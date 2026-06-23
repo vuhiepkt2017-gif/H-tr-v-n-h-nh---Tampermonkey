@@ -82,48 +82,6 @@
         'ZmxleA==',
         'YmxvY2s=',
         'bm9uZQ==',
-        'ZGlzcGxheTogZmxleDsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBhbGlnbi1pdGVtczogY2VudGVyOyBtYXJnaW4tYm90dG9tOiA1cHg7IGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjNDQ0OyBwYWRkaW5nLWJvdHRvbTogOHB4Ow==',
-        'Y29sb3I6ICNmZjU3MjI7IGZvbnQtc2l6ZTogMTRweDs=',
-        'ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsgZ2FwOiA2cHg7',
-        'YXAtYmFkZ2U=',
-        'YmFja2dyb3VuZC1jb2xvcjogIzc3Nzc3NzsgY29sb3I6IHdoaXRlOyBwYWRkaW5nOiAycHggNnB4OyBib3JkZXItcmFkaXVzOiA0cHg7IGZvbnQtc2l6ZTogOXB4OyBmb250LXdlaWdodDogYm9sZDsgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsgY3Vyc29yOiBwb2ludGVyOw==',
-        'YXAtY2xvc2UtYnRu',
-        'Y29sb3I6ICNhYWE7IGN1cnNvcjogcG9pbnRlcjsgZm9udC1zaXplOiAxOHB4OyBmb250LXdlaWdodDogYm9sZDsgcGFkZGluZzogMCA0cHg7',
-        'YXAtY29udGVudC13cmFwcGVy',
-        'bWFyZ2luLWJvdHRvbTogOHB4OyBtYXJnaW4tdG9wOiAxMHB4Ow==',
-        'ZGlzcGxheTogYmxvY2s7IG1hcmdpbi1ib3R0b206IDRweDsgY29sb3I6ICNhYWE7',
-        'YXAtdXJsLXNhdmVkLXZpZXc=',
-        'ZGlzcGxheTogbm9uZTsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBiYWNrZ3JvdW5kLWNvbG9yOiAjMmEyYTM1OyBwYWRkaW5nOiA2cHggMTBweDsgYm9yZGVyLXJhZGl1czogNHB4OyBib3JkZXI6IDFweCBzb2xpZCAjNDQ0Ow==',
-        'YXAtdXJsLXN0YXR1cw==',
-        'Y29sb3I6ICM0Y2FmNTA7IGZvbnQtd2VpZ2h0OiBib2xkOyBsZXR0ZXItc3BhY2luZzogM3B4Ow==',
-        'YXAtZWRpdC11cmwtYnRu',
-        'Y3Vyc29yOiBwb2ludGVyOyBmb250LXNpemU6IDEycHg7',
-        'YXAtdXJsLWVkaXQtdmlldw==',
-        'ZGlzcGxheTogYmxvY2s7',
-        'dGV4dA==',
-        'YXAtdXJsLWlucHV0',
-        'aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy8uLi4vZXhlYw==',
-        'd2lkdGg6IDkzJTsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA0cHg7IGJvcmRlcjogMXB4IHNvbGlkICM1NTU7IGJhY2tncm91bmQtY29sb3I6ICMyYTJhMzU7IGNvbG9yOiB3aGl0ZTsgZm9udC1zaXplOiAxMXB4Ow==',
-        'JHthcGlVcmx9',
-        'bWFyZ2luLWJvdHRvbTogMTBweDs=',
-        'ZGlzcGxheTogYmxvY2s7IG1hcmdpbi1ib3R0b206IDRweDsgY29sb3I6ICNhYWE7',
-        'dGV4dA==',
-        'YXAtcGMtaW5wdXQ=',
-        'd2lkdGg6IDkzJTsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA0cHg7IGJvcmRlcjogMXB4IHNvbGlkICM1NTU7IGJhY2tncm91bmQtY29sb3I6ICMyYTJhMzU7IGNvbG9yOiB3aGl0ZTsgZm9udC1zaXplOiAxMXB4Ow==',
-        'JHtwY05hbWV9',
-        'ZGlzcGxheTogZmxleDsgZ2FwOiA4cHg7IG1hcmdpbi1ib3R0b206IDEwcHg7',
-        'YXAtc2F2ZS11cmw=',
-        'ZmxleDogMTsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogbm9uZTsgYmFja2dyb3VuZC1jb2xvcjogIzRjYWY1MDsgY29sb3I6IHdoaXRlOyBjdXJzb3I6IHBvaW50ZXI7IGZvbnQtd2VpZ2h0OiBib2xkOw==',
-        'YXAtdG9nZ2xlLWJ0bg==',
-        'ZmxleDogMS41OyBwYWRkaW5nOiA2cHg7IGJvcmRlci1yYWRpdXM6IDZweDsgYm9yZGVyOiBub25lOyBiYWNrZ3JvdW5kLWNvbG9yOiAjMjE5NmYzOyBjb2xvcjogd2hpdGU7IGN1cnNvcjogcG9pbnRlcjsgZm9udC13ZWlnaHQ6IGJvbGQ7',
-        'bWFyZ2luLWJvdHRvbTogMTBweDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM0NDQ7IHBhZGRpbmctdG9wOiA4cHg7',
-        'ZGlzcGxheTogYmxvY2s7IG1hcmdpbi1ib3R0b206IDZweDsgY29sb3I6ICNmZjk4MDA7IGZvbnQtd2VpZ2h0OiBib2xkOw==',
-        'ZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoMiwgMWZyKTsgZ2FwOiA2cHg7',
-        'YXAtdGFicy1zdGF0dXMtY29udGFpbmVy',
-        'YXAtb3Blbi1hbGwtdGFicy1idG4=',
-        'd2lkdGg6IDEwMCU7IG1hcmdpbi10b3A6IDhweDsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogMXB4IGRhc2hlZCAjZmY5ODAwOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMTUyLCAwLCAwLjEpOyBjb2xvcjogI2ZmOTgwMDsgY3Vyc29yOiBwb2ludGVyOyBmb250LXdlaWdodDogYm9sZDsgZm9udC1zaXplOiAxMXB4Ow==',
-        'YmFja2dyb3VuZC1jb2xvcjogIzEyMTIxNjsgcGFkZGluZzogOHB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGZvbnQtZmFtaWx5OiBtb25vc3BhY2U7IGZvbnQtc2l6ZTogMTFweDsgbWF4LWhlaWdodDogODBweDsgb3ZlcmZsb3cteTogYXV0bzsgYm9yZGVyOiAxcHggc29saWQgIzIyMjs=',
-        'YXAtbG9nLWJveA==',
         'c3R5bGU=',
         'LnByZXZpZXctY29udGFpbmVyLCAucHJpbnQtcHJldmlldywgaWZyYW1lW3NyYyo9InByaW50Il0=',
         'c2hvcGVlLWF1dG8tcHJpbnQtcGFuZWw=',
@@ -174,14 +132,6 @@
         'bGFzdF9wdWxzZV8=',
         'MA==',
         'ZGl2',
-        'cmdiYSg3NiwgMTc1LCA4MCwgMC4xNSk=',
-        'cmdiYSgyNDQsIDY3LCA1NCwgMC4xNSk=',
-        'IzRjYWY1MA==',
-        'I2Y0NDMzNg==',
-        'Zm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiAke2lzVGFiQWN0aXZlID8gJyM4MWM3ODQnIDogJyNlNTczNzMnfTs=',
-        'Zm9udC1zaXplOiA5cHg7IHBhZGRpbmc6IDFweCA0cHg7IGJvcmRlci1yYWRpdXM6IDNweDsgYmFja2dyb3VuZC1jb2xvcjogJHtpc1RhYkFjdGl2ZSA/ICcjNGNhZjUwJyA6ICcjZjQ0MzM2J307IGNvbG9yOiB3aGl0ZTs=',
-        'TeG7nw==',
-        'VOG6r3Q=',
         'cG9pbnRlcg==',
         'Y2xpY2s=',
         'dW5kZWZpbmVk',
@@ -205,7 +155,6 @@
         'bWFudWFs',
         'W03hu58gVGFiXSBU4bqldCBj4bqjIGPDoWMgdGFiIMSR4buBdSDEkWFuZyBob+G6oXQgxJHhu5luZyBy4buTaSE=',
         'c21hcnRfcmVsb2FkX3F1ZXVl',
-        'IOKGkiA=',
         'c2VxX29wZW5fcXVldWU=',
         'c2VxX29wZW5fY3VycmVudA==',
         'c2VxX29wZW5fcGhhc2U=',
@@ -320,7 +269,6 @@
         'Q2jGsGEgY+G6pXUgaMOsbmggQVBJIFVSTA==',
         '',
         'R0VU',
-        '',
         'R0VU',
         'Q29udGVudC1UeXBl',
         'dGV4dC9wbGFpbg==',
@@ -335,7 +283,6 @@
         'c3VjY2Vzcw==',
         'XG4=',
         'YXdiUHJpbnQ=',
-        'LCA=',
         'YXdiUHJpbnQ=',
         'dGV4dGFyZWE=',
         'aW5wdXRbdHlwZT0idGV4dCJd',
@@ -375,8 +322,6 @@
         'b2s=',
         'UE9TVA==',
         'dXBkYXRlX2NvZGVfc3RhdHVz',
-        'TcOjIGzhu5dp',
-        'JHtlcnJDb2RlfQ==',
         'TcOjIGzhu5dp',
         'W0luIEJpbGxdIFF1w6EgdGjhu51pIGdpYW4gY2jhu50gbuG6oXAgbcOjIHbhuq1uIMSRxqFuIGzDqm4gZ2lhbyBkaeG7h24u',
         'YnV0dG9uLCBzcGFuLCBh',
@@ -444,7 +389,6 @@
         'c3RhcnRQYWNrTm9MYWJlbA==',
         'UE9TVA==',
         'bWFya190b19wcmludGVk',
-        'JHtjdXJyZW50VE99',
         'c3RhcnRQYWNrTm9MYWJlbA==',
         'YnV0dG9u',
         'UHJpbnQgTGFiZWw=',
@@ -459,7 +403,6 @@
         'YnV0dG9u',
         'aXMtZGlzYWJsZWQ=',
         'W1RPIEluXSBQaMOhdCBoaeG7h24gbsO6dCBpbiBuaMOjbiBraOG6oyBk4bulbmcuIENsaWNrIG5nYXkh',
-        'xJDDoyBpbg==',
         '',
         'cGlja3VwVGFzay9saXN0',
         'cGlja3VwVGFzaw==',
@@ -472,10 +415,8 @@
         'UE9TVA==',
         'dXBkYXRlX2hhbmRvdmVyX3N0YXR1cw==',
         'xJDDoyBjaHV54buDbg==',
-        'xJDDoyBjaHV54buDbg==',
         'UE9TVA==',
         'dXBkYXRlX2hhbmRvdmVyX3N0YXR1cw==',
-        'VGjhuqV0IGLhuqFp',
         'VGjhuqV0IGLhuqFp',
         'cGlja3VwVGFzaw==',
         'LmVsLWZvcm0taXRlbSwgW2NsYXNzKj0iZm9ybS1pdGVtIl0=',
@@ -635,7 +576,6 @@
         'Z2VuZXJhbC10by1tYW5hZ2VtZW50',
         'c3RhcnRQYWNrTm9MYWJlbA==',
         'cGlja3VwVGFzay9saXN0',
-        'cHVsc2U=',
         'dGV4dC9qYXZhc2NyaXB0',
         'cHVsc2U=',
         'W0jhu4cgdGjhu5FuZ10gdjYuMiAtIE11bHRpLVRhYiBQYXJhbGxlbCBIZWxwZXIgKEZpeGVkIFBvbGxpbmcgNDAwbXMpLg==',
@@ -820,48 +760,48 @@ launcher.style.display = _0xstr(64);
 startAutoCollapseTimer();
 }
 panel.innerHTML = `
-<div style=_0xstr(65)>
-<strong style=_0xstr(66)>Hỗ trợ</strong>
-<div style=_0xstr(67)>
-<span id=_0xstr(68) style=_0xstr(69)>Tắt</span>
-<span id=_0xstr(70) style=_0xstr(71)>×</span>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; border-bottom: 1px solid #444; padding-bottom: 8px;">
+<strong style="color: #ff5722; font-size: 14px;">Hỗ trợ</strong>
+<div style="display: flex; align-items: center; gap: 6px;">
+<span id="ap-badge" style="background-color: #777777; color: white; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: bold; text-transform: uppercase; cursor: pointer;">Tắt</span>
+<span id="ap-close-btn" style="color: #aaa; cursor: pointer; font-size: 18px; font-weight: bold; padding: 0 4px;">×</span>
 </div>
 </div>
-<div id=_0xstr(72)>
-<div style=_0xstr(73)>
-<label style=_0xstr(74)>Link Google Web App:</label>
-<div id=_0xstr(75) style=_0xstr(76)>
-<span id=_0xstr(77) style=_0xstr(78)>***</span>
-<span id=_0xstr(79) style=_0xstr(80)>✏️</span>
+<div id="ap-content-wrapper">
+<div style="margin-bottom: 8px; margin-top: 10px;">
+<label style="display: block; margin-bottom: 4px; color: #aaa;">Link Google Web App:</label>
+<div id="ap-url-saved-view" style="display: none; align-items: center; justify-content: space-between; background-color: #2a2a35; padding: 6px 10px; border-radius: 4px; border: 1px solid #444;">
+<span id="ap-url-status" style="color: #4caf50; font-weight: bold; letter-spacing: 3px;">***</span>
+<span id="ap-edit-url-btn" style="cursor: pointer; font-size: 12px;">✏️</span>
 </div>
-<div id=_0xstr(81) style=_0xstr(82)>
-<input type=_0xstr(83) id=_0xstr(84) placeholder=_0xstr(85) style=_0xstr(86) value=_0xstr(87)>
+<div id="ap-url-edit-view" style="display: block;">
+<input type="text" id="ap-url-input" placeholder="https://script.google.com/macros/s/.../exec" style="width: 93%; padding: 6px; border-radius: 4px; border: 1px solid #555; background-color: #2a2a35; color: white; font-size: 11px;" value="${apiUrl}">
 </div>
 </div>
-<div style=_0xstr(88)>
-<label style=_0xstr(89)>Tên Máy Tính (PC Name):</label>
-<input type=_0xstr(90) id=_0xstr(91) style=_0xstr(92) value=_0xstr(93)>
+<div style="margin-bottom: 10px;">
+<label style="display: block; margin-bottom: 4px; color: #aaa;">Tên Máy Tính (PC Name):</label>
+<input type="text" id="ap-pc-input" style="width: 93%; padding: 6px; border-radius: 4px; border: 1px solid #555; background-color: #2a2a35; color: white; font-size: 11px;" value="${pcName}">
 </div>
-<div style=_0xstr(94)>
-<button id=_0xstr(95) style=_0xstr(96)>Lưu</button>
-<button id=_0xstr(97) style=_0xstr(98)>Bắt đầu chạy</button>
+<div style="display: flex; gap: 8px; margin-bottom: 10px;">
+<button id="ap-save-url" style="flex: 1; padding: 6px; border-radius: 6px; border: none; background-color: #4caf50; color: white; cursor: pointer; font-weight: bold;">Lưu</button>
+<button id="ap-toggle-btn" style="flex: 1.5; padding: 6px; border-radius: 6px; border: none; background-color: #2196f3; color: white; cursor: pointer; font-weight: bold;">Bắt đầu chạy</button>
 </div>
-<div style=_0xstr(99)>
-<label style=_0xstr(100)>Trạng thái các Tab (Auto-Open):</label>
-<div style=_0xstr(101) id=_0xstr(102)>
+<div style="margin-bottom: 10px; border-top: 1px solid #444; padding-top: 8px;">
+<label style="display: block; margin-bottom: 6px; color: #ff9800; font-weight: bold;">Trạng thái các Tab (Auto-Open):</label>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;" id="ap-tabs-status-container">
 <!-- Tab status items will be rendered here dynamically -->
 </div>
-<button id=_0xstr(103) style=_0xstr(104)>
+<button id="ap-open-all-tabs-btn" style="width: 100%; margin-top: 8px; padding: 6px; border-radius: 6px; border: 1px dashed #ff9800; background-color: rgba(255, 152, 0, 0.1); color: #ff9800; cursor: pointer; font-weight: bold; font-size: 11px;">
 🚀 Mở tất cả các Tab hoạt động
 </button>
 </div>
-<div style=_0xstr(105) id=_0xstr(106)>
+<div style="background-color: #121216; padding: 8px; border-radius: 6px; font-family: monospace; font-size: 11px; max-height: 80px; overflow-y: auto; border: 1px solid #222;" id="ap-log-box">
 [Hệ thống] Đang tải...
 </div>
 </div>
 `;
 document.body.appendChild(panel);
-const transitionStyle = document.createElement(_0xstr(107));
+const transitionStyle = document.createElement(_0xstr(65));
 transitionStyle.innerHTML = `
 #shopee-auto-print-panel, #shopee-auto-print-launcher {
 transition: opacity 0.25s ease-in-out;
@@ -870,138 +810,138 @@ transition: opacity 0.25s ease-in-out;
 document.head.appendChild(transitionStyle);
 function checkDialogVisibility() {
 let hasVisibleDialog = false;
-const dialogs = document.querySelectorAll(_0xstr(108));
+const dialogs = document.querySelectorAll(_0xstr(66));
 for (let i = 0; i < dialogs.length; i++) {
 const el = dialogs[i];
-if (el.id === _0xstr(109) || el.id === _0xstr(110)) continue;
+if (el.id === _0xstr(67) || el.id === _0xstr(68)) continue;
 const style = window.getComputedStyle(el);
-if (style.display !== _0xstr(111) && style.visibility !== _0xstr(112) && style.opacity !== _0xstr(113) && el.offsetHeight > 0) {
+if (style.display !== _0xstr(69) && style.visibility !== _0xstr(70) && style.opacity !== _0xstr(71) && el.offsetHeight > 0) {
 hasVisibleDialog = true;
 break;
 }
 }
 if (hasVisibleDialog) {
-panel.style.opacity = _0xstr(114);
-panel.style.pointerEvents = _0xstr(115);
+panel.style.opacity = _0xstr(72);
+panel.style.pointerEvents = _0xstr(73);
 } else {
-if (panel.style.display !== _0xstr(116)) {
-panel.style.opacity = _0xstr(117);
-panel.style.pointerEvents = _0xstr(118);
+if (panel.style.display !== _0xstr(74)) {
+panel.style.opacity = _0xstr(75);
+panel.style.pointerEvents = _0xstr(76);
 }
 }
-if (launcher.style.display !== _0xstr(119)) {
-launcher.style.opacity = _0xstr(120);
-launcher.style.pointerEvents = _0xstr(121);
+if (launcher.style.display !== _0xstr(77)) {
+launcher.style.opacity = _0xstr(78);
+launcher.style.pointerEvents = _0xstr(79);
 }
 }
 setInterval(checkDialogVisibility, 300);
-const logBox = document.getElementById(_0xstr(122));
-const badge = document.getElementById(_0xstr(123));
-const toggleBtn = document.getElementById(_0xstr(124));
-const urlInput = document.getElementById(_0xstr(125));
-const pcInput = document.getElementById(_0xstr(126));
-const saveUrlBtn = document.getElementById(_0xstr(127));
-const closeBtn = document.getElementById(_0xstr(128));
-const contentWrapper = document.getElementById(_0xstr(129));
-const urlSavedView = document.getElementById(_0xstr(130));
-const urlEditView = document.getElementById(_0xstr(131));
-const editUrlBtn = document.getElementById(_0xstr(132));
-const urlStatus = document.getElementById(_0xstr(133));
-const tabsStatusContainer = document.getElementById(_0xstr(134));
-const openAllTabsBtn = document.getElementById(_0xstr(135));
+const logBox = document.getElementById(_0xstr(80));
+const badge = document.getElementById(_0xstr(81));
+const toggleBtn = document.getElementById(_0xstr(82));
+const urlInput = document.getElementById(_0xstr(83));
+const pcInput = document.getElementById(_0xstr(84));
+const saveUrlBtn = document.getElementById(_0xstr(85));
+const closeBtn = document.getElementById(_0xstr(86));
+const contentWrapper = document.getElementById(_0xstr(87));
+const urlSavedView = document.getElementById(_0xstr(88));
+const urlEditView = document.getElementById(_0xstr(89));
+const editUrlBtn = document.getElementById(_0xstr(90));
+const urlStatus = document.getElementById(_0xstr(91));
+const tabsStatusContainer = document.getElementById(_0xstr(92));
+const openAllTabsBtn = document.getElementById(_0xstr(93));
 function log(message) {
 const time = new Date().toLocaleTimeString();
 logBox.innerHTML = `[${time}] ${message}<br>` + logBox.innerHTML;
-const lines = logBox.innerHTML.split(_0xstr(136));
-if (lines.length > 20) logBox.innerHTML = lines.slice(0, 20).join(_0xstr(137));
+const lines = logBox.innerHTML.split(_0xstr(94));
+if (lines.length > 20) logBox.innerHTML = lines.slice(0, 20).join(_0xstr(95));
 }
 function updateUIState() {
 if (isRunning) {
-badge.innerText = _0xstr(138);
-badge.style.backgroundColor = _0xstr(139);
-toggleBtn.innerText = _0xstr(140);
-toggleBtn.style.backgroundColor = _0xstr(141);
+badge.innerText = _0xstr(96);
+badge.style.backgroundColor = _0xstr(97);
+toggleBtn.innerText = _0xstr(98);
+toggleBtn.style.backgroundColor = _0xstr(99);
 } else {
-badge.innerText = _0xstr(142);
-badge.style.backgroundColor = _0xstr(143);
-toggleBtn.innerText = _0xstr(144);
-toggleBtn.style.backgroundColor = _0xstr(145);
+badge.innerText = _0xstr(100);
+badge.style.backgroundColor = _0xstr(101);
+toggleBtn.innerText = _0xstr(102);
+toggleBtn.style.backgroundColor = _0xstr(103);
 }
 }
 function updateUrlView() {
 if (apiUrl && apiUrl !== _0x2c5b) {
-urlEditView.style.display = _0xstr(146);
-urlSavedView.style.display = _0xstr(147);
-urlStatus.innerText = _0xstr(148);
+urlEditView.style.display = _0xstr(104);
+urlSavedView.style.display = _0xstr(105);
+urlStatus.innerText = _0xstr(106);
 } else {
-urlEditView.style.display = _0xstr(149);
-urlSavedView.style.display = _0xstr(150);
+urlEditView.style.display = _0xstr(107);
+urlSavedView.style.display = _0xstr(108);
 }
 }
 function updateSelfPulse() {
 const currentType = getCurrentTabType();
 if (currentType) {
-localStorage.setItem(_0xstr(151) + currentType, Date.now().toString());
-localStorage.setItem(_0xstr(152) + currentType, tabInstanceId);
+localStorage.setItem(_0xstr(109) + currentType, Date.now().toString());
+localStorage.setItem(_0xstr(110) + currentType, tabInstanceId);
 }
 }
 const TAB_ACTIVE_TIMEOUT = 300000;
 const REOPEN_COOLDOWN_CLOSED = 30000;
 const REOPEN_COOLDOWN_CRASHED = 300000;
 function updateTabsStatusUI() {
-tabsStatusContainer.innerHTML = _0xstr(153);
+tabsStatusContainer.innerHTML = _0xstr(111);
 const now = Date.now();
 for (const [type, cfg] of Object.entries(_0x1b4a)) {
-const lastPulse = parseInt(localStorage.getItem(_0xstr(154) + type) || _0xstr(155));
+const lastPulse = parseInt(localStorage.getItem(_0xstr(112) + type) || _0xstr(113));
 const _0x2a5f = lastPulse > 0 && (now - lastPulse) < TAB_ACTIVE_TIMEOUT;
-const item = document.createElement(_0xstr(156));
-item.style = `display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 4px; background-color: ${_0x2a5f ? _0xstr(157) : _0xstr(158)}; border: 1px solid ${_0x2a5f ? _0xstr(159) : _0xstr(160)}; font-size: 11px;`;
+const item = document.createElement(_0xstr(114));
+item.style = `display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 4px; background-color: ${_0x2a5f ? 'rgba(76, 175, 80, 0.15)' : 'rgba(244, 67, 54, 0.15)'}; border: 1px solid ${_0x2a5f ? '#4caf50' : '#f44336'}; font-size: 11px;`;
 item.innerHTML = `
-<span style=_0xstr(161)>${cfg.name}</span>
-<span style=_0xstr(162)>
-${_0x2a5f ? _0xstr(163) : _0xstr(164)}
+<span style="font-weight: bold; color: ${_0x2a5f ? '#81c784' : '#e57373'};">${cfg.name}</span>
+<span style="font-size: 9px; padding: 1px 4px; border-radius: 3px; background-color: ${_0x2a5f ? '#4caf50' : '#f44336'}; color: white;">
+${_0x2a5f ? 'Mở' : 'Tắt'}
 </span>
 `;
-item.style.cursor = _0xstr(165);
+item.style.cursor = _0xstr(115);
 item.title = `Bấm để mở tab ${cfg.name}`;
-item.addEventListener(_0xstr(166), () => {
-if (typeof GM_openInTab !== _0xstr(167)) {
+item.addEventListener(_0xstr(116), () => {
+if (typeof GM_openInTab !== _0xstr(117)) {
 GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(cfg.url, _0xstr(168));
+window.open(cfg.url, _0xstr(118));
 }
 });
 tabsStatusContainer.appendChild(item);
 }
 }
-const RELOAD_ORDER = [_0xstr(169), _0xstr(170), _0xstr(171), _0xstr(172)];
+const RELOAD_ORDER = [_0xstr(119), _0xstr(120), _0xstr(121), _0xstr(122)];
 const SEQ_OPEN_TAB_TIMEOUT = 45000;
 function openMissingTabs() {
-initiateSequentialTabOpen(_0xstr(173));
+initiateSequentialTabOpen(_0xstr(123));
 }
 function initiateSequentialTabOpen(trigger) {
 const now = Date.now();
-const existing = localStorage.getItem(_0xstr(174));
+const existing = localStorage.getItem(_0xstr(124));
 if (existing) {
-if (trigger === _0xstr(175)) {
-log(_0xstr(176));
+if (trigger === _0xstr(125)) {
+log(_0xstr(126));
 clearSeqOpenState();
 } else {
-const started = parseInt(localStorage.getItem(_0xstr(177)) || _0xstr(178));
+const started = parseInt(localStorage.getItem(_0xstr(127)) || _0xstr(128));
 if ((now - started) < 300000) {
 return;
 }
-log(_0xstr(179));
+log(_0xstr(129));
 clearSeqOpenState();
 }
 }
 const tabsToOpen = [];
 for (const type of RELOAD_ORDER) {
-if (trigger === _0xstr(180)) {
-localStorage.setItem(_0xstr(181) + type, _0xstr(182));
+if (trigger === _0xstr(130)) {
+localStorage.setItem(_0xstr(131) + type, _0xstr(132));
 tabsToOpen.push(type);
 } else {
-const lastPulse = parseInt(localStorage.getItem(_0xstr(183) + type) || _0xstr(184));
+const lastPulse = parseInt(localStorage.getItem(_0xstr(133) + type) || _0xstr(134));
 const isActive = lastPulse > 0 && (now - lastPulse) < TAB_ACTIVE_TIMEOUT;
 if (!isActive) {
 tabsToOpen.push(type);
@@ -1009,44 +949,44 @@ tabsToOpen.push(type);
 }
 }
 if (tabsToOpen.length === 0) {
-if (trigger === _0xstr(185)) log(_0xstr(186));
+if (trigger === _0xstr(135)) log(_0xstr(136));
 return;
 }
-localStorage.removeItem(_0xstr(187));
-log(`[Mở Tab] ▶ Bắt đầu mở tuần tự ${tabsToOpen.length} tab: ${tabsToOpen.map(t => _0x1b4a[t]?.name || t).join(_0xstr(188))}`);
-localStorage.setItem(_0xstr(189), JSON.stringify(tabsToOpen));
-localStorage.setItem(_0xstr(190), tabsToOpen[0]);
-localStorage.setItem(_0xstr(191), _0xstr(192));
-localStorage.setItem(_0xstr(193), now.toString());
-localStorage.setItem(_0xstr(194), now.toString());
+localStorage.removeItem(_0xstr(137));
+log(`[Mở Tab] ▶ Bắt đầu mở tuần tự ${tabsToOpen.length} tab: ${tabsToOpen.map(t => _0x1b4a[t]?.name || t).join(' → ')}`);
+localStorage.setItem(_0xstr(138), JSON.stringify(tabsToOpen));
+localStorage.setItem(_0xstr(139), tabsToOpen[0]);
+localStorage.setItem(_0xstr(140), _0xstr(141));
+localStorage.setItem(_0xstr(142), now.toString());
+localStorage.setItem(_0xstr(143), now.toString());
 const firstType = tabsToOpen[0];
 const cfg = _0x1b4a[firstType];
-localStorage.setItem(_0xstr(195) + firstType, now.toString());
+localStorage.setItem(_0xstr(144) + firstType, now.toString());
 const myTabType = getCurrentTabType();
 if (myTabType === firstType) {
 log(`[Mở Tab] 🔄 Đang ở tab đầu tiên (${cfg.name}) - tiến hành reload...`);
 window.location.reload();
 } else {
 log(`[Mở Tab] 🔄 Đang mở tab: ${cfg.name}...`);
-if (typeof GM_openInTab !== _0xstr(196)) {
+if (typeof GM_openInTab !== _0xstr(145)) {
 GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(cfg.url, _0xstr(197));
+window.open(cfg.url, _0xstr(146));
 }
 }
 }
 function clearSeqOpenState() {
-localStorage.removeItem(_0xstr(198));
-localStorage.removeItem(_0xstr(199));
-localStorage.removeItem(_0xstr(200));
-localStorage.removeItem(_0xstr(201));
-localStorage.removeItem(_0xstr(202));
-localStorage.removeItem(_0xstr(203));
+localStorage.removeItem(_0xstr(147));
+localStorage.removeItem(_0xstr(148));
+localStorage.removeItem(_0xstr(149));
+localStorage.removeItem(_0xstr(150));
+localStorage.removeItem(_0xstr(151));
+localStorage.removeItem(_0xstr(152));
 }
 function openNextTabInQueue() {
 let queue;
 try {
-queue = JSON.parse(localStorage.getItem(_0xstr(204)) || _0xstr(205));
+queue = JSON.parse(localStorage.getItem(_0xstr(153)) || _0xstr(154));
 } catch(e) {
 clearSeqOpenState();
 return;
@@ -1056,31 +996,31 @@ if (queue.length > 0) {
 const nextType = queue[0];
 const cfg = _0x1b4a[nextType];
 const now = Date.now();
-localStorage.setItem(_0xstr(206), JSON.stringify(queue));
-localStorage.setItem(_0xstr(207), nextType);
-localStorage.setItem(_0xstr(208), _0xstr(209));
-localStorage.setItem(_0xstr(210), now.toString());
-localStorage.setItem(_0xstr(211) + nextType, now.toString());
-localStorage.removeItem(_0xstr(212));
+localStorage.setItem(_0xstr(155), JSON.stringify(queue));
+localStorage.setItem(_0xstr(156), nextType);
+localStorage.setItem(_0xstr(157), _0xstr(158));
+localStorage.setItem(_0xstr(159), now.toString());
+localStorage.setItem(_0xstr(160) + nextType, now.toString());
+localStorage.removeItem(_0xstr(161));
 const myTabType = getCurrentTabType();
 if (myTabType === nextType) {
 log(`[Mở Tab] 🔄 Đang ở tab tiếp theo (${cfg.name}) - tiến hành reload...`);
 window.location.reload();
 } else {
 log(`[Mở Tab] ➡ Mở tab tiếp: ${cfg.name}...`);
-if (typeof GM_openInTab !== _0xstr(213)) {
+if (typeof GM_openInTab !== _0xstr(162)) {
 GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(cfg.url, _0xstr(214));
+window.open(cfg.url, _0xstr(163));
 }
 }
 } else {
 clearSeqOpenState();
-log(_0xstr(215));
+log(_0xstr(164));
 }
 }
 function handleSequentialTabOpen() {
-const queueStr = localStorage.getItem(_0xstr(216));
+const queueStr = localStorage.getItem(_0xstr(165));
 if (!queueStr) return;
 let queue;
 try {
@@ -1093,12 +1033,12 @@ if (!Array.isArray(queue) || queue.length === 0) {
 clearSeqOpenState();
 return;
 }
-const currentTarget = localStorage.getItem(_0xstr(217));
+const currentTarget = localStorage.getItem(_0xstr(166));
 const myTabType = getCurrentTabType();
 if (!myTabType || myTabType !== currentTarget) return;
-const phase = localStorage.getItem(_0xstr(218));
-if (phase !== _0xstr(219)) return;
-const tabStart = parseInt(localStorage.getItem(_0xstr(220)) || _0xstr(221));
+const phase = localStorage.getItem(_0xstr(167));
+if (phase !== _0xstr(168)) return;
+const tabStart = parseInt(localStorage.getItem(_0xstr(169)) || _0xstr(170));
 const now = Date.now();
 if (isPageContentFullyLoaded()) {
 log(`[Mở Tab] ✓ Tab ${_0x1b4a[myTabType]?.name || myTabType} đã load đầy đủ và sẵn sàng!`);
@@ -1107,15 +1047,15 @@ openNextTabInQueue();
 return;
 }
 if ((now - tabStart) > SEQ_OPEN_TAB_TIMEOUT) {
-const retryCount = parseInt(localStorage.getItem(_0xstr(222)) || _0xstr(223));
+const retryCount = parseInt(localStorage.getItem(_0xstr(171)) || _0xstr(172));
 if (retryCount < 1) {
 log(`[Mở Tab] ⚠ Tab ${_0x1b4a[myTabType]?.name || myTabType} load quá 45s. Thử reload lại...`);
-localStorage.setItem(_0xstr(224), _0xstr(225));
-localStorage.setItem(_0xstr(226), now.toString());
+localStorage.setItem(_0xstr(173), _0xstr(174));
+localStorage.setItem(_0xstr(175), now.toString());
 window.location.reload();
 } else {
 log(`[Mở Tab] ✗ Tab ${_0x1b4a[myTabType]?.name || myTabType} không thể load. Bỏ qua...`);
-localStorage.removeItem(_0xstr(227));
+localStorage.removeItem(_0xstr(176));
 openNextTabInQueue();
 }
 }
@@ -1123,17 +1063,17 @@ openNextTabInQueue();
 const REOPEN_COOLDOWN_CRASHED_NEW = 900000;
 function autoReopenClosedTabs() {
 if (!isRunning) return;
-if (localStorage.getItem(_0xstr(228)) || localStorage.getItem(_0xstr(229))) return;
+if (localStorage.getItem(_0xstr(177)) || localStorage.getItem(_0xstr(178))) return;
 const now = Date.now();
 let hasDeadTab = false;
 let hasFrozenTab = false;
-let frozenTabType = _0xstr(230);
+let frozenTabType = _0xstr(179);
 for (const [type, cfg] of Object.entries(_0x1b4a)) {
-const lastPulse = parseInt(localStorage.getItem(_0xstr(231) + type) || _0xstr(232));
-const registeredInstanceId = localStorage.getItem(_0xstr(233) + type);
+const lastPulse = parseInt(localStorage.getItem(_0xstr(180) + type) || _0xstr(181));
+const registeredInstanceId = localStorage.getItem(_0xstr(182) + type);
 const _0x2a5f = lastPulse > 0 && (now - lastPulse) < TAB_ACTIVE_TIMEOUT;
 if (!_0x2a5f) {
-const lastOpenAttempt = parseInt(localStorage.getItem(_0xstr(234) + type) || _0xstr(235));
+const lastOpenAttempt = parseInt(localStorage.getItem(_0xstr(183) + type) || _0xstr(184));
 const lastOpenDiff = now - lastOpenAttempt;
 if (registeredInstanceId && lastOpenDiff > 60000) {
 hasFrozenTab = true;
@@ -1155,38 +1095,38 @@ break;
 if (hasFrozenTab && frozenTabType) {
 const cfg = _0x1b4a[frozenTabType];
 log(`[Hệ thống] Phát hiện tab ${cfg.name} bị đóng băng. Đang kích hoạt (Unfreeze) lại tab...`);
-localStorage.setItem(_0xstr(236) + frozenTabType, now.toString());
-if (typeof GM_openInTab !== _0xstr(237)) {
+localStorage.setItem(_0xstr(185) + frozenTabType, now.toString());
+if (typeof GM_openInTab !== _0xstr(186)) {
 GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(cfg.url, _0xstr(238));
+window.open(cfg.url, _0xstr(187));
 }
 return;
 }
 if (hasDeadTab) {
-log(_0xstr(239));
-initiateSequentialTabOpen(_0xstr(240));
+log(_0xstr(188));
+initiateSequentialTabOpen(_0xstr(189));
 }
 }
 let _0x8a1f = null;
 let _0x9b2a = null;
 async function requestWakeLock() {
-if (!(_0xstr(241) in navigator)) {
-log(_0xstr(242));
+if (!(_0xstr(190) in navigator)) {
+log(_0xstr(191));
 return;
 }
 try {
-_0x8a1f = await navigator._0x8a1f.request(_0xstr(243));
-log(_0xstr(244));
+_0x8a1f = await navigator._0x8a1f.request(_0xstr(192));
+log(_0xstr(193));
 } catch (err) {
-console.log(_0xstr(245), err.message);
+console.log(_0xstr(194), err.message);
 }
 }
 function _0x4c7b() {
 if (_0x8a1f) {
 _0x8a1f.release().then(() => {
 _0x8a1f = null;
-log(_0xstr(246));
+log(_0xstr(195));
 });
 }
 }
@@ -1198,27 +1138,27 @@ if (!AudioContext) return;
 _0x9b2a = new AudioContext();
 const oscillator = _0x9b2a.createOscillator();
 const gainNode = _0x9b2a.createGain();
-oscillator.type = _0xstr(247);
+oscillator.type = _0xstr(196);
 oscillator.frequency.value = 20000;
 gainNode.gain.value = 0.0001;
 oscillator.connect(gainNode);
 gainNode.connect(_0x9b2a.destination);
 oscillator.start();
-log(_0xstr(248));
+log(_0xstr(197));
 } catch (e) {
-console.log(_0xstr(249), e.message);
+console.log(_0xstr(198), e.message);
 }
 }
 function checkAndResumeAudio() {
-if (_0x9b2a && _0x9b2a.state === _0xstr(250)) {
+if (_0x9b2a && _0x9b2a.state === _0xstr(199)) {
 _0x9b2a.resume().then(() => {
-log(_0xstr(251));
+log(_0xstr(200));
 }).catch(() => {});
 }
-if (_0x9b2a && _0x9b2a.state === _0xstr(252)) {
+if (_0x9b2a && _0x9b2a.state === _0xstr(201)) {
 _0x9b2a = null;
 startSilentAudio();
-log(_0xstr(253));
+log(_0xstr(202));
 }
 }
 function stopSilentAudio() {
@@ -1226,7 +1166,7 @@ if (_0x9b2a) {
 try {
 _0x9b2a.close().then(() => {
 _0x9b2a = null;
-log(_0xstr(254));
+log(_0xstr(203));
 });
 } catch (e) {
 _0x9b2a = null;
@@ -1241,53 +1181,53 @@ function disableAntiSleep() {
 _0x4c7b();
 stopSilentAudio();
 }
-document.addEventListener(_0xstr(255), () => {
-if (document.visibilityState === _0xstr(256) && isRunning) {
+document.addEventListener(_0xstr(204), () => {
+if (document.visibilityState === _0xstr(205) && isRunning) {
 requestWakeLock();
 }
 });
-openAllTabsBtn.addEventListener(_0xstr(257), openMissingTabs);
+openAllTabsBtn.addEventListener(_0xstr(206), openMissingTabs);
 updateUIState();
 updateUrlView();
 if (isRunning) {
 enableAntiSleep();
 const initAntiSleepHandler = () => {
 if (isRunning) enableAntiSleep();
-document.removeEventListener(_0xstr(258), initAntiSleepHandler);
+document.removeEventListener(_0xstr(207), initAntiSleepHandler);
 };
-document.addEventListener(_0xstr(259), initAntiSleepHandler);
+document.addEventListener(_0xstr(208), initAntiSleepHandler);
 }
-editUrlBtn.addEventListener(_0xstr(260), () => {
-urlEditView.style.display = _0xstr(261);
-urlSavedView.style.display = _0xstr(262);
+editUrlBtn.addEventListener(_0xstr(209), () => {
+urlEditView.style.display = _0xstr(210);
+urlSavedView.style.display = _0xstr(211);
 urlInput.focus();
 });
-saveUrlBtn.addEventListener(_0xstr(263), () => {
+saveUrlBtn.addEventListener(_0xstr(212), () => {
 const inputVal = urlInput.value.trim();
-const pcInputVal = pcInput.value.trim() || _0xstr(264);
-if (inputVal && !inputVal.includes(_0xstr(265))) {
+const pcInputVal = pcInput.value.trim() || _0xstr(213);
+if (inputVal && !inputVal.includes(_0xstr(214))) {
 apiUrl = inputVal;
 pcName = pcInputVal;
-localStorage.setItem(_0xstr(266), apiUrl);
-localStorage.setItem(_0xstr(267), pcName);
-GM_setValue(_0xstr(268), apiUrl);
-GM_setValue(_0xstr(269), pcName);
+localStorage.setItem(_0xstr(215), apiUrl);
+localStorage.setItem(_0xstr(216), pcName);
+GM_setValue(_0xstr(217), apiUrl);
+GM_setValue(_0xstr(218), pcName);
 log(`Đã lưu cấu hình. PC: ${pcName}`);
 updateUrlView();
-alert(_0xstr(270));
+alert(_0xstr(219));
 } else {
-alert(_0xstr(271));
+alert(_0xstr(220));
 }
 });
 function toggleRunningState() {
-if (!apiUrl || apiUrl.includes(_0xstr(272))) {
-alert(_0xstr(273));
+if (!apiUrl || apiUrl.includes(_0xstr(221))) {
+alert(_0xstr(222));
 return;
 }
 isRunning = !isRunning;
-localStorage.setItem(_0xstr(274), isRunning ? _0xstr(275) : _0xstr(276));
+localStorage.setItem(_0xstr(223), isRunning ? _0xstr(224) : _0xstr(225));
 updateUIState();
-log(isRunning ? _0xstr(277) : _0xstr(278));
+log(isRunning ? _0xstr(226) : _0xstr(227));
 if (isRunning) {
 enableAntiSleep();
 openMissingTabs();
@@ -1295,15 +1235,15 @@ openMissingTabs();
 disableAntiSleep();
 }
 }
-toggleBtn.addEventListener(_0xstr(279), toggleRunningState);
-badge.addEventListener(_0xstr(280), toggleRunningState);
-closeBtn.addEventListener(_0xstr(281), collapsePanel);
-launcher.addEventListener(_0xstr(282), expandPanel);
-panel.addEventListener(_0xstr(283), stopAutoCollapseTimer);
-panel.addEventListener(_0xstr(284), stopAutoCollapseTimer);
-panel.addEventListener(_0xstr(285), stopAutoCollapseTimer);
-panel.addEventListener(_0xstr(286), stopAutoCollapseTimer);
-panel.addEventListener(_0xstr(287), startAutoCollapseTimer);
+toggleBtn.addEventListener(_0xstr(228), toggleRunningState);
+badge.addEventListener(_0xstr(229), toggleRunningState);
+closeBtn.addEventListener(_0xstr(230), collapsePanel);
+launcher.addEventListener(_0xstr(231), expandPanel);
+panel.addEventListener(_0xstr(232), stopAutoCollapseTimer);
+panel.addEventListener(_0xstr(233), stopAutoCollapseTimer);
+panel.addEventListener(_0xstr(234), stopAutoCollapseTimer);
+panel.addEventListener(_0xstr(235), stopAutoCollapseTimer);
+panel.addEventListener(_0xstr(236), startAutoCollapseTimer);
 function delay(ms) {
 return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -1314,21 +1254,21 @@ async function simulateInput(inputEl, value) {
 try {
 inputEl.focus();
 } catch (e) {}
-const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(288))?.set;
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(237))?.set;
 if (nativeInputValueSetter) {
 nativeInputValueSetter.call(inputEl, value);
 } else {
 inputEl.value = value;
 }
-inputEl.dispatchEvent(new Event(_0xstr(289), { bubbles: true }));
-inputEl.dispatchEvent(new Event(_0xstr(290), { bubbles: true }));
+inputEl.dispatchEvent(new Event(_0xstr(238), { bubbles: true }));
+inputEl.dispatchEvent(new Event(_0xstr(239), { bubbles: true }));
 await delay(300);
-[_0xstr(291), _0xstr(292), _0xstr(293)].forEach(name => {
+[_0xstr(240), _0xstr(241), _0xstr(242)].forEach(name => {
 const ev = new KeyboardEvent(name, {
-bubbles: true, cancelable: true, key: _0xstr(294), code: _0xstr(295), keyCode: 13, which: 13
+bubbles: true, cancelable: true, key: _0xstr(243), code: _0xstr(244), keyCode: 13, which: 13
 });
-Object.defineProperty(ev, _0xstr(296), { value: 13 });
-Object.defineProperty(ev, _0xstr(297), { value: 13 });
+Object.defineProperty(ev, _0xstr(245), { value: 13 });
+Object.defineProperty(ev, _0xstr(246), { value: 13 });
 inputEl.dispatchEvent(ev);
 });
 }
@@ -1338,14 +1278,14 @@ const maxAttempts = 2;
 function makeRequest() {
 attempts++;
 return new Promise((resolve, reject) => {
-let cleanApiUrl = (apiUrl || _0xstr(298)).trim();
-if (!cleanApiUrl || cleanApiUrl.includes(_0xstr(299))) {
-reject(new Error(_0xstr(300)));
+let cleanApiUrl = (apiUrl || _0xstr(247)).trim();
+if (!cleanApiUrl || cleanApiUrl.includes(_0xstr(248))) {
+reject(new Error(_0xstr(249)));
 return;
 }
-let targetUrl = _0xstr(301);
-if (method === _0xstr(302)) {
-targetUrl = `${cleanApiUrl}?action=${urlOrAction}&pc=${encodeURIComponent((pcName || _0xstr(303)).trim())}`;
+let targetUrl = _0xstr(250);
+if (method === _0xstr(251)) {
+targetUrl = `${cleanApiUrl}?action=${urlOrAction}&pc=${encodeURIComponent((pcName || "").trim())}`;
 } else {
 targetUrl = cleanApiUrl;
 }
@@ -1384,9 +1324,9 @@ clearTimeout(timer);
 reject(new Error(`GM_xmlhttpRequest timeout khi gọi ${urlOrAction}`));
 }
 };
-if (method !== _0xstr(304)) {
-options.headers = { _0xstr(305): _0xstr(306) };
-options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (pcName || _0xstr(307)).trim() }, data));
+if (method !== _0xstr(252)) {
+options.headers = { _0xstr(253): _0xstr(254) };
+options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (pcName || _0xstr(255)).trim() }, data));
 }
 GM_xmlhttpRequest(options);
 });
@@ -1408,37 +1348,37 @@ tryCall();
 });
 }
 function extractDriverCode(driverStr) {
-if (!driverStr) return _0xstr(308);
+if (!driverStr) return _0xstr(256);
 const match = driverStr.match(/\d+/);
 return match ? match[0] : driverStr;
 }
 async function startPollingLoop() {
 if (!isRunning || isPrintingNow) return;
-const hash = window.location.hash || _0xstr(309);
-if (!hash.includes(_0xstr(310))) return;
-if (!_0x0e3d(_0xstr(311))) {
+const hash = window.location.hash || _0xstr(257);
+if (!hash.includes(_0xstr(258))) return;
+if (!_0x0e3d(_0xstr(259))) {
 return;
 }
 try {
 isPrintingNow = true;
 lastPrintStartTime = Date.now();
-updateGlobalLockHeartbeat(_0xstr(312));
-const data = await callGASPromise(_0xstr(313), _0xstr(314));
+updateGlobalLockHeartbeat(_0xstr(260));
+const data = await callGASPromise(_0xstr(261), _0xstr(262));
 lastSuccessfulAction = Date.now();
-if (data.status === _0xstr(315)) {
+if (data.status === _0xstr(263)) {
 let codesToPrint = [];
 if (data.code) {
-codesToPrint = data.code.split(_0xstr(316)).map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
+codesToPrint = data.code.split(_0xstr(264)).map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
 } else if (data.codes && Array.isArray(data.codes)) {
 codesToPrint = data.codes.map(c => c.trim().toUpperCase());
 }
 if (codesToPrint.length > 0) {
 log(`Tìm thấy lô gồm ${codesToPrint.length} mã để in.`);
-updateGlobalLockHeartbeat(_0xstr(317));
+updateGlobalLockHeartbeat(_0xstr(265));
 const success = await executePrintJob(codesToPrint);
 if (success) {
 lastSuccessfulAction = Date.now();
-log(`Đã in lô thành công: ${codesToPrint.join(_0xstr(318))}`);
+log(`Đã in lô thành công: ${codesToPrint.join(', ')}`);
 } else {
 log(`Thất bại khi in lô.`);
 }
@@ -1448,39 +1388,39 @@ log(`Thất bại khi in lô.`);
 log(`Lỗi in thường: ${error.message}`);
 } finally {
 isPrintingNow = false;
-_0x1f4e(_0xstr(319));
+_0x1f4e(_0xstr(266));
 }
 }
 async function executePrintJob(codes) {
-const textarea = document.querySelector(_0xstr(320)) || document.querySelector(_0xstr(321));
+const textarea = document.querySelector(_0xstr(267)) || document.querySelector(_0xstr(268));
 if (!textarea) {
-log(_0xstr(322));
+log(_0xstr(269));
 return false;
 }
-const combinedText = codes.join(_0xstr(323));
+const combinedText = codes.join(_0xstr(270));
 textarea.value = combinedText;
-textarea.dispatchEvent(new Event(_0xstr(324), { bubbles: true }));
-textarea.dispatchEvent(new Event(_0xstr(325), { bubbles: true }));
+textarea.dispatchEvent(new Event(_0xstr(271), { bubbles: true }));
+textarea.dispatchEvent(new Event(_0xstr(272), { bubbles: true }));
 try {
 textarea.focus();
 textarea.select();
-document.execCommand(_0xstr(326), false, combinedText);
-textarea.dispatchEvent(new Event(_0xstr(327), { bubbles: true }));
+document.execCommand(_0xstr(273), false, combinedText);
+textarea.dispatchEvent(new Event(_0xstr(274), { bubbles: true }));
 } catch (e) {}
 await delayRandom(300, 500);
-const confirmBtn = Array.from(document.querySelectorAll(_0xstr(328))).find(btn => {
-const txt = btn.innerText || btn.textContent || _0xstr(329);
-return txt.trim().toLowerCase() === _0xstr(330);
+const confirmBtn = Array.from(document.querySelectorAll(_0xstr(275))).find(btn => {
+const txt = btn.innerText || btn.textContent || _0xstr(276);
+return txt.trim().toLowerCase() === _0xstr(277);
 });
 if (!confirmBtn) return false;
 confirmBtn.click();
 let isLoaded = false;
 let hasError = false;
-let errorMsg = _0xstr(331);
-const validCodesInList = codes.filter(c => c.startsWith(_0xstr(332)) || c.startsWith(_0xstr(333)) || c.startsWith(_0xstr(334)) || /^[A-Z0-9]{8,25}$/.test(c));
+let errorMsg = _0xstr(278);
+const validCodesInList = codes.filter(c => c.startsWith(_0xstr(279)) || c.startsWith(_0xstr(280)) || c.startsWith(_0xstr(281)) || /^[A-Z0-9]{8,25}$/.test(c));
 for (let i = 0; i < 40; i++) {
 await delay(50);
-const allCells = Array.from(document.querySelectorAll(_0xstr(335)));
+const allCells = Array.from(document.querySelectorAll(_0xstr(282)));
 const foundValidCode = allCells.find(el => {
 const txt = el.textContent.trim().toUpperCase();
 return validCodesInList.some(vc => txt === vc || txt.includes(vc));
@@ -1488,33 +1428,33 @@ return validCodesInList.some(vc => txt === vc || txt.includes(vc));
 if (foundValidCode) {
 isLoaded = true;
 }
-const dialogs = document.querySelectorAll(_0xstr(336));
+const dialogs = document.querySelectorAll(_0xstr(283));
 for (const dialog of dialogs) {
 if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
-const dialogText = (dialog.innerText || dialog.textContent || _0xstr(337));
-if (dialogText.toLowerCase().includes(_0xstr(338)) ||
-dialogText.toLowerCase().includes(_0xstr(339)) ||
-dialogText.toLowerCase().includes(_0xstr(340)) ||
-dialogText.toLowerCase().includes(_0xstr(341)) ||
-dialogText.toLowerCase().includes(_0xstr(342))) {
+const dialogText = (dialog.innerText || dialog.textContent || _0xstr(284));
+if (dialogText.toLowerCase().includes(_0xstr(285)) ||
+dialogText.toLowerCase().includes(_0xstr(286)) ||
+dialogText.toLowerCase().includes(_0xstr(287)) ||
+dialogText.toLowerCase().includes(_0xstr(288)) ||
+dialogText.toLowerCase().includes(_0xstr(289))) {
 hasError = true;
-errorMsg = dialogText.trim().replace(/\n/g, _0xstr(343));
-const lines = dialogText.split(_0xstr(344)).map(l => l.trim().toUpperCase());
+errorMsg = dialogText.trim().replace(/\n/g, _0xstr(290));
+const lines = dialogText.split(_0xstr(291)).map(l => l.trim().toUpperCase());
 const invalidCodes = [];
 for (const line of lines) {
 const matches = line.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
 if (matches) {
 for (const match of matches) {
-if (!match.includes(_0xstr(345)) && !match.includes(_0xstr(346)) && !match.includes(_0xstr(347))) {
+if (!match.includes(_0xstr(292)) && !match.includes(_0xstr(293)) && !match.includes(_0xstr(294))) {
 invalidCodes.push(match);
 }
 }
 }
 }
 const codesToMarkError = invalidCodes.length > 0 ? invalidCodes : codes;
-const okBtn = Array.from(dialog.querySelectorAll(_0xstr(348))).find(btn => {
-const txt = (btn.innerText || btn.textContent || _0xstr(349)).trim().toLowerCase();
-return txt === _0xstr(350) || txt === _0xstr(351) || txt === _0xstr(352) || txt === _0xstr(353) || txt === _0xstr(354) || txt.includes(_0xstr(355));
+const okBtn = Array.from(dialog.querySelectorAll(_0xstr(295))).find(btn => {
+const txt = (btn.innerText || btn.textContent || _0xstr(296)).trim().toLowerCase();
+return txt === _0xstr(297) || txt === _0xstr(298) || txt === _0xstr(299) || txt === _0xstr(300) || txt === _0xstr(301) || txt.includes(_0xstr(302));
 });
 if (okBtn) {
 const okDelay = 800 + Math.random() * 200;
@@ -1525,9 +1465,9 @@ log(`[In Bill] Đã click nút OK đóng cảnh báo.`);
 log(`[In Bill] Phát hiện dialog lỗi. Đợi ${(okDelay/1000).toFixed(2)} giây để tự động đóng...`);
 }
 for (const errCode of codesToMarkError) {
-callGASPromise(_0xstr(356), _0xstr(357), { code: errCode, status: _0xstr(358) })
+callGASPromise(_0xstr(303), _0xstr(304), { code: errCode, status: _0xstr(305) })
 .then(() => {
-log(`[In Bill] Đã báo cáo thành công mã lỗi: _0xstr(359) = _0xstr(360).`);
+log(`[In Bill] Đã báo cáo thành công mã lỗi: '${errCode}' = 'Mã lỗi'.`);
 })
 .catch(e => {
 log(`[In Bill] Gặp lỗi khi gửi báo cáo cho ${errCode}: ${e.message}`);
@@ -1546,12 +1486,12 @@ if (hasError && !isLoaded) {
 return false;
 }
 if (!isLoaded) {
-log(_0xstr(361));
+log(_0xstr(306));
 return false;
 }
-const printBtn = Array.from(document.querySelectorAll(_0xstr(362))).find(el => {
-const txt = el.innerText || el.textContent || _0xstr(363);
-return txt.trim() === _0xstr(364);
+const printBtn = Array.from(document.querySelectorAll(_0xstr(307))).find(el => {
+const txt = el.innerText || el.textContent || _0xstr(308);
+return txt.trim() === _0xstr(309);
 });
 if (!printBtn) return false;
 await delayRandom(400, 500);
@@ -1560,12 +1500,12 @@ let isModalOpened = false;
 let dialogPrintBtn = null;
 for (let i = 0; i < 20; i++) {
 await delay(50);
-const dialogs = document.querySelectorAll(_0xstr(365));
+const dialogs = document.querySelectorAll(_0xstr(310));
 for (const dialog of dialogs) {
 if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
-dialogPrintBtn = Array.from(dialog.querySelectorAll(_0xstr(366))).find(btn => {
-const txt = btn.innerText || btn.textContent || _0xstr(367);
-return txt.trim() === _0xstr(368);
+dialogPrintBtn = Array.from(dialog.querySelectorAll(_0xstr(311))).find(btn => {
+const txt = btn.innerText || btn.textContent || _0xstr(312);
+return txt.trim() === _0xstr(313);
 });
 if (dialogPrintBtn) {
 isModalOpened = true;
@@ -1588,13 +1528,13 @@ if (!isRunning || isProcessingList) return;
 isProcessingList = true;
 lastListStartTime = Date.now();
 lastSuccessfulAction = Date.now();
-log(_0xstr(369));
+log(_0xstr(314));
 try {
 const now = Date.now();
 if (now - lastSearchTime > 2000) {
-let searchBtn = Array.from(document.querySelectorAll(_0xstr(370))).find(btn => {
+let searchBtn = Array.from(document.querySelectorAll(_0xstr(315))).find(btn => {
 const text = btn.innerText.trim();
-return text === _0xstr(371) || text === _0xstr(372);
+return text === _0xstr(316) || text === _0xstr(317);
 });
 if (searchBtn) {
 searchBtn.click();
@@ -1604,8 +1544,8 @@ await delay(300);
 }
 if (localExistingTOs.size === 0 || (now - lastTOFetchTime) > 60000) {
 try {
-const res = await callGASPromise(_0xstr(373), _0xstr(374));
-if (res.status === _0xstr(375) && Array.isArray(res.data)) {
+const res = await callGASPromise(_0xstr(318), _0xstr(319));
+if (res.status === _0xstr(320) && Array.isArray(res.data)) {
 localExistingTOs = new Set(res.data.map(to => to.toLowerCase()));
 lastTOFetchTime = now;
 log(`[TO Quét] Đã đồng bộ ${localExistingTOs.size} mã TO đã tồn tại từ Excel.`);
@@ -1614,26 +1554,26 @@ log(`[TO Quét] Đã đồng bộ ${localExistingTOs.size} mã TO đã tồn t�
 log(`[TO Quét] Lỗi đồng bộ danh sách TO hiện có: ${e.message}`);
 }
 }
-const headers = Array.from(document.querySelectorAll(_0xstr(376)));
+const headers = Array.from(document.querySelectorAll(_0xstr(321)));
 let toColIndex = -1;
 let opColIndex = -1;
 let qtyColIndex = -1;
 headers.forEach((th, index) => {
 const text = th.innerText.trim().toLowerCase();
-if (text.includes(_0xstr(377)) || text.includes(_0xstr(378)) || text.includes(_0xstr(379)) || text.includes(_0xstr(380))) {
+if (text.includes(_0xstr(322)) || text.includes(_0xstr(323)) || text.includes(_0xstr(324)) || text.includes(_0xstr(325))) {
 toColIndex = index;
-} else if (text.includes(_0xstr(381)) || text.includes(_0xstr(382)) || text.includes(_0xstr(383)) || text.includes(_0xstr(384))) {
+} else if (text.includes(_0xstr(326)) || text.includes(_0xstr(327)) || text.includes(_0xstr(328)) || text.includes(_0xstr(329))) {
 opColIndex = index;
-} else if (text.includes(_0xstr(385)) || text.includes(_0xstr(386)) || text.includes(_0xstr(387)) || text.includes(_0xstr(388))) {
+} else if (text.includes(_0xstr(330)) || text.includes(_0xstr(331)) || text.includes(_0xstr(332)) || text.includes(_0xstr(333))) {
 qtyColIndex = index;
 }
 });
-const rows = document.querySelectorAll(_0xstr(389));
+const rows = document.querySelectorAll(_0xstr(334));
 for (let row of rows) {
-const cells = row.querySelectorAll(_0xstr(390));
+const cells = row.querySelectorAll(_0xstr(335));
 if (cells.length > 0) {
-let toNum = _0xstr(391);
-let operatorText = _0xstr(392);
+let toNum = _0xstr(336);
+let operatorText = _0xstr(337);
 let quantity = -1;
 if (toColIndex !== -1 && cells[toColIndex]) toNum = cells[toColIndex].innerText.trim();
 if (opColIndex !== -1 && cells[opColIndex]) operatorText = cells[opColIndex].innerText.trim();
@@ -1650,7 +1590,7 @@ if (/^TO\d+[A-Z0-9]+$/i.test(txt)) toNum = txt;
 if (!operatorText) {
 cells.forEach(c => {
 const txt = c.innerText.trim();
-if (txt.includes(_0xstr(393))) operatorText = txt;
+if (txt.includes(_0xstr(338))) operatorText = txt;
 });
 }
 if (quantity === -1) {
@@ -1663,15 +1603,15 @@ if (qVal > 0) quantity = qVal;
 });
 }
 if (toNum && operatorText && quantity > 0) {
-const isSpxShopee = operatorText.toLowerCase() === _0xstr(394);
+const isSpxShopee = operatorText.toLowerCase() === _0xstr(339);
 if (!isSpxShopee && !localExistingTOs.has(toNum.toLowerCase())) {
 localExistingTOs.add(toNum.toLowerCase());
 try {
-const addRes = await callGASPromise(_0xstr(395), _0xstr(396), { toNum: toNum });
-if (addRes.status === _0xstr(397)) {
+const addRes = await callGASPromise(_0xstr(340), _0xstr(341), { toNum: toNum });
+if (addRes.status === _0xstr(342)) {
 log(`[TO Quét] Đã copy TO mới: ${toNum} (Operator: ${operatorText}, Qty: ${quantity})`);
 lastSuccessfulAction = Date.now();
-} else if (addRes.status === _0xstr(398)) {
+} else if (addRes.status === _0xstr(343)) {
 log(`[TO Quét] TO ${toNum} đã tồn tại trên Sheet, bỏ qua.`);
 } else {
 log(`[TO Quét] API trả về không thành công cho ${toNum}: ${JSON.stringify(addRes)}`);
@@ -1693,24 +1633,24 @@ isProcessingList = false;
 async function processPrintPage() {
 if (!isRunning || isProcessingPrint) return;
 const hash = window.location.hash;
-if (!hash.includes(_0xstr(399))) return;
-if (!_0x0e3d(_0xstr(400))) {
+if (!hash.includes(_0xstr(344))) return;
+if (!_0x0e3d(_0xstr(345))) {
 return;
 }
 try {
 isProcessingPrint = true;
 lastPrintPageStartTime = Date.now();
-updateGlobalLockHeartbeat(_0xstr(401));
-const res = await callGASPromise(_0xstr(402), _0xstr(403));
-if (res.status === _0xstr(404) && res.toNum) {
+updateGlobalLockHeartbeat(_0xstr(346));
+const res = await callGASPromise(_0xstr(347), _0xstr(348));
+if (res.status === _0xstr(349) && res.toNum) {
 const currentTO = res.toNum;
 log(`[TO In] Lấy mã TO cần in từ Sheet: ${currentTO}`);
 let toInput = null;
-const labelElements = document.querySelectorAll(_0xstr(405));
+const labelElements = document.querySelectorAll(_0xstr(350));
 let targetLabel = null;
 for (let el of labelElements) {
 const text = el.innerText.trim().toLowerCase();
-if (text === _0xstr(406) || text === _0xstr(407) || text === _0xstr(408) || text === _0xstr(409)) {
+if (text === _0xstr(351) || text === _0xstr(352) || text === _0xstr(353) || text === _0xstr(354)) {
 targetLabel = el;
 break;
 }
@@ -1718,27 +1658,27 @@ break;
 if (targetLabel) {
 let parent = targetLabel.parentElement;
 for (let i = 0; i < 3 && parent; i++) {
-toInput = parent.querySelector(_0xstr(410));
+toInput = parent.querySelector(_0xstr(355));
 if (toInput) break;
 parent = parent.parentElement;
 }
 }
 if (!toInput) {
-const allInputs = document.querySelectorAll(_0xstr(411));
+const allInputs = document.querySelectorAll(_0xstr(356));
 for (let input of allInputs) {
-const placeholder = (input.placeholder || _0xstr(412)).toLowerCase();
-if (placeholder.includes(_0xstr(413)) || placeholder.includes(_0xstr(414)) || placeholder.includes(_0xstr(415)) || placeholder.includes(_0xstr(416))) {
+const placeholder = (input.placeholder || _0xstr(357)).toLowerCase();
+if (placeholder.includes(_0xstr(358)) || placeholder.includes(_0xstr(359)) || placeholder.includes(_0xstr(360)) || placeholder.includes(_0xstr(361))) {
 toInput = input;
 break;
 }
 }
 }
 if (!toInput) {
-const allInputs = Array.from(document.querySelectorAll(_0xstr(417)));
+const allInputs = Array.from(document.querySelectorAll(_0xstr(362)));
 toInput = allInputs.find(input => {
-const type = (input.type || _0xstr(418)).toLowerCase();
-const isText = type === _0xstr(419) || type === _0xstr(420) || type === _0xstr(421);
-const isVisible = input.style.display !== _0xstr(422) && input.style.visibility !== _0xstr(423);
+const type = (input.type || _0xstr(363)).toLowerCase();
+const isText = type === _0xstr(364) || type === _0xstr(365) || type === _0xstr(366);
+const isVisible = input.style.display !== _0xstr(367) && input.style.visibility !== _0xstr(368);
 return isText && isVisible;
 });
 }
@@ -1746,14 +1686,14 @@ if (toInput) {
 log(`[TO In] Đang nhập mã TO: ${currentTO} và nhấn Enter...`);
 await simulateInput(toInput, currentTO);
 await delay(100);
-updateGlobalLockHeartbeat(_0xstr(424));
+updateGlobalLockHeartbeat(_0xstr(369));
 const printSuccess = await triggerPrintLabel(currentTO);
 if (printSuccess) {
 log(`[TO In] Đã in nhãn thành công cho ${currentTO}`);
 lastSuccessfulAction = Date.now();
 try {
-await callGASPromise(_0xstr(425), _0xstr(426), { toNum: currentTO });
-log(`[TO In] Đã đánh dấu _0xstr(427) = Đã In trên Sheet.`);
+await callGASPromise(_0xstr(370), _0xstr(371), { toNum: currentTO });
+log(`[TO In] Đã đánh dấu '${currentTO}' = Đã In trên Sheet.`);
 } catch (markErr) {
 log(`[TO In] Cảnh báo: Không đánh dấu được Đã In cho ${currentTO}: ${markErr.message}`);
 }
@@ -1769,7 +1709,7 @@ log(`[TO In] Không tìm thấy ô nhập TO Number trên màn hình!`);
 log(`Lỗi In TO: ${error.message}`);
 } finally {
 isProcessingPrint = false;
-_0x1f4e(_0xstr(428));
+_0x1f4e(_0xstr(372));
 }
 }
 function triggerPrintLabel(currentTO) {
@@ -1778,30 +1718,30 @@ let checkCount = 0;
 let checkPrintInterval = setInterval(() => {
 checkCount++;
 let printBtn = null;
-const buttons = document.querySelectorAll(_0xstr(429));
+const buttons = document.querySelectorAll(_0xstr(373));
 for (let btn of buttons) {
 const text = btn.innerText.trim();
-if (text === _0xstr(430) || text === _0xstr(431) || text === _0xstr(432) || text.includes(_0xstr(433))) {
+if (text === _0xstr(374) || text === _0xstr(375) || text === _0xstr(376) || text.includes(_0xstr(377))) {
 printBtn = btn;
 break;
 }
 }
 if (!printBtn) {
-const elements = document.querySelectorAll(_0xstr(434));
+const elements = document.querySelectorAll(_0xstr(378));
 for (let el of elements) {
 const text = el.innerText.trim();
-if (text === _0xstr(435) || text === _0xstr(436) || text === _0xstr(437) || text.includes(_0xstr(438))) {
-printBtn = el.closest(_0xstr(439)) || el;
+if (text === _0xstr(379) || text === _0xstr(380) || text === _0xstr(381) || text.includes(_0xstr(382))) {
+printBtn = el.closest(_0xstr(383)) || el;
 break;
 }
 }
 }
-if (printBtn && !printBtn.disabled && !printBtn.classList.contains(_0xstr(440))) {
+if (printBtn && !printBtn.disabled && !printBtn.classList.contains(_0xstr(384))) {
 clearInterval(checkPrintInterval);
-log(_0xstr(441));
+log(_0xstr(385));
 printBtn.click();
 setTimeout(() => {
-log(`[TO In] Đánh dấu _0xstr(442) thành công cho ${currentTO}`);
+log(`[TO In] Đánh dấu 'Đã in' thành công cho ${currentTO}`);
 resolve(true);
 }, 800);
 } else if (checkCount > 20) {
@@ -1813,17 +1753,17 @@ resolve(false);
 }
 async function _0x6a9f() {
 if (!isRunning || isProcessingHandover) return;
-const hash = window.location.hash || _0xstr(443);
-if (!hash.includes(_0xstr(444))) return;
-if (!_0x0e3d(_0xstr(445))) {
+const hash = window.location.hash || _0xstr(386);
+if (!hash.includes(_0xstr(387))) return;
+if (!_0x0e3d(_0xstr(388))) {
 return;
 }
 try {
 isProcessingHandover = true;
 lastHandoverStartTime = Date.now();
-updateGlobalLockHeartbeat(_0xstr(446));
-const data = await callGASPromise(_0xstr(447), _0xstr(448));
-if (data.status === _0xstr(449)) {
+updateGlobalLockHeartbeat(_0xstr(389));
+const data = await callGASPromise(_0xstr(390), _0xstr(391));
+if (data.status === _0xstr(392)) {
 const pupCode = data.pupCode;
 const rawDriver = data.recipientDriver;
 const recipientDriver = extractDriverCode(rawDriver);
@@ -1831,27 +1771,27 @@ const now = Date.now();
 if (pupCode === lastHandoverPup && (now - lastHandoverTime) < 30000) {
 log(`PUP ${pupCode} đã được xử lý gần đây (dưới 30s). Bỏ qua thao tác trùng lặp.`);
 isProcessingHandover = false;
-_0x1f4e(_0xstr(450));
+_0x1f4e(_0xstr(393));
 return;
 }
 log(`Tìm thấy nhiệm vụ Chuyển Pick: PUP=${pupCode}, Nhận=${recipientDriver} (Gốc: ${rawDriver})`);
-updateGlobalLockHeartbeat(_0xstr(451));
+updateGlobalLockHeartbeat(_0xstr(394));
 const success = await executeHandoverJob(pupCode, recipientDriver);
 if (success) {
 lastHandoverPup = pupCode;
 lastHandoverTime = Date.now();
 log(`Đã chuyển giao thành công PUP: ${pupCode} cho tài xế ${recipientDriver}`);
 try {
-await callGASPromise(_0xstr(452), _0xstr(453), { pupCode: pupCode, status: _0xstr(454) });
-log(`[Chuyển Pick] Đã ghi nhận trạng thái _0xstr(455) cho ${pupCode} vào Sheet.`);
+await callGASPromise(_0xstr(395), _0xstr(396), { pupCode: pupCode, status: _0xstr(397) });
+log(`[Chuyển Pick] Đã ghi nhận trạng thái 'Đã chuyển' cho ${pupCode} vào Sheet.`);
 } catch (err) {
 log(`[Chuyển Pick] Lỗi đồng bộ trạng thái thành công cho ${pupCode}: ${err.message}`);
 }
 } else {
 log(`Chuyển giao thất bại trên giao diện Shopee.`);
 try {
-await callGASPromise(_0xstr(456), _0xstr(457), { pupCode: pupCode, status: _0xstr(458) });
-log(`[Chuyển Pick] Đã cập nhật trạng thái _0xstr(459) cho ${pupCode} vào Sheet.`);
+await callGASPromise(_0xstr(398), _0xstr(399), { pupCode: pupCode, status: _0xstr(400) });
+log(`[Chuyển Pick] Đã cập nhật trạng thái 'Thất bại' cho ${pupCode} vào Sheet.`);
 } catch (err) {
 log(`[Chuyển Pick] Lỗi đồng bộ trạng thái thất bại cho ${pupCode}: ${err.message}`);
 }
@@ -1861,68 +1801,68 @@ log(`[Chuyển Pick] Lỗi đồng bộ trạng thái thất bại cho ${pupCode
 log(`Lỗi Chuyển Pick: ${error.message}`);
 } finally {
 isProcessingHandover = false;
-_0x1f4e(_0xstr(460));
+_0x1f4e(_0xstr(401));
 }
 }
 async function executeHandoverJob(pupCode, recipientDriver) {
 let filterInput = null;
-const formItems = document.querySelectorAll(_0xstr(461));
+const formItems = document.querySelectorAll(_0xstr(402));
 for (let item of formItems) {
-const label = item.querySelector(_0xstr(462));
+const label = item.querySelector(_0xstr(403));
 if (label) {
-const labelText = (label.innerText || label.textContent || _0xstr(463)).trim().toLowerCase();
-if (labelText.includes(_0xstr(464)) || labelText.includes(_0xstr(465)) || labelText === _0xstr(466)) {
-filterInput = item.querySelector(_0xstr(467));
+const labelText = (label.innerText || label.textContent || _0xstr(404)).trim().toLowerCase();
+if (labelText.includes(_0xstr(405)) || labelText.includes(_0xstr(406)) || labelText === _0xstr(407)) {
+filterInput = item.querySelector(_0xstr(408));
 if (filterInput) break;
 }
 }
 }
 if (!filterInput) {
-const allInputs = document.querySelectorAll(_0xstr(468));
+const allInputs = document.querySelectorAll(_0xstr(409));
 for (let input of allInputs) {
-const placeholder = input.placeholder || _0xstr(469);
-if (placeholder.toLowerCase().includes(_0xstr(470)) || placeholder.toLowerCase().includes(_0xstr(471))) {
+const placeholder = input.placeholder || _0xstr(410);
+if (placeholder.toLowerCase().includes(_0xstr(411)) || placeholder.toLowerCase().includes(_0xstr(412))) {
 filterInput = input;
 break;
 }
 }
 }
 if (!filterInput) {
-log(_0xstr(472));
+log(_0xstr(413));
 return false;
 }
 await simulateInput(filterInput, pupCode);
 await delay(300);
-let searchBtn = Array.from(document.querySelectorAll(_0xstr(473))).find(btn => {
-const txt = btn.innerText || btn.textContent || _0xstr(474);
-return txt.trim() === _0xstr(475) || txt.trim() === _0xstr(476);
+let searchBtn = Array.from(document.querySelectorAll(_0xstr(414))).find(btn => {
+const txt = btn.innerText || btn.textContent || _0xstr(415);
+return txt.trim() === _0xstr(416) || txt.trim() === _0xstr(417);
 });
 if (searchBtn) {
 searchBtn.click();
-log(_0xstr(477) + pupCode);
+log(_0xstr(418) + pupCode);
 } else {
-filterInput.dispatchEvent(new KeyboardEvent(_0xstr(478), { key: _0xstr(479), code: _0xstr(480), keyCode: 13, which: 13, bubbles: true }));
+filterInput.dispatchEvent(new KeyboardEvent(_0xstr(419), { key: _0xstr(420), code: _0xstr(421), keyCode: 13, which: 13, bubbles: true }));
 }
 await delay(2000);
-updateGlobalLockHeartbeat(_0xstr(481));
-const rows = Array.from(document.querySelectorAll(_0xstr(482)));
+updateGlobalLockHeartbeat(_0xstr(422));
+const rows = Array.from(document.querySelectorAll(_0xstr(423)));
 let reassignedAny = false;
 for (let row of rows) {
-const reassignBtn = Array.from(row.querySelectorAll(_0xstr(483))).find(el => {
-const txt = el.innerText || el.textContent || _0xstr(484);
-return txt.trim() === _0xstr(485) || txt.trim() === _0xstr(486) || txt.trim() === _0xstr(487);
+const reassignBtn = Array.from(row.querySelectorAll(_0xstr(424))).find(el => {
+const txt = el.innerText || el.textContent || _0xstr(425);
+return txt.trim() === _0xstr(426) || txt.trim() === _0xstr(427) || txt.trim() === _0xstr(428);
 });
 if (reassignBtn) {
-log(_0xstr(488));
+log(_0xstr(429));
 reassignBtn.click();
 await delay(2500);
-updateGlobalLockHeartbeat(_0xstr(489));
-const dialogs = document.querySelectorAll(_0xstr(490));
+updateGlobalLockHeartbeat(_0xstr(430));
+const dialogs = document.querySelectorAll(_0xstr(431));
 let targetDialog = null;
 for (const dialog of dialogs) {
 if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
-const text = (dialog.innerText || dialog.textContent || _0xstr(491));
-if (text.includes(_0xstr(492)) || text.includes(_0xstr(493)) || text.includes(_0xstr(494)) || text.includes(_0xstr(495))) {
+const text = (dialog.innerText || dialog.textContent || _0xstr(432));
+if (text.includes(_0xstr(433)) || text.includes(_0xstr(434)) || text.includes(_0xstr(435)) || text.includes(_0xstr(436))) {
 targetDialog = dialog;
 break;
 }
@@ -1930,107 +1870,107 @@ break;
 }
 if (targetDialog) {
 let driverSelectInput = null;
-const formItems = targetDialog.querySelectorAll(_0xstr(496));
+const formItems = targetDialog.querySelectorAll(_0xstr(437));
 for (let item of formItems) {
-const label = item.querySelector(_0xstr(497));
+const label = item.querySelector(_0xstr(438));
 if (label) {
-const labelText = (label.innerText || label.textContent || _0xstr(498)).trim().toLowerCase();
-if (labelText.includes(_0xstr(499)) || labelText.includes(_0xstr(500))) {
-driverSelectInput = item.querySelector(_0xstr(501));
+const labelText = (label.innerText || label.textContent || _0xstr(439)).trim().toLowerCase();
+if (labelText.includes(_0xstr(440)) || labelText.includes(_0xstr(441))) {
+driverSelectInput = item.querySelector(_0xstr(442));
 if (driverSelectInput) break;
 }
 }
 }
 if (!driverSelectInput) {
-const dialogInputs = targetDialog.querySelectorAll(_0xstr(502));
+const dialogInputs = targetDialog.querySelectorAll(_0xstr(443));
 for (let inp of dialogInputs) {
-const ph = inp.placeholder || _0xstr(503);
-if (ph.toLowerCase().includes(_0xstr(504)) || ph.toLowerCase().includes(_0xstr(505)) || ph.toLowerCase().includes(_0xstr(506))) {
+const ph = inp.placeholder || _0xstr(444);
+if (ph.toLowerCase().includes(_0xstr(445)) || ph.toLowerCase().includes(_0xstr(446)) || ph.toLowerCase().includes(_0xstr(447))) {
 driverSelectInput = inp;
 break;
 }
 }
 }
 if (driverSelectInput) {
-const selectWrapper = driverSelectInput.closest(_0xstr(507)) || driverSelectInput.parentElement;
+const selectWrapper = driverSelectInput.closest(_0xstr(448)) || driverSelectInput.parentElement;
 if (selectWrapper) {
 selectWrapper.click();
 } else {
-driverSelectInput.removeAttribute(_0xstr(508));
+driverSelectInput.removeAttribute(_0xstr(449));
 driverSelectInput.click();
 }
-log(_0xstr(509));
+log(_0xstr(450));
 await delay(2200);
-updateGlobalLockHeartbeat(_0xstr(510));
+updateGlobalLockHeartbeat(_0xstr(451));
 let activeInput = document.activeElement;
-if (!activeInput || activeInput.tagName !== _0xstr(511) || !targetDialog.contains(activeInput)) {
+if (!activeInput || activeInput.tagName !== _0xstr(452) || !targetDialog.contains(activeInput)) {
 activeInput = driverSelectInput;
 }
-activeInput.removeAttribute(_0xstr(512));
+activeInput.removeAttribute(_0xstr(453));
 activeInput.focus();
-if (typeof activeInput.select === _0xstr(513)) activeInput.select();
-activeInput.value = _0xstr(514);
-activeInput.dispatchEvent(new Event(_0xstr(515), { bubbles: true }));
+if (typeof activeInput.select === _0xstr(454)) activeInput.select();
+activeInput.value = _0xstr(455);
+activeInput.dispatchEvent(new Event(_0xstr(456), { bubbles: true }));
 try {
-document.execCommand(_0xstr(516), false, recipientDriver);
+document.execCommand(_0xstr(457), false, recipientDriver);
 } catch (e) {}
 if (activeInput.value !== recipientDriver) {
 activeInput.value = recipientDriver;
 }
-activeInput.dispatchEvent(new Event(_0xstr(517), { bubbles: true }));
-activeInput.dispatchEvent(new Event(_0xstr(518), { bubbles: true }));
-activeInput.dispatchEvent(new KeyboardEvent(_0xstr(519), { key: _0xstr(520), bubbles: true }));
-activeInput.dispatchEvent(new KeyboardEvent(_0xstr(521), { key: _0xstr(522), bubbles: true }));
-log(_0xstr(523) + recipientDriver + _0xstr(524));
+activeInput.dispatchEvent(new Event(_0xstr(458), { bubbles: true }));
+activeInput.dispatchEvent(new Event(_0xstr(459), { bubbles: true }));
+activeInput.dispatchEvent(new KeyboardEvent(_0xstr(460), { key: _0xstr(461), bubbles: true }));
+activeInput.dispatchEvent(new KeyboardEvent(_0xstr(462), { key: _0xstr(463), bubbles: true }));
+log(_0xstr(464) + recipientDriver + _0xstr(465));
 await delay(2500);
-const allElements = Array.from(document.querySelectorAll(_0xstr(525)));
+const allElements = Array.from(document.querySelectorAll(_0xstr(466)));
 let matchedOption = allElements.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(526)).trim();
+const text = (el.innerText || el.textContent || _0xstr(467)).trim();
 return text.includes(recipientDriver) &&
 (el.offsetWidth > 0 || el.offsetHeight > 0) &&
-(el.classList.contains(_0xstr(527)) ||
-el.closest(_0xstr(528)) ||
-el.closest(_0xstr(529)) ||
-el.tagName === _0xstr(530));
+(el.classList.contains(_0xstr(468)) ||
+el.closest(_0xstr(469)) ||
+el.closest(_0xstr(470)) ||
+el.tagName === _0xstr(471));
 });
 if (!matchedOption) {
 matchedOption = allElements.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(531)).trim();
+const text = (el.innerText || el.textContent || _0xstr(472)).trim();
 return text.includes(recipientDriver) &&
-(el.closest(_0xstr(532)) || el.closest(_0xstr(533)) || el.tagName === _0xstr(534));
+(el.closest(_0xstr(473)) || el.closest(_0xstr(474)) || el.tagName === _0xstr(475));
 });
 }
 if (!matchedOption) {
 matchedOption = allElements.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(535)).trim();
+const text = (el.innerText || el.textContent || _0xstr(476)).trim();
 return text.includes(recipientDriver);
 });
 }
 if (matchedOption) {
 matchedOption.click();
-log(_0xstr(536) + (matchedOption.innerText || matchedOption.textContent).trim());
+log(_0xstr(477) + (matchedOption.innerText || matchedOption.textContent).trim());
 await delay(1200);
-const dialogConfirmBtn = Array.from(targetDialog.querySelectorAll(_0xstr(537))).find(btn => {
-const txt = btn.innerText || btn.textContent || _0xstr(538);
-return txt.trim() === _0xstr(539) || txt.trim() === _0xstr(540) || txt.trim() === _0xstr(541);
+const dialogConfirmBtn = Array.from(targetDialog.querySelectorAll(_0xstr(478))).find(btn => {
+const txt = btn.innerText || btn.textContent || _0xstr(479);
+return txt.trim() === _0xstr(480) || txt.trim() === _0xstr(481) || txt.trim() === _0xstr(482);
 });
 if (dialogConfirmBtn) {
 dialogConfirmBtn.click();
-log(_0xstr(542));
+log(_0xstr(483));
 reassignedAny = true;
 await delay(1500);
 break;
 } else {
-log(_0xstr(543));
+log(_0xstr(484));
 }
 } else {
-log(_0xstr(544) + recipientDriver);
+log(_0xstr(485) + recipientDriver);
 }
 } else {
-log(_0xstr(545));
+log(_0xstr(486));
 }
 } else {
-log(_0xstr(546));
+log(_0xstr(487));
 }
 }
 }
@@ -2039,34 +1979,34 @@ return reassignedAny;
 function checkAndRecoverStuckFlags() {
 const now = Date.now();
 if (isPrintingNow && lastPrintStartTime > 0 && (now - lastPrintStartTime) > STUCK_TIMEOUT) {
-log(_0xstr(547));
+log(_0xstr(488));
 isPrintingNow = false;
-_0x1f4e(_0xstr(548));
+_0x1f4e(_0xstr(489));
 lastPrintStartTime = 0;
 }
 if (isProcessingList && lastListStartTime > 0 && (now - lastListStartTime) > STUCK_TIMEOUT) {
-log(_0xstr(549));
+log(_0xstr(490));
 isProcessingList = false;
-_0x1f4e(_0xstr(550));
+_0x1f4e(_0xstr(491));
 lastListStartTime = 0;
 }
 if (isProcessingPrint && lastPrintPageStartTime > 0 && (now - lastPrintPageStartTime) > STUCK_TIMEOUT) {
-log(_0xstr(551));
+log(_0xstr(492));
 isProcessingPrint = false;
-_0x1f4e(_0xstr(552));
+_0x1f4e(_0xstr(493));
 lastPrintPageStartTime = 0;
 }
 if (isProcessingHandover && lastHandoverStartTime > 0 && (now - lastHandoverStartTime) > STUCK_TIMEOUT) {
-log(_0xstr(553));
+log(_0xstr(494));
 isProcessingHandover = false;
-_0x1f4e(_0xstr(554));
+_0x1f4e(_0xstr(495));
 lastHandoverStartTime = 0;
 }
 }
 function checkSessionHealth() {
 const href = window.location.href;
-if (href.includes(_0xstr(555)) || href.includes(_0xstr(556))) {
-log(_0xstr(557));
+if (href.includes(_0xstr(496)) || href.includes(_0xstr(497))) {
+log(_0xstr(498));
 window.location.reload();
 return false;
 }
@@ -2075,55 +2015,55 @@ return true;
 const SMART_RELOAD_TAB_TIMEOUT = 60000;
 const SMART_RELOAD_CHAIN_TIMEOUT = 300000;
 function isPageContentFullyLoaded() {
-const hash = window.location.hash || _0xstr(558);
+const hash = window.location.hash || _0xstr(499);
 const href = window.location.href;
-if (href.includes(_0xstr(559)) || href.includes(_0xstr(560))) return false;
-const spinners = document.querySelectorAll(_0xstr(561));
+if (href.includes(_0xstr(500)) || href.includes(_0xstr(501))) return false;
+const spinners = document.querySelectorAll(_0xstr(502));
 for (const sp of spinners) {
 if (sp.offsetWidth > 0 || sp.offsetHeight > 0) {
 const style = window.getComputedStyle(sp);
-if (style.display !== _0xstr(562) && style.visibility !== _0xstr(563) && style.opacity !== _0xstr(564)) {
+if (style.display !== _0xstr(503) && style.visibility !== _0xstr(504) && style.opacity !== _0xstr(505)) {
 return false;
 }
 }
 }
-if (hash.includes(_0xstr(565))) {
-const textarea = document.querySelector(_0xstr(566)) || document.querySelector(_0xstr(567));
+if (hash.includes(_0xstr(506))) {
+const textarea = document.querySelector(_0xstr(507)) || document.querySelector(_0xstr(508));
 if (!textarea) return false;
 const style = window.getComputedStyle(textarea);
-return textarea.offsetWidth > 0 && style.display !== _0xstr(568) && style.visibility !== _0xstr(569);
+return textarea.offsetWidth > 0 && style.display !== _0xstr(509) && style.visibility !== _0xstr(510);
 }
-if (hash.includes(_0xstr(570))) {
-const buttons = Array.from(document.querySelectorAll(_0xstr(571)));
+if (hash.includes(_0xstr(511))) {
+const buttons = Array.from(document.querySelectorAll(_0xstr(512)));
 const hasSearchBtn = buttons.some(btn => {
-const text = (btn.innerText || btn.textContent || _0xstr(572)).trim().toLowerCase();
+const text = (btn.innerText || btn.textContent || _0xstr(513)).trim().toLowerCase();
 const style = window.getComputedStyle(btn);
-const isVisible = btn.offsetWidth > 0 && style.display !== _0xstr(573) && style.visibility !== _0xstr(574);
-return isVisible && (text.includes(_0xstr(575)) || text.includes(_0xstr(576)));
+const isVisible = btn.offsetWidth > 0 && style.display !== _0xstr(514) && style.visibility !== _0xstr(515);
+return isVisible && (text.includes(_0xstr(516)) || text.includes(_0xstr(517)));
 });
-const hasTable = document.querySelectorAll(_0xstr(577)).length > 0;
+const hasTable = document.querySelectorAll(_0xstr(518)).length > 0;
 return hasSearchBtn && hasTable;
 }
-if (hash.includes(_0xstr(578))) {
-const inputs = Array.from(document.querySelectorAll(_0xstr(579)));
+if (hash.includes(_0xstr(519))) {
+const inputs = Array.from(document.querySelectorAll(_0xstr(520)));
 const hasVisibleInput = inputs.some(input => {
-const type = (input.type || _0xstr(580)).toLowerCase();
+const type = (input.type || _0xstr(521)).toLowerCase();
 const style = window.getComputedStyle(input);
-const isText = type === _0xstr(581) || type === _0xstr(582) || type === _0xstr(583);
-return isText && input.offsetWidth > 0 && style.display !== _0xstr(584) && style.visibility !== _0xstr(585);
+const isText = type === _0xstr(522) || type === _0xstr(523) || type === _0xstr(524);
+return isText && input.offsetWidth > 0 && style.display !== _0xstr(525) && style.visibility !== _0xstr(526);
 });
 return hasVisibleInput;
 }
-if (hash.includes(_0xstr(586))) {
-const inputs = Array.from(document.querySelectorAll(_0xstr(587)));
+if (hash.includes(_0xstr(527))) {
+const inputs = Array.from(document.querySelectorAll(_0xstr(528)));
 const hasInput = inputs.some(input => {
 const style = window.getComputedStyle(input);
-return input.offsetWidth > 0 && style.display !== _0xstr(588) && style.visibility !== _0xstr(589);
+return input.offsetWidth > 0 && style.display !== _0xstr(529) && style.visibility !== _0xstr(530);
 });
-const buttons = Array.from(document.querySelectorAll(_0xstr(590)));
+const buttons = Array.from(document.querySelectorAll(_0xstr(531)));
 const hasButton = buttons.some(btn => {
 const style = window.getComputedStyle(btn);
-return btn.offsetWidth > 0 && style.display !== _0xstr(591) && style.visibility !== _0xstr(592);
+return btn.offsetWidth > 0 && style.display !== _0xstr(532) && style.visibility !== _0xstr(533);
 });
 return hasInput && hasButton;
 }
@@ -2131,32 +2071,32 @@ return false;
 }
 function initiateSmartReload() {
 const now = Date.now();
-log(_0xstr(593));
+log(_0xstr(534));
 for (const type of RELOAD_ORDER) {
-localStorage.setItem(_0xstr(594) + type, _0xstr(595));
+localStorage.setItem(_0xstr(535) + type, _0xstr(536));
 }
 setTimeout(() => {
-log(_0xstr(596));
-initiateSequentialTabOpen(_0xstr(597));
+log(_0xstr(537));
+initiateSequentialTabOpen(_0xstr(538));
 }, 2500);
 lastSuccessfulAction = now;
 }
 function checkCloseTabTrigger() {
 const myTabType = getCurrentTabType();
 if (myTabType) {
-const trigger = localStorage.getItem(_0xstr(598) + myTabType);
-if (trigger === _0xstr(599)) {
-localStorage.removeItem(_0xstr(600) + myTabType);
+const trigger = localStorage.getItem(_0xstr(539) + myTabType);
+if (trigger === _0xstr(540)) {
+localStorage.removeItem(_0xstr(541) + myTabType);
 log(`[Hệ thống] Nhận lệnh làm mới tuần tự. Đang đóng tab này...`);
-localStorage.setItem(_0xstr(601) + myTabType, _0xstr(602));
-localStorage.removeItem(_0xstr(603) + myTabType);
+localStorage.setItem(_0xstr(542) + myTabType, _0xstr(543));
+localStorage.removeItem(_0xstr(544) + myTabType);
 window.close();
 }
 }
 }
 function checkPeriodicReload() {
 const now = Date.now();
-if (localStorage.getItem(_0xstr(604)) || localStorage.getItem(_0xstr(605))) return;
+if (localStorage.getItem(_0xstr(545)) || localStorage.getItem(_0xstr(546))) return;
 const isIdle = !isPrintingNow && !isProcessingList && !isProcessingPrint && !isProcessingHandover;
 if (isIdle && (now - lastSuccessfulAction) > PAGE_RELOAD_INTERVAL) {
 initiateSmartReload();
@@ -2167,12 +2107,12 @@ function monitorApp() {
 updateSelfPulse();
 updateTabsStatusUI();
 checkCloseTabTrigger();
-apiUrl = localStorage.getItem(_0xstr(606)) || GM_getValue(_0xstr(607), _0x2c5b);
-pcName = localStorage.getItem(_0xstr(608)) || GM_getValue(_0xstr(609), _0xstr(610));
-isRunning = localStorage.getItem(_0xstr(611)) === _0xstr(612);
+apiUrl = localStorage.getItem(_0xstr(547)) || GM_getValue(_0xstr(548), _0x2c5b);
+pcName = localStorage.getItem(_0xstr(549)) || GM_getValue(_0xstr(550), _0xstr(551));
+isRunning = localStorage.getItem(_0xstr(552)) === _0xstr(553);
 updateUIState();
 const currentUrl = window.location.href;
-const hash = window.location.hash || _0xstr(613);
+const hash = window.location.hash || _0xstr(554);
 if (currentUrl !== lastUrl) {
 lastUrl = currentUrl;
 isProcessingList = false;
@@ -2190,16 +2130,16 @@ checkSessionHealth();
 checkPeriodicReload();
 autoReopenClosedTabs();
 }
-if (hash.includes(_0xstr(614))) {
+if (hash.includes(_0xstr(555))) {
 startPollingLoop();
 }
-if (hash.includes(_0xstr(615))) {
+if (hash.includes(_0xstr(556))) {
 processTOListPage();
 }
-if (hash.includes(_0xstr(616))) {
+if (hash.includes(_0xstr(557))) {
 processPrintPage();
 }
-if (hash.includes(_0xstr(617))) {
+if (hash.includes(_0xstr(558))) {
 _0x6a9f();
 }
 }
@@ -2208,21 +2148,21 @@ let worker = null;
 try {
 const blob = new Blob([`
 function tick() {
-postMessage(_0xstr(618));
+postMessage("pulse");
 setTimeout(tick, 400);
 }
 tick();
-`], { type: _0xstr(619) });
+`], { type: _0xstr(559) });
 const workerUrl = URL.createObjectURL(blob);
 worker = new Worker(workerUrl);
 worker.onmessage = function(e) {
-if (e.data === _0xstr(620)) {
+if (e.data === _0xstr(560)) {
 monitorApp();
 }
 };
-log(_0xstr(621));
+log(_0xstr(561));
 } catch (err) {
-log(_0xstr(622));
+log(_0xstr(562));
 function fallbackTick() {
 monitorApp();
 setTimeout(fallbackTick, 400);
@@ -2230,8 +2170,8 @@ setTimeout(fallbackTick, 400);
 fallbackTick();
 }
 }
-if (document.readyState === _0xstr(623)) {
-document.addEventListener(_0xstr(624), init);
+if (document.readyState === _0xstr(563)) {
+document.addEventListener(_0xstr(564), init);
 } else {
 init();
 }
