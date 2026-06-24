@@ -573,8 +573,8 @@
             const tabStart = parseInt(localStorage.getItem('seq_open_tab_start') || '0');
             const now = Date.now();
 
-            // Kiểm tra nội dung trang đã load đầy đủ chưa
-            if (isPageContentFullyLoaded()) {
+            // Đợi ít nhất 4 giây sau khi tab bắt đầu mở để đảm bảo trang đã tải xong
+            if ((now - tabStart) >= 4000) {
                 log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã load đầy đủ và sẵn sàng!`);
                 lastSuccessfulAction = Date.now();
                 openNextTabInQueue();
