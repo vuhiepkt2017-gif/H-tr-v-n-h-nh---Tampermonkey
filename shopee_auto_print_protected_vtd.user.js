@@ -661,7 +661,7 @@
         '',
         'bG9naW4=',
         'c3NvLnNob3BlZQ==',
-        'LmVsLWxvYWRpbmctbWFzaywgLmVsLWxvYWRpbmctc3Bpbm5lciwgLmxvYWRpbmctbW9jaywgW2NsYXNzKj0ibG9hZGluZy1zcGlubmVyIl0=',
+        'LmVsLWxvYWRpbmctbWFzaw==',
         'bm9uZQ==',
         'aGlkZGVu',
         'MA==',
@@ -769,29 +769,29 @@ hashKey: _0xstr(12)
 };
 function _0x004b() {
 const hash = window.location.hash || _0xstr(13);
-const _0x0096 = hash.split(_0xstr(14))[0];
+const _0x0098 = hash.split(_0xstr(14))[0];
 for (const [type, _0x0019] of Object.entries(_0x000a)) {
-if (_0x0096.includes(_0x0019.hashKey)) {
+if (_0x0098.includes(_0x0019.hashKey)) {
 return type;
 }
 }
 return null;
 }
-let _0x00bc = sessionStorage.getItem(_0xstr(15));
-if (!_0x00bc) {
-_0x00bc = _0xstr(16) + Math.random().toString(36).substring(2, 10) + _0xstr(17) + Date.now();
-sessionStorage.setItem(_0xstr(18), _0x00bc);
+let _0x00bd = sessionStorage.getItem(_0xstr(15));
+if (!_0x00bd) {
+_0x00bd = _0xstr(16) + Math.random().toString(36).substring(2, 10) + _0xstr(17) + Date.now();
+sessionStorage.setItem(_0xstr(18), _0x00bd);
 }
 const _0x0058 = _0x004b();
 if (_0x0058) {
 localStorage.setItem(_0xstr(19) + _0x0058, Date.now().toString());
-localStorage.setItem(_0xstr(20) + _0x0058, _0x00bc);
+localStorage.setItem(_0xstr(20) + _0x0058, _0x00bd);
 }
 function _0x004d() {
 const _0x002e = _0x004b();
 if (_0x002e) {
-const _0x00a7 = localStorage.getItem(_0xstr(21) + _0x002e);
-if (_0x00a7 === _0x00bc) {
+const _0x00a9 = localStorage.getItem(_0xstr(21) + _0x002e);
+if (_0x00a9 === _0x00bd) {
 localStorage.setItem(_0xstr(22) + _0x002e, _0xstr(23));
 localStorage.removeItem(_0xstr(24) + _0x002e);
 }
@@ -806,7 +806,7 @@ return;
 }
 const _0x0000 = _0xstr(29);
 let _0x0012 = localStorage.getItem(_0xstr(30)) || GM_getValue(_0xstr(31), _0x0000);
-let _0x0099 = localStorage.getItem(_0xstr(32)) || GM_getValue(_0xstr(33), _0xstr(34));
+let _0x009b = localStorage.getItem(_0xstr(32)) || GM_getValue(_0xstr(33), _0xstr(34));
 let _0x0069 = localStorage.getItem(_0xstr(35)) === _0xstr(36);
 let _0x0065 = false;
 let _0x0067 = false;
@@ -832,42 +832,42 @@ if (now - _0x007b < 2000) {
 return false;
 }
 const _0x0083 = _0xstr(39);
-const _0x00cd = _0xstr(40);
-const _0x00c4 = _0xstr(41);
-const _0x002b = localStorage.getItem(_0x00cd);
-const _0x0084 = parseInt(localStorage.getItem(_0x00c4) || _0xstr(42));
+const _0x00ce = _0xstr(40);
+const _0x00c5 = _0xstr(41);
+const _0x002b = localStorage.getItem(_0x00ce);
+const _0x0084 = parseInt(localStorage.getItem(_0x00c5) || _0xstr(42));
 if (!_0x002b || (now - _0x0084) > 5000 || _0x002b === tabType) {
 localStorage.setItem(_0x0083, _0xstr(43));
-localStorage.setItem(_0x00cd, tabType);
-localStorage.setItem(_0x00c4, now.toString());
+localStorage.setItem(_0x00ce, tabType);
+localStorage.setItem(_0x00c5, now.toString());
 return true;
 }
 return false;
 }
-function _0x00a9(tabType) {
+function _0x00ab(tabType) {
 const _0x0083 = _0xstr(44);
-const _0x00cd = _0xstr(45);
-const _0x00c4 = _0xstr(46);
-const _0x002b = localStorage.getItem(_0x00cd);
+const _0x00ce = _0xstr(45);
+const _0x00c5 = _0xstr(46);
+const _0x002b = localStorage.getItem(_0x00ce);
 if (_0x002b === tabType) {
 localStorage.removeItem(_0x0083);
-localStorage.removeItem(_0x00cd);
-localStorage.removeItem(_0x00c4);
+localStorage.removeItem(_0x00ce);
+localStorage.removeItem(_0x00c5);
 _0x007b = Date.now();
 }
 }
-function _0x00ce(tabType) {
-const _0x00cd = _0xstr(47);
-const _0x00c4 = _0xstr(48);
-const _0x002b = localStorage.getItem(_0x00cd);
+function _0x00cf(tabType) {
+const _0x00ce = _0xstr(47);
+const _0x00c5 = _0xstr(48);
+const _0x002b = localStorage.getItem(_0x00ce);
 if (_0x002b === tabType) {
-localStorage.setItem(_0x00c4, Date.now().toString());
+localStorage.setItem(_0x00c5, Date.now().toString());
 }
 }
 GM_registerMenuCommand(_0xstr(49), function() {
-let _0x008c = prompt(_0xstr(50), _0x0012);
-if (_0x008c) {
-_0x0012 = _0x008c.trim();
+let _0x008e = prompt(_0xstr(50), _0x0012);
+if (_0x008e) {
+_0x0012 = _0x008e.trim();
 localStorage.setItem(_0xstr(51), _0x0012);
 GM_setValue(_0xstr(52), _0x0012);
 alert(_0xstr(53));
@@ -883,13 +883,13 @@ const panel = document.createElement(_0xstr(58));
 panel.id = _0xstr(59);
 panel.style = _0xstr(60);
 let _0x0013 = null;
-function _0x00b4() {
-_0x00b9();
+function _0x00b5() {
+_0x00ba();
 _0x0013 = setTimeout(() => {
 _0x0027();
 }, 20000);
 }
-function _0x00b9() {
+function _0x00ba() {
 if (_0x0013) {
 clearTimeout(_0x0013);
 _0x0013 = null;
@@ -898,18 +898,18 @@ _0x0013 = null;
 function _0x0027() {
 panel.style.display = _0xstr(61);
 launcher.style.display = _0xstr(62);
-_0x00b9();
+_0x00ba();
 }
 function _0x0042() {
 panel.style.display = _0xstr(63);
 launcher.style.display = _0xstr(64);
-_0x00b4();
+_0x00b5();
 }
-panel.innerHTML = _0xstr(65) + (_0x0012) + _0xstr(66) + (_0x0099) + _0xstr(67);
+panel.innerHTML = _0xstr(65) + (_0x0012) + _0xstr(66) + (_0x009b) + _0xstr(67);
 document.body.appendChild(panel);
-const _0x00c9 = document.createElement(_0xstr(68));
-_0x00c9.innerHTML = _0xstr(69);
-document.head.appendChild(_0x00c9);
+const _0x00ca = document.createElement(_0xstr(68));
+_0x00ca.innerHTML = _0xstr(69);
+document.head.appendChild(_0x00ca);
 function _0x001e() {
 let _0x0055 = false;
 const _0x0037 = document.querySelectorAll(_0xstr(70));
@@ -939,59 +939,59 @@ launcher.style.pointerEvents = _0xstr(83);
 setInterval(_0x001e, 300);
 const _0x0085 = document.getElementById(_0xstr(84));
 const badge = document.getElementById(_0xstr(85));
-const _0x00c7 = document.getElementById(_0xstr(86));
-const _0x00d4 = document.getElementById(_0xstr(87));
-const _0x0097 = document.getElementById(_0xstr(88));
-const _0x00af = document.getElementById(_0xstr(89));
+const _0x00c8 = document.getElementById(_0xstr(86));
+const _0x00d5 = document.getElementById(_0xstr(87));
+const _0x0099 = document.getElementById(_0xstr(88));
+const _0x00b1 = document.getElementById(_0xstr(89));
 const _0x0024 = document.getElementById(_0xstr(90));
 const _0x002a = document.getElementById(_0xstr(91));
-const _0x00d5 = document.getElementById(_0xstr(92));
-const _0x00d3 = document.getElementById(_0xstr(93));
+const _0x00d6 = document.getElementById(_0xstr(92));
+const _0x00d4 = document.getElementById(_0xstr(93));
 const _0x003a = document.getElementById(_0xstr(94));
-const _0x00d6 = document.getElementById(_0xstr(95));
-const _0x00be = document.getElementById(_0xstr(96));
-const _0x0091 = document.getElementById(_0xstr(97));
+const _0x00d7 = document.getElementById(_0xstr(95));
+const _0x00bf = document.getElementById(_0xstr(96));
+const _0x0093 = document.getElementById(_0xstr(97));
 function log(message) {
-const _0x00c3 = new Date().toLocaleTimeString();
-_0x0085.innerHTML = _0xstr(98) + (_0x00c3) + _0xstr(99) + (message) + _0xstr(100) + _0x0085.innerHTML;
+const _0x00c4 = new Date().toLocaleTimeString();
+_0x0085.innerHTML = _0xstr(98) + (_0x00c4) + _0xstr(99) + (message) + _0xstr(100) + _0x0085.innerHTML;
 const _0x0081 = _0x0085.innerHTML.split(_0xstr(101));
 if (_0x0081.length > 20) _0x0085.innerHTML = _0x0081.slice(0, 20).join(_0xstr(102));
 }
-function _0x00d1() {
+function _0x00d2() {
 if (_0x0069) {
 badge.innerText = _0xstr(103);
 badge.style.backgroundColor = _0xstr(104);
-_0x00c7.innerText = _0xstr(105);
-_0x00c7.style.backgroundColor = _0xstr(106);
+_0x00c8.innerText = _0xstr(105);
+_0x00c8.style.backgroundColor = _0xstr(106);
 } else {
 badge.innerText = _0xstr(107);
 badge.style.backgroundColor = _0xstr(108);
-_0x00c7.innerText = _0xstr(109);
-_0x00c7.style.backgroundColor = _0xstr(110);
+_0x00c8.innerText = _0xstr(109);
+_0x00c8.style.backgroundColor = _0xstr(110);
 }
 }
-function _0x00d2() {
+function _0x00d3() {
 if (_0x0012 && _0x0012 !== _0x0000) {
-_0x00d3.style.display = _0xstr(111);
-_0x00d5.style.display = _0xstr(112);
-_0x00d6.innerText = _0xstr(113);
+_0x00d4.style.display = _0xstr(111);
+_0x00d6.style.display = _0xstr(112);
+_0x00d7.innerText = _0xstr(113);
 } else {
-_0x00d3.style.display = _0xstr(114);
-_0x00d5.style.display = _0xstr(115);
+_0x00d4.style.display = _0xstr(114);
+_0x00d6.style.display = _0xstr(115);
 }
 }
-function _0x00cf() {
+function _0x00d0() {
 const _0x002e = _0x004b();
 if (_0x002e) {
 localStorage.setItem(_0xstr(116) + _0x002e, Date.now().toString());
-localStorage.setItem(_0xstr(117) + _0x002e, _0x00bc);
+localStorage.setItem(_0xstr(117) + _0x002e, _0x00bd);
 }
 }
 const _0x000b = 300000;
 const _0x0003 = 30000;
 const _0x0004 = 300000;
-function _0x00d0() {
-_0x00be.innerHTML = _0xstr(118);
+function _0x00d1() {
+_0x00bf.innerHTML = _0xstr(118);
 const now = Date.now();
 for (const [type, _0x0019] of Object.entries(_0x000a)) {
 const _0x007a = parseInt(localStorage.getItem(_0xstr(119) + type) || _0xstr(120));
@@ -1008,59 +1008,59 @@ GM_openInTab(_0x0019.url, { active: true, insert: true, setParent: true });
 window.open(_0x0019.url, _0xstr(145));
 }
 });
-_0x00be.appendChild(_0x006e);
+_0x00bf.appendChild(_0x006e);
 }
 }
 const _0x0002 = [_0xstr(146), _0xstr(147), _0xstr(148), _0xstr(149)];
 const _0x0006 = 45000;
-function _0x0092() {
+function _0x0094() {
 _0x0059(_0xstr(150));
 }
-function _0x0059(_0x00ca) {
+function _0x0059(_0x00cb) {
 const now = Date.now();
 const _0x0041 = localStorage.getItem(_0xstr(151));
 if (_0x0041) {
-if (_0x00ca === _0xstr(152)) {
+if (_0x00cb === _0xstr(152)) {
 log(_0xstr(153));
 _0x0023();
 } else {
-const _0x00b8 = parseInt(localStorage.getItem(_0xstr(154)) || _0xstr(155));
-if ((now - _0x00b8) < 300000) {
+const _0x00b9 = parseInt(localStorage.getItem(_0xstr(154)) || _0xstr(155));
+if ((now - _0x00b9) < 300000) {
 return;
 }
 log(_0xstr(156));
 _0x0023();
 }
 }
-const _0x00bf = [];
+const _0x00c0 = [];
 for (const type of _0x0002) {
-if (_0x00ca === _0xstr(157)) {
+if (_0x00cb === _0xstr(157)) {
 localStorage.setItem(_0xstr(158) + type, _0xstr(159));
-_0x00bf.push(type);
+_0x00c0.push(type);
 } else {
 const _0x007a = parseInt(localStorage.getItem(_0xstr(160) + type) || _0xstr(161));
 const _0x005f = _0x007a > 0 && (now - _0x007a) < _0x000b;
 if (!_0x005f) {
-_0x00bf.push(type);
+_0x00c0.push(type);
 }
 }
 }
-if (_0x00bf.length === 0) {
-if (_0x00ca === _0xstr(162)) log(_0xstr(163));
+if (_0x00c0.length === 0) {
+if (_0x00cb === _0xstr(162)) log(_0xstr(163));
 return;
 }
 localStorage.removeItem(_0xstr(164));
-log(_0xstr(165) + (_0x00bf.length) + _0xstr(166) + (_0x00bf.map(t => _0x000a[t]?.name || t).join(_0xstr(167))) + _0xstr(168));
-localStorage.setItem(_0xstr(169), JSON.stringify(_0x00bf));
-localStorage.setItem(_0xstr(170), _0x00bf[0]);
+log(_0xstr(165) + (_0x00c0.length) + _0xstr(166) + (_0x00c0.map(t => _0x000a[t]?.name || t).join(_0xstr(167))) + _0xstr(168));
+localStorage.setItem(_0xstr(169), JSON.stringify(_0x00c0));
+localStorage.setItem(_0xstr(170), _0x00c0[0]);
 localStorage.setItem(_0xstr(171), _0xstr(172));
 localStorage.setItem(_0xstr(173), now.toString());
 localStorage.setItem(_0xstr(174), now.toString());
-const _0x0046 = _0x00bf[0];
+const _0x0046 = _0x00c0[0];
 const _0x0019 = _0x000a[_0x0046];
 localStorage.setItem(_0xstr(175) + _0x0046, now.toString());
-const _0x008a = _0x004b();
-if (_0x008a === _0x0046) {
+const _0x008c = _0x004b();
+if (_0x008c === _0x0046) {
 log(_0xstr(176) + (_0x0019.name) + _0xstr(177));
 window.location.reload();
 } else {
@@ -1080,27 +1080,27 @@ localStorage.removeItem(_0xstr(185));
 localStorage.removeItem(_0xstr(186));
 localStorage.removeItem(_0xstr(187));
 }
-function _0x0093() {
-let _0x00a2;
+function _0x0095() {
+let _0x00a4;
 try {
-_0x00a2 = JSON.parse(localStorage.getItem(_0xstr(188)) || _0xstr(189));
+_0x00a4 = JSON.parse(localStorage.getItem(_0xstr(188)) || _0xstr(189));
 } catch(e) {
 _0x0023();
 return;
 }
-_0x00a2.shift();
-if (_0x00a2.length > 0) {
-const _0x008d = _0x00a2[0];
-const _0x0019 = _0x000a[_0x008d];
+_0x00a4.shift();
+if (_0x00a4.length > 0) {
+const _0x008f = _0x00a4[0];
+const _0x0019 = _0x000a[_0x008f];
 const now = Date.now();
-localStorage.setItem(_0xstr(190), JSON.stringify(_0x00a2));
-localStorage.setItem(_0xstr(191), _0x008d);
+localStorage.setItem(_0xstr(190), JSON.stringify(_0x00a4));
+localStorage.setItem(_0xstr(191), _0x008f);
 localStorage.setItem(_0xstr(192), _0xstr(193));
 localStorage.setItem(_0xstr(194), now.toString());
-localStorage.setItem(_0xstr(195) + _0x008d, now.toString());
+localStorage.setItem(_0xstr(195) + _0x008f, now.toString());
 localStorage.removeItem(_0xstr(196));
-const _0x008a = _0x004b();
-if (_0x008a === _0x008d) {
+const _0x008c = _0x004b();
+if (_0x008c === _0x008f) {
 log(_0xstr(197) + (_0x0019.name) + _0xstr(198));
 window.location.reload();
 } else {
@@ -1117,43 +1117,43 @@ log(_0xstr(203));
 }
 }
 function _0x004c() {
-const _0x00a3 = localStorage.getItem(_0xstr(204));
-if (!_0x00a3) return;
-let _0x00a2;
+const _0x00a5 = localStorage.getItem(_0xstr(204));
+if (!_0x00a5) return;
+let _0x00a4;
 try {
-_0x00a2 = JSON.parse(_0x00a3);
+_0x00a4 = JSON.parse(_0x00a5);
 } catch(e) {
 _0x0023();
 return;
 }
-if (!Array.isArray(_0x00a2) || _0x00a2.length === 0) {
+if (!Array.isArray(_0x00a4) || _0x00a4.length === 0) {
 _0x0023();
 return;
 }
 const _0x002d = localStorage.getItem(_0xstr(205));
-const _0x008a = _0x004b();
-if (!_0x008a || _0x008a !== _0x002d) return;
-const _0x009a = localStorage.getItem(_0xstr(206));
-if (_0x009a !== _0xstr(207)) return;
-const _0x00bd = parseInt(localStorage.getItem(_0xstr(208)) || _0xstr(209));
+const _0x008c = _0x004b();
+if (!_0x008c || _0x008c !== _0x002d) return;
+const _0x009c = localStorage.getItem(_0xstr(206));
+if (_0x009c !== _0xstr(207)) return;
+const _0x00be = parseInt(localStorage.getItem(_0xstr(208)) || _0xstr(209));
 const now = Date.now();
 if (_0x0063()) {
-log(_0xstr(210) + (_0x000a[_0x008a]?.name || _0x008a) + _0xstr(211));
+log(_0xstr(210) + (_0x000a[_0x008c]?.name || _0x008c) + _0xstr(211));
 _0x007d = Date.now();
-_0x0093();
+_0x0095();
 return;
 }
-if ((now - _0x00bd) > _0x0006) {
-const _0x00ac = parseInt(localStorage.getItem(_0xstr(212)) || _0xstr(213));
-if (_0x00ac < 1) {
-log(_0xstr(214) + (_0x000a[_0x008a]?.name || _0x008a) + _0xstr(215));
+if ((now - _0x00be) > _0x0006) {
+const _0x00ae = parseInt(localStorage.getItem(_0xstr(212)) || _0xstr(213));
+if (_0x00ae < 1) {
+log(_0xstr(214) + (_0x000a[_0x008c]?.name || _0x008c) + _0xstr(215));
 localStorage.setItem(_0xstr(216), _0xstr(217));
 localStorage.setItem(_0xstr(218), now.toString());
 window.location.reload();
 } else {
-log(_0xstr(219) + (_0x000a[_0x008a]?.name || _0x008a) + _0xstr(220));
+log(_0xstr(219) + (_0x000a[_0x008c]?.name || _0x008c) + _0xstr(220));
 localStorage.removeItem(_0xstr(221));
-_0x0093();
+_0x0095();
 }
 }
 }
@@ -1167,17 +1167,17 @@ let _0x0051 = false;
 let _0x0049 = _0xstr(224);
 for (const [type, _0x0019] of Object.entries(_0x000a)) {
 const _0x007a = parseInt(localStorage.getItem(_0xstr(225) + type) || _0xstr(226));
-const _0x00a8 = localStorage.getItem(_0xstr(227) + type);
+const _0x00aa = localStorage.getItem(_0xstr(227) + type);
 const _0x006b = _0x007a > 0 && (now - _0x007a) < _0x000b;
 if (!_0x006b) {
 const _0x0076 = parseInt(localStorage.getItem(_0xstr(228) + type) || _0xstr(229));
 const _0x0077 = now - _0x0076;
-if (_0x00a8 && _0x0077 > 60000) {
+if (_0x00aa && _0x0077 > 60000) {
 _0x0051 = true;
 _0x0049 = type;
 break;
 }
-if (!_0x00a8) {
+if (!_0x00aa) {
 if (_0x007a === 0 && _0x0077 > _0x0003) {
 _0x004f = true;
 break;
@@ -1207,7 +1207,7 @@ _0x0059(_0xstr(236));
 }
 let wakeLock = null;
 let audioCtx = null;
-async function _0x00ab() {
+async function _0x00ad() {
 if (!(_0xstr(237) in navigator)) {
 log(_0xstr(238));
 return;
@@ -1219,7 +1219,7 @@ log(_0xstr(240));
 console.log(_0xstr(241), err.message);
 }
 }
-function _0x00aa() {
+function _0x00ac() {
 if (wakeLock) {
 wakeLock.release().then(() => {
 wakeLock = null;
@@ -1227,20 +1227,20 @@ log(_0xstr(242));
 });
 }
 }
-function _0x00b7() {
+function _0x00b8() {
 try {
 if (audioCtx) return;
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 if (!AudioContext) return;
 audioCtx = new AudioContext();
-const _0x0095 = audioCtx.createOscillator();
+const _0x0097 = audioCtx.createOscillator();
 const _0x004a = audioCtx.createGain();
-_0x0095.type = _0xstr(243);
-_0x0095.frequency.value = 20000;
+_0x0097.type = _0xstr(243);
+_0x0097.frequency.value = 20000;
 _0x004a.gain.value = 0.0001;
-_0x0095.connect(_0x004a);
+_0x0097.connect(_0x004a);
 _0x004a.connect(audioCtx.destination);
-_0x0095.start();
+_0x0097.start();
 log(_0xstr(244));
 } catch (e) {
 console.log(_0xstr(245), e.message);
@@ -1254,11 +1254,11 @@ log(_0xstr(247));
 }
 if (audioCtx && audioCtx.state === _0xstr(248)) {
 audioCtx = null;
-_0x00b7();
+_0x00b8();
 log(_0xstr(249));
 }
 }
-function _0x00ba() {
+function _0x00bb() {
 if (audioCtx) {
 try {
 audioCtx.close().then(() => {
@@ -1271,21 +1271,21 @@ audioCtx = null;
 }
 }
 function _0x003c() {
-_0x00ab();
-_0x00b7();
+_0x00ad();
+_0x00b8();
 }
 function _0x0038() {
-_0x00aa();
-_0x00ba();
+_0x00ac();
+_0x00bb();
 }
 document.addEventListener(_0xstr(251), () => {
 if (document.visibilityState === _0xstr(252) && _0x0069) {
-_0x00ab();
+_0x00ad();
 }
 });
-_0x0091.addEventListener(_0xstr(253), _0x0092);
-_0x00d1();
+_0x0093.addEventListener(_0xstr(253), _0x0094);
 _0x00d2();
+_0x00d3();
 if (_0x0069) {
 _0x003c();
 const _0x0057 = () => {
@@ -1295,65 +1295,65 @@ document.removeEventListener(_0xstr(254), _0x0057);
 document.addEventListener(_0xstr(255), _0x0057);
 }
 _0x003a.addEventListener(_0xstr(256), () => {
-_0x00d3.style.display = _0xstr(257);
-_0x00d5.style.display = _0xstr(258);
-_0x00d4.focus();
+_0x00d4.style.display = _0xstr(257);
+_0x00d6.style.display = _0xstr(258);
+_0x00d5.focus();
 });
-_0x00af.addEventListener(_0xstr(259), () => {
-const _0x005c = _0x00d4.value.trim();
-const _0x0098 = _0x0097.value.trim() || _0xstr(260);
+_0x00b1.addEventListener(_0xstr(259), () => {
+const _0x005c = _0x00d5.value.trim();
+const _0x009a = _0x0099.value.trim() || _0xstr(260);
 if (_0x005c && !_0x005c.includes(_0xstr(261))) {
 _0x0012 = _0x005c;
-_0x0099 = _0x0098;
+_0x009b = _0x009a;
 localStorage.setItem(_0xstr(262), _0x0012);
-localStorage.setItem(_0xstr(263), _0x0099);
+localStorage.setItem(_0xstr(263), _0x009b);
 GM_setValue(_0xstr(264), _0x0012);
-GM_setValue(_0xstr(265), _0x0099);
-log(_0xstr(266) + (_0x0099) + _0xstr(267));
-_0x00d2();
+GM_setValue(_0xstr(265), _0x009b);
+log(_0xstr(266) + (_0x009b) + _0xstr(267));
+_0x00d3();
 alert(_0xstr(268));
 } else {
 alert(_0xstr(269));
 }
 });
-function _0x00c8() {
+function _0x00c9() {
 if (!_0x0012 || _0x0012.includes(_0xstr(270))) {
 alert(_0xstr(271));
 return;
 }
 _0x0069 = !_0x0069;
 localStorage.setItem(_0xstr(272), _0x0069 ? _0xstr(273) : _0xstr(274));
-_0x00d1();
+_0x00d2();
 log(_0x0069 ? _0xstr(275) : _0xstr(276));
 if (_0x0069) {
 _0x003c();
-_0x0092();
+_0x0094();
 } else {
 _0x0038();
 }
 }
-_0x00c7.addEventListener(_0xstr(277), _0x00c8);
-badge.addEventListener(_0xstr(278), _0x00c8);
+_0x00c8.addEventListener(_0xstr(277), _0x00c9);
+badge.addEventListener(_0xstr(278), _0x00c9);
 _0x0024.addEventListener(_0xstr(279), _0x0027);
 launcher.addEventListener(_0xstr(280), _0x0042);
-panel.addEventListener(_0xstr(281), _0x00b9);
-panel.addEventListener(_0xstr(282), _0x00b9);
-panel.addEventListener(_0xstr(283), _0x00b9);
-panel.addEventListener(_0xstr(284), _0x00b9);
-panel.addEventListener(_0xstr(285), _0x00b4);
+panel.addEventListener(_0xstr(281), _0x00ba);
+panel.addEventListener(_0xstr(282), _0x00ba);
+panel.addEventListener(_0xstr(283), _0x00ba);
+panel.addEventListener(_0xstr(284), _0x00ba);
+panel.addEventListener(_0xstr(285), _0x00b5);
 function _0x0030(ms) {
 return new Promise(resolve => setTimeout(resolve, ms));
 }
 function _0x0031(min, max) {
 return new Promise(resolve => setTimeout(resolve, min + Math.random() * (max - min)));
 }
-async function _0x00b2(inputEl, value) {
+async function _0x00b4(inputEl, value) {
 try {
 inputEl.focus();
 } catch (e) {}
-const _0x008b = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(286))?.set;
-if (_0x008b) {
-_0x008b.call(inputEl, value);
+const _0x008d = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(286))?.set;
+if (_0x008d) {
+_0x008d.call(inputEl, value);
 } else {
 inputEl.value = value;
 }
@@ -1380,11 +1380,11 @@ if (!_0x0022 || _0x0022.includes(_0xstr(297))) {
 reject(new Error(_0xstr(298)));
 return;
 }
-let _0x00c2 = _0xstr(299);
+let _0x00c3 = _0xstr(299);
 if (method === _0xstr(300)) {
-_0x00c2 = _0xstr(301) + (_0x0022) + _0xstr(302) + (urlOrAction) + _0xstr(303) + (encodeURIComponent((_0x0099 || _0xstr(304)).trim())) + _0xstr(305);
+_0x00c3 = _0xstr(301) + (_0x0022) + _0xstr(302) + (urlOrAction) + _0xstr(303) + (encodeURIComponent((_0x009b || _0xstr(304)).trim())) + _0xstr(305);
 } else {
-_0x00c2 = _0x0022;
+_0x00c3 = _0x0022;
 }
 let isSettled = false;
 const timer = setTimeout(() => {
@@ -1395,7 +1395,7 @@ reject(new Error(_0xstr(306) + (timeoutMs/1000) + _0xstr(307) + (urlOrAction) + 
 }, timeoutMs);
 let options = {
 method: method,
-url: _0x00c2,
+url: _0x00c3,
 timeout: timeoutMs,
 onload: function(response) {
 if (isSettled) return;
@@ -1412,7 +1412,7 @@ onerror: function(err) {
 if (isSettled) return;
 isSettled = true;
 clearTimeout(timer);
-reject(new Error(_0xstr(313) + (_0x00c2) + _0xstr(314)));
+reject(new Error(_0xstr(313) + (_0x00c3) + _0xstr(314)));
 },
 ontimeout: function() {
 if (isSettled) return;
@@ -1423,7 +1423,7 @@ reject(new Error(_0xstr(315) + (urlOrAction) + _0xstr(316)));
 };
 if (method !== _0xstr(317)) {
 options.headers = { [_0xstr(318)]: _0xstr(319) };
-options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (_0x0099 || _0xstr(320)).trim() }, data));
+options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (_0x009b || _0xstr(320)).trim() }, data));
 }
 GM_xmlhttpRequest(options);
 });
@@ -1449,7 +1449,7 @@ if (!driverStr) return _0xstr(324);
 const match = driverStr.match(/\d+/);
 return match ? match[0] : driverStr;
 }
-async function _0x00b6() {
+async function _0x00b7() {
 if (!_0x0069 || _0x0065) return;
 const hash = window.location.hash || _0xstr(325);
 if (!hash.includes(_0xstr(326))) return;
@@ -1459,7 +1459,7 @@ return;
 try {
 _0x0065 = true;
 _0x0079 = Date.now();
-_0x00ce(_0xstr(328));
+_0x00cf(_0xstr(328));
 const data = await _0x0017(_0xstr(329), _0xstr(330));
 _0x007d = Date.now();
 if (data.status === _0xstr(331)) {
@@ -1471,9 +1471,9 @@ _0x0026 = data.codes.map(c => c.trim().toUpperCase());
 }
 if (_0x0026.length > 0) {
 log(_0xstr(333) + (_0x0026.length) + _0xstr(334));
-_0x00ce(_0xstr(335));
-const _0x00bb = await _0x0040(_0x0026);
-if (_0x00bb) {
+_0x00cf(_0xstr(335));
+const _0x00bc = await _0x0040(_0x0026);
+if (_0x00bc) {
 _0x007d = Date.now();
 log(_0xstr(336) + (_0x0026.join(_0xstr(337))) + _0xstr(338));
 } else {
@@ -1485,7 +1485,7 @@ log(_0xstr(339));
 log(_0xstr(340) + (error.message) + _0xstr(341));
 } finally {
 _0x0065 = false;
-_0x00a9(_0xstr(342));
+_0x00ab(_0xstr(342));
 }
 }
 async function _0x0040(codes) {
@@ -1506,21 +1506,21 @@ textarea.dispatchEvent(new Event(_0xstr(350), { bubbles: true }));
 } catch (e) {}
 await _0x0031(300, 500);
 const _0x0029 = Array.from(document.querySelectorAll(_0xstr(351))).find(btn => {
-const _0x00cc = btn.innerText || btn.textContent || _0xstr(352);
-return _0x00cc.trim().toLowerCase() === _0xstr(353);
+const _0x00cd = btn.innerText || btn.textContent || _0xstr(352);
+return _0x00cd.trim().toLowerCase() === _0xstr(353);
 });
 if (!_0x0029) return false;
 _0x0029.click();
 let _0x0061 = false;
 let _0x0050 = false;
 let _0x003e = _0xstr(354);
-const _0x00d7 = codes.filter(c => c.startsWith(_0xstr(355)) || c.startsWith(_0xstr(356)) || c.startsWith(_0xstr(357)) || /^[A-Z0-9]{8,25}$/.test(c));
+const _0x00d8 = codes.filter(c => c.startsWith(_0xstr(355)) || c.startsWith(_0xstr(356)) || c.startsWith(_0xstr(357)) || /^[A-Z0-9]{8,25}$/.test(c));
 for (let i = 0; i < 40; i++) {
 await _0x0030(50);
 const _0x000f = Array.from(document.querySelectorAll(_0xstr(358)));
 const _0x0048 = _0x000f.find(el => {
-const _0x00cc = el.textContent.trim().toUpperCase();
-return _0x00d7.some(vc => _0x00cc === vc || _0x00cc.includes(vc));
+const _0x00cd = el.textContent.trim().toUpperCase();
+return _0x00d8.some(vc => _0x00cd === vc || _0x00cd.includes(vc));
 });
 if (_0x0048) {
 _0x0061 = true;
@@ -1539,9 +1539,9 @@ _0x003e = _0x0036.trim().replace(/\n/g, _0xstr(366));
 const _0x0081 = _0x0036.split(_0xstr(367)).map(l => l.trim().toUpperCase());
 const _0x005e = [];
 for (const _0x0080 of _0x0081) {
-const _0x0087 = _0x0080.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
-if (_0x0087) {
-for (const match of _0x0087) {
+const _0x0089 = _0x0080.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
+if (_0x0089) {
+for (const match of _0x0089) {
 if (!match.includes(_0xstr(368)) && !match.includes(_0xstr(369)) && !match.includes(_0xstr(370))) {
 _0x005e.push(match);
 }
@@ -1549,17 +1549,17 @@ _0x005e.push(match);
 }
 }
 const _0x0025 = _0x005e.length > 0 ? _0x005e : codes;
-const _0x008e = Array.from(_0x0032.querySelectorAll(_0xstr(371))).find(btn => {
-const _0x00cc = (btn.innerText || btn.textContent || _0xstr(372)).trim().toLowerCase();
-return _0x00cc === _0xstr(373) || _0x00cc === _0xstr(374) || _0x00cc === _0xstr(375) || _0x00cc === _0xstr(376) || _0x00cc === _0xstr(377) || _0x00cc.includes(_0xstr(378));
+const _0x0090 = Array.from(_0x0032.querySelectorAll(_0xstr(371))).find(btn => {
+const _0x00cd = (btn.innerText || btn.textContent || _0xstr(372)).trim().toLowerCase();
+return _0x00cd === _0xstr(373) || _0x00cd === _0xstr(374) || _0x00cd === _0xstr(375) || _0x00cd === _0xstr(376) || _0x00cd === _0xstr(377) || _0x00cd.includes(_0xstr(378));
 });
-if (_0x008e) {
-const _0x008f = 800 + Math.random() * 200;
+if (_0x0090) {
+const _0x0091 = 800 + Math.random() * 200;
 setTimeout(() => {
-_0x008e.click();
+_0x0090.click();
 log(_0xstr(379));
-}, _0x008f);
-log(_0xstr(380) + ((_0x008f/1000).toFixed(2)) + _0xstr(381));
+}, _0x0091);
+log(_0xstr(380) + ((_0x0091/1000).toFixed(2)) + _0xstr(381));
 }
 for (const _0x003d of _0x0025) {
 _0x0017(_0xstr(382), _0xstr(383), { code: _0x003d, status: _0xstr(384) })
@@ -1586,13 +1586,13 @@ if (!_0x0061) {
 log(_0xstr(390));
 return false;
 }
-const _0x009b = Array.from(document.querySelectorAll(_0xstr(391))).find(el => {
-const _0x00cc = el.innerText || el.textContent || _0xstr(392);
-return _0x00cc.trim() === _0xstr(393);
+const _0x009d = Array.from(document.querySelectorAll(_0xstr(391))).find(el => {
+const _0x00cd = el.innerText || el.textContent || _0xstr(392);
+return _0x00cd.trim() === _0xstr(393);
 });
-if (!_0x009b) return false;
+if (!_0x009d) return false;
 await _0x0031(400, 500);
-_0x009b.click();
+_0x009d.click();
 let _0x0062 = false;
 let _0x0035 = null;
 for (let i = 0; i < 20; i++) {
@@ -1601,8 +1601,8 @@ const _0x0037 = document.querySelectorAll(_0xstr(394));
 for (const _0x0032 of _0x0037) {
 if (_0x0032.offsetWidth > 0 || _0x0032.offsetHeight > 0) {
 _0x0035 = Array.from(_0x0032.querySelectorAll(_0xstr(395))).find(btn => {
-const _0x00cc = btn.innerText || btn.textContent || _0xstr(396);
-return _0x00cc.trim() === _0xstr(397);
+const _0x00cd = btn.innerText || btn.textContent || _0xstr(396);
+return _0x00cd.trim() === _0xstr(397);
 });
 if (_0x0035) {
 _0x0062 = true;
@@ -1620,7 +1620,7 @@ return true;
 }
 return false;
 }
-async function _0x009e() {
+async function _0x00a0() {
 if (!_0x0069 || _0x0067) return;
 _0x0067 = true;
 _0x0075 = Date.now();
@@ -1629,12 +1629,12 @@ log(_0xstr(398));
 try {
 const now = Date.now();
 if (now - _0x007c > 2000) {
-let _0x00b0 = Array.from(document.querySelectorAll(_0xstr(399))).find(btn => {
+let _0x00b2 = Array.from(document.querySelectorAll(_0xstr(399))).find(btn => {
 const text = btn.innerText.trim();
 return text === _0xstr(400) || text === _0xstr(401);
 });
-if (_0x00b0) {
-_0x00b0.click();
+if (_0x00b2) {
+_0x00b2.click();
 _0x007c = now;
 await _0x0030(300);
 }
@@ -1652,61 +1652,61 @@ log(_0xstr(407) + (e.message) + _0xstr(408));
 }
 }
 const headers = Array.from(document.querySelectorAll(_0xstr(409)));
-let _0x00c5 = -1;
-let _0x0090 = -1;
-let _0x00a0 = -1;
+let _0x00c6 = -1;
+let _0x0092 = -1;
+let _0x00a2 = -1;
 headers.forEach((th, index) => {
 const text = th.innerText.trim().toLowerCase();
 if (text.includes(_0xstr(410)) || text.includes(_0xstr(411)) || text.includes(_0xstr(412)) || text.includes(_0xstr(413))) {
-_0x00c5 = index;
+_0x00c6 = index;
 } else if (text.includes(_0xstr(414)) || text.includes(_0xstr(415)) || text.includes(_0xstr(416)) || text.includes(_0xstr(417))) {
-_0x0090 = index;
+_0x0092 = index;
 } else if (text.includes(_0xstr(418)) || text.includes(_0xstr(419)) || text.includes(_0xstr(420)) || text.includes(_0xstr(421))) {
-_0x00a0 = index;
+_0x00a2 = index;
 }
 });
-const _0x00ae = document.querySelectorAll(_0xstr(422));
-for (let _0x00ad of _0x00ae) {
-const _0x0018 = _0x00ad.querySelectorAll(_0xstr(423));
+const _0x00b0 = document.querySelectorAll(_0xstr(422));
+for (let _0x00af of _0x00b0) {
+const _0x0018 = _0x00af.querySelectorAll(_0xstr(423));
 if (_0x0018.length > 0) {
 let toNum = _0xstr(424);
-let _0x0094 = _0xstr(425);
-let _0x00a1 = -1;
-if (_0x00c5 !== -1 && _0x0018[_0x00c5]) toNum = _0x0018[_0x00c5].innerText.trim();
-if (_0x0090 !== -1 && _0x0018[_0x0090]) _0x0094 = _0x0018[_0x0090].innerText.trim();
-if (_0x00a0 !== -1 && _0x0018[_0x00a0]) {
-const _0x009f = parseInt(_0x0018[_0x00a0].innerText.trim(), 10);
-if (!isNaN(_0x009f)) _0x00a1 = _0x009f;
+let _0x0096 = _0xstr(425);
+let _0x00a3 = -1;
+if (_0x00c6 !== -1 && _0x0018[_0x00c6]) toNum = _0x0018[_0x00c6].innerText.trim();
+if (_0x0092 !== -1 && _0x0018[_0x0092]) _0x0096 = _0x0018[_0x0092].innerText.trim();
+if (_0x00a2 !== -1 && _0x0018[_0x00a2]) {
+const _0x00a1 = parseInt(_0x0018[_0x00a2].innerText.trim(), 10);
+if (!isNaN(_0x00a1)) _0x00a3 = _0x00a1;
 }
 if (!toNum) {
 _0x0018.forEach(c => {
-const _0x00cc = c.innerText.trim();
-if (/^TO\d+[A-Z0-9]+$/i.test(_0x00cc)) toNum = _0x00cc;
+const _0x00cd = c.innerText.trim();
+if (/^TO\d+[A-Z0-9]+$/i.test(_0x00cd)) toNum = _0x00cd;
 });
 }
-if (!_0x0094) {
+if (!_0x0096) {
 _0x0018.forEach(c => {
-const _0x00cc = c.innerText.trim();
-if (_0x00cc.includes(_0xstr(426))) _0x0094 = _0x00cc;
+const _0x00cd = c.innerText.trim();
+if (_0x00cd.includes(_0xstr(426))) _0x0096 = _0x00cd;
 });
 }
-if (_0x00a1 === -1) {
+if (_0x00a3 === -1) {
 _0x0018.forEach((c, idx) => {
-const _0x00cc = c.innerText.trim();
-if (/^\d+$/.test(_0x00cc) && idx > 0 && idx !== _0x00c5) {
-const _0x009f = parseInt(_0x00cc, 10);
-if (_0x009f > 0) _0x00a1 = _0x009f;
+const _0x00cd = c.innerText.trim();
+if (/^\d+$/.test(_0x00cd) && idx > 0 && idx !== _0x00c6) {
+const _0x00a1 = parseInt(_0x00cd, 10);
+if (_0x00a1 > 0) _0x00a3 = _0x00a1;
 }
 });
 }
-if (toNum && _0x0094 && _0x00a1 > 0) {
-const _0x006a = _0x0094.toLowerCase() === _0xstr(427);
+if (toNum && _0x0096 && _0x00a3 > 0) {
+const _0x006a = _0x0096.toLowerCase() === _0xstr(427);
 if (!_0x006a && !_0x0082.has(toNum.toLowerCase())) {
 _0x0082.add(toNum.toLowerCase());
 try {
 const _0x000e = await _0x0017(_0xstr(428), _0xstr(429), { toNum: toNum });
 if (_0x000e.status === _0xstr(430)) {
-log(_0xstr(431) + (toNum) + _0xstr(432) + (_0x0094) + _0xstr(433) + (_0x00a1) + _0xstr(434));
+log(_0xstr(431) + (toNum) + _0xstr(432) + (_0x0096) + _0xstr(433) + (_0x00a3) + _0xstr(434));
 _0x007d = Date.now();
 } else if (_0x000e.status === _0xstr(435)) {
 log(_0xstr(436) + (toNum) + _0xstr(437));
@@ -1727,7 +1727,7 @@ log(_0xstr(444) + (error.message) + _0xstr(445));
 _0x0067 = false;
 }
 }
-async function _0x009d() {
+async function _0x009f() {
 if (!_0x0069 || _0x0068) return;
 const hash = window.location.hash;
 if (!hash.includes(_0xstr(446))) return;
@@ -1737,55 +1737,55 @@ return;
 try {
 _0x0068 = true;
 _0x0078 = Date.now();
-_0x00ce(_0xstr(448));
+_0x00cf(_0xstr(448));
 const res = await _0x0017(_0xstr(449), _0xstr(450));
 if (res.status === _0xstr(451) && res.toNum) {
 const _0x002c = res.toNum;
 log(_0xstr(452) + (_0x002c) + _0xstr(453));
-let _0x00c6 = null;
+let _0x00c7 = null;
 const _0x0070 = document.querySelectorAll(_0xstr(454));
-let _0x00c1 = null;
+let _0x00c2 = null;
 for (let el of _0x0070) {
 const text = el.innerText.trim().toLowerCase();
 if (text === _0xstr(455) || text === _0xstr(456) || text === _0xstr(457) || text === _0xstr(458)) {
-_0x00c1 = el;
+_0x00c2 = el;
 break;
 }
 }
-if (_0x00c1) {
-let parent = _0x00c1.parentElement;
+if (_0x00c2) {
+let parent = _0x00c2.parentElement;
 for (let i = 0; i < 3 && parent; i++) {
-_0x00c6 = parent.querySelector(_0xstr(459));
-if (_0x00c6) break;
+_0x00c7 = parent.querySelector(_0xstr(459));
+if (_0x00c7) break;
 parent = parent.parentElement;
 }
 }
-if (!_0x00c6) {
+if (!_0x00c7) {
 const _0x0011 = document.querySelectorAll(_0xstr(460));
 for (let input of _0x0011) {
 const placeholder = (input.placeholder || _0xstr(461)).toLowerCase();
 if (placeholder.includes(_0xstr(462)) || placeholder.includes(_0xstr(463)) || placeholder.includes(_0xstr(464)) || placeholder.includes(_0xstr(465))) {
-_0x00c6 = input;
+_0x00c7 = input;
 break;
 }
 }
 }
-if (!_0x00c6) {
+if (!_0x00c7) {
 const _0x0011 = Array.from(document.querySelectorAll(_0xstr(466)));
-_0x00c6 = _0x0011.find(input => {
+_0x00c7 = _0x0011.find(input => {
 const type = (input.type || _0xstr(467)).toLowerCase();
 const _0x006c = type === _0xstr(468) || type === _0xstr(469) || type === _0xstr(470);
 const _0x006d = input.style.display !== _0xstr(471) && input.style.visibility !== _0xstr(472);
 return _0x006c && _0x006d;
 });
 }
-if (_0x00c6) {
+if (_0x00c7) {
 log(_0xstr(473) + (_0x002c) + _0xstr(474));
-await _0x00b2(_0x00c6, _0x002c);
+await _0x00b4(_0x00c7, _0x002c);
 await _0x0030(100);
-_0x00ce(_0xstr(475));
-const _0x009c = await _0x00cb(_0x002c);
-if (_0x009c) {
+_0x00cf(_0xstr(475));
+const _0x009e = await _0x00cc(_0x002c);
+if (_0x009e) {
 log(_0xstr(476) + (_0x002c) + _0xstr(477));
 _0x007d = Date.now();
 try {
@@ -1806,37 +1806,37 @@ log(_0xstr(487));
 log(_0xstr(488) + (error.message) + _0xstr(489));
 } finally {
 _0x0068 = false;
-_0x00a9(_0xstr(490));
+_0x00ab(_0xstr(490));
 }
 }
-function _0x00cb(_0x002c) {
+function _0x00cc(_0x002c) {
 return new Promise((resolve) => {
 let _0x001d = 0;
 let _0x0020 = setInterval(() => {
 _0x001d++;
-let _0x009b = null;
+let _0x009d = null;
 const _0x0016 = document.querySelectorAll(_0xstr(491));
 for (let btn of _0x0016) {
 const text = btn.innerText.trim();
 if (text === _0xstr(492) || text === _0xstr(493) || text === _0xstr(494) || text.includes(_0xstr(495))) {
-_0x009b = btn;
+_0x009d = btn;
 break;
 }
 }
-if (!_0x009b) {
+if (!_0x009d) {
 const _0x003b = document.querySelectorAll(_0xstr(496));
 for (let el of _0x003b) {
 const text = el.innerText.trim();
 if (text === _0xstr(497) || text === _0xstr(498) || text === _0xstr(499) || text.includes(_0xstr(500))) {
-_0x009b = el.closest(_0xstr(501)) || el;
+_0x009d = el.closest(_0xstr(501)) || el;
 break;
 }
 }
 }
-if (_0x009b && !_0x009b.disabled && !_0x009b.classList.contains(_0xstr(502))) {
+if (_0x009d && !_0x009d.disabled && !_0x009d.classList.contains(_0xstr(502))) {
 clearInterval(_0x0020);
 log(_0xstr(503));
-_0x009b.click();
+_0x009d.click();
 setTimeout(() => {
 log(_0xstr(504) + (_0x002c) + _0xstr(505));
 resolve(true);
@@ -1848,7 +1848,7 @@ resolve(false);
 }, 150);
 });
 }
-async function _0x00b5() {
+async function _0x00b6() {
 if (!_0x0069 || _0x0066) return;
 const hash = window.location.hash || _0xstr(506);
 if (!hash.includes(_0xstr(507))) return;
@@ -1858,23 +1858,23 @@ return;
 try {
 _0x0066 = true;
 _0x0073 = Date.now();
-_0x00ce(_0xstr(509));
+_0x00cf(_0xstr(509));
 const data = await _0x0017(_0xstr(510), _0xstr(511));
 if (data.status === _0xstr(512)) {
 const pupCode = data.pupCode;
-const _0x00a4 = data.recipientDriver;
-const recipientDriver = _0x0043(_0x00a4);
+const _0x00a6 = data.recipientDriver;
+const recipientDriver = _0x0043(_0x00a6);
 const now = Date.now();
 if (pupCode === _0x0072 && (now - _0x0074) < 30000) {
 log(_0xstr(513) + (pupCode) + _0xstr(514));
 _0x0066 = false;
-_0x00a9(_0xstr(515));
+_0x00ab(_0xstr(515));
 return;
 }
-log(_0xstr(516) + (pupCode) + _0xstr(517) + (recipientDriver) + _0xstr(518) + (_0x00a4) + _0xstr(519));
-_0x00ce(_0xstr(520));
-const _0x00bb = await _0x003f(pupCode, recipientDriver);
-if (_0x00bb) {
+log(_0xstr(516) + (pupCode) + _0xstr(517) + (recipientDriver) + _0xstr(518) + (_0x00a6) + _0xstr(519));
+_0x00cf(_0xstr(520));
+const _0x00bc = await _0x003f(pupCode, recipientDriver);
+if (_0x00bc) {
 _0x0072 = pupCode;
 _0x0074 = Date.now();
 log(_0xstr(521) + (pupCode) + _0xstr(522) + (recipientDriver) + _0xstr(523));
@@ -1898,7 +1898,7 @@ log(_0xstr(538) + (pupCode) + _0xstr(539) + (err.message) + _0xstr(540));
 log(_0xstr(541) + (error.message) + _0xstr(542));
 } finally {
 _0x0066 = false;
-_0x00a9(_0xstr(543));
+_0x00ab(_0xstr(543));
 }
 }
 async function _0x003f(pupCode, recipientDriver) {
@@ -1928,46 +1928,46 @@ if (!_0x0045) {
 log(_0xstr(555));
 return false;
 }
-await _0x00b2(_0x0045, pupCode);
+await _0x00b4(_0x0045, pupCode);
 await _0x0030(300);
-let _0x00b0 = Array.from(document.querySelectorAll(_0xstr(556))).find(btn => {
-const _0x00cc = btn.innerText || btn.textContent || _0xstr(557);
-return _0x00cc.trim() === _0xstr(558) || _0x00cc.trim() === _0xstr(559);
+let _0x00b2 = Array.from(document.querySelectorAll(_0xstr(556))).find(btn => {
+const _0x00cd = btn.innerText || btn.textContent || _0xstr(557);
+return _0x00cd.trim() === _0xstr(558) || _0x00cd.trim() === _0xstr(559);
 });
-if (_0x00b0) {
-_0x00b0.click();
+if (_0x00b2) {
+_0x00b2.click();
 log(_0xstr(560) + pupCode);
 } else {
 _0x0045.dispatchEvent(new KeyboardEvent(_0xstr(561), { key: _0xstr(562), code: _0xstr(563), keyCode: 13, which: 13, bubbles: true }));
 }
 await _0x0030(2000);
-_0x00ce(_0xstr(564));
-const _0x00ae = Array.from(document.querySelectorAll(_0xstr(565)));
-let _0x00a6 = false;
-for (let _0x00ad of _0x00ae) {
-const _0x00a5 = Array.from(_0x00ad.querySelectorAll(_0xstr(566))).find(el => {
-const _0x00cc = el.innerText || el.textContent || _0xstr(567);
-return _0x00cc.trim() === _0xstr(568) || _0x00cc.trim() === _0xstr(569) || _0x00cc.trim() === _0xstr(570);
+_0x00cf(_0xstr(564));
+const _0x00b0 = Array.from(document.querySelectorAll(_0xstr(565)));
+let _0x00a8 = false;
+for (let _0x00af of _0x00b0) {
+const _0x00a7 = Array.from(_0x00af.querySelectorAll(_0xstr(566))).find(el => {
+const _0x00cd = el.innerText || el.textContent || _0xstr(567);
+return _0x00cd.trim() === _0xstr(568) || _0x00cd.trim() === _0xstr(569) || _0x00cd.trim() === _0xstr(570);
 });
-if (_0x00a5) {
+if (_0x00a7) {
 log(_0xstr(571));
-_0x00a5.click();
+_0x00a7.click();
 await _0x0030(2500);
-_0x00ce(_0xstr(572));
+_0x00cf(_0xstr(572));
 const _0x0037 = document.querySelectorAll(_0xstr(573));
-let _0x00c0 = null;
+let _0x00c1 = null;
 for (const _0x0032 of _0x0037) {
 if (_0x0032.offsetWidth > 0 || _0x0032.offsetHeight > 0) {
 const text = (_0x0032.innerText || _0x0032.textContent || _0xstr(574));
 if (text.includes(_0xstr(575)) || text.includes(_0xstr(576)) || text.includes(_0xstr(577)) || text.includes(_0xstr(578))) {
-_0x00c0 = _0x0032;
+_0x00c1 = _0x0032;
 break;
 }
 }
 }
-if (_0x00c0) {
+if (_0x00c1) {
 let _0x0039 = null;
-const _0x0047 = _0x00c0.querySelectorAll(_0xstr(579));
+const _0x0047 = _0x00c1.querySelectorAll(_0xstr(579));
 for (let _0x006e of _0x0047) {
 const _0x006f = _0x006e.querySelector(_0xstr(580));
 if (_0x006f) {
@@ -1979,7 +1979,7 @@ if (_0x0039) break;
 }
 }
 if (!_0x0039) {
-const _0x0034 = _0x00c0.querySelectorAll(_0xstr(585));
+const _0x0034 = _0x00c1.querySelectorAll(_0xstr(585));
 for (let _0x005b of _0x0034) {
 const ph = _0x005b.placeholder || _0xstr(586);
 if (ph.toLowerCase().includes(_0xstr(587)) || ph.toLowerCase().includes(_0xstr(588)) || ph.toLowerCase().includes(_0xstr(589))) {
@@ -1989,18 +1989,18 @@ break;
 }
 }
 if (_0x0039) {
-const _0x00b1 = _0x0039.closest(_0xstr(590)) || _0x0039.parentElement;
-if (_0x00b1) {
-_0x00b1.click();
+const _0x00b3 = _0x0039.closest(_0xstr(590)) || _0x0039.parentElement;
+if (_0x00b3) {
+_0x00b3.click();
 } else {
 _0x0039.removeAttribute(_0xstr(591));
 _0x0039.click();
 }
 log(_0xstr(592));
 await _0x0030(2200);
-_0x00ce(_0xstr(593));
+_0x00cf(_0xstr(593));
 let _0x000d = document.activeElement;
-if (!_0x000d || _0x000d.tagName !== _0xstr(594) || !_0x00c0.contains(_0x000d)) {
+if (!_0x000d || _0x000d.tagName !== _0xstr(594) || !_0x00c1.contains(_0x000d)) {
 _0x000d = _0x0039;
 }
 _0x000d.removeAttribute(_0xstr(595));
@@ -2021,7 +2021,7 @@ _0x000d.dispatchEvent(new KeyboardEvent(_0xstr(604), { key: _0xstr(605), bubbles
 log(_0xstr(606) + recipientDriver + _0xstr(607));
 await _0x0030(2500);
 const _0x0010 = Array.from(document.querySelectorAll(_0xstr(608)));
-let _0x0086 = _0x0010.find(el => {
+let _0x0088 = _0x0010.find(el => {
 const text = (el.innerText || el.textContent || _0xstr(609)).trim();
 return text.includes(recipientDriver) &&
 (el.offsetWidth > 0 || el.offsetHeight > 0) &&
@@ -2030,31 +2030,31 @@ el.closest(_0xstr(611)) ||
 el.closest(_0xstr(612)) ||
 el.tagName === _0xstr(613));
 });
-if (!_0x0086) {
-_0x0086 = _0x0010.find(el => {
+if (!_0x0088) {
+_0x0088 = _0x0010.find(el => {
 const text = (el.innerText || el.textContent || _0xstr(614)).trim();
 return text.includes(recipientDriver) &&
 (el.closest(_0xstr(615)) || el.closest(_0xstr(616)) || el.tagName === _0xstr(617));
 });
 }
-if (!_0x0086) {
-_0x0086 = _0x0010.find(el => {
+if (!_0x0088) {
+_0x0088 = _0x0010.find(el => {
 const text = (el.innerText || el.textContent || _0xstr(618)).trim();
 return text.includes(recipientDriver);
 });
 }
-if (_0x0086) {
-_0x0086.click();
-log(_0xstr(619) + (_0x0086.innerText || _0x0086.textContent).trim());
+if (_0x0088) {
+_0x0088.click();
+log(_0xstr(619) + (_0x0088.innerText || _0x0088.textContent).trim());
 await _0x0030(1200);
-const _0x0033 = Array.from(_0x00c0.querySelectorAll(_0xstr(620))).find(btn => {
-const _0x00cc = btn.innerText || btn.textContent || _0xstr(621);
-return _0x00cc.trim() === _0xstr(622) || _0x00cc.trim() === _0xstr(623) || _0x00cc.trim() === _0xstr(624);
+const _0x0033 = Array.from(_0x00c1.querySelectorAll(_0xstr(620))).find(btn => {
+const _0x00cd = btn.innerText || btn.textContent || _0xstr(621);
+return _0x00cd.trim() === _0xstr(622) || _0x00cd.trim() === _0xstr(623) || _0x00cd.trim() === _0xstr(624);
 });
 if (_0x0033) {
 _0x0033.click();
 log(_0xstr(625));
-_0x00a6 = true;
+_0x00a8 = true;
 await _0x0030(1500);
 break;
 } else {
@@ -2071,32 +2071,32 @@ log(_0xstr(629));
 }
 }
 }
-return _0x00a6;
+return _0x00a8;
 }
 function _0x001a() {
 const now = Date.now();
 if (_0x0065 && _0x0079 > 0 && (now - _0x0079) > _0x0009) {
 log(_0xstr(630));
 _0x0065 = false;
-_0x00a9(_0xstr(631));
+_0x00ab(_0xstr(631));
 _0x0079 = 0;
 }
 if (_0x0067 && _0x0075 > 0 && (now - _0x0075) > _0x0009) {
 log(_0xstr(632));
 _0x0067 = false;
-_0x00a9(_0xstr(633));
+_0x00ab(_0xstr(633));
 _0x0075 = 0;
 }
 if (_0x0068 && _0x0078 > 0 && (now - _0x0078) > _0x0009) {
 log(_0xstr(634));
 _0x0068 = false;
-_0x00a9(_0xstr(635));
+_0x00ab(_0xstr(635));
 _0x0078 = 0;
 }
 if (_0x0066 && _0x0073 > 0 && (now - _0x0073) > _0x0009) {
 log(_0xstr(636));
 _0x0066 = false;
-_0x00a9(_0xstr(637));
+_0x00ab(_0xstr(637));
 _0x0073 = 0;
 }
 }
@@ -2115,10 +2115,10 @@ function _0x0063() {
 const hash = window.location.hash || _0xstr(641);
 const href = window.location.href;
 if (href.includes(_0xstr(642)) || href.includes(_0xstr(643))) return false;
-const _0x00b3 = document.querySelectorAll(_0xstr(644));
-for (const sp of _0x00b3) {
-if (sp.offsetWidth > 0 || sp.offsetHeight > 0) {
-const style = window.getComputedStyle(sp);
+const _0x0087 = document.querySelectorAll(_0xstr(644));
+for (const _0x0086 of _0x0087) {
+if (_0x0086.offsetWidth > 100 && _0x0086.offsetHeight > 100) {
+const style = window.getComputedStyle(_0x0086);
 if (style.display !== _0xstr(645) && style.visibility !== _0xstr(646) && style.opacity !== _0xstr(647)) {
 return false;
 }
@@ -2179,14 +2179,14 @@ _0x0059(_0xstr(680));
 _0x007d = now;
 }
 function _0x001c() {
-const _0x008a = _0x004b();
-if (_0x008a) {
-const _0x00ca = localStorage.getItem(_0xstr(681) + _0x008a);
-if (_0x00ca === _0xstr(682)) {
-localStorage.removeItem(_0xstr(683) + _0x008a);
+const _0x008c = _0x004b();
+if (_0x008c) {
+const _0x00cb = localStorage.getItem(_0xstr(681) + _0x008c);
+if (_0x00cb === _0xstr(682)) {
+localStorage.removeItem(_0xstr(683) + _0x008c);
 log(_0xstr(684));
-localStorage.setItem(_0xstr(685) + _0x008a, _0xstr(686));
-localStorage.removeItem(_0xstr(687) + _0x008a);
+localStorage.setItem(_0xstr(685) + _0x008c, _0xstr(686));
+localStorage.removeItem(_0xstr(687) + _0x008c);
 window.close();
 }
 }
@@ -2199,15 +2199,15 @@ if (_0x0060 && (now - _0x007d) > _0x0001) {
 _0x005a();
 }
 }
-let _0x0089 = 0;
-function _0x0088() {
-_0x00cf();
+let _0x008b = 0;
+function _0x008a() {
 _0x00d0();
+_0x00d1();
 _0x001c();
 _0x0012 = localStorage.getItem(_0xstr(690)) || GM_getValue(_0xstr(691), _0x0000);
-_0x0099 = localStorage.getItem(_0xstr(692)) || GM_getValue(_0xstr(693), _0xstr(694));
+_0x009b = localStorage.getItem(_0xstr(692)) || GM_getValue(_0xstr(693), _0xstr(694));
 _0x0069 = localStorage.getItem(_0xstr(695)) === _0xstr(696);
-_0x00d1();
+_0x00d2();
 const _0x002f = window.location.href;
 const hash = window.location.hash || _0xstr(697);
 if (_0x002f !== _0x007f) {
@@ -2219,8 +2219,8 @@ _0x0066 = false;
 }
 if (!_0x0069) return;
 _0x004c();
-_0x0089++;
-if (_0x0089 % 75 === 0) {
+_0x008b++;
+if (_0x008b % 75 === 0) {
 _0x001a();
 _0x001b();
 _0x0021();
@@ -2228,34 +2228,34 @@ _0x001f();
 _0x0014();
 }
 if (hash.includes(_0xstr(698))) {
-_0x00b6();
+_0x00b7();
 }
 if (hash.includes(_0xstr(699))) {
-_0x009e();
+_0x00a0();
 }
 if (hash.includes(_0xstr(700))) {
-_0x009d();
+_0x009f();
 }
 if (hash.includes(_0xstr(701))) {
-_0x00b5();
+_0x00b6();
 }
 }
-_0x00cf();
-let _0x00d8 = null;
+_0x00d0();
+let _0x00d9 = null;
 try {
 const _0x0015 = new Blob([_0xstr(702)], { type: _0xstr(703) });
-const _0x00d9 = URL.createObjectURL(_0x0015);
-_0x00d8 = new Worker(_0x00d9);
-_0x00d8.onmessage = function(e) {
+const _0x00da = URL.createObjectURL(_0x0015);
+_0x00d9 = new Worker(_0x00da);
+_0x00d9.onmessage = function(e) {
 if (e.data === _0xstr(704)) {
-_0x0088();
+_0x008a();
 }
 };
 log(_0xstr(705));
 } catch (err) {
 log(_0xstr(706));
 function _0x0044() {
-_0x0088();
+_0x008a();
 setTimeout(_0x0044, 400);
 }
 _0x0044();

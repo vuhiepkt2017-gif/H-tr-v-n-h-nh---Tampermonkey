@@ -1791,16 +1791,15 @@
             const hash = window.location.hash || "";
             const href = window.location.href;
 
-            // Nếu đang ở trang login → chưa load
             if (href.includes('login') || href.includes('sso.shopee')) return false;
 
-            // 1. Kiểm tra dấu hiệu loading (spinners) đang thực sự hiển thị (visible)
-            const spinners = document.querySelectorAll('.el-loading-mask, .el-loading-spinner, .loading-mock, [class*="loading-spinner"]');
-            for (const sp of spinners) {
-                if (sp.offsetWidth > 0 || sp.offsetHeight > 0) {
-                    const style = window.getComputedStyle(sp);
+            // Chỉ block nếu có lớp loading mask thực sự của Element UI đang phủ màn hình (kích thước lớn)
+            const masks = document.querySelectorAll('.el-loading-mask');
+            for (const mask of masks) {
+                if (mask.offsetWidth > 100 && mask.offsetHeight > 100) {
+                    const style = window.getComputedStyle(mask);
                     if (style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0') {
-                        return false; // Vẫn đang có spinner hiển thị thực sự
+                        return false;
                     }
                 }
             }
