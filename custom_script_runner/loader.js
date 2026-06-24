@@ -205,6 +205,8 @@ globalThis.GM_openInTab = (url, options) => {
         } else if (e.data.type === "SHOPEE_OPEN_TAB_REQUEST") {
             const { url, active } = e.data;
             globalThis.GM_openInTab(url, { active });
+        } else if (e.data.type === "SHOPEE_ACTIVATE_TAB_REQUEST") {
+            chrome.runtime.sendMessage({ action: "activate_tab" });
         }
     });
 

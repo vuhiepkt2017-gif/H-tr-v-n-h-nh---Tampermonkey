@@ -53,5 +53,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ success: true });
     });
     return true;
+  } else if (message.action === "activate_tab") {
+    if (sender.tab && sender.tab.id) {
+      chrome.tabs.update(sender.tab.id, { active: true }, () => {
+        sendResponse({ success: true });
+      });
+    } else {
+      sendResponse({ success: false, error: "No tab found" });
+    }
+    return true;
   }
 });

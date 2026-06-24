@@ -963,6 +963,23 @@
             return match ? match[0] : driverStr;
         }
 
+        // Đảm bảo tab được kích hoạt lên foreground trước khi in để tránh bị Chrome chặn window.print()
+        async function ensureTabActive() {
+            if (document.hidden) {
+                log("Phát hiện tab đang chạy ẩn. Đang kích hoạt tab lên trước khi thực hiện in...");
+                window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST" }, "*");
+                for (let i = 0; i < 40; i++) {
+                    await delay(100);
+                    if (!document.hidden) {
+                        await delay(500); // Đợi 500ms cho trang ổn định
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+
         // ==========================================
         // 2. TÍNH NĂNG 1: IN BILL THƯỜNG (awbPrint)
         // ==========================================
@@ -1011,6 +1028,7 @@
         }
 
         async function executePrintJob(codes) {
+            await ensureTabActive();
             const textarea = document.querySelector('textarea') || document.querySelector('input[type="text"]');
             if (!textarea) {
                 log("Không tìm thấy ô nhập mã vận đơn!");
@@ -1328,6 +1346,7 @@
                 if (res.status === "success" && res.toNum) {
                     const currentTO = res.toNum;
                     log(`[TO In] Lấy mã TO cần in từ Sheet: ${currentTO}`);
+                    await ensureTabActive();
 
                     // Tìm ô nhập TO Number bằng cách định vị nhãn chứa text và tìm input trong cùng container
                     let toInput = null;
