@@ -1294,9 +1294,8 @@
                             });
                         }
 
-                        if (toNum && operatorText && quantity > 0) {
-                            const isSpxShopee = operatorText.toLowerCase() === "spx@shopee.com";
-                            if (!isSpxShopee && !localExistingTOs.has(toNum.toLowerCase())) {
+                        if (toNum) {
+                            if (!localExistingTOs.has(toNum.toLowerCase())) {
                                 // THÊM VÀO SET NGAY LẬP TỨC TRƯỚC KHI GỌI API để chống trùng lặp (race condition)
                                 localExistingTOs.add(toNum.toLowerCase());
                                 try {
