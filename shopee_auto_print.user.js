@@ -1539,6 +1539,7 @@
         }
 
         async function executeHandoverJob(pupCode, recipientDriver) {
+            await ensureTabActive();
             let filterInput = null;
             
             // 1. Tìm thông qua label của form item (Element UI)

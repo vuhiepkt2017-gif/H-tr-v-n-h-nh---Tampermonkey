@@ -1975,6 +1975,7 @@ _0x00ab(_0xstr(545));
 }
 }
 async function _0x0040(pupCode, recipientDriver) {
+await _0x003d();
 let _0x0046 = null;
 const _0x0048 = document.querySelectorAll(_0xstr(546));
 for (let _0x006e of _0x0048) {
