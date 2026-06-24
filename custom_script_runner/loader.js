@@ -1,6 +1,54 @@
-// Custom UserScript Runner - Content Script Loader (Manifest V3)
+// Injection Script to inject GM APIs directly to page window context from Isolated context securely
+const injectionScript = document.createElement("script");
+injectionScript.textContent = `
+    (function() {
+        window.GM_getValue = (key, def) => {
+            const val = localStorage.getItem(key);
+            return val !== null ? val : def;
+        };
+        window.GM_setValue = (key, val) => {
+            localStorage.setItem(key, val);
+        };
+        window.GM_registerMenuCommand = (name, fn) => {
+            console.log("[VTDAuto] Menu Command registered:", name);
+        };
+        window.GM_openInTab = (url, options) => {
+            const active = options && options.active !== undefined ? options.active : true;
+            window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url, active }, "*");
+        };
+        window.GM_xmlhttpRequest = (options) => {
+            const reqId = "req_" + Math.random().toString(36).substring(2, 9);
+            window.addEventListener("message", function handler(e) {
+                if (e.data && e.data.type === "SHOPEE_XMLHTTP_RESPONSE" && e.data.reqId === reqId) {
+                    window.removeEventListener("message", handler);
+                    if (e.data.success) {
+                        if (options.onload) {
+                            options.onload({
+                                text: e.data.responseText,
+                                responseText: e.data.responseText,
+                                status: 200
+                            });
+                        }
+                    } else {
+                        if (options.onerror) {
+                            options.onerror(new Error(e.data.error || "Lỗi kết nối"));
+                        }
+                    }
+                }
+            });
+            window.postMessage({ type: "SHOPEE_XMLHTTP_REQUEST", reqId, options: {
+                url: options.url,
+                method: options.method,
+                data: options.data
+            }}, "*");
+        };
+        window.unsafeWindow = window;
+    })();
+`;
+(document.head || document.documentElement).appendChild(injectionScript);
+injectionScript.remove();
 
-// Expose GM APIs to global scope immediately so static script default_shopee_script.js can access them
+// Standard background communication messaging bridge in Isolated world
 globalThis.GM_getValue = (key, def) => {
     const val = localStorage.getItem(key);
     return val !== null ? val : def;
@@ -11,7 +59,7 @@ globalThis.GM_setValue = (key, val) => {
 };
 
 globalThis.GM_registerMenuCommand = (name, fn) => {
-    console.log("[VTDAuto] Menu Command registered:", name);
+    console.log("[VTDAuto] Menu Command registered in Isolated:", name);
 };
 
 globalThis.GM_xmlhttpRequest = (options) => {
@@ -71,23 +119,6 @@ globalThis.GM_openInTab = (url, options) => {
     });
 };
 
-// Also expose them to window and self just in case
-window.GM_getValue = globalThis.GM_getValue;
-window.GM_setValue = globalThis.GM_setValue;
-window.GM_registerMenuCommand = globalThis.GM_registerMenuCommand;
-window.GM_xmlhttpRequest = globalThis.GM_xmlhttpRequest;
-window.GM_openInTab = globalThis.GM_openInTab;
-
-self.GM_getValue = globalThis.GM_getValue;
-self.GM_setValue = globalThis.GM_setValue;
-self.GM_registerMenuCommand = globalThis.GM_registerMenuCommand;
-self.GM_xmlhttpRequest = globalThis.GM_xmlhttpRequest;
-self.GM_openInTab = globalThis.GM_openInTab;
-
-window.unsafeWindow = window;
-globalThis.unsafeWindow = window;
-self.unsafeWindow = window;
-
 (function() {
     'use strict';
 
@@ -141,6 +172,39 @@ self.unsafeWindow = window;
         }
         if (result.shopee_pc_name) {
             localStorage.setItem("shopee_pc_name", result.shopee_pc_name);
+        }
+    });
+
+    // Lang nghe postMessage tu MAIN world de lam cau noi goi API tu background
+    window.addEventListener("message", (e) => {
+        if (!e.data || typeof e.data !== "object") return;
+        
+        if (e.data.type === "SHOPEE_XMLHTTP_REQUEST") {
+            const { reqId, options } = e.data;
+            globalThis.GM_xmlhttpRequest({
+                url: options.url,
+                method: options.method,
+                data: options.data,
+                onload: (res) => {
+                    window.postMessage({
+                        type: "SHOPEE_XMLHTTP_RESPONSE",
+                        reqId,
+                        success: true,
+                        responseText: res.responseText
+                    }, "*");
+                },
+                onerror: (err) => {
+                    window.postMessage({
+                        type: "SHOPEE_XMLHTTP_RESPONSE",
+                        reqId,
+                        success: false,
+                        error: err.message
+                    }, "*");
+                }
+            });
+        } else if (e.data.type === "SHOPEE_OPEN_TAB_REQUEST") {
+            const { url, active } = e.data;
+            globalThis.GM_openInTab(url, { active });
         }
     });
 

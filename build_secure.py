@@ -310,13 +310,69 @@ try {{
 }}
 """
 
+    fallback_gm_apis = """
+if (typeof GM_getValue === 'undefined') {
+    globalThis.GM_getValue = (key, def) => {
+        const val = localStorage.getItem(key);
+        return val !== null ? val : def;
+    };
+}
+if (typeof GM_setValue === 'undefined') {
+    globalThis.GM_setValue = (key, val) => {
+        localStorage.setItem(key, val);
+    };
+}
+if (typeof GM_registerMenuCommand === 'undefined') {
+    globalThis.GM_registerMenuCommand = (name, fn) => {
+        console.log("[VTDAuto] Menu Command registered:", name);
+    };
+}
+if (typeof GM_openInTab === 'undefined') {
+    globalThis.GM_openInTab = (url, options) => {
+        const active = options && options.active !== undefined ? options.active : true;
+        window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url, active }, "*");
+    };
+}
+if (typeof GM_xmlhttpRequest === 'undefined') {
+    globalThis.GM_xmlhttpRequest = (options) => {
+        const reqId = "req_" + Math.random().toString(36).substring(2, 9);
+        window.addEventListener("message", function handler(e) {
+            if (e.data && e.data.type === "SHOPEE_XMLHTTP_RESPONSE" && e.data.reqId === reqId) {
+                window.removeEventListener("message", handler);
+                if (e.data.success) {
+                    if (options.onload) {
+                        options.onload({
+                            text: e.data.responseText,
+                            responseText: e.data.responseText,
+                            status: 200
+                        });
+                    }
+                } else {
+                    if (options.onerror) {
+                        options.onerror(new Error(e.data.error || "Lỗi kết nối"));
+                    }
+                }
+            }
+        });
+        window.postMessage({ type: "SHOPEE_XMLHTTP_REQUEST", reqId, options: {
+            url: options.url,
+            method: options.method,
+            data: options.data
+        }}, "*");
+    };
+}
+if (typeof unsafeWindow === 'undefined') {
+    globalThis.unsafeWindow = window;
+}
+"""
+
     # === TẠO OUTPUT CHO TAMPERMONKEY ===
-    final_body_tm = decoder_func + "\n" + wrapped_body
+    final_body_tm = fallback_gm_apis + "\n" + decoder_func + "\n" + wrapped_body
     with open(output_path_tm, 'w', encoding='utf-8') as f:
         f.write(header + "\n\n" + final_body_tm)
 
     # === TẠO OUTPUT CHO VTDAUTO ===
-    final_body_vtd = decoder_func + "\n" + wrapped_body
+    final_body_vtd = fallback_gm_apis + "\n" + decoder_func + "\n" + wrapped_body
     with open(output_path_vtd, 'w', encoding='utf-8') as f:
         f.write(header + "\n\n" + final_body_vtd)
 

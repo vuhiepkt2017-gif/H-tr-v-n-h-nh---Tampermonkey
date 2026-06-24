@@ -113,7 +113,7 @@ function doPost(e) {
 
     if (isChuyenPick) {
       var pupCode = (data.pupCode || "").toString().trim().toUpperCase();
-      var recipientDriver = (data.recipientDriver || "").toString().trim();
+      var recipientDriver = (data.recipientDriver || data.receiverRider || data.recipient_driver || data.receiver || "").toString().trim();
       
       if (!pupCode) {
         return ContentService.createTextOutput(JSON.stringify({
@@ -123,7 +123,15 @@ function doPost(e) {
       }
 
       var sheetCP = getOrCreateSheetChuyenPick();
-      sheetCP.appendRow([pupCode, now, riderName, recipientDriver, "Chờ chuyển", ""]);
+      // Đảm bảo không có giá trị undefined trong mảng để tránh bị lệch/trôi cột khi appendRow
+      sheetCP.appendRow([
+        pupCode || "", 
+        now, 
+        riderName || "", 
+        recipientDriver || "", 
+        "Chờ chuyển", 
+        ""
+      ]);
 
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
@@ -288,7 +296,14 @@ function handleAdminChuyenHoTro(data) {
   // 2. Tự động thêm bản ghi vào sheet "Chuyển Pick" để PC client nhận diện và in
   var sheetCP = getOrCreateSheetChuyenPick();
   var now = new Date();
-  sheetCP.appendRow([pupCode, now, riderName + " (Hỗ trợ)", receiverRider, "Chờ chuyển", ""]);
+  sheetCP.appendRow([
+    pupCode || "", 
+    now, 
+    (riderName || "") + " (Hỗ trợ)", 
+    receiverRider || "", 
+    "Chờ chuyển", 
+    ""
+  ]);
 
   return ContentService.createTextOutput(JSON.stringify({
     status: "success",
