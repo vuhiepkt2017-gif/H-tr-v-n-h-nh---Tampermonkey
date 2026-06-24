@@ -84,6 +84,10 @@ self.GM_registerMenuCommand = globalThis.GM_registerMenuCommand;
 self.GM_xmlhttpRequest = globalThis.GM_xmlhttpRequest;
 self.GM_openInTab = globalThis.GM_openInTab;
 
+window.unsafeWindow = window;
+globalThis.unsafeWindow = window;
+self.unsafeWindow = window;
+
 (function() {
     'use strict';
 
@@ -138,6 +142,14 @@ self.GM_openInTab = globalThis.GM_openInTab;
         if (result.shopee_pc_name) {
             localStorage.setItem("shopee_pc_name", result.shopee_pc_name);
         }
+
+        // Inject default_shopee_script.js using DOM script tag to execute inside page context
+        const scriptEl = document.createElement("script");
+        scriptEl.src = chrome.runtime.getURL("default_shopee_script.js");
+        scriptEl.onload = function() {
+            this.remove();
+        };
+        (document.head || document.documentElement).appendChild(scriptEl);
     });
 
 })();
