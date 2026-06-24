@@ -1137,7 +1137,7 @@ const _0x009c = localStorage.getItem(_0xstr(206));
 if (_0x009c !== _0xstr(207)) return;
 const _0x00be = parseInt(localStorage.getItem(_0xstr(208)) || _0xstr(209));
 const now = Date.now();
-if ((now - _0x00be) >= 4000) {
+if (_0x0063()) {
 log(_0xstr(210) + (_0x000a[_0x008c]?.name || _0x008c) + _0xstr(211));
 _0x007d = Date.now();
 _0x0095();
@@ -2217,8 +2217,8 @@ _0x0068 = false;
 _0x0065 = false;
 _0x0066 = false;
 }
-if (!_0x0069) return;
 _0x004c();
+if (!_0x0069) return;
 _0x008b++;
 if (_0x008b % 75 === 0) {
 _0x001a();

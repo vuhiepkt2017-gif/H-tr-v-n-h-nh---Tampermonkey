@@ -573,8 +573,8 @@
             const tabStart = parseInt(localStorage.getItem('seq_open_tab_start') || '0');
             const now = Date.now();
 
-            // Đợi ít nhất 4 giây sau khi tab bắt đầu mở để đảm bảo trang đã tải xong
-            if ((now - tabStart) >= 4000) {
+            // Kiểm tra nội dung trang đã load đầy đủ chưa
+            if (isPageContentFullyLoaded()) {
                 log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã load đầy đủ và sẵn sàng!`);
                 lastSuccessfulAction = Date.now();
                 openNextTabInQueue();
@@ -1932,10 +1932,10 @@
                 isProcessingHandover = false;
             }
 
-            if (!isRunning) return;
-
             // Sequential Tab Open: kiểm tra mỗi cycle (~1.5s) xem tab mới mở đã load xong chưa
             handleSequentialTabOpen();
+
+            if (!isRunning) return;
 
             // Mỗi 75 lần monitor (~30 giây ở chu kỳ 400ms) kiểm tra sức khỏe hệ thống
             monitorCounter++;
