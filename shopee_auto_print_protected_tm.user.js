@@ -1227,9 +1227,9 @@ alert(_0xstr(222));
 return;
 }
 isRunning = !isRunning;
-localStorage.setItem(_0xstr(223), isRunning ? _0xstr(224) : _0xstr(225));
+localStorage.setItem(_0xstr(223), isRunning ? [_0xstr(224)] : _0xstr(225));
 updateUIState();
-log(isRunning ? _0xstr(226) : _0xstr(227));
+log(isRunning ? [_0xstr(226)] : _0xstr(227));
 if (isRunning) {
 enableAntiSleep();
 openMissingTabs();
@@ -1327,7 +1327,7 @@ reject(new Error(`GM_xmlhttpRequest timeout khi gọi ${urlOrAction}`));
 }
 };
 if (method !== _0xstr(252)) {
-options.headers = { _0xstr(253): _0xstr(254) };
+options.headers = { [_0xstr(253)]: _0xstr(254) };
 options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (pcName || _0xstr(255)).trim() }, data));
 }
 GM_xmlhttpRequest(options);
