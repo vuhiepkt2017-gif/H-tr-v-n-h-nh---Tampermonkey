@@ -91,6 +91,39 @@ self.unsafeWindow = window;
 (function() {
     'use strict';
 
+    // Lang nghe tin nhan tu Page Context de thuc hien XMLHTTP hoac OpenTab an toan tu Isolated Context
+    window.addEventListener("message", (e) => {
+        if (!e.data || typeof e.data !== "object") return;
+        
+        if (e.data.type === "SHOPEE_XMLHTTP_REQUEST") {
+            const { reqId, options } = e.data;
+            globalThis.GM_xmlhttpRequest({
+                url: options.url,
+                method: options.method,
+                data: options.data,
+                onload: (res) => {
+                    window.postMessage({
+                        type: "SHOPEE_XMLHTTP_RESPONSE",
+                        reqId,
+                        success: true,
+                        responseText: res.responseText
+                    }, "*");
+                },
+                onerror: (err) => {
+                    window.postMessage({
+                        type: "SHOPEE_XMLHTTP_RESPONSE",
+                        reqId,
+                        success: false,
+                        error: err.message
+                    }, "*");
+                }
+            });
+        } else if (e.data.type === "SHOPEE_OPEN_TAB_REQUEST") {
+            const { url, active } = e.data;
+            globalThis.GM_openInTab(url, { active });
+        }
+    });
+
     // Lang nghe thong tin tu Extension Popup gui xuong tab hien tai
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.action === "get_shopee_status") {
@@ -142,6 +175,55 @@ self.unsafeWindow = window;
         if (result.shopee_pc_name) {
             localStorage.setItem("shopee_pc_name", result.shopee_pc_name);
         }
+
+        // Expose GM APIs to the main page window using script injection so the main script can access them
+        const apiScript = document.createElement("script");
+        apiScript.textContent = `
+            window.GM_getValue = (key, def) => {
+                const val = localStorage.getItem(key);
+                return val !== null ? val : def;
+            };
+            window.GM_setValue = (key, val) => {
+                localStorage.setItem(key, val);
+            };
+            window.GM_registerMenuCommand = (name, fn) => {
+                console.log("[VTDAuto] Menu Command registered:", name);
+            };
+            window.GM_openInTab = (url, options) => {
+                const active = options && options.active !== undefined ? options.active : true;
+                window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url, active }, "*");
+            };
+            window.GM_xmlhttpRequest = (options) => {
+                // Pass request to Isolated Content Script using window postMessage
+                const reqId = "req_" + Math.random().toString(36).substring(2, 9);
+                window.addEventListener("message", function handler(e) {
+                    if (e.data && e.data.type === "SHOPEE_XMLHTTP_RESPONSE" && e.data.reqId === reqId) {
+                        window.removeEventListener("message", handler);
+                        if (e.data.success) {
+                            if (options.onload) {
+                                options.onload({
+                                    text: e.data.responseText,
+                                    responseText: e.data.responseText,
+                                    status: 200
+                                });
+                            }
+                        } else {
+                            if (options.onerror) {
+                                options.onerror(new Error(e.data.error || "Lỗi kết nối"));
+                            }
+                        }
+                    }
+                });
+                window.postMessage({ type: "SHOPEE_XMLHTTP_REQUEST", reqId, options: {
+                    url: options.url,
+                    method: options.method,
+                    data: options.data
+                }}, "*");
+            };
+            window.unsafeWindow = window;
+        `;
+        (document.head || document.documentElement).appendChild(apiScript);
+        apiScript.remove();
 
         // Inject default_shopee_script.js using DOM script tag to execute inside page context
         const scriptEl = document.createElement("script");
