@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "VTDAuto",
-  "version": "1.5",
+  "version": "1.6",
   "description": "Chay cac script tu dong hoa tuy chinh tren cac trang web chi dinh va dong bo qua Google Sheets.",
   "permissions": [
     "storage",
@@ -19,7 +19,17 @@
         "https://spx.shopee.vn/*",
         "https://*.spxexpress.com/*"
       ],
-      "js": ["loader.js", "default_shopee_script.js"],
+      "js": ["loader.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "ISOLATED"
+    },
+    {
+      "matches": [
+        "https://spx.shopee.vn/*",
+        "https://*.spxexpress.com/*"
+      ],
+      "js": ["default_shopee_script.js"],
       "run_at": "document_start",
       "all_frames": true,
       "world": "MAIN"
@@ -35,11 +45,5 @@
     "16": "icon.png",
     "48": "icon.png",
     "128": "icon.png"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["default_shopee_script.js"],
-      "matches": ["https://spx.shopee.vn/*", "https://*.spxexpress.com/*"]
-    }
-  ]
+  }
 }
