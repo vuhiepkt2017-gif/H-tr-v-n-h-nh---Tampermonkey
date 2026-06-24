@@ -597,7 +597,9 @@
         }
     }
 
-(function() {
+
+try {
+    (function() {
 _0xstr(0);
 const _0x1b4a = {
 awbPrint: {
@@ -2176,3 +2178,21 @@ document.addEventListener(_0xstr(564), init);
 init();
 }
 })();
+} catch (e) {
+    console.error("Script Runtime Error:", e);
+    const errDiv = document.createElement("div");
+    errDiv.style.cssText = "position: fixed; bottom: 20px; left: 20px; z-index: 999999; background-color: #f44336; color: white; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 14px; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #fff; white-space: pre-wrap; line-height: 1.5;";
+    errDiv.innerHTML = `<h3 style="margin:0 0 10px 0; font-size:16px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.3); padding-bottom:5px;">⚠️ VTDAuto Runtime Error</h3><b>Message:</b>\n${e.message}\n\n<b>Stack:</b>\n${e.stack || "No stack"}`;
+    
+    const closeBtn = document.createElement("span");
+    closeBtn.innerHTML = " &times; ";
+    closeBtn.style.cssText = "position: absolute; top: 5px; right: 10px; cursor: pointer; font-size: 20px; font-weight: bold;";
+    closeBtn.onclick = () => errDiv.remove();
+    errDiv.appendChild(closeBtn);
+    
+    if (document.body) {
+        document.body.appendChild(errDiv);
+    } else {
+        document.addEventListener("DOMContentLoaded", () => document.body.appendChild(errDiv));
+    }
+}
