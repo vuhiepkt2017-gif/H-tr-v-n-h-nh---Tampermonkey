@@ -41,6 +41,18 @@ function doPost(e) {
       data = e.parameter;
     }
     
+    // Ghi log request để debug thông tin gửi từ App Android
+    try {
+      var ss = SpreadsheetApp.getActiveSpreadsheet();
+      var logSheet = ss.getSheetByName("Logs");
+      if (!logSheet) {
+        logSheet = ss.insertSheet("Logs");
+        logSheet.appendRow(["Thời gian", "Nội dung Request"]);
+        logSheet.getRange("A1:B1").setFontWeight("bold").setBackground("#EA9999");
+      }
+      logSheet.appendRow([new Date(), JSON.stringify(data)]);
+    } catch (logErr) {}
+
     var action = data.action;
     var pcName = data.pc || "PC ẩn danh";
 

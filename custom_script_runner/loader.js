@@ -162,10 +162,8 @@ globalThis.GM_openInTab = (url, options) => {
             return;
         }
 
-        if (result.extension_enabled === false) {
-            localStorage.setItem("auto_print_enabled", "false");
-            return;
-        }
+        const isEnabled = result.extension_enabled !== false;
+        localStorage.setItem("auto_print_enabled", isEnabled ? "true" : "false");
 
         if (result.google_apps_script_url) {
             localStorage.setItem("google_apps_script_url", result.google_apps_script_url);

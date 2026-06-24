@@ -44,13 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 popupContentMain.style.display = "block";
                 
                 // Clear password input if not saved
-                if (!popupSavePassword.checked) {
-                    // We don't save or we reset on close? If checked, we keep it unlocked.
-                    // If not checked, we keep it unlocked for current session or we can let them close.
-                    // Storage extension_unlocked is persistent, if user unchecks "remember", we should clear it on browser suspend or we can just let it expire or simple logic: if unchecked, we only unlock this time (which means we might reset it on browser startup or just simple setting).
-                    // To keep it simple: if checked we save extension_unlocked: true. If NOT checked, we save extension_unlocked: true, but we could set an option to clear it later. Let's just store a session flag or cookie if needed, but storage.local is persistent. Let's make extension_unlocked a persistent flag only if save is checked!
-                }
-                
                 // If they checked "Ghi nhớ mật khẩu", keep extension_unlocked as true persistently.
                 // If they UNCHECKED "Ghi nhớ mật khẩu", we can store it in session storage or background memory so that it locks again next time they restart Chrome.
                 if (!popupSavePassword.checked) {
@@ -60,13 +53,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     chrome.storage.local.remove("extension_unlocked_session_only");
                 }
 
+                chrome.storage.local.set({ extension_enabled: true }, () => {
+                    // Enable running in current active tab automatically on unlock
+                    if (activeTabId) {
+                        chrome.tabs.sendMessage(activeTabId, { action: "get_shopee_status" }, (currentStatus) => {
+                            const currentApiUrl = (currentStatus && currentStatus.apiUrl) || "";
+                            const currentPcName = (currentStatus && currentStatus.pcName) || "PC_01";
+                            chrome.tabs.sendMessage(activeTabId, {
+                                action: "set_shopee_status",
+                                apiUrl: currentApiUrl,
+                                pcName: currentPcName,
+                                isRunning: true
+                            }, () => {
+                                // Reload after setting so it runs instantly
+                                chrome.tabs.reload(activeTabId);
+                            });
+                        });
+                    }
+                });
+
                 popupUnlockPassword.value = "";
                 popupUnlockError.innerText = "";
-                
-                // Reload current Shopee page to apply settings
-                if (activeTabId) {
-                    chrome.tabs.reload(activeTabId);
-                }
             });
         } else {
             popupUnlockError.innerText = "Mật khẩu không chính xác!";
@@ -107,6 +114,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const isEnabled = e.target.checked;
         chrome.storage.local.set({ extension_enabled: isEnabled }, () => {
             updateStatusText(isEnabled);
+            
+            // Sync with current Shopee tab if active
+            if (activeTabId) {
+                chrome.tabs.sendMessage(activeTabId, { action: "get_shopee_status" }, (currentStatus) => {
+                    if (!chrome.runtime.lastError && currentStatus) {
+                        chrome.tabs.sendMessage(activeTabId, {
+                            action: "set_shopee_status",
+                            apiUrl: currentStatus.apiUrl,
+                            pcName: currentStatus.pcName,
+                            isRunning: isEnabled
+                        });
+                    }
+                });
+            }
         });
     });
 
