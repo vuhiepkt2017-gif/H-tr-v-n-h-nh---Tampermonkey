@@ -260,32 +260,50 @@
         <span class="version">v1.0</span>
     </div>
 
-    <!-- Global Switch -->
-    <div class="status-container">
-        <span class="status-label" id="status-text">Hệ thống: ĐANG BẬT</span>
-        <label class="switch">
-            <input type="checkbox" id="toggle-runner" checked>
-            <span class="slider"></span>
-        </label>
+    <!-- LOCK SCREEN OVERLAY INSIDE POPUP -->
+    <div id="popup-lock-overlay" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px 10px; text-align: center; background-color: var(--panel-bg); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px;">
+        <span style="font-size: 36px; margin-bottom: 12px;">🔒</span>
+        <h3 style="margin: 0 0 8px 0; color: var(--primary); font-size: 14px; font-weight: bold;">Yêu cầu mật khẩu bản quyền</h3>
+        <p style="color: var(--text-muted); margin: 0 0 15px 0; font-size: 11px; line-height: 1.5;">Vui lòng nhập mật khẩu bản quyền để kích hoạt và sử dụng extension VTDAuto.</p>
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; box-sizing: border-box;">
+            <input type="password" id="popup-unlock-password" placeholder="Nhập mật khẩu..." style="padding: 8px; border-radius: 6px; border: 1px solid var(--border); background-color: var(--bg-color); color: white; text-align: center; font-size: 12px; outline: none; width: 100%; box-sizing: border-box;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0;">
+                <input type="checkbox" id="popup-save-password" checked style="cursor: pointer;">
+                <label for="popup-save-password" style="font-size: 11px; color: var(--text-muted); cursor: pointer; user-select: none;">Ghi nhớ mật khẩu trên thiết bị này</label>
+            </div>
+            <button class="btn-dashboard" id="popup-submit-unlock" style="margin-bottom: 0; padding: 8px;">Kích hoạt Extension</button>
+        </div>
+        <div id="popup-unlock-error" style="color: var(--danger); font-size: 11px; font-weight: bold; margin-top: 8px;"></div>
     </div>
 
-    <!-- Matched Scripts Section -->
-    <div class="script-list-container" id="script-list-container" style="display: none;">
-        <div class="script-list-title">Script phù hợp trang này</div>
-        <div id="active-scripts-list"></div>
-    </div>
+    <div id="popup-content-main" style="display: block;">
+        <!-- Global Switch -->
+        <div class="status-container">
+            <span class="status-label" id="status-text">Hệ thống: ĐANG BẬT</span>
+            <label class="switch">
+                <input type="checkbox" id="toggle-runner" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
 
-    <!-- Open Dashboard -->
-    <button class="btn-dashboard" id="btn-open-dashboard">
-        🚀 Mở Trang Quản Trị Script
-    </button>
+        <!-- Matched Scripts Section -->
+        <div class="script-list-container" id="script-list-container" style="display: none;">
+            <div class="script-list-title">Script phù hợp trang này</div>
+            <div id="active-scripts-list"></div>
+        </div>
 
-    <!-- Web App Config Panel -->
-    <div class="webapp-config-section" id="webapp-config-section" style="display: none;">
-        <div class="webapp-title">⚙️ Cài đặt URL Google Web App</div>
-        <div class="webapp-input-group">
-            <input type="text" id="popup-webapp-url" placeholder="https://script.google.com/..." class="webapp-input">
-            <button id="popup-webapp-save" class="webapp-save-btn">Lưu</button>
+        <!-- Open Dashboard -->
+        <button class="btn-dashboard" id="btn-open-dashboard">
+            🚀 Mở Trang Quản Trị Script
+        </button>
+
+        <!-- Web App Config Panel -->
+        <div class="webapp-config-section" id="webapp-config-section" style="display: none;">
+            <div class="webapp-title">⚙️ Cài đặt URL Google Web App</div>
+            <div class="webapp-input-group">
+                <input type="text" id="popup-webapp-url" placeholder="https://script.google.com/..." class="webapp-input">
+                <button id="popup-webapp-save" class="webapp-save-btn">Lưu</button>
+            </div>
         </div>
     </div>
 

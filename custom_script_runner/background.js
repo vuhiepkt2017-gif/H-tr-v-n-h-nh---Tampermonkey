@@ -1,4 +1,17 @@
-// Custom UserScript Runner - Background Service Worker (Manifest V3)
+// Tu dong khoa lai extension khi khoi dong trinh duyet neu khong tich chon "Ghi nho mat khau"
+chrome.runtime.onStartup.addListener(() => {
+  chrome.storage.local.get(["extension_unlocked_session_only"], (result) => {
+    if (result.extension_unlocked_session_only === true) {
+      chrome.storage.local.set({ extension_unlocked: false });
+      chrome.storage.local.remove("extension_unlocked_session_only");
+    }
+  });
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  // Khoi tao extension o trang thai khoa luc moi cai dat
+  chrome.storage.local.set({ extension_unlocked: false });
+});
 
 // Lang nghe tin nhan tu content script (loader.js) hoac options page (options.js)
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

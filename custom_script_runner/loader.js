@@ -119,7 +119,14 @@ self.GM_openInTab = globalThis.GM_openInTab;
     });
 
     // Tu dong dong bo URL Web App va PC Name vao localStorage
-    chrome.storage.local.get(["extension_enabled", "google_apps_script_url", "shopee_pc_name"], (result) => {
+    chrome.storage.local.get(["extension_enabled", "google_apps_script_url", "shopee_pc_name", "extension_unlocked"], (result) => {
+        // Neu chua unlock qua popup, tat luon auto print
+        if (result.extension_unlocked !== true) {
+            localStorage.setItem("auto_print_enabled", "false");
+            console.log("[VTDAuto] Extension dang bi khoa. Vui long unlock qua popup.");
+            return;
+        }
+
         if (result.extension_enabled === false) {
             localStorage.setItem("auto_print_enabled", "false");
             return;
