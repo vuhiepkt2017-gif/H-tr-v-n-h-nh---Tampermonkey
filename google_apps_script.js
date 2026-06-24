@@ -430,11 +430,27 @@ function getPendingTO(pcName) {
     
     var range = sheet.getRange(2, 1, lastRow - 1, 2);
     var values = range.getValues();
+    
+    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG
+    var hasActiveTOPrint = false;
+    for (var i = 0; i < values.length; i++) {
+      var status = values[i][1].toString().trim().toLowerCase();
+      if (status === "đang in") {
+        hasActiveTOPrint = true;
+        break;
+      }
+    }
+    
+    if (hasActiveTOPrint) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in TO khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
     for (var i = 0; i < values.length; i++) {
       var status = values[i][1].toString().trim().toLowerCase();
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
-        sheet.getRange(rowNum, 2).setValue("Đã In"); // Đánh dấu đã in trên Sheet
+        sheet.getRange(rowNum, 2).setValue("Đang in"); // Cập nhật sang trạng thái trung gian "Đang in"
+        SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
           toNum: values[i][0].toString().trim()
@@ -518,11 +534,26 @@ function getPendingCode(pcName) {
     
     var range = sheet.getRange(2, 1, lastRow - 1, 5);
     var values = range.getValues();
+    
+    // KIỂM TRA XEM CÓ TASK NÀO ĐANG IN KHÔNG
+    var hasActivePrint = false;
+    for (var i = 0; i < values.length; i++) {
+      var status = values[i][3].toString().trim().toLowerCase();
+      if (status === "đang in") {
+        hasActivePrint = true;
+        break;
+      }
+    }
+    
+    if (hasActivePrint) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in bill khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
     for (var i = 0; i < values.length; i++) {
       var status = values[i][3].toString().trim().toLowerCase();
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
-        sheet.getRange(rowNum, 4).setValue("Đã in");
+        sheet.getRange(rowNum, 4).setValue("Đang in"); // Cập nhật sang Đang in thay vì nhảy thẳng Đã in
         sheet.getRange(rowNum, 5).setValue(pcName);
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
