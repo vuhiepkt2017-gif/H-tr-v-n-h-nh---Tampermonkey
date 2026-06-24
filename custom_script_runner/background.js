@@ -8,9 +8,11 @@ chrome.runtime.onStartup.addListener(() => {
   });
 });
 
-chrome.runtime.onInstalled.addListener(() => {
-  // Khoi tao extension o trang thai khoa luc moi cai dat
-  chrome.storage.local.set({ extension_unlocked: false });
+chrome.runtime.onInstalled.addListener((details) => {
+  // Chi khoa neu day la lan dau tien cai dat extension moi tinh (khong khoa khi cap nhat/reload dev)
+  if (details.reason === "install") {
+    chrome.storage.local.set({ extension_unlocked: false });
+  }
 });
 
 // Lang nghe tin nhan tu content script (loader.js) hoac options page (options.js)
