@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "VTDAuto",
+  "version": "1.0",
+  "description": "Chay cac script tu dong hoa tuy chinh tren cac trang web chi dinh va dong bo qua Google Sheets.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://spx.shopee.vn/*",
+        "https://*.spxexpress.com/*"
+      ],
+      "js": ["loader.js", "default_shopee_script.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "VTDAuto"
+  }
+}

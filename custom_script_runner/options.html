@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>VTDAuto Manager</title>
+    <style>
+        :root {
+            --bg-color: #121214;
+            --panel-bg: #1e1e24;
+            --text-color: #e1e1e6;
+            --text-muted: #87868b;
+            --primary: #ff5722;
+            --primary-hover: #ff784e;
+            --accent: #2196f3;
+            --accent-hover: #4ba3e3;
+            --success: #4caf50;
+            --danger: #f44336;
+            --border: #29292e;
+            --active-bg: #292932;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: flex-col;
+            flex-shrink: 0;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .btn-add {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .btn-add:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .script-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .script-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            transition: background 0.2s;
+        }
+
+        .script-item:hover {
+            background-color: var(--active-bg);
+        }
+
+        .script-item.active {
+            background-color: var(--active-bg);
+            border-left: 3px solid var(--primary);
+        }
+
+        .script-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .script-name {
+            font-weight: bold;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .script-pattern {
+            font-size: 11px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .script-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+
+        .sidebar-footer {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-settings {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .btn-settings:hover {
+            background-color: var(--active-bg);
+        }
+
+        /* Main Workspace */
+        .main-workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+        }
+
+        .workspace-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--panel-bg);
+        }
+
+        .workspace-title-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid transparent;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 4px;
+            width: 300px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .workspace-title-input:focus {
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .btn-save {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-save:hover {
+            opacity: 0.9;
+        }
+
+        .workspace-body {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .form-input {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .code-editor-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+        }
+
+        .code-editor {
+            flex: 1;
+            background-color: #151515;
+            color: #a9b7c6;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+        }
+
+        /* Modal Settings */
+        .settings-panel {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            padding: 20px;
+            background-color: var(--bg-color);
+            overflow-y: auto;
+        }
+
+        .settings-header {
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .settings-header h2 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .settings-section {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .settings-section h3 {
+            margin: 0;
+            font-size: 15px;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .btn-action-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background-color: var(--active-bg);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: #383842;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            border: none;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            border: none;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+
+        .status-message {
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .delete-btn-wrapper {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Global Toast */
+        #global-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100000;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            color: white;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+        }
+        #global-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>VTDAuto</h2>
+            <button class="btn-add" id="btn-new-script">+ Thêm</button>
+        </div>
+        <div class="script-list" id="script-list-container">
+            <!-- List scripts will load dynamically -->
+        </div>
+        <div class="sidebar-footer">
+            <button class="btn-settings" id="btn-show-settings">⚙️ Cấu hình & Đồng bộ</button>
+        </div>
+    </div>
+
+    <!-- Main Content (Script Workspace) -->
+    <div class="main-workspace" id="editor-workspace">
+        <div class="workspace-header">
+            <input type="text" id="script-title-input" class="workspace-title-input" value="Script chưa đặt tên">
+            <button class="btn-action" id="btn-lock-script" style="margin-right: 10px; display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 13px;">🔒 Đặt Mật Khẩu</button>
+            <button class="btn-save" id="btn-save-script">Lưu Script</button>
+        </div>
+        
+        <!-- LOCK OVERLAY FOR SECURED SCRIPTS -->
+        <div id="editor-lock-overlay" style="display: none; flex-direction: column; align-items: center; justify-content: center; flex: 1; padding: 40px; text-align: center; background-color: var(--panel-bg);">
+            <span style="font-size: 48px; margin-bottom: 20px;">🔒</span>
+            <h3 style="margin-bottom: 10px; color: var(--primary);">Script đã bị khóa mật khẩu</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 13px; max-width: 400px; line-height: 1.6;">Script này đã được mã hóa bảo vệ để ngăn xem hoặc sao chép mã nguồn trái phép. Vui lòng nhập đúng mật khẩu để mở khóa.</p>
+            <div style="display: flex; gap: 10px; width: 100%; max-width: 320px; margin-bottom: 15px;">
+                <input type="password" id="editor-unlock-password" class="form-input" placeholder="Nhập mật khẩu..." style="flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); background-color: var(--bg-color); color: white; text-align: center;">
+                <button class="btn-save" id="btn-submit-unlock" style="padding: 8px 16px;">Mở khóa</button>
+            </div>
+            <div id="unlock-error" style="color: var(--danger); font-size: 12px; font-weight: bold;"></div>
+        </div>
+
+        <div class="workspace-body" id="editor-workspace-body">
+            <div class="form-group">
+                <label for="script-match-input">Đường dẫn kích hoạt (Match URL pattern)</label>
+                <input type="text" id="script-match-input" class="form-input" placeholder="https://spx.shopee.vn/*">
+            </div>
+            <div class="form-group code-editor-wrapper">
+                <label for="script-code-editor">Mã nguồn Javascript (UserScript Code)</label>
+                <textarea id="script-code-editor" class="code-editor" placeholder="// Viết code của bạn vào đây..."></textarea>
+            </div>
+            <div class="delete-btn-wrapper">
+                <button class="btn-action btn-danger" id="btn-delete-script" style="padding: 6px 12px; font-size: 11px;">Xóa Script</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration / Sync Panel -->
+    <div class="settings-panel" id="settings-workspace">
+        <div class="settings-header">
+            <h2>Cấu hình & Đồng bộ đám mây</h2>
+        </div>
+
+        <!-- System Credentials -->
+        <div class="settings-section">
+            <h3>Cấu hình Kết nối</h3>
+            <div class="form-group">
+                <label>URL Google Apps Script Web App</label>
+                <input type="text" id="setting-api-url" class="form-input" placeholder="https://script.google.com/macros/s/.../exec">
+            </div>
+            <div class="form-group">
+                <label>Tên Máy Tính (PC Name)</label>
+                <input type="text" id="setting-pc-name" class="form-input" placeholder="PC_01">
+            </div>
+            <button class="btn-save" id="btn-save-settings" style="align-self: flex-start;">Lưu Cấu hình</button>
+        </div>
+
+        <!-- Cloud Sync -->
+        <div class="settings-section">
+            <h3>Đồng bộ đám mây (Google Sheets Cloud)</h3>
+            <p style="margin: 0; font-size: 12px; color: var(--text-muted);">Đồng bộ toàn bộ danh sách Script của bạn trực tiếp lên Google Spreadsheet thông qua Web App để lưu trữ và tải về trên các máy tính khác.</p>
+            <div class="btn-action-group">
+                <button class="btn-action btn-accent" id="btn-cloud-backup">☁️ Sao lưu lên Google Sheets</button>
+                <button class="btn-action" id="btn-cloud-restore">📥 Khôi phục từ Google Sheets</button>
+            </div>
+        </div>
+
+        <!-- Local Backup -->
+        <div class="settings-section">
+            <h3>Sao lưu & Phục hồi thủ công (Tập tin JSON)</h3>
+            <div class="btn-action-group">
+                <button class="btn-action" id="btn-export-json">💾 Xuất File Cấu hình (JSON)</button>
+                <button class="btn-action" id="btn-trigger-import">📂 Nhập File Cấu hình (JSON)</button>
+                <button class="btn-action btn-danger" id="btn-reset-default" style="padding: 8px 16px;">🔄 Cài lại Script Mặc Định</button>
+                <input type="file" id="import-file-input" style="display: none;" accept=".json">
+            </div>
+        </div>
+
+        <div id="settings-status" class="status-message"></div>
+    </div>
+
+    <div id="global-toast"></div>
+
+    <script src="options.js"></script>
+</body>
+</html>

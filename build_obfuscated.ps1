@@ -54,7 +54,7 @@ for ($i = 0; $i -lt $base64.Length; $i += $chunkSize) {
 
 Write-Host "Encoded: $($base64.Length) chars in $($chunks.Count) chunks"
 
-# === 1. TẠO DECODER CHO TAMPERMONKEY (Sử dụng Blob URL Proxy để vượt qua CSP) ===
+# === 1. TẠO DECODER CHO TAMPERMONKEY (Sử dụng eval tiêu chuẩn trong sandbox của Tampermonkey) ===
 $chunksArrayStr = ""
 for ($i = 0; $i -lt $chunks.Count; $i++) {
     $comma = if ($i -lt $chunks.Count - 1) { "," } else { "" }
@@ -73,25 +73,7 @@ $chunksArrayStr    ];
     for(var _0xc3f6=0;_0xc3f6<_0xa1d4.length;_0xc3f6++){
         _0xb2e5[_0xc3f6]=_0xa1d4.charCodeAt(_0xc3f6)^_0xf3a1.charCodeAt(_0xc3f6%_0xf3a1.length);
     }
-    var decrypted = new TextDecoder('utf-8').decode(_0xb2e5);
-
-    // Proxy GM APIs lên Window để script trong Blob có thể gọi
-    window.GM_xmlhttpRequest = GM_xmlhttpRequest;
-    window.GM_setValue = GM_setValue;
-    window.GM_getValue = GM_getValue;
-    window.GM_registerMenuCommand = GM_registerMenuCommand;
-    window.GM_openInTab = GM_openInTab;
-
-    // Chạy thông qua Blob URL để vượt qua kiểm duyệt CSP eval của Chrome trên Tampermonkey
-    var scriptEl = document.createElement("script");
-    var blob = new Blob([decrypted], { type: "text/javascript" });
-    var blobUrl = URL.createObjectURL(blob);
-    scriptEl.src = blobUrl;
-    (document.documentElement || document.head).appendChild(scriptEl);
-    scriptEl.onload = function() {
-        scriptEl.remove();
-        URL.revokeObjectURL(blobUrl);
-    };
+    eval(new TextDecoder('utf-8').decode(_0xb2e5));
 })();
 "@
 
