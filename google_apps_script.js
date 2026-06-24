@@ -551,14 +551,51 @@ function getPendingChuyenPick(pcName) {
   try {
     var now = new Date();
 
-    // 1. Kiểm tra ưu tiên sheet "Hỗ Trợ"
+    // KIỂM TRA ĐANG CÓ TASK CHẠY DỞ ("đang chuyển") ĐỂ TRÁNH TRÙNG LẬP
+    // 1. Kiểm tra sheet "Hỗ Trợ"
     var sheetHT = getOrCreateSheetHoTro();
     var lastRowHT = sheetHT.getLastRow();
+    var hasActiveTask = false;
+    
     if (lastRowHT >= 2) {
-      var rangeHT = sheetHT.getRange(2, 1, lastRowHT - 1, 6);
+      var rangeHT = sheetHT.getRange(2, 5, lastRowHT - 1, 1); // Cột E: Trạng thái
       var valuesHT = rangeHT.getValues();
       for (var i = 0; i < valuesHT.length; i++) {
-        var status = valuesHT[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
+        var status = valuesHT[i][0].toString().trim().toLowerCase();
+        if (status === "đang chuyển") {
+          hasActiveTask = true;
+          break;
+        }
+      }
+    }
+
+    // 2. Kiểm tra sheet "Chuyển Pick"
+    var sheetCP = getOrCreateSheetChuyenPick();
+    var lastRowCP = sheetCP.getLastRow();
+    if (!hasActiveTask && lastRowCP >= 2) {
+      var rangeCP = sheetCP.getRange(2, 5, lastRowCP - 1, 1); // Cột E: Trạng thái
+      var valuesCP = rangeCP.getValues();
+      for (var i = 0; i < valuesCP.length; i++) {
+        var status = valuesCP[i][0].toString().trim().toLowerCase();
+        if (status === "đang chuyển") {
+          hasActiveTask = true;
+          break;
+        }
+      }
+    }
+
+    // Nếu đang có bất kỳ task nào "Đang chuyển", dừng lại không nhận thêm task mới
+    if (hasActiveTask) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ chuyển pick khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // TIẾN HÀNH PHÁT TASK NEW NẾU KHÔNG CÓ BẬT KÌ TASK NÀO ĐANG CHẠY DỞ
+    // 1. Kiểm tra ưu tiên sheet "Hỗ Trợ" trước
+    if (lastRowHT >= 2) {
+      var rangeHTAll = sheetHT.getRange(2, 1, lastRowHT - 1, 6);
+      var valuesHTAll = rangeHTAll.getValues();
+      for (var i = 0; i < valuesHTAll.length; i++) {
+        var status = valuesHTAll[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
         if (status === "chờ chuyển") {
           var rowNum = i + 2;
           sheetHT.getRange(rowNum, 5).setValue("Đang chuyển"); // Cột E: Đặt trạng thái trung gian
@@ -566,9 +603,9 @@ function getPendingChuyenPick(pcName) {
           SpreadsheetApp.flush();
           return ContentService.createTextOutput(JSON.stringify({
             status: "success",
-            pupCode: valuesHT[i][0].toString().trim(), // Cột A: Mã PUP
-            recipientDriver: valuesHT[i][3].toString().trim(), // Cột D: Tên Rider nhận (chứa mã số)
-            timestamp: valuesHT[i][1], // Cột B: Thời gian chuyển
+            pupCode: valuesHTAll[i][0].toString().trim(), // Cột A: Mã PUP
+            recipientDriver: valuesHTAll[i][3].toString().trim(), // Cột D: Tên Rider nhận (chứa mã số)
+            timestamp: valuesHTAll[i][1], // Cột B: Thời gian chuyển
             sourceSheet: "Hỗ Trợ"
           })).setMimeType(ContentService.MimeType.JSON);
         }
@@ -576,13 +613,11 @@ function getPendingChuyenPick(pcName) {
     }
 
     // 2. Nếu sheet "Hỗ Trợ" không có, kiểm tra sheet "Chuyển Pick"
-    var sheetCP = getOrCreateSheetChuyenPick();
-    var lastRowCP = sheetCP.getLastRow();
     if (lastRowCP >= 2) {
-      var rangeCP = sheetCP.getRange(2, 1, lastRowCP - 1, 6);
-      var valuesCP = rangeCP.getValues();
-      for (var i = 0; i < valuesCP.length; i++) {
-        var status = valuesCP[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
+      var rangeCPAll = sheetCP.getRange(2, 1, lastRowCP - 1, 6);
+      var valuesCPAll = rangeCPAll.getValues();
+      for (var i = 0; i < valuesCPAll.length; i++) {
+        var status = valuesCPAll[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
         if (status === "chờ chuyển" || status === "") {
           var rowNum = i + 2;
           sheetCP.getRange(rowNum, 5).setValue("Đang chuyển"); // Cột E: Đặt trạng thái trung gian
@@ -590,9 +625,9 @@ function getPendingChuyenPick(pcName) {
           SpreadsheetApp.flush();
           return ContentService.createTextOutput(JSON.stringify({
             status: "success",
-            pupCode: valuesCP[i][0].toString().trim(),
-            recipientDriver: valuesCP[i][3].toString().trim(),
-            timestamp: valuesCP[i][1],
+            pupCode: valuesCPAll[i][0].toString().trim(),
+            recipientDriver: valuesCPAll[i][3].toString().trim(),
+            timestamp: valuesCPAll[i][1],
             sourceSheet: "Chuyển Pick"
           })).setMimeType(ContentService.MimeType.JSON);
         }
