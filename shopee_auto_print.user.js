@@ -967,7 +967,7 @@
         async function ensureTabActive() {
             if (document.hidden) {
                 log("Phát hiện tab đang chạy ẩn. Đang kích hoạt tab lên trước khi thực hiện in...");
-                window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST" }, "*");
+                window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST", tabInstanceId: tabInstanceId }, "*");
                 for (let i = 0; i < 40; i++) {
                     await delay(100);
                     if (!document.hidden) {

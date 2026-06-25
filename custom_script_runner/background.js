@@ -55,8 +55,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   } else if (message.action === "activate_tab") {
     if (sender.tab && sender.tab.id) {
-      chrome.tabs.update(sender.tab.id, { active: true }, () => {
-        sendResponse({ success: true });
+      // Kích hoạt tab và đem cửa sổ chứa tab đó lên tiêu điểm (foreground)
+      chrome.tabs.update(sender.tab.id, { active: true, highlighted: true }, () => {
+        if (sender.tab.windowId) {
+          chrome.windows.update(sender.tab.windowId, { focused: true, drawAttention: true }, () => {
+            sendResponse({ success: true });
+          });
+        } else {
+          sendResponse({ success: true });
+        }
       });
     } else {
       sendResponse({ success: false, error: "No tab found" });
