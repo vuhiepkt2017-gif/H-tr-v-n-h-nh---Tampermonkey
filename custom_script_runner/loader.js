@@ -39,37 +39,53 @@ globalThis.GM_xmlhttpRequest = (options) => {
         } catch(e) {}
     }
     
-    chrome.runtime.sendMessage({
-        action: "call_gas",
-        method,
-        apiUrl: url.split('?')[0],
-        actionName,
-        data: requestData,
-        pcName: localStorage.getItem("shopee_pc_name") || "PC_01"
-    }, (response) => {
-        if (response && response.success) {
-            if (options.onload) {
-                options.onload({
-                    text: JSON.stringify(response.data),
-                    responseText: JSON.stringify(response.data),
-                    status: 200
-                });
+    try {
+        chrome.runtime.sendMessage({
+            action: "call_gas",
+            method,
+            apiUrl: url.split('?')[0],
+            actionName,
+            data: requestData,
+            pcName: localStorage.getItem("shopee_pc_name") || "PC_01"
+        }, (response) => {
+            if (chrome.runtime.lastError) {
+                if (options.onerror) {
+                    options.onerror(new Error("Extension context invalidated. Vui lòng F5 lại trang."));
+                }
+                return;
             }
-        } else {
-            if (options.onerror) {
-                options.onerror(new Error(response ? response.error : "Lỗi kết nối"));
+            if (response && response.success) {
+                if (options.onload) {
+                    options.onload({
+                        text: JSON.stringify(response.data),
+                        responseText: JSON.stringify(response.data),
+                        status: 200
+                    });
+                }
+            } else {
+                if (options.onerror) {
+                    options.onerror(new Error(response ? response.error : "Lỗi kết nối"));
+                }
             }
+        });
+    } catch (e) {
+        if (options.onerror) {
+            options.onerror(new Error("Extension context invalidated. Vui lòng F5 lại trang."));
         }
-    });
+    }
 };
 
 globalThis.GM_openInTab = (url, options) => {
     const active = options && options.active !== undefined ? options.active : true;
-    chrome.runtime.sendMessage({
-        action: "open_tab",
-        url,
-        active
-    });
+    try {
+        chrome.runtime.sendMessage({
+            action: "open_tab",
+            url,
+            active
+        });
+    } catch (e) {
+        console.warn("[VTDAuto] Không thể mở tab do Extension đã bị reload/cập nhật. Vui lòng nhấn F5 lại trang này.", e.message);
+    }
 };
 
 (function() {
@@ -157,8 +173,30 @@ globalThis.GM_openInTab = (url, options) => {
             const { url, active } = e.data;
             globalThis.GM_openInTab(url, { active });
         } else if (e.data.type === "SHOPEE_ACTIVATE_TAB_REQUEST") {
-            chrome.runtime.sendMessage({ action: "activate_tab" });
+            try {
+                chrome.runtime.sendMessage({ action: "activate_tab" });
+            } catch (err) {}
         }
     });
+    // Keep alive connection to background script to prevent tab freezing and service worker suspension
+    function connectKeepAlive() {
+        try {
+            const port = chrome.runtime.connect({ name: "keepAlive" });
+            const interval = setInterval(() => {
+                try {
+                    port.postMessage({ type: "ping" });
+                } catch (e) {
+                    clearInterval(interval);
+                }
+            }, 10000); // ping every 10s
+            port.onDisconnect.addListener(() => {
+                clearInterval(interval);
+                setTimeout(connectKeepAlive, 5000); // reconnect after 5s
+            });
+        } catch (e) {
+            setTimeout(connectKeepAlive, 5000);
+        }
+    }
+    connectKeepAlive();
 
 })();

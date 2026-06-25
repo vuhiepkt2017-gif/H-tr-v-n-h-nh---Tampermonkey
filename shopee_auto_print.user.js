@@ -18,6 +18,61 @@
 (function() {
     'use strict';
 
+    // Standard background communication messaging bridge / fallback GM APIs in Main/Page world
+    if (typeof GM_getValue === 'undefined') {
+        globalThis.GM_getValue = (key, def) => {
+            const val = localStorage.getItem(key);
+            return val !== null ? val : def;
+        };
+    }
+    if (typeof GM_setValue === 'undefined') {
+        globalThis.GM_setValue = (key, val) => {
+            localStorage.setItem(key, val);
+        };
+    }
+    if (typeof GM_registerMenuCommand === 'undefined') {
+        globalThis.GM_registerMenuCommand = (name, fn) => {
+            console.log("[VTDAuto] Menu Command registered:", name);
+        };
+    }
+    if (typeof GM_openInTab === 'undefined') {
+        globalThis.GM_openInTab = (url, options) => {
+            const active = options && options.active !== undefined ? options.active : true;
+            window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url, active }, "*");
+        };
+    }
+    if (typeof GM_xmlhttpRequest === 'undefined') {
+        globalThis.GM_xmlhttpRequest = (options) => {
+            const reqId = "req_" + Math.random().toString(36).substring(2, 9);
+            window.addEventListener("message", function handler(e) {
+                if (e.data && e.data.type === "SHOPEE_XMLHTTP_RESPONSE" && e.data.reqId === reqId) {
+                    window.removeEventListener("message", handler);
+                    if (e.data.success) {
+                        if (options.onload) {
+                            options.onload({
+                                text: e.data.responseText,
+                                responseText: e.data.responseText,
+                                status: 200
+                            });
+                        }
+                    } else {
+                        if (options.onerror) {
+                            options.onerror(new Error(e.data.error || "Lỗi kết nối"));
+                        }
+                    }
+                }
+            });
+            window.postMessage({ type: "SHOPEE_XMLHTTP_REQUEST", reqId, options: {
+                url: options.url,
+                method: options.method,
+                data: options.data
+            }}, "*");
+        };
+    }
+    if (typeof unsafeWindow === 'undefined') {
+        globalThis.unsafeWindow = window;
+    }
+
     // Định nghĩa các URL và nhãn tab
     const TABS_CONFIG = {
         awbPrint: {
@@ -86,7 +141,7 @@
     // Đợi DOM load xong mới tạo Giao diện điều khiển
     function init() {
         // Loại bỏ trên các popup xem trước (preview), iframe để không làm vướng khi in
-        const isPopupOrPreview = window.opener !== null || window.self !== window.top || window.location.href.includes('preview') || window.location.href.includes('print');
+        const isPopupOrPreview = window.self !== window.top || window.location.href.includes('preview') || window.location.href.includes('print');
         if (isPopupOrPreview) {
             return; // Thoát ngay, không tạo bảng điều khiển
         }
@@ -370,9 +425,9 @@
         }
 
         // Đọc trạng thái các tab khác từ localStorage và cập nhật giao diện
-        const TAB_ACTIVE_TIMEOUT = 300000; // 5 phút (tránh bị Chrome ngủ đông làm mất trạng thái hoạt động)
-        const REOPEN_COOLDOWN_CLOSED = 30000; // 30 giây nếu tab bị đóng chủ động (unload phát hỏa)
-        const REOPEN_COOLDOWN_CRASHED = 300000; // 5 phút nếu tab bị treo/crash đột ngột không kịp gửi unload
+        const TAB_ACTIVE_TIMEOUT = 15000; // 15 giây (vì mỗi tab cập nhật pulse mỗi 400ms)
+        const REOPEN_COOLDOWN_CLOSED = 10000; // 10 giây nếu tab bị đóng chủ động (unload phát hỏa)
+        const REOPEN_COOLDOWN_CRASHED = 20000; // 20 giây nếu tab bị treo/crash đột ngột không kịp gửi unload
 
         // Đọc trạng thái các tab khác từ localStorage và cập nhật giao diện
         function updateTabsStatusUI() {
@@ -599,7 +654,7 @@
         }
 
         // Tự động kiểm tra và khôi phục các tab bị đóng (dùng mở tuần tự)
-        const REOPEN_COOLDOWN_CRASHED_NEW = 900000; // 15 phút nếu tab bị treo/crash đột ngột không kịp gửi unload
+        const REOPEN_COOLDOWN_CRASHED_NEW = 20000; // 20 giây nếu tab bị treo/crash đột ngột không kịp gửi unload
 
         function autoReopenClosedTabs() {
             if (!isRunning) return;
@@ -690,9 +745,15 @@
             }
         }
 
+        let hasUserGesture = false;
+
         function startSilentAudio() {
             try {
                 if (audioCtx) return;
+                if (!hasUserGesture) {
+                    log("[Chống ngủ] Đợi tương tác của người dùng để khởi chạy âm thanh chống ngủ.");
+                    return;
+                }
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (!AudioContext) return;
                 audioCtx = new AudioContext();
@@ -715,9 +776,22 @@
             }
         }
 
+        // Lắng nghe các tương tác để kích hoạt âm thanh chống ngủ
+        const gestureEvents = ['click', 'keydown', 'mousedown', 'pointerdown', 'touchstart'];
+        const handleGesture = () => {
+            hasUserGesture = true;
+            gestureEvents.forEach(e => window.removeEventListener(e, handleGesture, true));
+            if (isRunning) {
+                startSilentAudio();
+                checkAndResumeAudio();
+            }
+        };
+        gestureEvents.forEach(e => window.addEventListener(e, handleGesture, { once: true, capture: true, passive: true }));
+
         // Kiểm tra và khôi phục AudioContext nếu bị Chrome tạm ngưng (suspended)
         function checkAndResumeAudio() {
             if (audioCtx && audioCtx.state === 'suspended') {
+                if (!hasUserGesture) return;
                 audioCtx.resume().then(() => {
                     log("[Chống ngủ] Đã khôi phục AudioContext từ trạng thái suspended.");
                 }).catch(e => {
@@ -769,11 +843,6 @@
 
         if (isRunning) {
             enableAntiSleep();
-            const initAntiSleepHandler = () => {
-                if (isRunning) enableAntiSleep();
-                document.removeEventListener('click', initAntiSleepHandler);
-            };
-            document.addEventListener('click', initAntiSleepHandler);
         }
 
         editUrlBtn.addEventListener('click', () => {
@@ -1017,6 +1086,17 @@
                         if (success) {
                             lastSuccessfulAction = Date.now();
                             log(`Đã in lô thành công: ${codesToPrint.join(', ')}`);
+                            
+                            // Cập nhật trạng thái "Đã in" cho từng mã trong lô lên Google Sheet
+                            for (const code of codesToPrint) {
+                                callGASPromise("POST", "update_code_status", { code: code, status: "Đã in" })
+                                    .then(() => {
+                                        log(`[In Bill] Đã cập nhật trạng thái 'Đã in' cho mã: ${code}`);
+                                    })
+                                    .catch(e => {
+                                        log(`[In Bill] Lỗi cập nhật trạng thái cho mã ${code}: ${e.message}`);
+                                    });
+                            }
                         } else {
                             log(`Thất bại khi in lô.`);
                         }

@@ -54,14 +54,42 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true;
   } else if (message.action === "activate_tab") {
-    if (sender.tab && sender.tab.id) {
-      // Chỉ kích hoạt tab hoạt động bên trong cửa sổ của nó, KHÔNG đưa cửa sổ lên trên đầu (tránh làm phiền người dùng)
-      chrome.tabs.update(sender.tab.id, { active: true }, () => {
-        sendResponse({ success: true });
+    if (sender.tab && sender.tab.id && sender.tab.windowId) {
+      // Tìm cửa sổ hiện tại của người dùng trước khi chuyển
+      chrome.windows.getLastFocused({ populate: false }, (currentWin) => {
+        const userWindowId = currentWin ? currentWin.id : null;
+        
+        // Kích hoạt cửa sổ của tab Shopee lên trước để Chrome cho phép in
+        chrome.windows.update(sender.tab.windowId, { focused: true }, () => {
+          chrome.tabs.update(sender.tab.id, { active: true }, () => {
+            sendResponse({ success: true });
+            
+            // Trả lại tiêu điểm cho cửa sổ làm việc của người dùng sau 1.5 giây
+            if (userWindowId && userWindowId !== sender.tab.windowId) {
+              setTimeout(() => {
+                chrome.windows.update(userWindowId, { focused: true });
+              }, 1500);
+            }
+          });
+        });
       });
     } else {
       sendResponse({ success: false, error: "No tab found" });
     }
     return true;
+  }
+});
+
+// Keep alive port listener to prevent service worker suspension
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name === "keepAlive") {
+    port.onMessage.addListener((msg) => {
+      // Respond to ping to keep the channel active
+      if (msg && msg.type === "ping") {
+        try {
+          port.postMessage({ type: "pong" });
+        } catch (e) {}
+      }
+    });
   }
 });
