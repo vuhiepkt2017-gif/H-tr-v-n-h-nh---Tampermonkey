@@ -720,7 +720,10 @@
             if (audioCtx && audioCtx.state === 'suspended') {
                 audioCtx.resume().then(() => {
                     log("[Chống ngủ] Đã khôi phục AudioContext từ trạng thái suspended.");
-                }).catch(() => {});
+                }).catch(e => {
+                    // Bỏ qua cảnh báo lỗi Autoplay của Chrome đối với tab chạy ngầm khi chưa tương tác click chuột
+                    console.log("[Chống ngủ] Chờ tương tác người dùng để khôi phục AudioContext:", e.message);
+                });
             }
             if (audioCtx && audioCtx.state === 'closed') {
                 audioCtx = null;
