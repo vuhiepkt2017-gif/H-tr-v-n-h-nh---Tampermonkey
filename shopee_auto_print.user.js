@@ -1178,6 +1178,21 @@
                             hasError = true;
                             errorMsg = dialogText.trim().replace(/\n/g, " ");
                             
+                            // Tìm nút Ok/Confirm/Xác nhận trong dialog
+                            const okBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
+                                const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                return txt === "ok" || txt === "xác nhận" || txt === "confirm" || txt === "close" || txt === "đóng" || txt.includes("ok");
+                            });
+                            
+                            if (okBtn) {
+                                // Tăng trễ lên 800-1000ms giả lập người thật trước khi bấm OK, dùng await để đợi đóng xong mới in tiếp các đơn đúng
+                                const okDelay = 800 + Math.random() * 200;
+                                log(`[In Bill] Phát hiện dialog lỗi. Đợi ${(okDelay/1000).toFixed(2)} giây để tự động đóng...`);
+                                await delay(okDelay);
+                                okBtn.click();
+                                log(`[In Bill] Đã click nút OK đóng cảnh báo.`);
+                                await delay(500); // Đợi thêm 500ms cho dialog đóng hẳn khỏi màn hình
+                            }
 
                             // Trích xuất các mã lỗi cụ thể từ văn bản trong dialog (ví dụ: dòng chứa mã SPX...)
                             const lines = dialogText.split('\n').map(l => l.trim().toUpperCase());
@@ -1197,21 +1212,7 @@
                             // Nếu không phân tích được dòng cụ thể, fallback toàn bộ mã gửi lên
                             const codesToMarkError = invalidCodes.length > 0 ? invalidCodes : codes;
 
-                            // Tìm nút Ok/Confirm/Xác nhận trong dialog
-                            const okBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
-                                const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
-                                return txt === "ok" || txt === "xác nhận" || txt === "confirm" || txt === "close" || txt === "đóng" || txt.includes("ok");
-                            });
-                            
-                            if (okBtn) {
-                                // Tăng trễ lên 800-1000ms giả lập người thật trước khi bấm OK
-                                const okDelay = 800 + Math.random() * 200;
-                                setTimeout(() => {
-                                    okBtn.click();
-                                    log(`[In Bill] Đã click nút OK đóng cảnh báo.`);
-                                }, okDelay);
-                                log(`[In Bill] Phát hiện dialog lỗi. Đợi ${(okDelay/1000).toFixed(2)} giây để tự động đóng...`);
-                            }
+
                             
                             // Báo cáo trạng thái Mã lỗi không đồng bộ cho những mã sai thực sự
                             for (const errCode of codesToMarkError) {
