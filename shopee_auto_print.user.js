@@ -165,9 +165,6 @@
         let lastSearchTime = 0;
         let localExistingTOs = new Set();
         let lastTOFetchTime = 0;
-        let lastAwbFetchTime = 0;
-        let lastToPrintFetchTime = 0;
-        let lastHandoverFetchTime = 0;
 
         // Bộ đếm thời gian để phát hiện treo (stuck detection)
         let lastPrintStartTime = 0;
@@ -1064,10 +1061,6 @@
             const hash = window.location.hash || "";
             if (!hash.includes('awbPrint')) return;
 
-            const now = Date.now();
-            if (now - lastAwbFetchTime < 10000) return; // Chỉ cho phép thăm dò tối đa 1 lần mỗi 10 giây khi rảnh
-            lastAwbFetchTime = now;
-
             if (!acquireGlobalLock('awbPrint')) {
                 return;
             }
@@ -1104,7 +1097,6 @@
                                         log(`[In Bill] Lỗi cập nhật trạng thái cho mã ${code}: ${e.message}`);
                                     });
                             }
-                            lastAwbFetchTime = 0; // Reset cooldown để tiếp tục quét tiếp lập tức
                         } else {
                             log(`Thất bại khi in lô.`);
                         }
@@ -1426,10 +1418,6 @@
             const hash = window.location.hash;
             if (!hash.includes("startPackNoLabel")) return;
 
-            const now = Date.now();
-            if (now - lastToPrintFetchTime < 10000) return; // Chỉ cho phép thăm dò tối đa 1 lần mỗi 10 giây khi rảnh
-            lastToPrintFetchTime = now;
-
             if (!acquireGlobalLock('startPackNoLabel')) {
                 return;
             }
@@ -1441,7 +1429,6 @@
                 const res = await callGASPromise("POST", "get_pending_to");
                 if (res.status === "success" && res.toNum) {
                     const currentTO = res.toNum;
-                    lastToPrintFetchTime = 0; // Reset cooldown để tiếp tục quét tiếp lập tức
                     log(`[TO In] Lấy mã TO cần in từ Sheet: ${currentTO}`);
                     await ensureTabActive();
 
@@ -1583,10 +1570,6 @@
             const hash = window.location.hash || "";
             if (!hash.includes('pickupTask/list')) return;
 
-            const now = Date.now();
-            if (now - lastHandoverFetchTime < 10000) return; // Chỉ cho phép thăm dò tối đa 1 lần mỗi 10 giây khi rảnh
-            lastHandoverFetchTime = now;
-
             if (!acquireGlobalLock('pickupTask')) {
                 return;
             }
@@ -1597,7 +1580,6 @@
                 updateGlobalLockHeartbeat('pickupTask');
                 const data = await callGASPromise("POST", "get_pending_chuyen_pick");
                 if (data.status === "success") {
-                    lastHandoverFetchTime = 0; // Reset cooldown để tiếp tục quét tiếp lập tức
                     const pupCode = data.pupCode;
                     const rawDriver = data.recipientDriver;
                     const recipientDriver = extractDriverCode(rawDriver);
@@ -2087,26 +2069,6 @@
         }
 
         updateSelfPulse();
-        
-        // Nhận tin nhắn đánh thức từ extension để chạy ngay lập tức các tác vụ kiểm tra
-        window.addEventListener("message", (e) => {
-            if (e.data && e.data.type === "SHOPEE_WAKE_UP_PING") {
-                updateSelfPulse();
-                if (isRunning) {
-                    checkAndResumeAudio();
-                    const hash = window.location.hash || "";
-                    if (hash.includes("awbPrint")) {
-                        startPollingLoop();
-                    } else if (hash.includes("general-to-management")) {
-                        processTOListPage();
-                    } else if (hash.includes("startPackNoLabel")) {
-                        processPrintPage();
-                    } else if (hash.includes("pickupTask/list")) {
-                        startHandoverLoop();
-                    }
-                }
-            }
-        });
         
         // Tạo Web Worker để chạy setTimeout đệ quy liên tục ở background (tránh bị Chrome bóp băng thông/ngủ đông)
         let worker = null;
