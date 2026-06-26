@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
   "name": "VTDAuto",
-  "version": "1.9",
+  "version": "2.0",
   "description": "Chay cac script tu dong hoa tuy chinh tren cac trang web chi dinh va dong bo qua Google Sheets.",
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "alarms"
   ],
   "host_permissions": [
     "<all_urls>"

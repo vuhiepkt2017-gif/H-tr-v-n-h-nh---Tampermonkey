@@ -2088,6 +2088,26 @@
 
         updateSelfPulse();
         
+        // Nhận tin nhắn đánh thức từ extension để chạy ngay lập tức các tác vụ kiểm tra
+        window.addEventListener("message", (e) => {
+            if (e.data && e.data.type === "SHOPEE_WAKE_UP_PING") {
+                updateSelfPulse();
+                if (isRunning) {
+                    checkAndResumeAudio();
+                    const hash = window.location.hash || "";
+                    if (hash.includes("awbPrint")) {
+                        startPollingLoop();
+                    } else if (hash.includes("general-to-management")) {
+                        processTOListPage();
+                    } else if (hash.includes("startPackNoLabel")) {
+                        processPrintPage();
+                    } else if (hash.includes("pickupTask/list")) {
+                        startHandoverLoop();
+                    }
+                }
+            }
+        });
+        
         // Tạo Web Worker để chạy setTimeout đệ quy liên tục ở background (tránh bị Chrome bóp băng thông/ngủ đông)
         let worker = null;
         try {
