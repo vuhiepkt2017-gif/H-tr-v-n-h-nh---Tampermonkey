@@ -55,21 +55,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   } else if (message.action === "activate_tab") {
     if (sender.tab && sender.tab.id && sender.tab.windowId) {
-      // Tìm cửa sổ hiện tại của người dùng trước khi chuyển
-      chrome.windows.getLastFocused({ populate: false }, (currentWin) => {
-        const userWindowId = currentWin ? currentWin.id : null;
+      // Lấy thông tin chi tiết của cửa sổ để kiểm tra xem có bị thu nhỏ (minimized) không
+      chrome.windows.get(sender.tab.windowId, (win) => {
+        const updateInfo = { focused: true };
+        if (win && win.state === "minimized") {
+          updateInfo.state = "normal"; // Khôi phục cửa sổ nếu đang bị ẩn/thu nhỏ dưới taskbar
+        }
         
         // Kích hoạt cửa sổ của tab Shopee lên trước để Chrome cho phép in
-        chrome.windows.update(sender.tab.windowId, { focused: true }, () => {
+        chrome.windows.update(sender.tab.windowId, updateInfo, () => {
           chrome.tabs.update(sender.tab.id, { active: true }, () => {
             sendResponse({ success: true });
-            
-            // Trả lại tiêu điểm cho cửa sổ làm việc của người dùng sau 1.5 giây
-            if (userWindowId && userWindowId !== sender.tab.windowId) {
-              setTimeout(() => {
-                chrome.windows.update(userWindowId, { focused: true });
-              }, 1500);
-            }
           });
         });
       });
