@@ -84,7 +84,7 @@ globalThis.GM_openInTab = (url, options) => {
             active
         });
     } catch (e) {
-        console.warn("[VTDAuto] Không thể mở tab do Extension đã bị reload/cập nhật. Vui lòng nhấn F5 lại trang này.", e.message);
+        console.log("[VTDAuto] Không thể mở tab do Extension đã bị reload/cập nhật. Vui lòng nhấn F5 lại trang này.", e.message);
     }
 };
 

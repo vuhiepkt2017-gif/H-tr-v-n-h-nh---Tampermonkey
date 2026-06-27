@@ -1017,7 +1017,7 @@
                         .then(resolve)
                         .catch(err => {
                             if (attempts < maxAttempts) {
-                                console.warn(`API call ${urlOrAction} failed: ${err.message}. Retrying in 2s...`);
+                                console.log(`API call ${urlOrAction} failed: ${err.message}. Retrying in 2s...`);
                                 setTimeout(tryCall, 2000);
                             } else {
                                 reject(err);

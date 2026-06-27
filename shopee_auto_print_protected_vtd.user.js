@@ -1587,7 +1587,7 @@ makeRequest()
 .then(resolve)
 .catch(err => {
 if (attempts < maxAttempts) {
-console.warn(_0xstr(342) + (urlOrAction) + _0xstr(343) + (err.message) + _0xstr(344));
+console.log(_0xstr(342) + (urlOrAction) + _0xstr(343) + (err.message) + _0xstr(344));
 setTimeout(tryCall, 2000);
 } else {
 reject(err);
