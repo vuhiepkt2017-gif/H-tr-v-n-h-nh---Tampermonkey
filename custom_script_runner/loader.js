@@ -118,6 +118,9 @@ globalThis.GM_openInTab = (url, options) => {
         } else if (request.action === "trigger_open_all_tabs") {
             window.postMessage({ type: "SHOPEE_TRIGGER_OPEN_ALL_TABS" }, "*");
             sendResponse({ success: true });
+        } else if (request.action === "wake_up") {
+            window.postMessage({ type: "SHOPEE_WAKE_UP_PING" }, "*");
+            sendResponse({ success: true });
         }
         return true;
     });

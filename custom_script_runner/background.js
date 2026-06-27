@@ -89,3 +89,24 @@ chrome.runtime.onConnect.addListener((port) => {
     });
   }
 });
+
+// Định kỳ quét các tab Shopee cứ mỗi 15 giây để chống ngủ đông/giải phóng tab của Chrome
+setInterval(() => {
+  chrome.tabs.query({ url: ["https://spx.shopee.vn/*", "https://*.spxexpress.com/*"] }, (tabs) => {
+    if (!tabs) return;
+    tabs.forEach((tab) => {
+      if (tab.id) {
+        if (tab.discarded) {
+          console.log(`[VTDAuto] Phat hien tab ${tab.url} bi discarded. Tien hanh reload...`);
+          chrome.tabs.reload(tab.id);
+        } else {
+          // Gui tin nhan danh thuc tab
+          chrome.tabs.sendMessage(tab.id, { action: "wake_up" }, () => {
+            // Bo qua loi neu tab chua san sang nhan tin nhan
+            const err = chrome.runtime.lastError;
+          });
+        }
+      }
+    });
+  });
+}, 15000);
