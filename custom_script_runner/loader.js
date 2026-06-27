@@ -82,6 +82,12 @@ globalThis.GM_openInTab = (url, options) => {
             action: "open_tab",
             url,
             active
+        }, (response) => {
+            if (chrome.runtime.lastError) {
+                console.error("[VTDAuto] Lỗi gửi sendMessage open_tab:", chrome.runtime.lastError.message);
+            } else {
+                console.log("[VTDAuto] Đã gửi lệnh open_tab thành công, phản hồi:", response);
+            }
         });
     } catch (e) {
         console.log("[VTDAuto] Không thể mở tab do Extension đã bị reload/cập nhật. Vui lòng nhấn F5 lại trang này.", e.message);

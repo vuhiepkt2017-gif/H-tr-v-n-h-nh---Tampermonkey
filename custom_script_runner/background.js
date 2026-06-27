@@ -46,12 +46,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     return true; // Giu ket noi de phan hoi bat dong bo
   } else if (message.action === "open_tab") {
-    chrome.tabs.create({
-      url: message.url,
-      active: message.active !== false
-    }, () => {
-      sendResponse({ success: true });
-    });
+    try {
+      chrome.tabs.create({
+        url: message.url,
+        active: message.active !== false
+      }, (tab) => {
+        if (chrome.runtime.lastError) {
+          console.error("[VTDAuto] Lỗi tạo tab:", chrome.runtime.lastError.message);
+          sendResponse({ success: false, error: chrome.runtime.lastError.message });
+        } else {
+          console.log("[VTDAuto] Đã tạo tab thành công:", tab.id);
+          sendResponse({ success: true });
+        }
+      });
+    } catch (err) {
+      console.error("[VTDAuto] Exception khi tạo tab:", err.message);
+      sendResponse({ success: false, error: err.message });
+    }
     return true;
   } else if (message.action === "activate_tab") {
     if (sender.tab && sender.tab.id && sender.tab.windowId) {
