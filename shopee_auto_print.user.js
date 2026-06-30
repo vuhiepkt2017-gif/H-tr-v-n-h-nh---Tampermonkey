@@ -759,32 +759,7 @@
         let hasUserGesture = false;
 
         function startSilentAudio() {
-            try {
-                if (audioCtx) return;
-                if (!hasUserGesture) {
-                    log("[Chống ngủ] Đợi tương tác của người dùng để khởi chạy âm thanh chống ngủ.");
-                    return;
-                }
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                audioCtx = new AudioContext();
-                
-                // Tạo oscillator tần số 20kHz (siêu âm, tai người không nghe thấy)
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                
-                oscillator.type = 'sine';
-                oscillator.frequency.value = 20000;
-                gainNode.gain.value = 0.0001; // Âm lượng siêu nhỏ không nghe thấy
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                oscillator.start();
-                log("[Chống ngủ] Đã phát âm thanh nền tần số cao giữ tab hoạt động.");
-            } catch (e) {
-                console.log("[Chống ngủ] Không thể phát âm thanh nền:", e.message);
-            }
+            // Đã có hệ thống Service Worker gửi tín hiệu đánh thức định kỳ mỗi 15s nên không cần phát AudioContext nữa để tránh cảnh báo của Chrome
         }
 
         // Lắng nghe các tương tác để kích hoạt âm thanh chống ngủ
@@ -799,35 +774,12 @@
         };
         gestureEvents.forEach(e => window.addEventListener(e, handleGesture, { once: true, capture: true, passive: true }));
 
-        // Kiểm tra và khôi phục AudioContext nếu bị Chrome tạm ngưng (suspended)
         function checkAndResumeAudio() {
-            if (audioCtx && audioCtx.state === 'suspended') {
-                if (!hasUserGesture) return;
-                audioCtx.resume().then(() => {
-                    log("[Chống ngủ] Đã khôi phục AudioContext từ trạng thái suspended.");
-                }).catch(e => {
-                    // Bỏ qua cảnh báo lỗi Autoplay của Chrome đối với tab chạy ngầm khi chưa tương tác click chuột
-                    console.log("[Chống ngủ] Chờ tương tác người dùng để khôi phục AudioContext:", e.message);
-                });
-            }
-            if (audioCtx && audioCtx.state === 'closed') {
-                audioCtx = null;
-                startSilentAudio();
-                log("[Chống ngủ] AudioContext bị đóng, đã tạo lại.");
-            }
+            // Không sử dụng AudioContext nữa
         }
 
         function stopSilentAudio() {
-            if (audioCtx) {
-                try {
-                    audioCtx.close().then(() => {
-                        audioCtx = null;
-                        log("[Chống ngủ] Đã tắt âm thanh nền.");
-                    });
-                } catch (e) {
-                    audioCtx = null;
-                }
-            }
+            // Không sử dụng AudioContext nữa
         }
 
         function enableAntiSleep() {
