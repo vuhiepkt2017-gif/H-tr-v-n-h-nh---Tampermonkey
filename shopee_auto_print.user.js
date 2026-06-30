@@ -187,6 +187,17 @@
                 return false;
             }
 
+            // KIỂM TRA ĐỘ ƯU TIÊN (Priority Lock Policy): In Bill > In TO > Chuyển Pick
+            if (tabType === 'pickupTask') {
+                if (localStorage.getItem('pending_awbPrint') === 'true' || localStorage.getItem('pending_startPackNoLabel') === 'true') {
+                    return false; // Nhường khóa cho In Bill và In TO
+                }
+            } else if (tabType === 'startPackNoLabel') {
+                if (localStorage.getItem('pending_awbPrint') === 'true') {
+                    return false; // Nhường khóa cho In Bill
+                }
+            }
+
             const lockKey = "global_automation_single_lock";
             const typeKey = "global_automation_lock_type";
             const timeKey = "global_automation_lock_time";
@@ -1061,46 +1072,48 @@
             const hash = window.location.hash || "";
             if (!hash.includes('awbPrint')) return;
 
-            if (!acquireGlobalLock('awbPrint')) {
-                return;
-            }
-
             try {
                 isPrintingNow = true;
                 lastPrintStartTime = Date.now();
-                updateGlobalLockHeartbeat('awbPrint');
                 const data = await callGASPromise("POST", "get_pending");
                 lastSuccessfulAction = Date.now();
+                let codesToPrint = [];
                 if (data.status === "success") {
-                    let codesToPrint = [];
                     if (data.code) {
                         codesToPrint = data.code.split('\n').map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
                     } else if (data.codes && Array.isArray(data.codes)) {
                         codesToPrint = data.codes.map(c => c.trim().toUpperCase());
                     }
+                }
 
-                    if (codesToPrint.length > 0) {
-                        log(`Tìm thấy lô gồm ${codesToPrint.length} mã để in.`);
-                        updateGlobalLockHeartbeat('awbPrint');
-                        const success = await executePrintJob(codesToPrint);
-                        if (success) {
-                            lastSuccessfulAction = Date.now();
-                            log(`Đã in lô thành công: ${codesToPrint.join(', ')}`);
-                            
-                            // Cập nhật trạng thái "Đã in" cho từng mã trong lô lên Google Sheet
-                            for (const code of codesToPrint) {
-                                callGASPromise("POST", "update_code_status", { code: code, status: "Đã in" })
-                                    .then(() => {
-                                        log(`[In Bill] Đã cập nhật trạng thái 'Đã in' cho mã: ${code}`);
-                                    })
-                                    .catch(e => {
-                                        log(`[In Bill] Lỗi cập nhật trạng thái cho mã ${code}: ${e.message}`);
-                                    });
-                            }
-                        } else {
-                            log(`Thất bại khi in lô.`);
-                        }
+                if (codesToPrint.length > 0) {
+                    localStorage.setItem('pending_awbPrint', 'true');
+                    if (!acquireGlobalLock('awbPrint')) {
+                        isPrintingNow = false;
+                        return;
                     }
+                    updateGlobalLockHeartbeat('awbPrint');
+                    log(`Tìm thấy lô gồm ${codesToPrint.length} mã để in.`);
+                    const success = await executePrintJob(codesToPrint);
+                    if (success) {
+                        lastSuccessfulAction = Date.now();
+                        log(`Đã in lô thành công: ${codesToPrint.join(', ')}`);
+                        
+                        // Cập nhật trạng thái "Đã in" cho từng mã trong lô lên Google Sheet
+                        for (const code of codesToPrint) {
+                            callGASPromise("POST", "update_code_status", { code: code, status: "Đã in" })
+                                .then(() => {
+                                    log(`[In Bill] Đã cập nhật trạng thái 'Đã in' cho mã: ${code}`);
+                                })
+                                .catch(e => {
+                                    log(`[In Bill] Lỗi cập nhật trạng thái cho mã ${code}: ${e.message}`);
+                                });
+                        }
+                    } else {
+                        log(`Thất bại khi in lô.`);
+                    }
+                } else {
+                    localStorage.removeItem('pending_awbPrint');
                 }
             } catch (error) {
                 log(`Lỗi in thường: ${error.message}`);
@@ -1418,17 +1431,18 @@
             const hash = window.location.hash;
             if (!hash.includes("startPackNoLabel")) return;
 
-            if (!acquireGlobalLock('startPackNoLabel')) {
-                return;
-            }
-
             try {
                 isProcessingPrint = true;
                 lastPrintPageStartTime = Date.now();
-                updateGlobalLockHeartbeat('startPackNoLabel');
                 const res = await callGASPromise("POST", "get_pending_to");
                 if (res.status === "success" && res.toNum) {
                     const currentTO = res.toNum;
+                    localStorage.setItem('pending_startPackNoLabel', 'true');
+                    if (!acquireGlobalLock('startPackNoLabel')) {
+                        isProcessingPrint = false;
+                        return;
+                    }
+                    updateGlobalLockHeartbeat('startPackNoLabel');
                     log(`[TO In] Lấy mã TO cần in từ Sheet: ${currentTO}`);
                     await ensureTabActive();
 
@@ -1504,7 +1518,7 @@
                         log(`[TO In] Không tìm thấy ô nhập TO Number trên màn hình!`);
                     }
                 } else {
-                    // Không có TO chờ in - không cần log liên tục gây rối
+                    localStorage.removeItem('pending_startPackNoLabel');
                 }
             } catch (error) {
                 log(`Lỗi In TO: ${error.message}`);
@@ -1570,19 +1584,20 @@
             const hash = window.location.hash || "";
             if (!hash.includes('pickupTask/list')) return;
 
-            if (!acquireGlobalLock('pickupTask')) {
-                return;
-            }
-
             try {
                 isProcessingHandover = true;
                 lastHandoverStartTime = Date.now();
-                updateGlobalLockHeartbeat('pickupTask');
                 const data = await callGASPromise("POST", "get_pending_chuyen_pick");
-                if (data.status === "success") {
+                if (data.status === "success" && data.pupCode) {
                     const pupCode = data.pupCode;
                     const rawDriver = data.recipientDriver;
                     const recipientDriver = extractDriverCode(rawDriver);
+                    localStorage.setItem('pending_pickupTask', 'true');
+                    if (!acquireGlobalLock('pickupTask')) {
+                        isProcessingHandover = false;
+                        return;
+                    }
+                    updateGlobalLockHeartbeat('pickupTask');
                     
                     const now = Date.now();
                     if (pupCode === lastHandoverPup && (now - lastHandoverTime) < 30000) {
@@ -1593,7 +1608,6 @@
                     }
                     
                     log(`Tìm thấy nhiệm vụ Chuyển Pick: PUP=${pupCode}, Nhận=${recipientDriver} (Gốc: ${rawDriver})`);
-                    updateGlobalLockHeartbeat('pickupTask');
                     const success = await executeHandoverJob(pupCode, recipientDriver);
                     if (success) {
                         lastHandoverPup = pupCode;
@@ -1614,6 +1628,8 @@
                             log(`[Chuyển Pick] Lỗi đồng bộ trạng thái thất bại cho ${pupCode}: ${err.message}`);
                         }
                     }
+                } else {
+                    localStorage.removeItem('pending_pickupTask');
                 }
             } catch (error) {
                 log(`Lỗi Chuyển Pick: ${error.message}`);
@@ -1675,7 +1691,37 @@
             await delay(2000);
             updateGlobalLockHeartbeat('pickupTask');
 
+            // 1. Kiểm tra xem có hiển thị "No Data" không
+            const noDataEl = Array.from(document.querySelectorAll('div, span, p')).find(el => {
+                const txt = (el.innerText || el.textContent || "").trim().toLowerCase();
+                return txt === "no data" || txt === "không có dữ liệu";
+            });
+            if (noDataEl && (noDataEl.offsetWidth > 0 || noDataEl.offsetHeight > 0)) {
+                log(`[Chuyển Pick] Không tìm thấy dữ liệu cho PUP: ${pupCode} (Hiển thị No Data).`);
+                return false;
+            }
+
+            // 2. Kiểm tra xem có dòng dữ liệu nào có nút Reassign không
             const rows = Array.from(document.querySelectorAll('tr'));
+            const dataRows = rows.filter(row => row.querySelector('td'));
+            if (dataRows.length > 0) {
+                let foundReassign = false;
+                for (let row of dataRows) {
+                    const reassignBtn = Array.from(row.querySelectorAll('button, span, a')).find(el => {
+                        const txt = el.innerText || el.textContent || "";
+                        return txt.trim() === "Reassign" || txt.trim() === "Phân bổ lại" || txt.trim() === "Chuyển giao";
+                    });
+                    if (reassignBtn) {
+                        foundReassign = true;
+                        break;
+                    }
+                }
+                if (!foundReassign) {
+                    log(`[Chuyển Pick] Có dòng dữ liệu của PUP ${pupCode} nhưng không có nút Reassign (chỉ có View/Disable).`);
+                    return false;
+                }
+            }
+
             let reassignedAny = false;
 
             for (let row of rows) {
@@ -1817,7 +1863,38 @@
 
                                 if (dialogConfirmBtn) {
                                     dialogConfirmBtn.click();
-                                    log("Đã nhấn Xác nhận chuyển giao tài xế.");
+                                    log("Đã nhấn Xác nhận chuyển giao tài xế. Đang kiểm tra kết quả phản hồi...");
+                                    
+                                    // Đợi tối đa 3 giây để kiểm tra xem có thông báo lỗi "already belongs" không
+                                    let hasDriverError = false;
+                                    for (let check = 0; check < 30; check++) {
+                                        await delay(100);
+                                        const allMessages = Array.from(document.querySelectorAll('.el-message, .el-notification, .el-dialog, .modal-content, div, p, span'));
+                                        const errorMsg = allMessages.find(el => {
+                                            const txt = (el.innerText || el.textContent || "");
+                                            return txt.includes("110901002") || txt.includes("already belongs to this driver");
+                                        });
+                                        if (errorMsg && (errorMsg.offsetWidth > 0 || errorMsg.offsetHeight > 0)) {
+                                            log(`[Chuyển Pick] Lỗi: ${errorMsg.textContent.trim()}`);
+                                            hasDriverError = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (hasDriverError) {
+                                        // Tìm nút Cancel hoặc Hủy để đóng hộp thoại
+                                        const cancelBtn = Array.from(targetDialog.querySelectorAll('button')).find(btn => {
+                                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                            return txt === "cancel" || txt === "hủy" || txt === "close" || txt === "đóng";
+                                        });
+                                        if (cancelBtn) {
+                                            cancelBtn.click();
+                                            log("[Chuyển Pick] Đã tự động đóng hộp thoại Reassign sau khi tài xế đã thuộc nhiệm vụ.");
+                                        }
+                                        await delay(500);
+                                        return false; // Trả về thất bại
+                                    }
+
                                     reassignedAny = true;
                                     await delay(1500);
                                     break;
