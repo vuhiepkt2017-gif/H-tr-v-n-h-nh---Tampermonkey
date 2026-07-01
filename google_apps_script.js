@@ -460,7 +460,7 @@ function getPendingTO(pcName, priority) {
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
     
-    var range = sheet.getRange(2, 1, lastRow - 1, 3);
+    var range = sheet.getRange(2, 1, lastRow - 1, 4);
     var values = range.getValues();
     
     // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (NẾU THIẾT BỊ ĐÓ VẪN CÒN SỐNG)
@@ -469,7 +469,17 @@ function getPendingTO(pcName, priority) {
       var status = values[i][1].toString().trim().toLowerCase();
       if (status === "đang in") {
         var activePc = values[i][2] ? values[i][2].toString().trim() : "";
-        if (activePc && isPcAlive(activePc, now)) {
+        var rowTime = values[i][3];
+        var isTimedOut = false;
+        if (rowTime instanceof Date) {
+          var diffMs = now.getTime() - rowTime.getTime();
+          if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
+            sheet.getRange(i + 2, 2).setValue("Mã lỗi");
+            isTimedOut = true;
+          }
+        }
+        
+        if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
           hasActiveTOPrint = true;
           break;
         }
@@ -486,6 +496,7 @@ function getPendingTO(pcName, priority) {
         var rowNum = i + 2;
         sheet.getRange(rowNum, 2).setValue("Đang in"); // Cập nhật sang trạng thái trung gian "Đang in"
         sheet.getRange(rowNum, 3).setValue(pcName); // Ghi nhận thiết bị thực hiện
+        sheet.getRange(rowNum, 4).setValue(now); // Ghi nhận thời gian bắt đầu in TO
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
@@ -583,7 +594,17 @@ function getPendingCode(pcName, priority) {
       var status = values[i][3].toString().trim().toLowerCase();
       if (status === "đang in") {
         var activePc = values[i][4] ? values[i][4].toString().trim() : "";
-        if (activePc && isPcAlive(activePc, now)) {
+        var rowTime = values[i][1];
+        var isTimedOut = false;
+        if (rowTime instanceof Date) {
+          var diffMs = now.getTime() - rowTime.getTime();
+          if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
+            sheet.getRange(i + 2, 4).setValue("Mã lỗi");
+            isTimedOut = true;
+          }
+        }
+        
+        if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
           hasActivePrint = true;
           break;
         }
@@ -599,6 +620,7 @@ function getPendingCode(pcName, priority) {
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
         sheet.getRange(rowNum, 4).setValue("Đang in"); // Cập nhật sang Đang in thay vì nhảy thẳng Đã in
+        sheet.getRange(rowNum, 2).setValue(now); // Cập nhật thời gian bắt đầu in để tính timeout chính xác
         sheet.getRange(rowNum, 5).setValue(pcName);
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
