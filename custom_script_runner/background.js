@@ -38,6 +38,31 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     fetch(targetUrl, options)
       .then(response => response.json())
       .then(res => {
+        // TỰ ĐỘNG ĐỒNG BỘ WEBAPP URL TỪ SHEET NẾU CÓ THAY ĐỔI
+        if (res.activeWebappUrl && res.activeWebappUrl.trim() !== "") {
+          chrome.storage.local.get("google_apps_script_url", (result) => {
+            if (result.google_apps_script_url !== res.activeWebappUrl) {
+              const newUrl = res.activeWebappUrl;
+              chrome.storage.local.set({ google_apps_script_url: newUrl }, () => {
+                console.log("[VTDAuto] Tu dong dong bo Webapp URL moi tu Google Sheet:", newUrl);
+                chrome.tabs.query({ url: ["https://spx.shopee.vn/*", "https://*.spxexpress.com/*"] }, (tabs) => {
+                  if (tabs) {
+                    tabs.forEach((tab) => {
+                      if (tab.id) {
+                        chrome.tabs.sendMessage(tab.id, {
+                          action: "set_shopee_status",
+                          apiUrl: newUrl
+                        }, () => {
+                          const err = chrome.runtime.lastError;
+                        });
+                      }
+                    });
+                  }
+                });
+              });
+            }
+          });
+        }
         sendResponse({ success: true, data: res });
       })
       .catch(error => {

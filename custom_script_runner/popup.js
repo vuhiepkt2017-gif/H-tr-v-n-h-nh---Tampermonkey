@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const popupSubmitUnlock = document.getElementById("popup-submit-unlock");
     const popupUnlockError = document.getElementById("popup-unlock-error");
 
-    const SECRET_KEY = "VTDAuto@2026";
+    const SECRET_KEY = "SPXVN0228$";
     let activeTabId = null;
     let allScripts = [];
 
@@ -225,9 +225,29 @@ document.addEventListener("DOMContentLoaded", () => {
     popupWebappSave.addEventListener("click", () => {
         const urlVal = popupWebappUrl.value.trim();
         if (urlVal) {
+            const pass = prompt("Nhập mật khẩu xác thực để thay đổi Web App URL:");
+            if (pass !== SECRET_KEY) {
+                alert("Mật khẩu không chính xác! Không thể thay đổi Web App URL.");
+                return;
+            }
+
             chrome.storage.local.set({ google_apps_script_url: urlVal }, () => {
-                alert("Đã lưu URL Web App thành công!");
+                alert("Đã lưu URL Web App thành công! Hệ thống đang đồng bộ lên Google Sheet...");
                 
+                // Đồng bộ lên Google Sheet thông qua API update_webapp_url
+                fetch(urlVal, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify({ action: "update_webapp_url", newUrl: urlVal, pc: "PC_Master" })
+                })
+                .then(r => r.json())
+                .then(res => {
+                    console.log("[VTDAuto] Đồng bộ Webapp URL lên Sheet thành công:", res);
+                })
+                .catch(err => {
+                    console.error("[VTDAuto] Lỗi đồng bộ Webapp URL lên Sheet:", err);
+                });
+
                 // Sync settings with Shopee webpage in real-time
                 if (activeTabId) {
                     chrome.tabs.sendMessage(activeTabId, { action: "get_shopee_status" }, (currentStatus) => {

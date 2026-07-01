@@ -7,6 +7,28 @@
  */
 
 function doGet(e) {
+  var res = doGetInternal(e);
+  try {
+    var obj = JSON.parse(res.getContent());
+    obj.activeWebappUrl = getActiveWebappUrl();
+    return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return res;
+  }
+}
+
+function doPost(e) {
+  var res = doPostInternal(e);
+  try {
+    var obj = JSON.parse(res.getContent());
+    obj.activeWebappUrl = getActiveWebappUrl();
+    return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return res;
+  }
+}
+
+function doGetInternal(e) {
   var action = e.parameter.action;
   var pcName = e.parameter.pc || "PC ẩn danh";
   
@@ -32,7 +54,7 @@ function doGet(e) {
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
-function doPost(e) {
+function doPostInternal(e) {
   try {
     var data;
     if (e.postData && e.postData.contents) {
@@ -41,10 +63,12 @@ function doPost(e) {
       data = e.parameter;
     }
     
-
-
     var action = data.action;
     var pcName = data.pc || "PC ẩn danh";
+
+    if (action === "update_webapp_url") {
+      return updateActiveWebappUrl(data.newUrl);
+    }
 
     if (action === "get_pending") {
       return getPendingCode(pcName);
@@ -809,4 +833,40 @@ function updateHandoverStatus(data) {
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() })).setMimeType(ContentService.MimeType.JSON);
   } finally { lock.releaseLock(); }
+}
+
+function getOrCreateSheetCauHinh() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Cấu hình");
+  if (!sheet) {
+    sheet = ss.insertSheet("Cấu hình");
+    sheet.appendRow(["Tham số", "Giá trị"]);
+    sheet.getRange("A1:B1").setFontWeight("bold").setBackground("#D9EAD3");
+    sheet.appendRow(["WEBAPP_URL", ""]);
+  }
+  return sheet;
+}
+
+function updateActiveWebappUrl(newUrl) {
+  var lock = LockService.getScriptLock();
+  try { lock.waitLock(10000); } catch (e) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "busy" })).setMimeType(ContentService.MimeType.JSON);
+  }
+  try {
+    var sheet = getOrCreateSheetCauHinh();
+    sheet.getRange(2, 2).setValue(newUrl); // Cột B dòng 2
+    SpreadsheetApp.flush();
+    return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "Đã cập nhật Webapp URL thành công" })).setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() })).setMimeType(ContentService.MimeType.JSON);
+  } finally { lock.releaseLock(); }
+}
+
+function getActiveWebappUrl() {
+  try {
+    var sheet = getOrCreateSheetCauHinh();
+    return sheet.getRange(2, 2).getValue().toString().trim();
+  } catch (e) {
+    return "";
+  }
 }
