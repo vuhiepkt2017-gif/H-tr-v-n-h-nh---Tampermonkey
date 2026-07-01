@@ -463,19 +463,7 @@ function getPendingTO(pcName, priority) {
     var range = sheet.getRange(2, 1, lastRow - 1, 2);
     var values = range.getValues();
     
-    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG
-    var hasActiveTOPrint = false;
-    for (var i = 0; i < values.length; i++) {
-      var status = values[i][1].toString().trim().toLowerCase();
-      if (status === "đang in") {
-        hasActiveTOPrint = true;
-        break;
-      }
-    }
-    
-    if (hasActiveTOPrint) {
-      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in TO khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
-    }
+    // Tiến hành phát task chờ in TO tiếp theo tuần tự mà không bị nghẽn bởi task đang in khác
     
     for (var i = 0; i < values.length; i++) {
       var status = values[i][1].toString().trim().toLowerCase();
@@ -573,19 +561,7 @@ function getPendingCode(pcName, priority) {
     var range = sheet.getRange(2, 1, lastRow - 1, 5);
     var values = range.getValues();
     
-    // KIỂM TRA XEM CÓ TASK NÀO ĐANG IN KHÔNG
-    var hasActivePrint = false;
-    for (var i = 0; i < values.length; i++) {
-      var status = values[i][3].toString().trim().toLowerCase();
-      if (status === "đang in") {
-        hasActivePrint = true;
-        break;
-      }
-    }
-    
-    if (hasActivePrint) {
-      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in bill khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
-    }
+    // Tiến hành phát task chờ in tiếp theo tuần tự mà không bị nghẽn bởi task đang in khác
     
     for (var i = 0; i < values.length; i++) {
       var status = values[i][3].toString().trim().toLowerCase();

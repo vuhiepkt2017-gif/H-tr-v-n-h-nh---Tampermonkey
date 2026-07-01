@@ -1136,7 +1136,16 @@
                                 });
                         }
                     } else {
-                        log(`Thất bại khi in lô.`);
+                        log(`Thất bại khi in lô. Cập nhật trạng thái 'Mã lỗi' lên Sheet...`);
+                        for (const code of codesToPrint) {
+                            callGASPromise("POST", "update_code_status", { code: code, status: "Mã lỗi" })
+                                .then(() => {
+                                    log(`[In Bill] Đã cập nhật trạng thái 'Mã lỗi' cho mã: ${code}`);
+                                })
+                                .catch(e => {
+                                    log(`[In Bill] Lỗi cập nhật trạng thái lỗi cho mã ${code}: ${e.message}`);
+                                });
+                        }
                     }
                 } else {
                     localStorage.removeItem('pending_awbPrint');
