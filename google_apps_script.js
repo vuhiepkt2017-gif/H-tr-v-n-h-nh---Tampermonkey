@@ -460,16 +460,32 @@ function getPendingTO(pcName, priority) {
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
     
-    var range = sheet.getRange(2, 1, lastRow - 1, 2);
+    var range = sheet.getRange(2, 1, lastRow - 1, 3);
     var values = range.getValues();
     
-    // Tiến hành phát task chờ in TO tiếp theo tuần tự mà không bị nghẽn bởi task đang in khác
+    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (NẾU THIẾT BỊ ĐÓ VẪN CÒN SỐNG)
+    var hasActiveTOPrint = false;
+    for (var i = 0; i < values.length; i++) {
+      var status = values[i][1].toString().trim().toLowerCase();
+      if (status === "đang in") {
+        var activePc = values[i][2] ? values[i][2].toString().trim() : "";
+        if (activePc && isPcAlive(activePc, now)) {
+          hasActiveTOPrint = true;
+          break;
+        }
+      }
+    }
+    
+    if (hasActiveTOPrint) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in TO khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
+    }
     
     for (var i = 0; i < values.length; i++) {
       var status = values[i][1].toString().trim().toLowerCase();
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
         sheet.getRange(rowNum, 2).setValue("Đang in"); // Cập nhật sang trạng thái trung gian "Đang in"
+        sheet.getRange(rowNum, 3).setValue(pcName); // Ghi nhận thiết bị thực hiện
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
@@ -515,8 +531,8 @@ function getOrCreateSheetInTO() {
   var sheet = ss.getSheetByName("InTO");
   if (!sheet) {
     sheet = ss.insertSheet("InTO");
-    sheet.appendRow(["TO Number", "Trạng thái"]);
-    sheet.getRange("A1:B1").setFontWeight("bold").setBackground("#FFE599");
+    sheet.appendRow(["TO Number", "Trạng thái", "Thiết bị in (PC)"]);
+    sheet.getRange("A1:C1").setFontWeight("bold").setBackground("#FFE599");
   }
   return sheet;
 }
@@ -561,7 +577,22 @@ function getPendingCode(pcName, priority) {
     var range = sheet.getRange(2, 1, lastRow - 1, 5);
     var values = range.getValues();
     
-    // Tiến hành phát task chờ in tiếp theo tuần tự mà không bị nghẽn bởi task đang in khác
+    // KIỂM TRA XEM CÓ TASK NÀO ĐANG IN HOẠT ĐỘNG KHÔNG (NẾU THIẾT BỊ ĐÓ VẪN CÒN SỐNG)
+    var hasActivePrint = false;
+    for (var i = 0; i < values.length; i++) {
+      var status = values[i][3].toString().trim().toLowerCase();
+      if (status === "đang in") {
+        var activePc = values[i][4] ? values[i][4].toString().trim() : "";
+        if (activePc && isPcAlive(activePc, now)) {
+          hasActivePrint = true;
+          break;
+        }
+      }
+    }
+    
+    if (hasActivePrint) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ in bill khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
+    }
     
     for (var i = 0; i < values.length; i++) {
       var status = values[i][3].toString().trim().toLowerCase();
@@ -913,4 +944,25 @@ function registerPcActiveAndCheckPriority(pcName, priority, now) {
   }
   
   return higherPriorityActive;
+}
+
+function isPcAlive(pcName, now) {
+  if (!pcName) return false;
+  try {
+    var sheet = getOrCreateSheetTrangThaiPC();
+    var lastRow = sheet.getLastRow();
+    if (lastRow < 2) return false;
+    
+    var values = sheet.getRange(2, 1, lastRow - 1, 3).getValues();
+    for (var i = 0; i < values.length; i++) {
+      if (values[i][0].toString().trim() === pcName.toString().trim()) {
+        var rowTime = values[i][2];
+        if (rowTime instanceof Date) {
+          var diffMs = now.getTime() - rowTime.getTime();
+          return diffMs < 30000; // Hoạt động trong 30 giây qua
+        }
+      }
+    }
+  } catch (e) {}
+  return false;
 }
