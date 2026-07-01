@@ -582,45 +582,12 @@ function getPendingChuyenPick(pcName) {
   try {
     var now = new Date();
 
-    // KIỂM TRA ĐANG CÓ TASK CHẠY DỞ ("đang chuyển") ĐỂ TRÁNH TRÙNG LẬP
-    // 1. Kiểm tra sheet "Hỗ Trợ"
     var sheetHT = getOrCreateSheetHoTro();
     var lastRowHT = sheetHT.getLastRow();
-    var hasActiveTask = false;
-    
-    if (lastRowHT >= 2) {
-      var rangeHT = sheetHT.getRange(2, 5, lastRowHT - 1, 1); // Cột E: Trạng thái
-      var valuesHT = rangeHT.getValues();
-      for (var i = 0; i < valuesHT.length; i++) {
-        var status = valuesHT[i][0].toString().trim().toLowerCase();
-        if (status === "đang chuyển") {
-          hasActiveTask = true;
-          break;
-        }
-      }
-    }
-
-    // 2. Kiểm tra sheet "Chuyển Pick"
     var sheetCP = getOrCreateSheetChuyenPick();
     var lastRowCP = sheetCP.getLastRow();
-    if (!hasActiveTask && lastRowCP >= 2) {
-      var rangeCP = sheetCP.getRange(2, 5, lastRowCP - 1, 1); // Cột E: Trạng thái
-      var valuesCP = rangeCP.getValues();
-      for (var i = 0; i < valuesCP.length; i++) {
-        var status = valuesCP[i][0].toString().trim().toLowerCase();
-        if (status === "đang chuyển") {
-          hasActiveTask = true;
-          break;
-        }
-      }
-    }
 
-    // Nếu đang có bất kỳ task nào "Đang chuyển", dừng lại không nhận thêm task mới
-    if (hasActiveTask) {
-      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Đang có tác vụ chuyển pick khác đang chạy" })).setMimeType(ContentService.MimeType.JSON);
-    }
-
-    // TIẾN HÀNH PHÁT TASK NEW NẾU KHÔNG CÓ BẬT KÌ TASK NÀO ĐANG CHẠY DỞ
+    // TIẾN HÀNH PHÁT TASK NEW NẾU CÓ TASK CHỜ CHUYỂN
     // 1. Kiểm tra ưu tiên sheet "Hỗ Trợ" trước
     if (lastRowHT >= 2) {
       var rangeHTAll = sheetHT.getRange(2, 1, lastRowHT - 1, 6);
