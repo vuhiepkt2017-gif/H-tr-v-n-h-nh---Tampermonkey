@@ -1578,8 +1578,9 @@
                     const success = await executeHandoverJob(pupCode, recipientDriver);
                     lastHandoverPup = pupCode;
                     lastHandoverTime = Date.now();
-                    if (success) {
-                        log(`Đã chuyển giao thành công PUP: ${pupCode} cho tài xế ${recipientDriver}`);
+                    if (success === true || success === "already_belongs") {
+                        const statusMsg = success === "already_belongs" ? "Tài xế đã thuộc nhiệm vụ (110901002)" : `cho tài xế ${recipientDriver}`;
+                        log(`Đã chuyển giao thành công PUP: ${pupCode} (${statusMsg})`);
                         try {
                             await callGASPromise("POST", "update_handover_status", { pupCode: pupCode, status: "Đã chuyển" });
                             log(`[Chuyển Pick] Đã ghi nhận trạng thái 'Đã chuyển' cho ${pupCode} vào Sheet.`);
@@ -1850,16 +1851,26 @@
 
                                     if (hasDriverError) {
                                         // Tìm nút Cancel hoặc Hủy để đóng hộp thoại
-                                        const cancelBtn = Array.from(targetDialog.querySelectorAll('button')).find(btn => {
+                                        let cancelBtn = Array.from(targetDialog.querySelectorAll('button')).find(btn => {
                                             const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
-                                            return txt === "cancel" || txt === "hủy" || txt === "close" || txt === "đóng";
+                                            return txt === "cancel" || txt === "hủy" || txt === "close" || txt === "đóng" || txt.includes("cancel") || txt.includes("hủy");
                                         });
+                                        if (!cancelBtn) {
+                                            // Quét toàn cục tất cả button hiển thị trên màn hình
+                                            cancelBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+                                                const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                                return (txt === "cancel" || txt === "hủy" || txt === "close" || txt === "đóng" || txt.includes("cancel") || txt.includes("hủy")) && 
+                                                       (btn.offsetWidth > 0 || btn.offsetHeight > 0);
+                                            });
+                                        }
                                         if (cancelBtn) {
                                             cancelBtn.click();
-                                            log("[Chuyển Pick] Đã tự động đóng hộp thoại Reassign sau khi tài xế đã thuộc nhiệm vụ.");
+                                            log("[Chuyển Pick] Đã click nút Hủy/Cancel để đóng hộp thoại Reassign.");
+                                        } else {
+                                            log("[Chuyển Pick] Cảnh báo: Không tìm thấy nút Cancel/Hủy trên giao diện để đóng hộp thoại!");
                                         }
                                         await delay(500);
-                                        return false; // Trả về thất bại
+                                        return "already_belongs"; // Trả về mã thành công đặc biệt
                                     }
 
                                     reassignedAny = true;
