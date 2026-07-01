@@ -460,29 +460,16 @@ function getPendingTO(pcName, priority) {
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
     
-    var range = sheet.getRange(2, 1, lastRow - 1, 4);
+    var range = sheet.getRange(2, 1, lastRow - 1, 2);
     var values = range.getValues();
     
-    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (NẾU THIẾT BỊ ĐÓ VẪN CÒN SỐNG)
+    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (Bản 3.1 cũ)
     var hasActiveTOPrint = false;
     for (var i = 0; i < values.length; i++) {
       var status = values[i][1].toString().trim().toLowerCase();
       if (status === "đang in") {
-        var activePc = values[i][2] ? values[i][2].toString().trim() : "";
-        var rowTime = values[i][3];
-        var isTimedOut = false;
-        if (rowTime instanceof Date) {
-          var diffMs = now.getTime() - rowTime.getTime();
-          if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
-            sheet.getRange(i + 2, 2).setValue("Mã lỗi");
-            isTimedOut = true;
-          }
-        }
-        
-        if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
-          hasActiveTOPrint = true;
-          break;
-        }
+        hasActiveTOPrint = true;
+        break;
       }
     }
     
@@ -495,8 +482,6 @@ function getPendingTO(pcName, priority) {
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
         sheet.getRange(rowNum, 2).setValue("Đang in"); // Cập nhật sang trạng thái trung gian "Đang in"
-        sheet.getRange(rowNum, 3).setValue(pcName); // Ghi nhận thiết bị thực hiện
-        sheet.getRange(rowNum, 4).setValue(now); // Ghi nhận thời gian bắt đầu in TO
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
@@ -542,8 +527,8 @@ function getOrCreateSheetInTO() {
   var sheet = ss.getSheetByName("InTO");
   if (!sheet) {
     sheet = ss.insertSheet("InTO");
-    sheet.appendRow(["TO Number", "Trạng thái", "Thiết bị in (PC)"]);
-    sheet.getRange("A1:C1").setFontWeight("bold").setBackground("#FFE599");
+    sheet.appendRow(["TO Number", "Trạng thái"]);
+    sheet.getRange("A1:B1").setFontWeight("bold").setBackground("#FFE599");
   }
   return sheet;
 }
