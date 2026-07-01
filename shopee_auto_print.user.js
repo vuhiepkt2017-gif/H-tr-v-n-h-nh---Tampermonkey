@@ -1575,10 +1575,33 @@
                     }
                     
                     log(`Tìm thấy nhiệm vụ Chuyển Pick: PUP=${pupCode}, Nhận=${recipientDriver} (Gốc: ${rawDriver})`);
+                    
+                    // KIỂM TRA CACHE TRÙNG TÀI XẾ
+                    const cachedDriver = localStorage.getItem('assigned_driver_' + pupCode);
+                    const cachedTime = parseInt(localStorage.getItem('assigned_driver_time_' + pupCode) || '0');
+                    if (cachedDriver && cachedDriver === recipientDriver && (Date.now() - cachedTime) < 1200000) {
+                        log(`[Chuyển Pick] PUP ${pupCode} đã được gán cho tài xế ${recipientDriver} trước đó. Ghi nhận thành công ngay.`);
+                        lastHandoverPup = pupCode;
+                        lastHandoverTime = Date.now();
+                        try {
+                            await callGASPromise("POST", "update_handover_status", { pupCode: pupCode, status: "Đã chuyển" });
+                            log(`[Chuyển Pick] Đã ghi nhận trạng thái 'Đã chuyển' cho ${pupCode} vào Sheet (Bỏ qua UI).`);
+                        } catch (err) {
+                            log(`[Chuyển Pick] Lỗi đồng bộ: ${err.message}`);
+                        }
+                        isProcessingHandover = false;
+                        releaseGlobalLock('pickupTask');
+                        return;
+                    }
+
                     const success = await executeHandoverJob(pupCode, recipientDriver);
                     lastHandoverPup = pupCode;
                     lastHandoverTime = Date.now();
                     if (success === true || success === "already_belongs") {
+                        // Lưu cache thành công
+                        localStorage.setItem('assigned_driver_' + pupCode, recipientDriver);
+                        localStorage.setItem('assigned_driver_time_' + pupCode, Date.now().toString());
+                        
                         const statusMsg = success === "already_belongs" ? "Tài xế đã thuộc nhiệm vụ (110901002)" : `cho tài xế ${recipientDriver}`;
                         log(`Đã chuyển giao thành công PUP: ${pupCode} (${statusMsg})`);
                         try {
