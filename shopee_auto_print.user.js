@@ -179,6 +179,27 @@
 
         // Cơ chế khóa dùng chung duy nhất (Single Global Lock) cho toàn bộ hệ thống
         // Đảm bảo tại một thời điểm chỉ có DUY NHẤT một tab thực hiện nhiệm vụ, tránh chạy chồng lấn các sheet khác nhau.
+        function isHigherPriorityTaskPending(myType) {
+            const now = Date.now();
+            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask'];
+            const myIndex = priorities.indexOf(myType);
+            if (myIndex === -1) return false;
+            
+            const TAB_ACTIVE_TIMEOUT = 12000; // 12 giây
+
+            for (let i = 0; i < myIndex; i++) {
+                const type = priorities[i];
+                const lastPulse = parseInt(localStorage.getItem('last_pulse_' + type) || '0');
+                const isTabActive = lastPulse > 0 && (now - lastPulse) < TAB_ACTIVE_TIMEOUT;
+                const isPending = localStorage.getItem('pending_' + type) === 'true';
+                
+                if (isTabActive && isPending) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         function acquireGlobalLock(tabType) {
             const now = Date.now();
             
@@ -188,14 +209,8 @@
             }
 
             // KIỂM TRA ĐỘ ƯU TIÊN (Priority Lock Policy): In Bill > In TO > Chuyển Pick
-            if (tabType === 'pickupTask') {
-                if (localStorage.getItem('pending_awbPrint') === 'true' || localStorage.getItem('pending_startPackNoLabel') === 'true') {
-                    return false; // Nhường khóa cho In Bill và In TO
-                }
-            } else if (tabType === 'startPackNoLabel') {
-                if (localStorage.getItem('pending_awbPrint') === 'true') {
-                    return false; // Nhường khóa cho In Bill
-                }
+            if (isHigherPriorityTaskPending(tabType)) {
+                return false; // Nhường khóa cho tab có độ ưu tiên cao hơn đang hoạt động và có task
             }
 
             const lockKey = "global_automation_single_lock";
@@ -1561,9 +1576,9 @@
                     
                     log(`Tìm thấy nhiệm vụ Chuyển Pick: PUP=${pupCode}, Nhận=${recipientDriver} (Gốc: ${rawDriver})`);
                     const success = await executeHandoverJob(pupCode, recipientDriver);
+                    lastHandoverPup = pupCode;
+                    lastHandoverTime = Date.now();
                     if (success) {
-                        lastHandoverPup = pupCode;
-                        lastHandoverTime = Date.now();
                         log(`Đã chuyển giao thành công PUP: ${pupCode} cho tài xế ${recipientDriver}`);
                         try {
                             await callGASPromise("POST", "update_handover_status", { pupCode: pupCode, status: "Đã chuyển" });
