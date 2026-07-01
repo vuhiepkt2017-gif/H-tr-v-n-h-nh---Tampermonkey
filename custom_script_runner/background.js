@@ -22,7 +22,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     let targetUrl = apiUrl;
     
     if (method === "GET") {
-      targetUrl += `?action=${actionName}&pc=${encodeURIComponent(pcName || "")}`;
+      const priority = (data && data.priority) || "1";
+      targetUrl += `?action=${actionName}&pc=${encodeURIComponent(pcName || "")}&priority=${encodeURIComponent(priority)}`;
     }
 
     const options = {

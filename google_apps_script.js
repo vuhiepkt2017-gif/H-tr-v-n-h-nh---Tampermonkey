@@ -31,17 +31,18 @@ function doPost(e) {
 function doGetInternal(e) {
   var action = e.parameter.action;
   var pcName = e.parameter.pc || "PC ẩn danh";
+  var priority = e.parameter.priority || "1";
   
   if (action === "get_pending") {
-    return getPendingCode(pcName);
+    return getPendingCode(pcName, priority);
   }
   
   if (action === "get_pending_chuyen_pick") {
-    return getPendingChuyenPick(pcName);
+    return getPendingChuyenPick(pcName, priority);
   }
   
   if (action === "get_pending_to") {
-    return getPendingTO(pcName);
+    return getPendingTO(pcName, priority);
   }
 
   if (action === "restore_scripts") {
@@ -65,19 +66,20 @@ function doPostInternal(e) {
     
     var action = data.action;
     var pcName = data.pc || "PC ẩn danh";
+    var priority = data.priority || "1";
 
     if (action === "update_webapp_url") {
       return updateActiveWebappUrl(data.newUrl);
     }
 
     if (action === "get_pending") {
-      return getPendingCode(pcName);
+      return getPendingCode(pcName, priority);
     }
     if (action === "get_pending_chuyen_pick") {
-      return getPendingChuyenPick(pcName);
+      return getPendingChuyenPick(pcName, priority);
     }
     if (action === "get_pending_to") {
-      return getPendingTO(pcName);
+      return getPendingTO(pcName, priority);
     }
     if (action === "backup_scripts") {
       return backupScripts(data.scripts);
@@ -442,12 +444,18 @@ function handleSpxRequest(data) {
 /**
  * Lấy ra mã TO chờ in đầu tiên từ sheet "InTO"
  */
-function getPendingTO(pcName) {
+function getPendingTO(pcName, priority) {
   var lock = LockService.getScriptLock();
   try { lock.waitLock(10000); } catch (e) {
     return ContentService.createTextOutput(JSON.stringify({ status: "busy" })).setMimeType(ContentService.MimeType.JSON);
   }
   try {
+    var now = new Date();
+    var priorityVal = priority || "1";
+    var isBlockedByPriority = registerPcActiveAndCheckPriority(pcName, priorityVal, now);
+    if (isBlockedByPriority) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Nhường máy ưu tiên cao hơn" })).setMimeType(ContentService.MimeType.JSON);
+    }
     var sheet = getOrCreateSheetInTO();
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
@@ -546,12 +554,18 @@ function authenticateRider(username, password) {
 /**
  * Lấy ra dòng "Chờ in" đầu tiên từ sheet "Mã"
  */
-function getPendingCode(pcName) {
+function getPendingCode(pcName, priority) {
   var lock = LockService.getScriptLock();
   try { lock.waitLock(10000); } catch (e) {
     return ContentService.createTextOutput(JSON.stringify({ status: "busy" })).setMimeType(ContentService.MimeType.JSON);
   }
   try {
+    var now = new Date();
+    var priorityVal = priority || "1";
+    var isBlockedByPriority = registerPcActiveAndCheckPriority(pcName, priorityVal, now);
+    if (isBlockedByPriority) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Nhường máy ưu tiên cao hơn" })).setMimeType(ContentService.MimeType.JSON);
+    }
     var sheet = getOrCreateSheetMa();
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
@@ -598,13 +612,18 @@ function getPendingCode(pcName) {
  * Lấy ra dòng "Chờ chuyển" đầu tiên từ sheet "Hỗ Trợ" hoặc "Chuyển Pick"
  * Ưu tiên xử lý từ sheet "Hỗ Trợ" trước, sau đó mới đến "Chuyển Pick"
  */
-function getPendingChuyenPick(pcName) {
+function getPendingChuyenPick(pcName, priority) {
   var lock = LockService.getScriptLock();
   try { lock.waitLock(10000); } catch (e) {
     return ContentService.createTextOutput(JSON.stringify({ status: "busy" })).setMimeType(ContentService.MimeType.JSON);
   }
   try {
     var now = new Date();
+    var priorityVal = priority || "1";
+    var isBlockedByPriority = registerPcActiveAndCheckPriority(pcName, priorityVal, now);
+    if (isBlockedByPriority) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "busy", message: "Nhường máy ưu tiên cao hơn" })).setMimeType(ContentService.MimeType.JSON);
+    }
 
     var sheetHT = getOrCreateSheetHoTro();
     var lastRowHT = sheetHT.getLastRow();
@@ -869,4 +888,53 @@ function getActiveWebappUrl() {
   } catch (e) {
     return "";
   }
+}
+
+function getOrCreateSheetTrangThaiPC() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Trạng thái PC");
+  if (!sheet) {
+    sheet = ss.insertSheet("Trạng thái PC");
+    sheet.appendRow(["Tên PC", "Mức ưu tiên", "Lần cuối hoạt động"]);
+    sheet.getRange("A1:C1").setFontWeight("bold").setBackground("#D9EAD3");
+  }
+  return sheet;
+}
+
+function registerPcActiveAndCheckPriority(pcName, priority, now) {
+  var sheet = getOrCreateSheetTrangThaiPC();
+  var lastRow = sheet.getLastRow();
+  var pcClean = pcName.toString().trim();
+  var priorityVal = parseInt(priority || "1");
+  
+  var values = lastRow >= 2 ? sheet.getRange(2, 1, lastRow - 1, 3).getValues() : [];
+  var pcFound = false;
+  var higherPriorityActive = false;
+  
+  for (var i = 0; i < values.length; i++) {
+    var rowPc = values[i][0].toString().trim();
+    var rowPriority = parseInt(values[i][1] || "1");
+    var rowTime = values[i][2];
+    
+    if (rowPc === pcClean) {
+      sheet.getRange(i + 2, 2).setValue(priorityVal);
+      sheet.getRange(i + 2, 3).setValue(now);
+      pcFound = true;
+    } else {
+      if (rowPriority > priorityVal) {
+        if (rowTime instanceof Date) {
+          var diffMs = now.getTime() - rowTime.getTime();
+          if (diffMs < 20000) { // 20 giây hoạt động
+            higherPriorityActive = true;
+          }
+        }
+      }
+    }
+  }
+  
+  if (!pcFound) {
+    sheet.appendRow([pcClean, priorityVal, now]);
+  }
+  
+  return higherPriorityActive;
 }

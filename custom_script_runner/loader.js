@@ -45,7 +45,7 @@ globalThis.GM_xmlhttpRequest = (options) => {
             method,
             apiUrl: url.split('?')[0],
             actionName,
-            data: requestData,
+            data: Object.assign({ priority: localStorage.getItem("shopee_pc_priority") || "1" }, requestData),
             pcName: localStorage.getItem("shopee_pc_name") || "PC_01"
         }, (response) => {
             if (chrome.runtime.lastError) {

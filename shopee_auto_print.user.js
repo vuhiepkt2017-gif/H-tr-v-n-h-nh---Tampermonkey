@@ -153,6 +153,7 @@
         
         let apiUrl = localStorage.getItem("google_apps_script_url") || GM_getValue("google_apps_script_url", DEFAULT_WEB_APP_URL);
         let pcName = localStorage.getItem("shopee_pc_name") || GM_getValue("shopee_pc_name", "PC_01");
+        let pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
         let isRunning = localStorage.getItem("auto_print_enabled") === "true";
         
         let isPrintingNow = false;
@@ -326,6 +327,14 @@
                 <div style="margin-bottom: 10px;">
                     <label style="display: block; margin-bottom: 4px; color: #aaa;">Tên Máy Tính (PC Name):</label>
                     <input type="text" id="ap-pc-input" style="width: 93%; padding: 6px; border-radius: 4px; border: 1px solid #555; background-color: #2a2a35; color: white; font-size: 11px;" value="${pcName}">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 4px; color: #aaa;">Độ ưu tiên thiết bị:</label>
+                    <select id="ap-priority-select" style="width: 99%; padding: 6px; border-radius: 4px; border: 1px solid #555; background-color: #2a2a35; color: white; font-size: 11px;">
+                        <option value="1" ${pcPriority === "1" ? "selected" : ""}>1 (Mặc định - Thấp)</option>
+                        <option value="2" ${pcPriority === "2" ? "selected" : ""}>2 (Trung bình)</option>
+                        <option value="3" ${pcPriority === "3" ? "selected" : ""}>3 (Cao nhất - Ưu tiên)</option>
+                    </select>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                     <button id="ap-save-url" style="flex: 1; padding: 6px; border-radius: 6px; border: none; background-color: #4caf50; color: white; cursor: pointer; font-weight: bold;">Lưu</button>
@@ -829,18 +838,50 @@
             urlInput.focus();
         });
 
-        saveUrlBtn.addEventListener('click', () => {
+        saveUrlBtn.addEventListener('click', async () => {
             const inputVal = urlInput.value.trim();
             const pcInputVal = pcInput.value.trim() || "PC_01";
+            const prioritySelect = document.getElementById('ap-priority-select');
+            const priorityVal = prioritySelect ? prioritySelect.value : "1";
+            
+            const oldUrl = localStorage.getItem("google_apps_script_url") || "";
+
             if (inputVal && !inputVal.includes("HAY_DIEN_URL")) {
+                // Nếu thay đổi URL Webapp, yêu cầu nhập mật khẩu bảo mật
+                if (inputVal !== oldUrl && oldUrl !== "") {
+                    const pass = prompt("Nhập mật khẩu xác thực để thay đổi Web App URL:");
+                    if (pass !== "SPXVN0228$") {
+                        alert("Mật khẩu không chính xác! Không thể thay đổi Web App URL.");
+                        return;
+                    }
+                }
+
                 apiUrl = inputVal;
                 pcName = pcInputVal;
+                pcPriority = priorityVal;
+                
                 localStorage.setItem("google_apps_script_url", apiUrl);
                 localStorage.setItem("shopee_pc_name", pcName);
+                localStorage.setItem("shopee_pc_priority", pcPriority);
+                
                 GM_setValue("google_apps_script_url", apiUrl);
                 GM_setValue("shopee_pc_name", pcName);
-                log(`Đã lưu cấu hình. PC: ${pcName}`);
+                GM_setValue("shopee_pc_priority", pcPriority);
+                
+                log(`Đã lưu cấu hình. PC: ${pcName}, Độ ưu tiên: ${pcPriority}`);
                 updateUrlView();
+
+                // Nếu đổi URL Webapp, thực hiện đồng bộ lên Google Sheet
+                if (inputVal !== oldUrl && oldUrl !== "") {
+                    log("Đang đồng bộ Web App URL mới lên Google Sheet...");
+                    try {
+                        await callGASPromise("POST", "update_webapp_url", { newUrl: apiUrl });
+                        log("Đồng bộ Web App URL mới lên Google Sheet thành công!");
+                    } catch (e) {
+                        log(`Lỗi đồng bộ Web App URL lên Sheet: ${e.message}`);
+                    }
+                }
+
                 alert("Đã lưu cấu hình thành công!");
             } else {
                 alert("Vui lòng điền URL hợp lệ!");
@@ -937,7 +978,7 @@
                     
                     let targetUrl = "";
                     if (method === "GET") {
-                        targetUrl = `${cleanApiUrl}?action=${urlOrAction}&pc=${encodeURIComponent((pcName || "").trim())}`;
+                        targetUrl = `${cleanApiUrl}?action=${urlOrAction}&pc=${encodeURIComponent((pcName || "").trim())}&priority=${encodeURIComponent((pcPriority || "1").trim())}`;
                     } else {
                         targetUrl = cleanApiUrl;
                     }
@@ -961,6 +1002,24 @@
                             clearTimeout(timer);
                             try {
                                 const res = JSON.parse(response.responseText);
+                                
+                                // TỰ ĐỘNG ĐỒNG BỘ WEBAPP URL TỪ SHEET
+                                if (res.activeWebappUrl && res.activeWebappUrl.trim() !== "" && res.activeWebappUrl !== apiUrl) {
+                                    apiUrl = res.activeWebappUrl;
+                                    localStorage.setItem("google_apps_script_url", apiUrl);
+                                    GM_setValue("google_apps_script_url", apiUrl);
+                                    log(`[Cấu hình] Tự động đồng bộ Webapp URL mới: ${apiUrl}`);
+                                    
+                                    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
+                                        chrome.runtime.sendMessage({
+                                            action: "sync_active_webapp_url",
+                                            apiUrl: apiUrl
+                                        }, () => {
+                                            const err = chrome.runtime.lastError;
+                                        });
+                                    }
+                                }
+
                                 resolve(res);
                             } catch (e) {
                                 reject(new Error(`Lỗi parse JSON: ${e.message}. Nội dung phản hồi: ${response.responseText.substring(0, 120)}`));
@@ -982,7 +1041,7 @@
 
                     if (method !== "GET") {
                         options.headers = { "Content-Type": "text/plain" };
-                        options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (pcName || "").trim() }, data));
+                        options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (pcName || "").trim(), priority: (pcPriority || "1").trim() }, data));
                     }
 
                     GM_xmlhttpRequest(options);
@@ -2100,6 +2159,7 @@
             // Đồng bộ lại trạng thái chạy và cấu hình từ localStorage theo thời gian thực
             apiUrl = localStorage.getItem("google_apps_script_url") || GM_getValue("google_apps_script_url", DEFAULT_WEB_APP_URL);
             pcName = localStorage.getItem("shopee_pc_name") || GM_getValue("shopee_pc_name", "PC_01");
+            pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
             isRunning = localStorage.getItem("auto_print_enabled") === "true";
             updateUIState();
 
