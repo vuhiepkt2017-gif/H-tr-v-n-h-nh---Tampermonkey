@@ -1103,9 +1103,16 @@
             const hash = window.location.hash || "";
             if (!hash.includes('awbPrint')) return;
 
+            if (!acquireGlobalLock('awbPrint')) {
+                return;
+            }
+
             try {
                 isPrintingNow = true;
                 lastPrintStartTime = Date.now();
+                localStorage.setItem('pending_awbPrint', 'true');
+                updateGlobalLockHeartbeat('awbPrint');
+
                 const data = await callGASPromise("POST", "get_pending");
                 lastSuccessfulAction = Date.now();
                 let codesToPrint = [];
@@ -1118,12 +1125,6 @@
                 }
 
                 if (codesToPrint.length > 0) {
-                    localStorage.setItem('pending_awbPrint', 'true');
-                    if (!acquireGlobalLock('awbPrint')) {
-                        isPrintingNow = false;
-                        return;
-                    }
-                    updateGlobalLockHeartbeat('awbPrint');
                     log(`Tìm thấy lô gồm ${codesToPrint.length} mã để in.`);
                     const success = await executePrintJob(codesToPrint);
                     if (success) {
@@ -1152,13 +1153,12 @@
                                 });
                         }
                     }
-                } else {
-                    localStorage.removeItem('pending_awbPrint');
                 }
             } catch (error) {
                 log(`Lỗi in thường: ${error.message}`);
             } finally {
                 isPrintingNow = false;
+                localStorage.removeItem('pending_awbPrint');
                 releaseGlobalLock('awbPrint');
             }
         }
@@ -1471,18 +1471,19 @@
             const hash = window.location.hash;
             if (!hash.includes("startPackNoLabel")) return;
 
+            if (!acquireGlobalLock('startPackNoLabel')) {
+                return;
+            }
+
             try {
                 isProcessingPrint = true;
                 lastPrintPageStartTime = Date.now();
+                localStorage.setItem('pending_startPackNoLabel', 'true');
+                updateGlobalLockHeartbeat('startPackNoLabel');
+
                 const res = await callGASPromise("POST", "get_pending_to");
                 if (res.status === "success" && res.toNum) {
                     const currentTO = res.toNum;
-                    localStorage.setItem('pending_startPackNoLabel', 'true');
-                    if (!acquireGlobalLock('startPackNoLabel')) {
-                        isProcessingPrint = false;
-                        return;
-                    }
-                    updateGlobalLockHeartbeat('startPackNoLabel');
                     log(`[TO In] Lấy mã TO cần in từ Sheet: ${currentTO}`);
                     await ensureTabActive();
 
@@ -1563,17 +1564,17 @@
                         log(`[TO In] Không tìm thấy ô nhập TO Number trên màn hình! Cập nhật trạng thái 'Mã lỗi' lên Sheet...`);
                         try {
                             await callGASPromise("POST", "mark_to_printed", { toNum: currentTO, status: "Mã lỗi" });
+                            log(`[TO In] Lỗi cập nhật trạng thái lỗi cho ${currentTO}`);
                         } catch (e) {
                             log(`[TO In] Lỗi cập nhật trạng thái lỗi cho ${currentTO}: ${e.message}`);
                         }
                     }
-                } else {
-                    localStorage.removeItem('pending_startPackNoLabel');
                 }
             } catch (error) {
                 log(`Lỗi In TO: ${error.message}`);
             } finally {
                 isProcessingPrint = false;
+                localStorage.removeItem('pending_startPackNoLabel');
                 releaseGlobalLock('startPackNoLabel');
             }
         }
@@ -1634,26 +1635,25 @@
             const hash = window.location.hash || "";
             if (!hash.includes('pickupTask/list')) return;
 
+            if (!acquireGlobalLock('pickupTask')) {
+                return;
+            }
+
             try {
                 isProcessingHandover = true;
                 lastHandoverStartTime = Date.now();
+                localStorage.setItem('pending_pickupTask', 'true');
+                updateGlobalLockHeartbeat('pickupTask');
+
                 const data = await callGASPromise("POST", "get_pending_chuyen_pick");
                 if (data.status === "success" && data.pupCode) {
                     const pupCode = data.pupCode;
                     const rawDriver = data.recipientDriver;
                     const recipientDriver = extractDriverCode(rawDriver);
-                    localStorage.setItem('pending_pickupTask', 'true');
-                    if (!acquireGlobalLock('pickupTask')) {
-                        isProcessingHandover = false;
-                        return;
-                    }
-                    updateGlobalLockHeartbeat('pickupTask');
                     
                     const now = Date.now();
                     if (pupCode === lastHandoverPup && (now - lastHandoverTime) < 30000) {
                         log(`PUP ${pupCode} đã được xử lý gần đây (dưới 30s). Bỏ qua thao tác trùng lặp.`);
-                        isProcessingHandover = false;
-                        releaseGlobalLock('pickupTask');
                         return;
                     }
                     
@@ -1663,17 +1663,13 @@
                     const cachedDriver = localStorage.getItem('assigned_driver_' + pupCode);
                     const cachedTime = parseInt(localStorage.getItem('assigned_driver_time_' + pupCode) || '0');
                     if (cachedDriver && cachedDriver === recipientDriver && (Date.now() - cachedTime) < 1200000) {
-                        log(`[Chuyển Pick] PUP ${pupCode} đã được gán cho tài xế ${recipientDriver} trước đó. Ghi nhận thành công ngay.`);
-                        lastHandoverPup = pupCode;
-                        lastHandoverTime = Date.now();
+                        log(`PUP ${pupCode} đã được gán cho ${recipientDriver} trước đó (dưới 20 phút). Ghi nhận thành công trực tiếp.`);
                         try {
                             await callGASPromise("POST", "update_handover_status", { pupCode: pupCode, status: "Đã chuyển" });
-                            log(`[Chuyển Pick] Đã ghi nhận trạng thái 'Đã chuyển' cho ${pupCode} vào Sheet (Bỏ qua UI).`);
+                            log(`[Chuyển Pick] Đã ghi nhận thành công từ cache cho ${pupCode}.`);
                         } catch (err) {
-                            log(`[Chuyển Pick] Lỗi đồng bộ: ${err.message}`);
+                            log(`[Chuyển Pick] Lỗi đồng bộ thành công cho ${pupCode}: ${err.message}`);
                         }
-                        isProcessingHandover = false;
-                        releaseGlobalLock('pickupTask');
                         return;
                     }
 
