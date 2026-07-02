@@ -642,8 +642,20 @@ if (typeof unsafeWindow === 'undefined') {
         'OiA=',
         '',
         'W1RPIEluXSBLaMO0bmcgYuG6pW0gxJHGsOG7o2MgbsO6dCBpbiBuaMOjbiBjaG8g',
+        'LiBD4bqtcCBuaOG6rXQgdHLhuqFuZyB0aMOhaSAnTcOjIGzhu5dpJyBsw6puIFNoZWV0Li4u',
+        'UE9TVA==',
+        'bWFya190b19wcmludGVk',
+        'TcOjIGzhu5dp',
+        'W1RPIEluXSBM4buXaSBj4bqtcCBuaOG6rXQgdHLhuqFuZyB0aMOhaSBs4buXaSBjaG8g',
+        'OiA=',
         '',
-        'W1RPIEluXSBLaMO0bmcgdMOsbSB0aOG6pXkgw7Qgbmjhuq1wIFRPIE51bWJlciB0csOqbiBtw6BuIGjDrG5oIQ==',
+        'W1RPIEluXSBLaMO0bmcgdMOsbSB0aOG6pXkgw7Qgbmjhuq1wIFRPIE51bWJlciB0csOqbiBtw6BuIGjDrG5oISBD4bqtcCBuaOG6rXQgdHLhuqFuZyB0aMOhaSAnTcOjIGzhu5dpJyBsw6puIFNoZWV0Li4u',
+        'UE9TVA==',
+        'bWFya190b19wcmludGVk',
+        'TcOjIGzhu5dp',
+        'W1RPIEluXSBM4buXaSBj4bqtcCBuaOG6rXQgdHLhuqFuZyB0aMOhaSBs4buXaSBjaG8g',
+        'OiA=',
+        '',
         'cGVuZGluZ19zdGFydFBhY2tOb0xhYmVs',
         'TOG7l2kgSW4gVE86IA==',
         '',
@@ -2127,18 +2139,28 @@ log(_0xstr(566) + (_0x0031) + _0xstr(567) + (markErr.message) + _0xstr(568));
 }
 } else {
 log(_0xstr(569) + (_0x0031) + _0xstr(570));
+try {
+await _0x001a(_0xstr(571), _0xstr(572), { toNum: _0x0031, status: _0xstr(573) });
+} catch (e) {
+log(_0xstr(574) + (_0x0031) + _0xstr(575) + (e.message) + _0xstr(576));
+}
 }
 } else {
-log(_0xstr(571));
+log(_0xstr(577));
+try {
+await _0x001a(_0xstr(578), _0xstr(579), { toNum: _0x0031, status: _0xstr(580) });
+} catch (e) {
+log(_0xstr(581) + (_0x0031) + _0xstr(582) + (e.message) + _0xstr(583));
+}
 }
 } else {
-localStorage.removeItem(_0xstr(572));
+localStorage.removeItem(_0xstr(584));
 }
 } catch (error) {
-log(_0xstr(573) + (error.message) + _0xstr(574));
+log(_0xstr(585) + (error.message) + _0xstr(586));
 } finally {
 _0x0075 = false;
-_0x00be(_0xstr(575));
+_0x00be(_0xstr(587));
 }
 }
 function _0x00df(_0x0031) {
@@ -2147,30 +2169,30 @@ let _0x0022 = 0;
 let _0x0025 = setInterval(() => {
 _0x0022++;
 let _0x00ad = null;
-const _0x0017 = document.querySelectorAll(_0xstr(576));
+const _0x0017 = document.querySelectorAll(_0xstr(588));
 for (let btn of _0x0017) {
 const text = btn.innerText.trim();
-if (text === _0xstr(577) || text === _0xstr(578) || text === _0xstr(579) || text.includes(_0xstr(580))) {
+if (text === _0xstr(589) || text === _0xstr(590) || text === _0xstr(591) || text.includes(_0xstr(592))) {
 _0x00ad = btn;
 break;
 }
 }
 if (!_0x00ad) {
-const _0x0041 = document.querySelectorAll(_0xstr(581));
+const _0x0041 = document.querySelectorAll(_0xstr(593));
 for (let el of _0x0041) {
 const text = el.innerText.trim();
-if (text === _0xstr(582) || text === _0xstr(583) || text === _0xstr(584) || text.includes(_0xstr(585))) {
-_0x00ad = el.closest(_0xstr(586)) || el;
+if (text === _0xstr(594) || text === _0xstr(595) || text === _0xstr(596) || text.includes(_0xstr(597))) {
+_0x00ad = el.closest(_0xstr(598)) || el;
 break;
 }
 }
 }
-if (_0x00ad && !_0x00ad.disabled && !_0x00ad.classList.contains(_0xstr(587))) {
+if (_0x00ad && !_0x00ad.disabled && !_0x00ad.classList.contains(_0xstr(599))) {
 clearInterval(_0x0025);
-log(_0xstr(588));
+log(_0xstr(600));
 _0x00ad.click();
 setTimeout(() => {
-log(_0xstr(589) + (_0x0031) + _0xstr(590));
+log(_0xstr(601) + (_0x0031) + _0xstr(602));
 resolve(true);
 }, 800);
 } else if (_0x0022 > 20) {
@@ -2182,137 +2204,137 @@ resolve(false);
 }
 async function _0x00c9() {
 if (!_0x0076 || _0x0073) return;
-const hash = window.location.hash || _0xstr(591);
-if (!hash.includes(_0xstr(592))) return;
+const hash = window.location.hash || _0xstr(603);
+if (!hash.includes(_0xstr(604))) return;
 try {
 _0x0073 = true;
 _0x0080 = Date.now();
-const data = await _0x001a(_0xstr(593), _0xstr(594));
-if (data.status === _0xstr(595) && data.pupCode) {
+const data = await _0x001a(_0xstr(605), _0xstr(606));
+if (data.status === _0xstr(607) && data.pupCode) {
 const pupCode = data.pupCode;
 const _0x00b9 = data.recipientDriver;
 const recipientDriver = _0x004a(_0x00b9);
-localStorage.setItem(_0xstr(596), _0xstr(597));
-if (!_0x000c(_0xstr(598))) {
+localStorage.setItem(_0xstr(608), _0xstr(609));
+if (!_0x000c(_0xstr(610))) {
 _0x0073 = false;
 return;
 }
-_0x00e2(_0xstr(599));
+_0x00e2(_0xstr(611));
 const now = Date.now();
 if (pupCode === _0x007f && (now - _0x0081) < 30000) {
-log(_0xstr(600) + (pupCode) + _0xstr(601));
+log(_0xstr(612) + (pupCode) + _0xstr(613));
 _0x0073 = false;
-_0x00be(_0xstr(602));
+_0x00be(_0xstr(614));
 return;
 }
-log(_0xstr(603) + (pupCode) + _0xstr(604) + (recipientDriver) + _0xstr(605) + (_0x00b9) + _0xstr(606));
-const _0x0018 = localStorage.getItem(_0xstr(607) + pupCode);
-const _0x0019 = parseInt(localStorage.getItem(_0xstr(608) + pupCode) || _0xstr(609));
+log(_0xstr(615) + (pupCode) + _0xstr(616) + (recipientDriver) + _0xstr(617) + (_0x00b9) + _0xstr(618));
+const _0x0018 = localStorage.getItem(_0xstr(619) + pupCode);
+const _0x0019 = parseInt(localStorage.getItem(_0xstr(620) + pupCode) || _0xstr(621));
 if (_0x0018 && _0x0018 === recipientDriver && (Date.now() - _0x0019) < 1200000) {
-log(_0xstr(610) + (pupCode) + _0xstr(611) + (recipientDriver) + _0xstr(612));
+log(_0xstr(622) + (pupCode) + _0xstr(623) + (recipientDriver) + _0xstr(624));
 _0x007f = pupCode;
 _0x0081 = Date.now();
 try {
-await _0x001a(_0xstr(613), _0xstr(614), { pupCode: pupCode, status: _0xstr(615) });
-log(_0xstr(616) + (pupCode) + _0xstr(617));
+await _0x001a(_0xstr(625), _0xstr(626), { pupCode: pupCode, status: _0xstr(627) });
+log(_0xstr(628) + (pupCode) + _0xstr(629));
 } catch (err) {
-log(_0xstr(618) + (err.message) + _0xstr(619));
+log(_0xstr(630) + (err.message) + _0xstr(631));
 }
 _0x0073 = false;
-_0x00be(_0xstr(620));
+_0x00be(_0xstr(632));
 return;
 }
 const success = await _0x0046(pupCode, recipientDriver);
 _0x007f = pupCode;
 _0x0081 = Date.now();
-if (success === true || success === _0xstr(621)) {
-localStorage.setItem(_0xstr(622) + pupCode, recipientDriver);
-localStorage.setItem(_0xstr(623) + pupCode, Date.now().toString());
-const _0x00cd = success === _0xstr(624) ? _0xstr(625) : _0xstr(626) + (recipientDriver) + _0xstr(627);
-log(_0xstr(628) + (pupCode) + _0xstr(629) + (_0x00cd) + _0xstr(630));
+if (success === true || success === _0xstr(633)) {
+localStorage.setItem(_0xstr(634) + pupCode, recipientDriver);
+localStorage.setItem(_0xstr(635) + pupCode, Date.now().toString());
+const _0x00cd = success === _0xstr(636) ? _0xstr(637) : _0xstr(638) + (recipientDriver) + _0xstr(639);
+log(_0xstr(640) + (pupCode) + _0xstr(641) + (_0x00cd) + _0xstr(642));
 try {
-await _0x001a(_0xstr(631), _0xstr(632), { pupCode: pupCode, status: _0xstr(633) });
-log(_0xstr(634) + (pupCode) + _0xstr(635));
+await _0x001a(_0xstr(643), _0xstr(644), { pupCode: pupCode, status: _0xstr(645) });
+log(_0xstr(646) + (pupCode) + _0xstr(647));
 } catch (err) {
-log(_0xstr(636) + (pupCode) + _0xstr(637) + (err.message) + _0xstr(638));
+log(_0xstr(648) + (pupCode) + _0xstr(649) + (err.message) + _0xstr(650));
 }
 } else {
-log(_0xstr(639));
+log(_0xstr(651));
 try {
-await _0x001a(_0xstr(640), _0xstr(641), { pupCode: pupCode, status: _0xstr(642) });
-log(_0xstr(643) + (pupCode) + _0xstr(644));
+await _0x001a(_0xstr(652), _0xstr(653), { pupCode: pupCode, status: _0xstr(654) });
+log(_0xstr(655) + (pupCode) + _0xstr(656));
 } catch (err) {
-log(_0xstr(645) + (pupCode) + _0xstr(646) + (err.message) + _0xstr(647));
+log(_0xstr(657) + (pupCode) + _0xstr(658) + (err.message) + _0xstr(659));
 }
 }
 } else {
-localStorage.removeItem(_0xstr(648));
+localStorage.removeItem(_0xstr(660));
 }
 } catch (error) {
-log(_0xstr(649) + (error.message) + _0xstr(650));
+log(_0xstr(661) + (error.message) + _0xstr(662));
 } finally {
 _0x0073 = false;
-_0x00be(_0xstr(651));
+_0x00be(_0xstr(663));
 }
 }
 async function _0x0046(pupCode, recipientDriver) {
 await _0x0043();
 let _0x004c = null;
-const _0x004e = document.querySelectorAll(_0xstr(652));
+const _0x004e = document.querySelectorAll(_0xstr(664));
 for (let _0x007b of _0x004e) {
-const _0x007c = _0x007b.querySelector(_0xstr(653));
+const _0x007c = _0x007b.querySelector(_0xstr(665));
 if (_0x007c) {
-const _0x007e = (_0x007c.innerText || _0x007c.textContent || _0xstr(654)).trim().toLowerCase();
-if (_0x007e.includes(_0xstr(655)) || _0x007e.includes(_0xstr(656)) || _0x007e === _0xstr(657)) {
-_0x004c = _0x007b.querySelector(_0xstr(658));
+const _0x007e = (_0x007c.innerText || _0x007c.textContent || _0xstr(666)).trim().toLowerCase();
+if (_0x007e.includes(_0xstr(667)) || _0x007e.includes(_0xstr(668)) || _0x007e === _0xstr(669)) {
+_0x004c = _0x007b.querySelector(_0xstr(670));
 if (_0x004c) break;
 }
 }
 }
 if (!_0x004c) {
-const _0x0011 = document.querySelectorAll(_0xstr(659));
+const _0x0011 = document.querySelectorAll(_0xstr(671));
 for (let input of _0x0011) {
-const placeholder = input.placeholder || _0xstr(660);
-if (placeholder.toLowerCase().includes(_0xstr(661)) || placeholder.toLowerCase().includes(_0xstr(662))) {
+const placeholder = input.placeholder || _0xstr(672);
+if (placeholder.toLowerCase().includes(_0xstr(673)) || placeholder.toLowerCase().includes(_0xstr(674))) {
 _0x004c = input;
 break;
 }
 }
 }
 if (!_0x004c) {
-log(_0xstr(663));
+log(_0xstr(675));
 return false;
 }
 await _0x00c7(_0x004c, pupCode);
 await _0x0036(300);
-let _0x00c5 = Array.from(document.querySelectorAll(_0xstr(664))).find(btn => {
-const _0x00e0 = btn.innerText || btn.textContent || _0xstr(665);
-return _0x00e0.trim() === _0xstr(666) || _0x00e0.trim() === _0xstr(667);
+let _0x00c5 = Array.from(document.querySelectorAll(_0xstr(676))).find(btn => {
+const _0x00e0 = btn.innerText || btn.textContent || _0xstr(677);
+return _0x00e0.trim() === _0xstr(678) || _0x00e0.trim() === _0xstr(679);
 });
 if (_0x00c5) {
 _0x00c5.click();
-log(_0xstr(668) + pupCode);
+log(_0xstr(680) + pupCode);
 } else {
-_0x004c.dispatchEvent(new KeyboardEvent(_0xstr(669), { key: _0xstr(670), code: _0xstr(671), keyCode: 13, which: 13, bubbles: true }));
+_0x004c.dispatchEvent(new KeyboardEvent(_0xstr(681), { key: _0xstr(682), code: _0xstr(683), keyCode: 13, which: 13, bubbles: true }));
 }
 await _0x0036(2000);
-_0x00e2(_0xstr(672));
-const _0x009e = Array.from(document.querySelectorAll(_0xstr(673))).find(el => {
-const _0x00e0 = (el.innerText || el.textContent || _0xstr(674)).trim().toLowerCase();
-return _0x00e0 === _0xstr(675) || _0x00e0 === _0xstr(676);
+_0x00e2(_0xstr(684));
+const _0x009e = Array.from(document.querySelectorAll(_0xstr(685))).find(el => {
+const _0x00e0 = (el.innerText || el.textContent || _0xstr(686)).trim().toLowerCase();
+return _0x00e0 === _0xstr(687) || _0x00e0 === _0xstr(688);
 });
 if (_0x009e && (_0x009e.offsetWidth > 0 || _0x009e.offsetHeight > 0)) {
-log(_0xstr(677) + (pupCode) + _0xstr(678));
+log(_0xstr(689) + (pupCode) + _0xstr(690));
 return false;
 }
-const _0x00c3 = Array.from(document.querySelectorAll(_0xstr(679)));
-const _0x0035 = _0x00c3.filter(_0x00c2 => _0x00c2.querySelector(_0xstr(680)));
+const _0x00c3 = Array.from(document.querySelectorAll(_0xstr(691)));
+const _0x0035 = _0x00c3.filter(_0x00c2 => _0x00c2.querySelector(_0xstr(692)));
 if (_0x0035.length > 0) {
 let _0x004f = false;
 for (let _0x00c2 of _0x0035) {
-const _0x00ba = Array.from(_0x00c2.querySelectorAll(_0xstr(681))).find(el => {
-const _0x00e0 = el.innerText || el.textContent || _0xstr(682);
-return _0x00e0.trim() === _0xstr(683) || _0x00e0.trim() === _0xstr(684) || _0x00e0.trim() === _0xstr(685);
+const _0x00ba = Array.from(_0x00c2.querySelectorAll(_0xstr(693))).find(el => {
+const _0x00e0 = el.innerText || el.textContent || _0xstr(694);
+return _0x00e0.trim() === _0xstr(695) || _0x00e0.trim() === _0xstr(696) || _0x00e0.trim() === _0xstr(697);
 });
 if (_0x00ba) {
 _0x004f = true;
@@ -2320,27 +2342,27 @@ break;
 }
 }
 if (!_0x004f) {
-log(_0xstr(686) + (pupCode) + _0xstr(687));
+log(_0xstr(698) + (pupCode) + _0xstr(699));
 return false;
 }
 }
 let _0x00bb = false;
 for (let _0x00c2 of _0x00c3) {
-const _0x00ba = Array.from(_0x00c2.querySelectorAll(_0xstr(688))).find(el => {
-const _0x00e0 = el.innerText || el.textContent || _0xstr(689);
-return _0x00e0.trim() === _0xstr(690) || _0x00e0.trim() === _0xstr(691) || _0x00e0.trim() === _0xstr(692);
+const _0x00ba = Array.from(_0x00c2.querySelectorAll(_0xstr(700))).find(el => {
+const _0x00e0 = el.innerText || el.textContent || _0xstr(701);
+return _0x00e0.trim() === _0xstr(702) || _0x00e0.trim() === _0xstr(703) || _0x00e0.trim() === _0xstr(704);
 });
 if (_0x00ba) {
-log(_0xstr(693));
+log(_0xstr(705));
 _0x00ba.click();
 await _0x0036(2500);
-_0x00e2(_0xstr(694));
-const _0x003d = document.querySelectorAll(_0xstr(695));
+_0x00e2(_0xstr(706));
+const _0x003d = document.querySelectorAll(_0xstr(707));
 let _0x00d4 = null;
 for (const _0x0038 of _0x003d) {
 if (_0x0038.offsetWidth > 0 || _0x0038.offsetHeight > 0) {
-const text = (_0x0038.innerText || _0x0038.textContent || _0xstr(696));
-if (text.includes(_0xstr(697)) || text.includes(_0xstr(698)) || text.includes(_0xstr(699)) || text.includes(_0xstr(700))) {
+const text = (_0x0038.innerText || _0x0038.textContent || _0xstr(708));
+if (text.includes(_0xstr(709)) || text.includes(_0xstr(710)) || text.includes(_0xstr(711)) || text.includes(_0xstr(712))) {
 _0x00d4 = _0x0038;
 break;
 }
@@ -2348,142 +2370,142 @@ break;
 }
 if (_0x00d4) {
 let _0x003f = null;
-const _0x004e = _0x00d4.querySelectorAll(_0xstr(701));
+const _0x004e = _0x00d4.querySelectorAll(_0xstr(713));
 for (let _0x007b of _0x004e) {
-const _0x007c = _0x007b.querySelector(_0xstr(702));
+const _0x007c = _0x007b.querySelector(_0xstr(714));
 if (_0x007c) {
-const _0x007e = (_0x007c.innerText || _0x007c.textContent || _0xstr(703)).trim().toLowerCase();
-if (_0x007e.includes(_0xstr(704)) || _0x007e.includes(_0xstr(705))) {
-_0x003f = _0x007b.querySelector(_0xstr(706));
+const _0x007e = (_0x007c.innerText || _0x007c.textContent || _0xstr(715)).trim().toLowerCase();
+if (_0x007e.includes(_0xstr(716)) || _0x007e.includes(_0xstr(717))) {
+_0x003f = _0x007b.querySelector(_0xstr(718));
 if (_0x003f) break;
 }
 }
 }
 if (!_0x003f) {
-const _0x003a = _0x00d4.querySelectorAll(_0xstr(707));
+const _0x003a = _0x00d4.querySelectorAll(_0xstr(719));
 for (let _0x0066 of _0x003a) {
-const ph = _0x0066.placeholder || _0xstr(708);
-if (ph.toLowerCase().includes(_0xstr(709)) || ph.toLowerCase().includes(_0xstr(710)) || ph.toLowerCase().includes(_0xstr(711))) {
+const ph = _0x0066.placeholder || _0xstr(720);
+if (ph.toLowerCase().includes(_0xstr(721)) || ph.toLowerCase().includes(_0xstr(722)) || ph.toLowerCase().includes(_0xstr(723))) {
 _0x003f = _0x0066;
 break;
 }
 }
 }
 if (_0x003f) {
-const _0x00c6 = _0x003f.closest(_0xstr(712)) || _0x003f.parentElement;
+const _0x00c6 = _0x003f.closest(_0xstr(724)) || _0x003f.parentElement;
 if (_0x00c6) {
 _0x00c6.click();
 } else {
-_0x003f.removeAttribute(_0xstr(713));
+_0x003f.removeAttribute(_0xstr(725));
 _0x003f.click();
 }
-log(_0xstr(714));
+log(_0xstr(726));
 await _0x0036(2200);
-_0x00e2(_0xstr(715));
+_0x00e2(_0xstr(727));
 let _0x000d = document.activeElement;
-if (!_0x000d || _0x000d.tagName !== _0xstr(716) || !_0x00d4.contains(_0x000d)) {
+if (!_0x000d || _0x000d.tagName !== _0xstr(728) || !_0x00d4.contains(_0x000d)) {
 _0x000d = _0x003f;
 }
-_0x000d.removeAttribute(_0xstr(717));
+_0x000d.removeAttribute(_0xstr(729));
 _0x000d.focus();
-if (typeof _0x000d.select === _0xstr(718)) _0x000d.select();
-_0x000d.value = _0xstr(719);
-_0x000d.dispatchEvent(new Event(_0xstr(720), { bubbles: true }));
+if (typeof _0x000d.select === _0xstr(730)) _0x000d.select();
+_0x000d.value = _0xstr(731);
+_0x000d.dispatchEvent(new Event(_0xstr(732), { bubbles: true }));
 try {
-document.execCommand(_0xstr(721), false, recipientDriver);
+document.execCommand(_0xstr(733), false, recipientDriver);
 } catch (e) {}
 if (_0x000d.value !== recipientDriver) {
 _0x000d.value = recipientDriver;
 }
-_0x000d.dispatchEvent(new Event(_0xstr(722), { bubbles: true }));
-_0x000d.dispatchEvent(new Event(_0xstr(723), { bubbles: true }));
-_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(724), { key: _0xstr(725), bubbles: true }));
-_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(726), { key: _0xstr(727), bubbles: true }));
-log(_0xstr(728) + recipientDriver + _0xstr(729));
+_0x000d.dispatchEvent(new Event(_0xstr(734), { bubbles: true }));
+_0x000d.dispatchEvent(new Event(_0xstr(735), { bubbles: true }));
+_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(736), { key: _0xstr(737), bubbles: true }));
+_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(738), { key: _0xstr(739), bubbles: true }));
+log(_0xstr(740) + recipientDriver + _0xstr(741));
 await _0x0036(2500);
-const _0x0010 = Array.from(document.querySelectorAll(_0xstr(730)));
+const _0x0010 = Array.from(document.querySelectorAll(_0xstr(742)));
 let _0x0095 = _0x0010.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(731)).trim();
+const text = (el.innerText || el.textContent || _0xstr(743)).trim();
 return text.includes(recipientDriver) &&
 (el.offsetWidth > 0 || el.offsetHeight > 0) &&
-(el.classList.contains(_0xstr(732)) ||
-el.closest(_0xstr(733)) ||
-el.closest(_0xstr(734)) ||
-el.tagName === _0xstr(735));
+(el.classList.contains(_0xstr(744)) ||
+el.closest(_0xstr(745)) ||
+el.closest(_0xstr(746)) ||
+el.tagName === _0xstr(747));
 });
 if (!_0x0095) {
 _0x0095 = _0x0010.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(736)).trim();
+const text = (el.innerText || el.textContent || _0xstr(748)).trim();
 return text.includes(recipientDriver) &&
-(el.closest(_0xstr(737)) || el.closest(_0xstr(738)) || el.tagName === _0xstr(739));
+(el.closest(_0xstr(749)) || el.closest(_0xstr(750)) || el.tagName === _0xstr(751));
 });
 }
 if (!_0x0095) {
 _0x0095 = _0x0010.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(740)).trim();
+const text = (el.innerText || el.textContent || _0xstr(752)).trim();
 return text.includes(recipientDriver);
 });
 }
 if (_0x0095) {
 _0x0095.click();
-log(_0xstr(741) + (_0x0095.innerText || _0x0095.textContent).trim());
+log(_0xstr(753) + (_0x0095.innerText || _0x0095.textContent).trim());
 await _0x0036(1200);
-const _0x0039 = Array.from(_0x00d4.querySelectorAll(_0xstr(742))).find(btn => {
-const _0x00e0 = btn.innerText || btn.textContent || _0xstr(743);
-return _0x00e0.trim() === _0xstr(744) || _0x00e0.trim() === _0xstr(745) || _0x00e0.trim() === _0xstr(746);
+const _0x0039 = Array.from(_0x00d4.querySelectorAll(_0xstr(754))).find(btn => {
+const _0x00e0 = btn.innerText || btn.textContent || _0xstr(755);
+return _0x00e0.trim() === _0xstr(756) || _0x00e0.trim() === _0xstr(757) || _0x00e0.trim() === _0xstr(758);
 });
 if (_0x0039) {
 _0x0039.click();
-log(_0xstr(747));
+log(_0xstr(759));
 let _0x005a = false;
 for (let _0x001e = 0; _0x001e < 30; _0x001e++) {
 await _0x0036(100);
-const _0x0012 = Array.from(document.querySelectorAll(_0xstr(748)));
+const _0x0012 = Array.from(document.querySelectorAll(_0xstr(760)));
 const _0x0045 = _0x0012.find(el => {
-const _0x00e0 = (el.innerText || el.textContent || _0xstr(749));
-return _0x00e0.includes(_0xstr(750)) || _0x00e0.includes(_0xstr(751));
+const _0x00e0 = (el.innerText || el.textContent || _0xstr(761));
+return _0x00e0.includes(_0xstr(762)) || _0x00e0.includes(_0xstr(763));
 });
 if (_0x0045 && (_0x0045.offsetWidth > 0 || _0x0045.offsetHeight > 0)) {
-log(_0xstr(752) + (_0x0045.textContent.trim()) + _0xstr(753));
+log(_0xstr(764) + (_0x0045.textContent.trim()) + _0xstr(765));
 _0x005a = true;
 break;
 }
 }
 if (_0x005a) {
-let _0x001b = Array.from(_0x00d4.querySelectorAll(_0xstr(754))).find(btn => {
-const _0x00e0 = (btn.innerText || btn.textContent || _0xstr(755)).trim().toLowerCase();
-return _0x00e0 === _0xstr(756) || _0x00e0 === _0xstr(757) || _0x00e0 === _0xstr(758) || _0x00e0 === _0xstr(759) || _0x00e0.includes(_0xstr(760)) || _0x00e0.includes(_0xstr(761));
+let _0x001b = Array.from(_0x00d4.querySelectorAll(_0xstr(766))).find(btn => {
+const _0x00e0 = (btn.innerText || btn.textContent || _0xstr(767)).trim().toLowerCase();
+return _0x00e0 === _0xstr(768) || _0x00e0 === _0xstr(769) || _0x00e0 === _0xstr(770) || _0x00e0 === _0xstr(771) || _0x00e0.includes(_0xstr(772)) || _0x00e0.includes(_0xstr(773));
 });
 if (!_0x001b) {
-_0x001b = Array.from(document.querySelectorAll(_0xstr(762))).find(btn => {
-const _0x00e0 = (btn.innerText || btn.textContent || _0xstr(763)).trim().toLowerCase();
-return (_0x00e0 === _0xstr(764) || _0x00e0 === _0xstr(765) || _0x00e0 === _0xstr(766) || _0x00e0 === _0xstr(767) || _0x00e0.includes(_0xstr(768)) || _0x00e0.includes(_0xstr(769))) &&
+_0x001b = Array.from(document.querySelectorAll(_0xstr(774))).find(btn => {
+const _0x00e0 = (btn.innerText || btn.textContent || _0xstr(775)).trim().toLowerCase();
+return (_0x00e0 === _0xstr(776) || _0x00e0 === _0xstr(777) || _0x00e0 === _0xstr(778) || _0x00e0 === _0xstr(779) || _0x00e0.includes(_0xstr(780)) || _0x00e0.includes(_0xstr(781))) &&
 (btn.offsetWidth > 0 || btn.offsetHeight > 0);
 });
 }
 if (_0x001b) {
 _0x001b.click();
-log(_0xstr(770));
+log(_0xstr(782));
 } else {
-log(_0xstr(771));
+log(_0xstr(783));
 }
 await _0x0036(500);
-return _0xstr(772);
+return _0xstr(784);
 }
 _0x00bb = true;
 await _0x0036(1500);
 break;
 } else {
-log(_0xstr(773));
+log(_0xstr(785));
 }
 } else {
-log(_0xstr(774) + recipientDriver);
+log(_0xstr(786) + recipientDriver);
 }
 } else {
-log(_0xstr(775));
+log(_0xstr(787));
 }
 } else {
-log(_0xstr(776));
+log(_0xstr(788));
 }
 }
 }
@@ -2492,34 +2514,34 @@ return _0x00bb;
 function _0x001f() {
 const now = Date.now();
 if (_0x0072 && _0x0086 > 0 && (now - _0x0086) > _0x0009) {
-log(_0xstr(777));
+log(_0xstr(789));
 _0x0072 = false;
-_0x00be(_0xstr(778));
+_0x00be(_0xstr(790));
 _0x0086 = 0;
 }
 if (_0x0074 && _0x0082 > 0 && (now - _0x0082) > _0x0009) {
-log(_0xstr(779));
+log(_0xstr(791));
 _0x0074 = false;
-_0x00be(_0xstr(780));
+_0x00be(_0xstr(792));
 _0x0082 = 0;
 }
 if (_0x0075 && _0x0085 > 0 && (now - _0x0085) > _0x0009) {
-log(_0xstr(781));
+log(_0xstr(793));
 _0x0075 = false;
-_0x00be(_0xstr(782));
+_0x00be(_0xstr(794));
 _0x0085 = 0;
 }
 if (_0x0073 && _0x0080 > 0 && (now - _0x0080) > _0x0009) {
-log(_0xstr(783));
+log(_0xstr(795));
 _0x0073 = false;
-_0x00be(_0xstr(784));
+_0x00be(_0xstr(796));
 _0x0080 = 0;
 }
 }
 function _0x0026() {
 const href = window.location.href;
-if (href.includes(_0xstr(785)) || href.includes(_0xstr(786))) {
-log(_0xstr(787));
+if (href.includes(_0xstr(797)) || href.includes(_0xstr(798))) {
+log(_0xstr(799));
 window.location.reload();
 return false;
 }
@@ -2528,55 +2550,55 @@ return true;
 const _0x0008 = 60000;
 const _0x0007 = 300000;
 function _0x006f() {
-const hash = window.location.hash || _0xstr(788);
+const hash = window.location.hash || _0xstr(800);
 const href = window.location.href;
-if (href.includes(_0xstr(789)) || href.includes(_0xstr(790))) return false;
-const _0x0094 = document.querySelectorAll(_0xstr(791));
+if (href.includes(_0xstr(801)) || href.includes(_0xstr(802))) return false;
+const _0x0094 = document.querySelectorAll(_0xstr(803));
 for (const _0x0093 of _0x0094) {
 if (_0x0093.offsetWidth > 100 && _0x0093.offsetHeight > 100) {
 const style = window.getComputedStyle(_0x0093);
-if (style.display !== _0xstr(792) && style.visibility !== _0xstr(793) && style.opacity !== _0xstr(794)) {
+if (style.display !== _0xstr(804) && style.visibility !== _0xstr(805) && style.opacity !== _0xstr(806)) {
 return false;
 }
 }
 }
-if (hash.includes(_0xstr(795))) {
-const textarea = document.querySelector(_0xstr(796)) || document.querySelector(_0xstr(797));
+if (hash.includes(_0xstr(807))) {
+const textarea = document.querySelector(_0xstr(808)) || document.querySelector(_0xstr(809));
 if (!textarea) return false;
 const style = window.getComputedStyle(textarea);
-return textarea.offsetWidth > 0 && style.display !== _0xstr(798) && style.visibility !== _0xstr(799);
+return textarea.offsetWidth > 0 && style.display !== _0xstr(810) && style.visibility !== _0xstr(811);
 }
-if (hash.includes(_0xstr(800))) {
-const _0x0017 = Array.from(document.querySelectorAll(_0xstr(801)));
+if (hash.includes(_0xstr(812))) {
+const _0x0017 = Array.from(document.querySelectorAll(_0xstr(813)));
 const _0x005e = _0x0017.some(btn => {
-const text = (btn.innerText || btn.textContent || _0xstr(802)).trim().toLowerCase();
+const text = (btn.innerText || btn.textContent || _0xstr(814)).trim().toLowerCase();
 const style = window.getComputedStyle(btn);
-const _0x007a = btn.offsetWidth > 0 && style.display !== _0xstr(803) && style.visibility !== _0xstr(804);
-return _0x007a && (text.includes(_0xstr(805)) || text.includes(_0xstr(806)));
+const _0x007a = btn.offsetWidth > 0 && style.display !== _0xstr(815) && style.visibility !== _0xstr(816);
+return _0x007a && (text.includes(_0xstr(817)) || text.includes(_0xstr(818)));
 });
-const _0x005f = document.querySelectorAll(_0xstr(807)).length > 0;
+const _0x005f = document.querySelectorAll(_0xstr(819)).length > 0;
 return _0x005e && _0x005f;
 }
-if (hash.includes(_0xstr(808))) {
-const _0x0068 = Array.from(document.querySelectorAll(_0xstr(809)));
+if (hash.includes(_0xstr(820))) {
+const _0x0068 = Array.from(document.querySelectorAll(_0xstr(821)));
 const _0x0062 = _0x0068.some(input => {
-const type = (input.type || _0xstr(810)).toLowerCase();
+const type = (input.type || _0xstr(822)).toLowerCase();
 const style = window.getComputedStyle(input);
-const _0x0079 = type === _0xstr(811) || type === _0xstr(812) || type === _0xstr(813);
-return _0x0079 && input.offsetWidth > 0 && style.display !== _0xstr(814) && style.visibility !== _0xstr(815);
+const _0x0079 = type === _0xstr(823) || type === _0xstr(824) || type === _0xstr(825);
+return _0x0079 && input.offsetWidth > 0 && style.display !== _0xstr(826) && style.visibility !== _0xstr(827);
 });
 return _0x0062;
 }
-if (hash.includes(_0xstr(816))) {
-const _0x0068 = Array.from(document.querySelectorAll(_0xstr(817)));
+if (hash.includes(_0xstr(828))) {
+const _0x0068 = Array.from(document.querySelectorAll(_0xstr(829)));
 const _0x005d = _0x0068.some(input => {
 const style = window.getComputedStyle(input);
-return input.offsetWidth > 0 && style.display !== _0xstr(818) && style.visibility !== _0xstr(819);
+return input.offsetWidth > 0 && style.display !== _0xstr(830) && style.visibility !== _0xstr(831);
 });
-const _0x0017 = Array.from(document.querySelectorAll(_0xstr(820)));
+const _0x0017 = Array.from(document.querySelectorAll(_0xstr(832)));
 const _0x0058 = _0x0017.some(btn => {
 const style = window.getComputedStyle(btn);
-return btn.offsetWidth > 0 && style.display !== _0xstr(821) && style.visibility !== _0xstr(822);
+return btn.offsetWidth > 0 && style.display !== _0xstr(833) && style.visibility !== _0xstr(834);
 });
 return _0x005d && _0x0058;
 }
@@ -2584,32 +2606,32 @@ return false;
 }
 function _0x0065() {
 const now = Date.now();
-log(_0xstr(823));
+log(_0xstr(835));
 for (const type of _0x0002) {
-localStorage.setItem(_0xstr(824) + type, _0xstr(825));
+localStorage.setItem(_0xstr(836) + type, _0xstr(837));
 }
 setTimeout(() => {
-log(_0xstr(826));
-_0x0064(_0xstr(827));
+log(_0xstr(838));
+_0x0064(_0xstr(839));
 }, 2500);
 _0x008a = now;
 }
 function _0x0021() {
 const _0x009a = _0x0053();
 if (_0x009a) {
-const _0x00de = localStorage.getItem(_0xstr(828) + _0x009a);
-if (_0x00de === _0xstr(829)) {
-localStorage.removeItem(_0xstr(830) + _0x009a);
-log(_0xstr(831));
-localStorage.setItem(_0xstr(832) + _0x009a, _0xstr(833));
-localStorage.removeItem(_0xstr(834) + _0x009a);
+const _0x00de = localStorage.getItem(_0xstr(840) + _0x009a);
+if (_0x00de === _0xstr(841)) {
+localStorage.removeItem(_0xstr(842) + _0x009a);
+log(_0xstr(843));
+localStorage.setItem(_0xstr(844) + _0x009a, _0xstr(845));
+localStorage.removeItem(_0xstr(846) + _0x009a);
 window.close();
 }
 }
 }
 function _0x0024() {
 const now = Date.now();
-if (localStorage.getItem(_0xstr(835)) || localStorage.getItem(_0xstr(836))) return;
+if (localStorage.getItem(_0xstr(847)) || localStorage.getItem(_0xstr(848))) return;
 const _0x006c = !_0x0072 && !_0x0074 && !_0x0075 && !_0x0073;
 if (_0x006c && (now - _0x008a) > _0x0001) {
 _0x0065();
@@ -2620,13 +2642,13 @@ function _0x0097() {
 _0x00e3();
 _0x00e4();
 _0x0021();
-_0x0013 = localStorage.getItem(_0xstr(837)) || GM_getValue(_0xstr(838), _0x0000);
-_0x00aa = localStorage.getItem(_0xstr(839)) || GM_getValue(_0xstr(840), _0xstr(841));
-_0x00ab = localStorage.getItem(_0xstr(842)) || GM_getValue(_0xstr(843), _0xstr(844));
-_0x0076 = localStorage.getItem(_0xstr(845)) === _0xstr(846);
+_0x0013 = localStorage.getItem(_0xstr(849)) || GM_getValue(_0xstr(850), _0x0000);
+_0x00aa = localStorage.getItem(_0xstr(851)) || GM_getValue(_0xstr(852), _0xstr(853));
+_0x00ab = localStorage.getItem(_0xstr(854)) || GM_getValue(_0xstr(855), _0xstr(856));
+_0x0076 = localStorage.getItem(_0xstr(857)) === _0xstr(858);
 _0x00e5();
 const _0x0034 = window.location.href;
-const hash = window.location.hash || _0xstr(847);
+const hash = window.location.hash || _0xstr(859);
 if (_0x0034 !== _0x008c) {
 _0x008c = _0x0034;
 _0x0074 = false;
@@ -2644,32 +2666,32 @@ _0x0026();
 _0x0024();
 _0x0015();
 }
-if (hash.includes(_0xstr(848))) {
+if (hash.includes(_0xstr(860))) {
 _0x00ca();
 }
-if (hash.includes(_0xstr(849))) {
+if (hash.includes(_0xstr(861))) {
 _0x00b3();
 }
-if (hash.includes(_0xstr(850))) {
+if (hash.includes(_0xstr(862))) {
 _0x00b2();
 }
-if (hash.includes(_0xstr(851))) {
+if (hash.includes(_0xstr(863))) {
 _0x00c9();
 }
 }
-window.addEventListener(_0xstr(852), (e) => {
-if (e.data && e.data.type === _0xstr(853)) {
+window.addEventListener(_0xstr(864), (e) => {
+if (e.data && e.data.type === _0xstr(865)) {
 _0x00e3();
 if (_0x0076) {
 _0x0020();
-const hash = window.location.hash || _0xstr(854);
-if (hash.includes(_0xstr(855))) {
+const hash = window.location.hash || _0xstr(866);
+if (hash.includes(_0xstr(867))) {
 _0x00ca();
-} else if (hash.includes(_0xstr(856))) {
+} else if (hash.includes(_0xstr(868))) {
 _0x00b3();
-} else if (hash.includes(_0xstr(857))) {
+} else if (hash.includes(_0xstr(869))) {
 _0x00b2();
-} else if (hash.includes(_0xstr(858))) {
+} else if (hash.includes(_0xstr(870))) {
 _0x00c9();
 }
 }
@@ -2678,17 +2700,17 @@ _0x00c9();
 _0x00e3();
 let _0x00ed = null;
 try {
-const _0x0016 = new Blob([_0xstr(859)], { type: _0xstr(860) });
+const _0x0016 = new Blob([_0xstr(871)], { type: _0xstr(872) });
 const _0x00ee = URL.createObjectURL(_0x0016);
 _0x00ed = new Worker(_0x00ee);
 _0x00ed.onmessage = function(e) {
-if (e.data === _0xstr(861)) {
+if (e.data === _0xstr(873)) {
 _0x0097();
 }
 };
-log(_0xstr(862));
+log(_0xstr(874));
 } catch (err) {
-log(_0xstr(863));
+log(_0xstr(875));
 function _0x004b() {
 _0x0097();
 setTimeout(_0x004b, 400);
@@ -2696,8 +2718,8 @@ setTimeout(_0x004b, 400);
 _0x004b();
 }
 }
-if (document.readyState === _0xstr(864)) {
-document.addEventListener(_0xstr(865), init);
+if (document.readyState === _0xstr(876)) {
+document.addEventListener(_0xstr(877), init);
 } else {
 init();
 }

@@ -402,6 +402,7 @@ function handleSpxRequest(data) {
   
   if (action === "markPrinted") {
     var toNum = data.toNum;
+    var targetStatus = data.status || "Đã In";
     if (!toNum) {
       return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "Missing toNum" }))
                            .setMimeType(ContentService.MimeType.JSON);
@@ -421,7 +422,7 @@ function handleSpxRequest(data) {
         if (values[i][0] && values[i][0].toString().trim().toUpperCase() === toNumClean) {
           var status = values[i][1].toString().trim().toLowerCase();
           if (status !== "đã in") {
-            sheet.getRange(i + 2, 2).setValue("Đã In");
+            sheet.getRange(i + 2, 2).setValue(targetStatus);
             markedCount++;
           }
         }
@@ -460,16 +461,30 @@ function getPendingTO(pcName, priority) {
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return ContentService.createTextOutput(JSON.stringify({ status: "no_data" })).setMimeType(ContentService.MimeType.JSON);
     
-    var range = sheet.getRange(2, 1, lastRow - 1, 2);
+    var range = sheet.getRange(2, 1, lastRow - 1, 4);
     var values = range.getValues();
     
-    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (Bản 3.1 cũ)
+    // KIỂM TRA ĐANG CÓ TASK IN TO NÀO CHẠY KHÔNG (NẾU THIẾT BỊ ĐÓ VẪN CÒN SỐNG VÀ DƯỚI 20 GIÂY)
     var hasActiveTOPrint = false;
     for (var i = 0; i < values.length; i++) {
       var status = values[i][1].toString().trim().toLowerCase();
       if (status === "đang in") {
-        hasActiveTOPrint = true;
-        break;
+        var activePc = values[i][2] ? values[i][2].toString().trim() : "";
+        var rowTime = values[i][3];
+        var isTimedOut = false;
+        var parsedTime = parseDateDefensive(rowTime);
+        if (parsedTime) {
+          var diffMs = now.getTime() - parsedTime.getTime();
+          if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
+            sheet.getRange(i + 2, 2).setValue("Mã lỗi");
+            isTimedOut = true;
+          }
+        }
+        
+        if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
+          hasActiveTOPrint = true;
+          break;
+        }
       }
     }
     
@@ -482,6 +497,8 @@ function getPendingTO(pcName, priority) {
       if (status === "chờ in" || status === "") {
         var rowNum = i + 2;
         sheet.getRange(rowNum, 2).setValue("Đang in"); // Cập nhật sang trạng thái trung gian "Đang in"
+        sheet.getRange(rowNum, 3).setValue(pcName); // Ghi nhận thiết bị thực hiện
+        sheet.getRange(rowNum, 4).setValue(now); // Ghi nhận thời gian bắt đầu in TO
         SpreadsheetApp.flush();
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
@@ -527,8 +544,8 @@ function getOrCreateSheetInTO() {
   var sheet = ss.getSheetByName("InTO");
   if (!sheet) {
     sheet = ss.insertSheet("InTO");
-    sheet.appendRow(["TO Number", "Trạng thái"]);
-    sheet.getRange("A1:B1").setFontWeight("bold").setBackground("#FFE599");
+    sheet.appendRow(["TO Number", "Trạng thái", "Thiết bị in (PC)", "Thời gian"]);
+    sheet.getRange("A1:D1").setFontWeight("bold").setBackground("#FFE599");
   }
   return sheet;
 }
@@ -581,8 +598,9 @@ function getPendingCode(pcName, priority) {
         var activePc = values[i][4] ? values[i][4].toString().trim() : "";
         var rowTime = values[i][1];
         var isTimedOut = false;
-        if (rowTime instanceof Date) {
-          var diffMs = now.getTime() - rowTime.getTime();
+        var parsedTime = parseDateDefensive(rowTime);
+        if (parsedTime) {
+          var diffMs = now.getTime() - parsedTime.getTime();
           if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
             sheet.getRange(i + 2, 4).setValue("Mã lỗi");
             isTimedOut = true;
@@ -936,8 +954,9 @@ function registerPcActiveAndCheckPriority(pcName, priority, now) {
       pcFound = true;
     } else {
       if (rowPriority > priorityVal) {
-        if (rowTime instanceof Date) {
-          var diffMs = now.getTime() - rowTime.getTime();
+        var parsedTime = parseDateDefensive(rowTime);
+        if (parsedTime) {
+          var diffMs = now.getTime() - parsedTime.getTime();
           if (diffMs < 20000) { // 20 giây hoạt động
             higherPriorityActive = true;
           }
@@ -964,12 +983,48 @@ function isPcAlive(pcName, now) {
     for (var i = 0; i < values.length; i++) {
       if (values[i][0].toString().trim() === pcName.toString().trim()) {
         var rowTime = values[i][2];
-        if (rowTime instanceof Date) {
-          var diffMs = now.getTime() - rowTime.getTime();
+        var parsedTime = parseDateDefensive(rowTime);
+        if (parsedTime) {
+          var diffMs = now.getTime() - parsedTime.getTime();
           return diffMs < 30000; // Hoạt động trong 30 giây qua
         }
       }
     }
   } catch (e) {}
   return false;
+}
+
+function parseDateDefensive(dateVal) {
+  if (!dateVal) return null;
+  if (dateVal instanceof Date) return dateVal;
+  
+  var str = dateVal.toString().trim();
+  // Khớp dd/MM/yyyy HH:mm:ss hoặc d/M/yyyy H:m:s
+  var parts = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2}):(\d{1,2})/);
+  if (parts) {
+    return new Date(
+      parseInt(parts[3], 10),
+      parseInt(parts[2], 10) - 1,
+      parseInt(parts[1], 10),
+      parseInt(parts[4], 10),
+      parseInt(parts[5], 10),
+      parseInt(parts[6], 10)
+    );
+  }
+  
+  // Khớp yyyy-MM-dd HH:mm:ss
+  var partsIso = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2}):(\d{1,2})/);
+  if (partsIso) {
+    return new Date(
+      parseInt(partsIso[1], 10),
+      parseInt(partsIso[2], 10) - 1,
+      parseInt(partsIso[3], 10),
+      parseInt(partsIso[4], 10),
+      parseInt(partsIso[5], 10),
+      parseInt(partsIso[6], 10)
+    );
+  }
+  
+  var d = new Date(str);
+  return isNaN(d.getTime()) ? null : d;
 }

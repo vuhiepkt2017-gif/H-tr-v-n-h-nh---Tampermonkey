@@ -1547,10 +1547,20 @@
                                 log(`[TO In] Cảnh báo: Không đánh dấu được Đã In cho ${currentTO}: ${markErr.message}`);
                             }
                         } else {
-                            log(`[TO In] Không bấm được nút in nhãn cho ${currentTO}`);
+                            log(`[TO In] Không bấm được nút in nhãn cho ${currentTO}. Cập nhật trạng thái 'Mã lỗi' lên Sheet...`);
+                            try {
+                                await callGASPromise("POST", "mark_to_printed", { toNum: currentTO, status: "Mã lỗi" });
+                            } catch (e) {
+                                log(`[TO In] Lỗi cập nhật trạng thái lỗi cho ${currentTO}: ${e.message}`);
+                            }
                         }
                     } else {
-                        log(`[TO In] Không tìm thấy ô nhập TO Number trên màn hình!`);
+                        log(`[TO In] Không tìm thấy ô nhập TO Number trên màn hình! Cập nhật trạng thái 'Mã lỗi' lên Sheet...`);
+                        try {
+                            await callGASPromise("POST", "mark_to_printed", { toNum: currentTO, status: "Mã lỗi" });
+                        } catch (e) {
+                            log(`[TO In] Lỗi cập nhật trạng thái lỗi cho ${currentTO}: ${e.message}`);
+                        }
                     }
                 } else {
                     localStorage.removeItem('pending_startPackNoLabel');
