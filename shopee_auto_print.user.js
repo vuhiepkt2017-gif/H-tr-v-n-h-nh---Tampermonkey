@@ -220,8 +220,13 @@
             const currentLockType = localStorage.getItem(typeKey);
             const lockTime = parseInt(localStorage.getItem(timeKey) || "0");
             
+            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask'];
+            const myIndex = priorities.indexOf(tabType);
+            const holderIndex = currentLockType ? priorities.indexOf(currentLockType) : 99;
+
             // Nếu chưa có khóa, hoặc khóa đã quá 5 giây (để các tab rảnh rỗi nhường khóa nhanh hơn), hoặc chính tab này đang giữ khóa
-            if (!currentLockType || (now - lockTime) > 5000 || currentLockType === tabType) {
+            // HOẶC tab này có độ ưu tiên cao hơn hẳn tab đang giữ khóa (myIndex < holderIndex)
+            if (!currentLockType || (now - lockTime) > 5000 || currentLockType === tabType || (myIndex !== -1 && myIndex < holderIndex)) {
                 localStorage.setItem(lockKey, "locked");
                 localStorage.setItem(typeKey, tabType);
                 localStorage.setItem(timeKey, now.toString());
