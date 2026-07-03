@@ -1296,22 +1296,24 @@
             printBtn.click();
             
             let dialogPrintBtn = null;
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 40; i++) {
                 await delay(50);
                 const allPrintButtons = Array.from(document.querySelectorAll('button, span, a')).filter(el => {
                     const txt = el.innerText || el.textContent || "";
-                    return txt.trim() === "Print";
+                    return txt.trim().toLowerCase() === "print";
                 });
                 
-                dialogPrintBtn = allPrintButtons.find(btn => btn !== printBtn && (btn.offsetWidth > 0 || btn.offsetHeight > 0 || btn.clientHeight > 0));
+                dialogPrintBtn = allPrintButtons.find(btn => btn !== printBtn);
                 if (dialogPrintBtn) break;
             }
 
             if (dialogPrintBtn) {
-                await delayRandom(200, 300);
+                await delay(300); // Chờ 300ms cho popup hiển thị hoàn tất và sẵn sàng nhận click
                 dialogPrintBtn.click();
+                log("[In Bill] Đã click nút in xác nhận trên popup.");
                 await delay(1000);
             } else {
+                log("[In Bill] Không phát hiện popup xác nhận, bỏ qua bước click xác nhận.");
                 await delay(500); // Fallback nếu không có modal xác nhận in
             }
             return { success: true, invalidCodes: invalidCodes };
