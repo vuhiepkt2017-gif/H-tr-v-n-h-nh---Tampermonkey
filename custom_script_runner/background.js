@@ -99,11 +99,31 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           updateInfo.state = "normal"; // Khôi phục cửa sổ nếu đang bị ẩn/thu nhỏ dưới taskbar
         }
         
-        // Kích hoạt cửa sổ của tab Shopee lên trước để Chrome cho phép in
-        chrome.windows.update(sender.tab.windowId, updateInfo, () => {
-          chrome.tabs.update(sender.tab.id, { active: true }, () => {
-            sendResponse({ success: true });
-          });
+        // Bẫy chuyển tiêu điểm (Focus Stealing Bypass): 
+        // Tạo một cửa sổ phụ cực nhỏ (popup) để ép Windows chuyển quyền focus cho Chrome
+        chrome.windows.create({
+          url: "about:blank",
+          type: "popup",
+          state: "normal",
+          focused: true,
+          width: 100,
+          height: 100,
+          left: 100,
+          top: 100
+        }, (tempWin) => {
+          // Ngay sau khi tạo, đóng cửa sổ phụ đó và tập trung lại cửa sổ chính
+          setTimeout(() => {
+            if (tempWin && tempWin.id) {
+              chrome.windows.remove(tempWin.id, () => {
+                // Kích hoạt cửa sổ chính của Shopee
+                chrome.windows.update(sender.tab.windowId, updateInfo, () => {
+                  chrome.tabs.update(sender.tab.id, { active: true }, () => {
+                    sendResponse({ success: true });
+                  });
+                });
+              });
+            }
+          }, 100);
         });
       });
     } else {
