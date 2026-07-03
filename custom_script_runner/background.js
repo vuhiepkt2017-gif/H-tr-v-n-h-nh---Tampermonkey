@@ -94,7 +94,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (sender.tab && sender.tab.id && sender.tab.windowId) {
       // Lấy thông tin chi tiết của cửa sổ để kiểm tra xem có bị thu nhỏ (minimized) không
       chrome.windows.get(sender.tab.windowId, (win) => {
-        const updateInfo = { focused: true };
+        const updateInfo = { focused: true, drawAttention: true };
         if (win && win.state === "minimized") {
           updateInfo.state = "normal"; // Khôi phục cửa sổ nếu đang bị ẩn/thu nhỏ dưới taskbar
         }

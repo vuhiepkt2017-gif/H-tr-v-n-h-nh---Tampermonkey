@@ -1288,7 +1288,7 @@
 
             const printBtn = Array.from(document.querySelectorAll('button, span, a')).find(el => {
                 const txt = el.innerText || el.textContent || "";
-                return txt.trim() === "Print";
+                return txt.trim().toLowerCase() === "print";
             });
             if (!printBtn) return { success: false, invalidCodes: codes };
 
@@ -1298,12 +1298,24 @@
             let dialogPrintBtn = null;
             for (let i = 0; i < 40; i++) {
                 await delay(50);
-                const allPrintButtons = Array.from(document.querySelectorAll('button, span, a')).filter(el => {
-                    const txt = el.innerText || el.textContent || "";
+                const allButtons = Array.from(document.querySelectorAll('button')).filter(btn => {
+                    const txt = btn.innerText || btn.textContent || "";
                     return txt.trim().toLowerCase() === "print";
                 });
                 
-                dialogPrintBtn = allPrintButtons.find(btn => btn !== printBtn);
+                dialogPrintBtn = allButtons.find(btn => {
+                    let parent = btn.parentElement;
+                    let depth = 0;
+                    while (parent && depth < 4) {
+                        const textContent = (parent.innerText || parent.textContent || "").toLowerCase();
+                        if (textContent.includes("cancel") || textContent.includes("đóng") || textContent.includes("close")) {
+                            return true;
+                        }
+                        parent = parent.parentElement;
+                        depth++;
+                    }
+                    return false;
+                });
                 if (dialogPrintBtn) break;
             }
 
