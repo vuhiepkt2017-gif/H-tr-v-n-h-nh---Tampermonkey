@@ -1126,31 +1126,31 @@
 
                 if (codesToPrint.length > 0) {
                     log(`Tìm thấy lô gồm ${codesToPrint.length} mã để in.`);
-                    const success = await executePrintJob(codesToPrint);
-                    if (success) {
+                    const result = await executePrintJob(codesToPrint);
+                    if (result && result.success) {
                         lastSuccessfulAction = Date.now();
-                        log(`Đã in lô thành công: ${codesToPrint.join(', ')}`);
+                        const failed = result.invalidCodes || [];
+                        const succeeded = codesToPrint.filter(c => !failed.some(f => c === f || c.includes(f)));
                         
-                        // Cập nhật trạng thái "Đã in" cho từng mã trong lô lên Google Sheet
-                        for (const code of codesToPrint) {
+                        log(`Đã in lô thành công. Thành công: ${succeeded.length}, Thất bại: ${failed.length}`);
+                        
+                        for (const code of succeeded) {
                             callGASPromise("POST", "update_code_status", { code: code, status: "Đã in" })
-                                .then(() => {
-                                    log(`[In Bill] Đã cập nhật trạng thái 'Đã in' cho mã: ${code}`);
-                                })
-                                .catch(e => {
-                                    log(`[In Bill] Lỗi cập nhật trạng thái cho mã ${code}: ${e.message}`);
-                                });
+                                .then(() => log(`[In Bill] Đã cập nhật 'Đã in' cho: ${code}`))
+                                .catch(e => log(`[In Bill] Lỗi cập nhật 'Đã in' cho ${code}: ${e.message}`));
+                        }
+                        for (const code of failed) {
+                            callGASPromise("POST", "update_code_status", { code: code, status: "Mã lỗi" })
+                                .then(() => log(`[In Bill] Đã cập nhật 'Mã lỗi' cho: ${code}`))
+                                .catch(e => log(`[In Bill] Lỗi cập nhật 'Mã lỗi' cho ${code}: ${e.message}`));
                         }
                     } else {
-                        log(`Thất bại khi in lô. Cập nhật trạng thái 'Mã lỗi' lên Sheet...`);
-                        for (const code of codesToPrint) {
+                        log(`Thất bại khi in lô. Cập nhật trạng thái 'Mã lỗi' cho cả lô...`);
+                        const failedCodes = (result && result.invalidCodes) ? result.invalidCodes : codesToPrint;
+                        for (const code of failedCodes) {
                             callGASPromise("POST", "update_code_status", { code: code, status: "Mã lỗi" })
-                                .then(() => {
-                                    log(`[In Bill] Đã cập nhật trạng thái 'Mã lỗi' cho mã: ${code}`);
-                                })
-                                .catch(e => {
-                                    log(`[In Bill] Lỗi cập nhật trạng thái lỗi cho mã ${code}: ${e.message}`);
-                                });
+                                .then(() => log(`[In Bill] Đã cập nhật 'Mã lỗi' cho: ${code}`))
+                                .catch(e => log(`[In Bill] Lỗi cập nhật lỗi cho ${code}: ${e.message}`));
                         }
                     }
                 }
@@ -1173,7 +1173,7 @@
             }
             if (!textarea) {
                 log("Không tìm thấy ô nhập mã vận đơn!");
-                return false;
+                return { success: false, invalidCodes: codes };
             }
 
             const combinedText = codes.join('\n');
@@ -1194,14 +1194,14 @@
                 const txt = btn.innerText || btn.textContent || "";
                 return txt.trim().toLowerCase() === "confirm";
             });
-            if (!confirmBtn) return false;
+            if (!confirmBtn) return { success: false, invalidCodes: codes };
 
             confirmBtn.click();
             
             // Theo dõi phản hồi: Hoặc là bảng dữ liệu xuất hiện thành công, hoặc xuất hiện Dialog lỗi (ví dụ: "can not find in system")
             let isLoaded = false;
             let hasError = false;
-            let errorMsg = "";
+            const invalidCodes = [];
 
             // Lấy danh sách các mã hợp lệ thực sự trong lô gửi lên để đối chiếu (bỏ qua các ký tự rác)
             const validCodesInList = codes.filter(c => c.startsWith("SPX") || c.startsWith("VN") || c.startsWith("TETS") || /^[A-Z0-9]{8,25}$/.test(c));
@@ -1219,7 +1219,6 @@
                 
                 if (foundValidCode) {
                     isLoaded = true;
-                    // Không ngắt (break) ngay, tiếp tục kiểm tra xem có popup lỗi xuất hiện song song không
                 }
                 
                 // 2. Kiểm tra Hộp thoại lỗi (kể cả el-message-box của Element UI)
@@ -1234,7 +1233,6 @@
                             dialogText.toLowerCase().includes("không tồn tại")) {
                             
                             hasError = true;
-                            errorMsg = dialogText.trim().replace(/\n/g, " ");
                             
                             // Tìm nút Ok/Confirm/Xác nhận trong dialog
                             const okBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
@@ -1243,7 +1241,7 @@
                             });
                             
                             if (okBtn) {
-                                // Tăng trễ lên 800-1000ms giả lập người thật trước khi bấm OK, dùng await để đợi đóng xong mới in tiếp các đơn đúng
+                                // Tăng trễ lên 800-1000ms giả lập người thật trước khi bấm OK
                                 const okDelay = 800 + Math.random() * 200;
                                 log(`[In Bill] Phát hiện dialog lỗi. Đợi ${(okDelay/1000).toFixed(2)} giây để tự động đóng...`);
                                 await delay(okDelay);
@@ -1254,33 +1252,17 @@
 
                             // Trích xuất các mã lỗi cụ thể từ văn bản trong dialog (ví dụ: dòng chứa mã SPX...)
                             const lines = dialogText.split('\n').map(l => l.trim().toUpperCase());
-                            const invalidCodes = [];
                             for (const line of lines) {
-                                // Tìm các chuỗi khớp với định dạng mã vận đơn: bắt đầu bằng SPX, TETS hoặc chuỗi ký tự hoa/số có độ dài 8-25 ký tự
                                 const matches = line.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
                                 if (matches) {
                                     for (const match of matches) {
                                         if (!match.includes("SYSTEM") && !match.includes("MESSAGE") && !match.includes("FIND")) {
-                                            invalidCodes.push(match);
+                                            if (!invalidCodes.includes(match)) {
+                                                invalidCodes.push(match);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            
-                            // Nếu không phân tích được dòng cụ thể, fallback toàn bộ mã gửi lên
-                            const codesToMarkError = invalidCodes.length > 0 ? invalidCodes : codes;
-
-
-                            
-                            // Báo cáo trạng thái Mã lỗi không đồng bộ cho những mã sai thực sự
-                            for (const errCode of codesToMarkError) {
-                                callGASPromise("POST", "update_code_status", { code: errCode, status: "Mã lỗi" })
-                                    .then(() => {
-                                        log(`[In Bill] Đã báo cáo thành công mã lỗi: '${errCode}' = 'Mã lỗi'.`);
-                                    })
-                                    .catch(e => {
-                                        log(`[In Bill] Gặp lỗi khi gửi báo cáo cho ${errCode}: ${e.message}`);
-                                    });
                             }
                             break;
                         }
@@ -1295,84 +1277,25 @@
             }
 
             if (hasError && !isLoaded) {
-                // Chỉ trả về thất bại hoàn toàn khi có lỗi xảy ra và không tải được bất cứ mã hợp lệ nào
-                return false; 
+                // Thất bại hoàn toàn khi có lỗi xảy ra và không tải được bất cứ mã hợp lệ nào
+                return { success: false, invalidCodes: codes }; 
             }
 
             if (!isLoaded) {
                 log("[In Bill] Quá thời gian chờ nạp mã vận đơn lên giao diện.");
-                return false;
-            }
-
-            // Quét bảng hiển thị và tự động loại bỏ các đơn lỗi (như Onhold, Cancel, ...) để tránh kẹt cả lô
-            const rows = Array.from(document.querySelectorAll('tbody tr, tr.el-table__row'));
-            for (const row of rows) {
-                const cells = Array.from(row.querySelectorAll('td'));
-                if (cells.length >= 4) {
-                    const trackingNumber = cells[0].textContent.trim().toUpperCase();
-                    const orderStatus = cells[3].textContent.trim().toLowerCase();
-                    
-                    if (orderStatus && orderStatus !== "created" && orderStatus !== "ready_to_ship" && orderStatus !== "processed") {
-                        log(`[In Bill] Phát hiện đơn hàng ${trackingNumber} có trạng thái lỗi: ${cells[3].textContent.trim()}. Đang loại bỏ...`);
-                        
-                        const removeBtn = Array.from(row.querySelectorAll('button, a, span')).find(el => {
-                            const txt = el.innerText || el.textContent || "";
-                            return txt.trim().toLowerCase() === "remove" || txt.trim() === "Xóa";
-                        });
-                        
-                        if (removeBtn) {
-                            removeBtn.click();
-                            callGASPromise("POST", "update_code_status", { code: trackingNumber, status: "Mã lỗi" })
-                                .then(() => log(`[In Bill] Đã báo trạng thái lỗi cho đơn bị loại bỏ: ${trackingNumber}`))
-                                .catch(() => {});
-                            codes = codes.filter(c => c !== trackingNumber);
-                            await delay(300);
-                        }
-                    }
-                }
-            }
-
-            if (codes.length === 0) {
-                log("[In Bill] Không còn mã hợp lệ nào trong lô để in.");
-                return false;
+                return { success: false, invalidCodes: codes };
             }
 
             const printBtn = Array.from(document.querySelectorAll('button, span, a')).find(el => {
                 const txt = el.innerText || el.textContent || "";
                 return txt.trim() === "Print";
             });
-            if (!printBtn) return false;
+            if (!printBtn) return { success: false, invalidCodes: codes };
 
             await delayRandom(400, 500);
             printBtn.click();
-            
-            let isModalOpened = false;
-            let dialogPrintBtn = null;
-            for (let i = 0; i < 20; i++) {
-                await delay(50);
-                const dialogs = document.querySelectorAll('.el-dialog, .modal-content, [class*="dialog"], [class*="modal"]');
-                for (const dialog of dialogs) {
-                    if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
-                        dialogPrintBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
-                            const txt = btn.innerText || btn.textContent || "";
-                            return txt.trim() === "Print";
-                        });
-                        if (dialogPrintBtn) {
-                            isModalOpened = true;
-                            break;
-                        }
-                    }
-                }
-                if (isModalOpened) break;
-            }
-
-            if (dialogPrintBtn) {
-                await delayRandom(100, 200);
-                dialogPrintBtn.click();
-                await delay(500);
-                return true;
-            }
-            return false;
+            await delay(1000); // Đợi 1 giây để trình duyệt nhận lệnh in
+            return { success: true, invalidCodes: invalidCodes };
         }
 
         // ==========================================
