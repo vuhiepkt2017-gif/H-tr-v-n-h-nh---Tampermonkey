@@ -1298,18 +1298,12 @@
             let dialogPrintBtn = null;
             for (let i = 0; i < 20; i++) {
                 await delay(50);
-                const dialogs = document.querySelectorAll('.el-dialog, .modal-content, [class*="dialog"], [class*="modal"]');
-                for (const dialog of dialogs) {
-                    if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
-                        dialogPrintBtn = Array.from(dialog.querySelectorAll('button, span, a')).find(btn => {
-                            const txt = btn.innerText || btn.textContent || "";
-                            return txt.trim() === "Print";
-                        });
-                        if (dialogPrintBtn) {
-                            break;
-                        }
-                    }
-                }
+                const allPrintButtons = Array.from(document.querySelectorAll('button, span, a')).filter(el => {
+                    const txt = el.innerText || el.textContent || "";
+                    return txt.trim() === "Print";
+                });
+                
+                dialogPrintBtn = allPrintButtons.find(btn => btn !== printBtn && (btn.offsetWidth > 0 || btn.offsetHeight > 0 || btn.clientHeight > 0));
                 if (dialogPrintBtn) break;
             }
 
