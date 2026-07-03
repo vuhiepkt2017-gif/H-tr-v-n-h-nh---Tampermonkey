@@ -177,6 +177,9 @@
         const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
 
         let lastReleaseTime = 0;
+        let lastAwbPollTime = 0;
+        let lastToPollTime = 0;
+        let lastCpPollTime = 0;
 
         // Cơ chế khóa dùng chung duy nhất (Single Global Lock) cho toàn bộ hệ thống
         // Đảm bảo tại một thời điểm chỉ có DUY NHẤT một tab thực hiện nhiệm vụ, tránh chạy chồng lấn các sheet khác nhau.
@@ -1608,43 +1611,10 @@
                         log("[TO In] Phát hiện nút in nhãn khả dụng. Click ngay!");
                         printBtn.click();
 
-                        // Bắt đầu xử lý click popup xác nhận in
-                        setTimeout(async () => {
-                            let dialogPrintBtn = null;
-                            for (let i = 0; i < 40; i++) {
-                                await delay(50);
-                                const allButtons = Array.from(document.querySelectorAll('button')).filter(btn => {
-                                    const txt = btn.innerText || btn.textContent || "";
-                                    return txt.trim().toLowerCase() === "print";
-                                });
-                                
-                                dialogPrintBtn = allButtons.find(btn => {
-                                    let parent = btn.parentElement;
-                                    let depth = 0;
-                                    while (parent && depth < 4) {
-                                        const textContent = (parent.innerText || parent.textContent || "").toLowerCase();
-                                        if (textContent.includes("cancel") || textContent.includes("đóng") || textContent.includes("close")) {
-                                            return true;
-                                        }
-                                        parent = parent.parentElement;
-                                        depth++;
-                                    }
-                                    return false;
-                                });
-                                if (dialogPrintBtn) break;
-                            }
-
-                            if (dialogPrintBtn) {
-                                await delay(300);
-                                dialogPrintBtn.click();
-                                log("[TO In] Đã click nút in xác nhận trên popup.");
-                                await delay(1000);
-                                resolve(true);
-                            } else {
-                                log("[TO In] Không phát hiện popup xác nhận, hoàn thành in nhãn.");
-                                resolve(true);
-                            }
-                        }, 100);
+                        setTimeout(() => {
+                            log(`[TO In] Đánh dấu 'Đã in' thành công cho ${currentTO}`);
+                            resolve(true);
+                        }, 800); // Giảm độ trễ sau khi in xuống 800ms để tối ưu tốc độ
                     } else if (checkCount > 20) { // Tối đa 20 lần kiểm tra (tổng cộng ~3 giây)
                         clearInterval(checkPrintInterval);
                         resolve(false);
@@ -2236,8 +2206,13 @@
                 autoReopenClosedTabs();
             }
 
+            const now = Date.now();
             if (hash.includes("awbPrint")) {
-                startPollingLoop();
+                // Tăng giãn cách gọi API lên 4.5 giây để chống quá tải/nghẽn mạng cho GAS và điện thoại
+                if (now - lastAwbPollTime > 4500) {
+                    lastAwbPollTime = now;
+                    startPollingLoop();
+                }
             }
 
             if (hash.includes("general-to-management")) {
@@ -2245,11 +2220,19 @@
             }
 
             if (hash.includes("startPackNoLabel")) {
-                processPrintPage();
+                // Tăng giãn cách gọi API lên 4.5 giây đối với luồng in nhãn TO
+                if (now - lastToPollTime > 4500) {
+                    lastToPollTime = now;
+                    processPrintPage();
+                }
             }
 
             if (hash.includes("pickupTask/list")) {
-                startHandoverLoop();
+                // Tăng giãn cách gọi API lên 5 giây đối với luồng chuyển Pick
+                if (now - lastCpPollTime > 5000) {
+                    lastCpPollTime = now;
+                    startHandoverLoop();
+                }
             }
         }
         // Nhận tin nhắn đánh thức hoặc kích hoạt mở tab từ extension

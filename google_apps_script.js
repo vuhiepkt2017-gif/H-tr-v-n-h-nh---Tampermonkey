@@ -20,12 +20,23 @@ function doGet(e) {
 function doPost(e) {
   var res = doPostInternal(e);
   try {
-    var obj = JSON.parse(res.getContent());
-    obj.activeWebappUrl = getActiveWebappUrl();
-    return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+    var data;
+    if (e && e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else if (e && e.parameter) {
+      data = e.parameter;
+    }
+    
+    // Chỉ thực hiện parse và bọc URL cấu hình nếu là cuộc gọi từ Extension (có tham số action)
+    if (data && data.action) {
+      var obj = JSON.parse(res.getContent());
+      obj.activeWebappUrl = getActiveWebappUrl();
+      return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+    }
   } catch (err) {
-    return res;
+    // Bỏ qua lỗi và trả về phản hồi gốc
   }
+  return res;
 }
 
 function doGetInternal(e) {
