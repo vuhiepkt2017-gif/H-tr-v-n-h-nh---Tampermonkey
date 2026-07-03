@@ -479,6 +479,9 @@ function getPendingTO(pcName, priority) {
             sheet.getRange(i + 2, 2).setValue("Mã lỗi");
             isTimedOut = true;
           }
+        } else {
+          sheet.getRange(i + 2, 2).setValue("Mã lỗi");
+          isTimedOut = true;
         }
         
         if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
@@ -605,6 +608,9 @@ function getPendingCode(pcName, priority) {
             sheet.getRange(i + 2, 4).setValue("Mã lỗi");
             isTimedOut = true;
           }
+        } else {
+          sheet.getRange(i + 2, 4).setValue("Mã lỗi");
+          isTimedOut = true;
         }
         
         if (!isTimedOut && activePc && isPcAlive(activePc, now)) {
@@ -800,6 +806,7 @@ function updateCodeStatus(data) {
         var rowCode = values[i][0].toString().trim().toUpperCase();
         if (rowCode === code.trim().toUpperCase() || rowCode.indexOf(code.trim().toUpperCase()) !== -1) {
           sheet.getRange(i + 2, 4).setValue(status); // Cột D (4) là Trạng thái in
+          sheet.getRange(i + 2, 5).setValue(pcName); // Cột E (5) là Tên PC
           updatedCount++;
         }
       }

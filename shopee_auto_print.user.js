@@ -1165,7 +1165,12 @@
 
         async function executePrintJob(codes) {
             await ensureTabActive();
-            const textarea = document.querySelector('textarea') || document.querySelector('input[type="text"]');
+            let textarea = null;
+            for (let i = 0; i < 20; i++) {
+                textarea = document.querySelector('textarea') || document.querySelector('input[type="text"]');
+                if (textarea) break;
+                await delay(100);
+            }
             if (!textarea) {
                 log("Không tìm thấy ô nhập mã vận đơn!");
                 return false;
@@ -1296,6 +1301,39 @@
 
             if (!isLoaded) {
                 log("[In Bill] Quá thời gian chờ nạp mã vận đơn lên giao diện.");
+                return false;
+            }
+
+            // Quét bảng hiển thị và tự động loại bỏ các đơn lỗi (như Onhold, Cancel, ...) để tránh kẹt cả lô
+            const rows = Array.from(document.querySelectorAll('tbody tr, tr.el-table__row'));
+            for (const row of rows) {
+                const cells = Array.from(row.querySelectorAll('td'));
+                if (cells.length >= 4) {
+                    const trackingNumber = cells[0].textContent.trim().toUpperCase();
+                    const orderStatus = cells[3].textContent.trim().toLowerCase();
+                    
+                    if (orderStatus && orderStatus !== "created" && orderStatus !== "ready_to_ship" && orderStatus !== "processed") {
+                        log(`[In Bill] Phát hiện đơn hàng ${trackingNumber} có trạng thái lỗi: ${cells[3].textContent.trim()}. Đang loại bỏ...`);
+                        
+                        const removeBtn = Array.from(row.querySelectorAll('button, a, span')).find(el => {
+                            const txt = el.innerText || el.textContent || "";
+                            return txt.trim().toLowerCase() === "remove" || txt.trim() === "Xóa";
+                        });
+                        
+                        if (removeBtn) {
+                            removeBtn.click();
+                            callGASPromise("POST", "update_code_status", { code: trackingNumber, status: "Mã lỗi" })
+                                .then(() => log(`[In Bill] Đã báo trạng thái lỗi cho đơn bị loại bỏ: ${trackingNumber}`))
+                                .catch(() => {});
+                            codes = codes.filter(c => c !== trackingNumber);
+                            await delay(300);
+                        }
+                    }
+                }
+            }
+
+            if (codes.length === 0) {
+                log("[In Bill] Không còn mã hợp lệ nào trong lô để in.");
                 return false;
             }
 
