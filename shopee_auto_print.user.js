@@ -174,7 +174,7 @@
         let lastHandoverStartTime = 0;
         const STUCK_TIMEOUT = 30000; // 30 giây - nếu quá thời gian này thì coi là treo và tự giải phóng
         let lastSuccessfulAction = Date.now(); // Lần cuối cùng thực hiện thành công bất kỳ hành động nào
-        const PAGE_RELOAD_INTERVAL = 3600000; // 1 giờ - tải lại trang để refresh session Shopee
+        const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
 
         let lastReleaseTime = 0;
 
@@ -1294,7 +1294,32 @@
 
             await delayRandom(400, 500);
             printBtn.click();
-            await delay(1000); // Đợi 1 giây để trình duyệt nhận lệnh in
+            
+            let dialogPrintBtn = null;
+            for (let i = 0; i < 20; i++) {
+                await delay(50);
+                const dialogs = document.querySelectorAll('.el-dialog, .modal-content, [class*="dialog"], [class*="modal"]');
+                for (const dialog of dialogs) {
+                    if (dialog.offsetWidth > 0 || dialog.offsetHeight > 0) {
+                        dialogPrintBtn = Array.from(dialog.querySelectorAll('button, span, a')).find(btn => {
+                            const txt = btn.innerText || btn.textContent || "";
+                            return txt.trim() === "Print";
+                        });
+                        if (dialogPrintBtn) {
+                            break;
+                        }
+                    }
+                }
+                if (dialogPrintBtn) break;
+            }
+
+            if (dialogPrintBtn) {
+                await delayRandom(200, 300);
+                dialogPrintBtn.click();
+                await delay(1000);
+            } else {
+                await delay(500); // Fallback nếu không có modal xác nhận in
+            }
             return { success: true, invalidCodes: invalidCodes };
         }
 
