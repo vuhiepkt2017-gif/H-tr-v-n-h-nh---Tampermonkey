@@ -124,6 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
                             apiUrl: currentStatus.apiUrl,
                             pcName: currentStatus.pcName,
                             isRunning: isEnabled
+                        }, () => {
+                            if (isEnabled) {
+                                // Kiểm tra xem script Shopee có bật không
+                                chrome.storage.local.get("user_scripts", (res) => {
+                                    const scripts = res.user_scripts || [];
+                                    const shopeeScript = scripts.find(s => s.enabled && (s.name.includes("Shopee") || s.matchUrl.includes("shopee")));
+                                    if (shopeeScript) {
+                                        chrome.tabs.sendMessage(activeTabId, { action: "trigger_open_all_tabs" });
+                                    }
+                                });
+                            }
                         });
                     }
                 });
@@ -198,6 +209,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             
                             // Re-evaluate webapp panel visibility
                             updateWebappPanelVisibility(matchedScripts, result.google_apps_script_url);
+
+                            // Tự động kích hoạt mở tab nếu cả hai đều bật và là script Shopee
+                            if (isChecked && toggleRunner.checked && (script.name.includes("Shopee") || script.matchUrl.includes("shopee"))) {
+                                if (activeTabId) {
+                                    chrome.tabs.sendMessage(activeTabId, { action: "trigger_open_all_tabs" });
+                                }
+                            }
                         });
                     });
                 });

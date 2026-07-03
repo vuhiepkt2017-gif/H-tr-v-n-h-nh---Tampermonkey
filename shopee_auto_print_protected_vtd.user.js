@@ -947,6 +947,9 @@ if (typeof unsafeWindow === 'undefined') {
         'Z2VuZXJhbC10by1tYW5hZ2VtZW50',
         'c3RhcnRQYWNrTm9MYWJlbA==',
         'cGlja3VwVGFzay9saXN0',
+        'U0hPUEVFX1RSSUdHRVJfT1BFTl9BTExfVEFCUw==',
+        'W0jhu4cgdGjhu5FuZ10gTmjhuq1uIHnDqnUgY+G6p3UgdOG7sSDEkeG7mW5nIG3hu58gdOG6pXQgY+G6oyBjw6FjIHRhYi4=',
+        'bWFudWFs',
         'CiAgICAgICAgICAgICAgICBmdW5jdGlvbiB0aWNrKCkgewogICAgICAgICAgICAgICAgICAgIHBvc3RNZXNzYWdlKCJwdWxzZSIpOwogICAgICAgICAgICAgICAgICAgIHNldFRpbWVvdXQodGljaywgNDAwKTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHRpY2soKTsKICAgICAgICAgICAg',
         'dGV4dC9qYXZhc2NyaXB0',
         'cHVsc2U=',
@@ -2677,7 +2680,8 @@ _0x00ca();
 }
 }
 window.addEventListener(_0xstr(868), (e) => {
-if (e.data && e.data.type === _0xstr(869)) {
+if (e.data) {
+if (e.data.type === _0xstr(869)) {
 _0x00e4();
 if (_0x0077) {
 _0x0020();
@@ -2692,22 +2696,26 @@ _0x00b3();
 _0x00ca();
 }
 }
+} else if (e.data.type === _0xstr(875)) {
+log(_0xstr(876));
+_0x0065(_0xstr(877));
+}
 }
 });
 _0x00e4();
 let _0x00ee = null;
 try {
-const _0x0016 = new Blob([_0xstr(875)], { type: _0xstr(876) });
+const _0x0016 = new Blob([_0xstr(878)], { type: _0xstr(879) });
 const _0x00ef = URL.createObjectURL(_0x0016);
 _0x00ee = new Worker(_0x00ef);
 _0x00ee.onmessage = function(e) {
-if (e.data === _0xstr(877)) {
+if (e.data === _0xstr(880)) {
 _0x0098();
 }
 };
-log(_0xstr(878));
+log(_0xstr(881));
 } catch (err) {
-log(_0xstr(879));
+log(_0xstr(882));
 function _0x004b() {
 _0x0098();
 setTimeout(_0x004b, 400);
@@ -2715,8 +2723,8 @@ setTimeout(_0x004b, 400);
 _0x004b();
 }
 }
-if (document.readyState === _0xstr(880)) {
-document.addEventListener(_0xstr(881), init);
+if (document.readyState === _0xstr(883)) {
+document.addEventListener(_0xstr(884), init);
 } else {
 init();
 }
