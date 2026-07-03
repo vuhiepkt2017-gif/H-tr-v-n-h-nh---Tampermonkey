@@ -39,11 +39,11 @@
   "action": {
     "default_popup": "popup.html",
     "default_title": "VTDAuto",
-    "default_icon": "icon48.png"
+    "default_icon": "icon.png"
   },
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   }
 }
