@@ -140,12 +140,6 @@
 
     // Đợi DOM load xong mới tạo Giao diện điều khiển
     function init() {
-        // Chỉ chạy script hỗ trợ Shopee trên các tên miền của Shopee / SPX
-        const isShopeeSite = window.location.href.includes('spx.shopee.vn') || window.location.href.includes('spxexpress.com') || window.location.href.includes('localhost');
-        if (!isShopeeSite) {
-            return; // Thoát ngay lập tức nếu không phải trang Shopee
-        }
-
         // Loại bỏ trên các popup xem trước (preview), iframe để không làm vướng khi in
         const isPopupOrPreview = window.self !== window.top || window.location.href.includes('preview') || window.location.href.includes('print');
         if (isPopupOrPreview) {
