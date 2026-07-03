@@ -1,65 +1,51 @@
-# Hướng dẫn Mã Hóa và Đóng gói Script VTDAuto
+# Hướng dẫn Mã Hóa, Đóng gói và Đồng bộ GitHub VTDAuto
 
-Tài liệu này hướng dẫn cách lấy mã nguồn chưa mã hóa (bản gốc), tiến hành mã hóa bảo mật (obfuscate), sao chép vào Extension, và đóng gói thành tệp `.zip` hoàn chỉnh.
-
----
-
-## 1. Trình tự thực hiện và Các tệp liên quan
-
-Quy trình xây dựng (build) được tự động hóa thông qua hai công cụ Python nằm trong dự án:
-
-1. **Mã nguồn chưa mã hóa (Bản gốc)**:
-   - Tên tệp: `shopee_auto_print.user.js`
-   - Chứa toàn bộ logic hoạt động dạng văn bản thuần túy (In Bill, In TO, Chuyển Pick, Quét TO).
-
-2. **Kịch bản Mã hóa bảo mật**:
-   - Tên tệp: `build_secure.py`
-   - Nhiệm vụ: Tách tiêu đề (Header UserScript), chuyển đổi Template Literals, mã hóa toàn bộ chuỗi ký tự (Strings) sang Base64 và đổi tên biến cục bộ thành dạng hex (`_0x...`) để chống dịch ngược. Sau đó xuất ra hai bản:
-     - `shopee_auto_print_protected_tm.user.js` (Bản cho Tampermonkey)
-     - `shopee_auto_print_protected_vtd.user.js` (Bản tích hợp sẵn vào Extension)
-
-3. **Kịch bản Đóng gói Extension**:
-   - Tên tệp: `scratch/zip_extension.py`
-   - Nhiệm vụ: Quét thư mục `custom_script_runner/` (nơi chứa Extension VTDAuto) và nén thành tệp `VTDAuto_Extension.zip` để cài đặt trực tiếp lên Chrome.
+Tài liệu này hướng dẫn cách mã hóa mã nguồn gốc, đóng gói tệp cài đặt `.zip` và đồng bộ mã nguồn lên GitHub.
 
 ---
 
-## 2. Các bước triển khai chi tiết
+## 1. Bản gốc để dự phòng và di chuyển máy tính
+- **Mã nguồn gốc chưa mã hóa**: Tệp `shopee_auto_print.user.js` nằm ở thư mục gốc của dự án. 
+- Hãy sao chép toàn bộ thư mục dự án này hoặc tải từ GitHub Private của bạn về máy khác để tiếp tục làm việc mà không sợ mất mát dữ liệu.
 
-Mỗi khi bạn muốn cập nhật logic nghiệp vụ, hãy thực hiện lần lượt các bước sau:
+---
 
-### Bước 2.1: Chỉnh sửa mã nguồn chưa mã hóa
-Mọi chỉnh sửa logic cần thực hiện trên file gốc chưa mã hóa: `shopee_auto_print.user.js`.
+## 2. Câu lệnh gửi cho Antigravity để thực hiện tự động
+Mỗi khi bạn muốn **Mã hóa mã nguồn gốc**, **Đóng gói Extension thành file zip**, và **Đồng bộ toàn bộ file lên GitHub**, hãy copy dòng yêu cầu dưới đây và gửi cho Antigravity:
 
-### Bước 2.2: Chạy lệnh mã hóa bảo mật
-Mở Terminal tại thư mục dự án và chạy kịch bản Python:
+> **Yêu cầu Antigravity**: "Hãy chạy kịch bản mã hóa `build_secure.py`, sao chép tệp bảo mật vào thư mục extension làm tệp mặc định, đóng gói zip lưu ra OneDrive Desktop, sau đó tự động git commit và push toàn bộ mã nguồn lên cả hai kho lưu trữ GitHub giúp tôi."
+
+Hệ thống AI sẽ tự động thực hiện tuần tự các bước:
+1. Chạy mã hóa tệp gốc `shopee_auto_print.user.js`.
+2. Sao chép đè tệp bảo mật vào `custom_script_runner/default_shopee_script.js`.
+3. Đóng gói zip lưu ra Desktop OneDrive.
+4. Đẩy toàn bộ code mới nhất lên cả 2 repository GitHub để lưu trữ.
+
+---
+
+## 3. Quy trình thực hiện thủ công bằng tay (Nếu không dùng AI)
+
+Nếu bạn thực hiện trên máy khác mà không có trợ lý Antigravity, hãy mở Terminal tại thư mục dự án và chạy lần lượt các lệnh sau:
+
+### Bước 3.1: Chạy script mã hóa bằng Python
 ```powershell
 python build_secure.py
 ```
-Sau khi chạy thành công, kịch bản sẽ xuất hiện thông báo:
-`=== SUCCESS ===`
-`1. Exported TM: shopee_auto_print_protected_tm.user.js`
-`2. Exported VTDAuto: shopee_auto_print_protected_vtd.user.js`
 
-### Bước 2.3: Sao chép mã nguồn đã bảo mật vào Extension
-Chạy lệnh sao chép đè bản bảo mật thành tệp script mặc định của Extension:
+### Bước 3.2: Copy đè tệp đã mã hóa vào thư mục Extension
 ```powershell
 Copy-Item -Path "shopee_auto_print_protected_vtd.user.js" -Destination "custom_script_runner/default_shopee_script.js" -Force
 ```
 
-### Bước 2.4: Đóng gói thành tệp Zip cài đặt
-Tiến hành chạy tệp đóng gói để xuất file zip ra Desktop:
+### Bước 3.3: Chạy script nén Extension thành file Zip
 ```powershell
 python scratch/zip_extension.py
 ```
-Tệp `VTDAuto_Extension.zip` sẽ được tạo ra tại thư mục Desktop của máy tính.
 
----
-
-## 3. Câu lệnh yêu cầu gửi cho Antigravity thực hiện tự động
-
-Khi pair programming với Antigravity, nếu bạn muốn thực hiện mã hóa và đóng gói nhanh, chỉ cần gửi yêu cầu sau:
-
-> **Yêu cầu**: "Hãy chạy kịch bản mã hóa `build_secure.py`, sao chép tệp bảo mật vào thư mục extension và đóng gói tệp zip lưu ra OneDrive Desktop giúp tôi."
-
-Hệ thống AI sẽ tự động chạy toàn bộ các bước từ 2.2 đến 2.4 chỉ trong một lượt phản hồi.
+### Bước 3.4: Đẩy toàn bộ thay đổi lên GitHub
+```powershell
+git add .
+git commit -m "Cập nhật mã nguồn và extension"
+git push origin main
+git push https://github.com/vuhiepkt2017-gif/Extention-VTDAuto.git main --force
+```
