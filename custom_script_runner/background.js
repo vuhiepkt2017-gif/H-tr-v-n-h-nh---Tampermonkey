@@ -92,44 +92,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   } else if (message.action === "activate_tab") {
     if (sender.tab && sender.tab.id && sender.tab.windowId) {
-      // Lấy thông tin chi tiết của cửa sổ để kiểm tra xem có bị thu nhỏ (minimized) không
       chrome.windows.get(sender.tab.windowId, (win) => {
+        // Lưu lại trạng thái ban đầu để khôi phục chính xác (mặc định là normal nếu trước đó bị minimized)
+        const originalState = win.state === "minimized" ? "normal" : win.state;
         const updateInfo = { focused: true, drawAttention: true };
-        if (win && win.state === "minimized") {
-          updateInfo.state = "normal"; // Khôi phục cửa sổ nếu đang bị ẩn/thu nhỏ dưới taskbar
-        }
         
-        // Kích hoạt cửa sổ chính và tab ngay lập tức
-        chrome.windows.update(sender.tab.windowId, updateInfo, () => {
-          chrome.tabs.update(sender.tab.id, { active: true });
-        });
-
-        // Bẫy chuyển tiêu điểm (Focus Stealing Bypass): 
-        // Tạo một cửa sổ phụ cực nhỏ (popup) để ép Windows chuyển quyền focus cho Chrome
-        chrome.windows.create({
-          url: "about:blank",
-          type: "popup",
-          state: "normal",
-          focused: true,
-          width: 10,
-          height: 10,
-          left: 0,
-          top: 0
-        }, (tempWin) => {
+        // Mẹo ép Windows đưa Chrome lên Foreground: Thu nhỏ (minimize) -> Khôi phục lại trạng thái cũ (restore)
+        chrome.windows.update(sender.tab.windowId, { state: "minimized" }, () => {
           setTimeout(() => {
-            if (tempWin && tempWin.id) {
-              chrome.windows.remove(tempWin.id, () => {
-                // Kích hoạt lại cửa sổ chính của Shopee
-                chrome.windows.update(sender.tab.windowId, updateInfo, () => {
-                  chrome.tabs.update(sender.tab.id, { active: true }, () => {
-                    sendResponse({ success: true });
-                  });
-                });
+            chrome.windows.update(sender.tab.windowId, { state: originalState, focused: true }, () => {
+              chrome.tabs.update(sender.tab.id, { active: true }, () => {
+                sendResponse({ success: true });
               });
-            } else {
-              sendResponse({ success: true });
-            }
-          }, 100);
+            });
+          }, 150); // Chờ 150ms để Windows thực hiện xong hiệu ứng thu nhỏ trước khi mở lại
         });
       });
     } else {
