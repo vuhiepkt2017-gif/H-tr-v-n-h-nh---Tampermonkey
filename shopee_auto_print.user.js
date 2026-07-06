@@ -1121,7 +1121,7 @@
                 let codesToPrint = [];
                 if (data.status === "success") {
                     if (data.code) {
-                        codesToPrint = data.code.split('\n').map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
+                        codesToPrint = data.code.split(/\s+/).map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
                     } else if (data.codes && Array.isArray(data.codes)) {
                         codesToPrint = data.codes.map(c => c.trim().toUpperCase());
                     }
