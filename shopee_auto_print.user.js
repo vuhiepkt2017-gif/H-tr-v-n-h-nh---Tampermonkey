@@ -1121,7 +1121,9 @@
                 let codesToPrint = [];
                 if (data.status === "success") {
                     if (data.code) {
-                        codesToPrint = data.code.split(/\s+/).map(c => c.trim().toUpperCase()).filter(c => c.length > 0);
+                        const rawUpper = data.code.toUpperCase();
+                        const matches = rawUpper.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
+                        codesToPrint = matches ? matches.filter(c => c.trim().length > 0) : [];
                     } else if (data.codes && Array.isArray(data.codes)) {
                         codesToPrint = data.codes.map(c => c.trim().toUpperCase());
                     }
