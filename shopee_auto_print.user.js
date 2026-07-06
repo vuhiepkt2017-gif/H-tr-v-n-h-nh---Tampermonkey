@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      4.8
+// @version      4.9
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2123,20 +2123,59 @@
             return false;
         }
 
-        // Khởi tạo chuỗi reload tuần tự bằng cách đóng hết các tab cũ và mở lại tuần tự
         function initiateSmartReload() {
             const now = Date.now();
+            const myTabType = getCurrentTabType();
 
-            // Đóng tất cả các tab đang hoạt động bằng cách phát tín hiệu đóng có kèm dấu thời gian
-            log('[Smart Reload] Phát lệnh đóng tất cả các tab để làm mới...');
+            log('[Smart Reload] Phát lệnh đóng tất cả các tab khác để làm mới...');
             for (const type of RELOAD_ORDER) {
-                localStorage.setItem('close_tab_trigger_time_' + type, now.toString());
+                if (type !== myTabType) {
+                    localStorage.setItem('close_tab_trigger_time_' + type, now.toString());
+                }
             }
 
             // Đợi 2.5 giây để các tab khác kịp đóng, sau đó tab điều phối hiện tại sẽ tự kích hoạt chuỗi mở tab tuần tự
             setTimeout(() => {
                 log('[Smart Reload] Bắt đầu mở lại tuần tự các tab...');
-                initiateSequentialTabOpen('manual'); // Dùng mode manual để mở lại tất cả các tab ở foreground
+                
+                // Thiết lập trạng thái hàng đợi tuần tự
+                localStorage.setItem('seq_open_queue', JSON.stringify(RELOAD_ORDER));
+                const firstType = RELOAD_ORDER[0];
+                localStorage.setItem('seq_open_current', firstType);
+                localStorage.setItem('seq_open_phase', 'opening');
+                localStorage.setItem('seq_open_tab_start', Date.now().toString());
+                localStorage.removeItem('seq_open_retry');
+
+                if (myTabType === firstType) {
+                    log(`[Mở Tab] 🔄 Tab hiện tại chính là tab đầu tiên (${firstType}) - F5 để bắt đầu chuỗi...`);
+                    window.location.reload();
+                } else {
+                    const cfg = TABS_CONFIG[firstType];
+                    log(`[Mở Tab] ➡ Mở tab đầu tiên của chuỗi: ${cfg.name}...`);
+                    
+                    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
+                        chrome.runtime.sendMessage({ action: "open_tab", url: cfg.url, active: true }, () => {
+                            // Tự đóng tab điều phối hiện tại sau khi đã khởi chạy tab đầu tiên thành công
+                            setTimeout(() => {
+                                log(`[Smart Reload] Tab điều phối đã khởi chạy chuỗi thành công, tự đóng...`);
+                                localStorage.setItem("last_pulse_" + myTabType, "0");
+                                localStorage.removeItem("tab_instance_id_" + myTabType);
+                                window.close();
+                            }, 500);
+                        });
+                    } else {
+                        if (typeof GM_openInTab !== 'undefined') {
+                            GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
+                        } else {
+                            window.open(cfg.url, '_blank');
+                        }
+                        setTimeout(() => {
+                            localStorage.setItem("last_pulse_" + myTabType, "0");
+                            localStorage.removeItem("tab_instance_id_" + myTabType);
+                            window.close();
+                        }, 1000);
+                    }
+                }
             }, 2500);
 
             lastSuccessfulAction = now;

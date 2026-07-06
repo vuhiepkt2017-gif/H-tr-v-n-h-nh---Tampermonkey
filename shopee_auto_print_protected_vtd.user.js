@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      4.8
+// @version      4.9
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -915,10 +915,30 @@ if (typeof unsafeWindow === 'undefined') {
         'YnV0dG9u',
         'bm9uZQ==',
         'aGlkZGVu',
-        'W1NtYXJ0IFJlbG9hZF0gUGjDoXQgbOG7h25oIMSRw7NuZyB04bqldCBj4bqjIGPDoWMgdGFiIMSR4buDIGzDoG0gbeG7m2kuLi4=',
+        'W1NtYXJ0IFJlbG9hZF0gUGjDoXQgbOG7h25oIMSRw7NuZyB04bqldCBj4bqjIGPDoWMgdGFiIGtow6FjIMSR4buDIGzDoG0gbeG7m2kuLi4=',
         'Y2xvc2VfdGFiX3RyaWdnZXJfdGltZV8=',
         'W1NtYXJ0IFJlbG9hZF0gQuG6r3QgxJHhuqd1IG3hu58gbOG6oWkgdHXhuqduIHThu7EgY8OhYyB0YWIuLi4=',
-        'bWFudWFs',
+        'c2VxX29wZW5fcXVldWU=',
+        'c2VxX29wZW5fY3VycmVudA==',
+        'c2VxX29wZW5fcGhhc2U=',
+        'b3BlbmluZw==',
+        'c2VxX29wZW5fdGFiX3N0YXJ0',
+        'c2VxX29wZW5fcmV0cnk=',
+        'W03hu58gVGFiXSDwn5SEIFRhYiBoaeG7h24gdOG6oWkgY2jDrW5oIGzDoCB0YWIgxJHhuqd1IHRpw6puICg=',
+        'KSAtIEY1IMSR4buDIGLhuq90IMSR4bqndSBjaHXhu5dpLi4u',
+        'W03hu58gVGFiXSDinqEgTeG7nyB0YWIgxJHhuqd1IHRpw6puIGPhu6dhIGNodeG7l2k6IA==',
+        'Li4u',
+        'dW5kZWZpbmVk',
+        'b3Blbl90YWI=',
+        'W1NtYXJ0IFJlbG9hZF0gVGFiIMSRaeG7gXUgcGjhu5FpIMSRw6Mga2jhu59pIGNo4bqheSBjaHXhu5dpIHRow6BuaCBjw7RuZywgdOG7sSDEkcOzbmcuLi4=',
+        'bGFzdF9wdWxzZV8=',
+        'MA==',
+        'dGFiX2luc3RhbmNlX2lkXw==',
+        'dW5kZWZpbmVk',
+        'X2JsYW5r',
+        'bGFzdF9wdWxzZV8=',
+        'MA==',
+        'dGFiX2luc3RhbmNlX2lkXw==',
         'Y2xvc2VfdGFiX3RyaWdnZXJfdGltZV8=',
         'W0jhu4cgdGjhu5FuZ10gTmjhuq1uIGzhu4duaCBsw6BtIG3hu5tpIHR14bqnbiB04buxIG5oxrBuZyB0YWIgxJFhbmcgYuG6rW4geOG7rSBsw70gdGFzay4gSG/Do24gdmnhu4djIMSRw7NuZyB0YWIuLi4=',
         'W0jhu4cgdGjhu5FuZ10gTmjhuq1uIGzhu4duaCBsw6BtIG3hu5tpIHR14bqnbiB04buxLiDEkGFuZyDEkcOzbmcgdGFiIG7DoHkuLi4=',
@@ -2618,32 +2638,68 @@ return false;
 }
 function _0x0068() {
 const now = Date.now();
+const _0x009f = _0x0055();
 log(_0xstr(843));
 for (const type of _0x0002) {
+if (type !== _0x009f) {
 localStorage.setItem(_0xstr(844) + type, now.toString());
+}
 }
 setTimeout(() => {
 log(_0xstr(845));
-_0x0067(_0xstr(846));
+localStorage.setItem(_0xstr(846), JSON.stringify(_0x0002));
+const _0x004f = _0x0002[0];
+localStorage.setItem(_0xstr(847), _0x004f);
+localStorage.setItem(_0xstr(848), _0xstr(849));
+localStorage.setItem(_0xstr(850), Date.now().toString());
+localStorage.removeItem(_0xstr(851));
+if (_0x009f === _0x004f) {
+log(_0xstr(852) + (_0x004f) + _0xstr(853));
+window.location.reload();
+} else {
+const _0x001e = _0x000a[_0x004f];
+log(_0xstr(854) + (_0x001e.name) + _0xstr(855));
+if (typeof chrome !== _0xstr(856) && chrome.runtime && chrome.runtime.sendMessage) {
+chrome.runtime.sendMessage({ action: _0xstr(857), url: _0x001e.url, active: true }, () => {
+setTimeout(() => {
+log(_0xstr(858));
+localStorage.setItem(_0xstr(859) + _0x009f, _0xstr(860));
+localStorage.removeItem(_0xstr(861) + _0x009f);
+window.close();
+}, 500);
+});
+} else {
+if (typeof GM_openInTab !== _0xstr(862)) {
+GM_openInTab(_0x001e.url, { active: true, insert: true, setParent: true });
+} else {
+window.open(_0x001e.url, _0xstr(863));
+}
+setTimeout(() => {
+localStorage.setItem(_0xstr(864) + _0x009f, _0xstr(865));
+localStorage.removeItem(_0xstr(866) + _0x009f);
+window.close();
+}, 1000);
+}
+}
 }, 2500);
 _0x008e = now;
 }
 function _0x0022() {
 const _0x009f = _0x0055();
 if (_0x009f) {
-const _0x00e8 = localStorage.getItem(_0xstr(847) + _0x009f);
+const _0x00e8 = localStorage.getItem(_0xstr(867) + _0x009f);
 if (_0x00e8) {
 const _0x00e7 = parseInt(_0x00e8, 10);
 const now = Date.now();
 if (now - _0x00e7 < 8000) {
 const _0x006d = _0x0074 || _0x0076 || _0x0077 || _0x0075;
 if (_0x006d) {
-log(_0xstr(848));
+log(_0xstr(868));
 return;
 }
-log(_0xstr(849));
-localStorage.setItem(_0xstr(850) + _0x009f, _0xstr(851));
-localStorage.removeItem(_0xstr(852) + _0x009f);
+log(_0xstr(869));
+localStorage.setItem(_0xstr(870) + _0x009f, _0xstr(871));
+localStorage.removeItem(_0xstr(872) + _0x009f);
 window.close();
 }
 }
@@ -2651,7 +2707,7 @@ window.close();
 }
 function _0x0025() {
 const now = Date.now();
-if (localStorage.getItem(_0xstr(853)) || localStorage.getItem(_0xstr(854))) return;
+if (localStorage.getItem(_0xstr(873)) || localStorage.getItem(_0xstr(874))) return;
 const _0x006f = !_0x0074 && !_0x0076 && !_0x0077 && !_0x0075;
 if (_0x006f && (now - _0x008e) > _0x0001) {
 _0x0068();
@@ -2662,13 +2718,13 @@ function _0x009c() {
 _0x00ec();
 _0x00ed();
 _0x0022();
-_0x0014 = localStorage.getItem(_0xstr(855)) || GM_getValue(_0xstr(856), _0x0000);
-_0x00af = localStorage.getItem(_0xstr(857)) || GM_getValue(_0xstr(858), _0xstr(859));
-_0x00b0 = localStorage.getItem(_0xstr(860)) || GM_getValue(_0xstr(861), _0xstr(862));
-_0x0078 = localStorage.getItem(_0xstr(863)) === _0xstr(864);
+_0x0014 = localStorage.getItem(_0xstr(875)) || GM_getValue(_0xstr(876), _0x0000);
+_0x00af = localStorage.getItem(_0xstr(877)) || GM_getValue(_0xstr(878), _0xstr(879));
+_0x00b0 = localStorage.getItem(_0xstr(880)) || GM_getValue(_0xstr(881), _0xstr(882));
+_0x0078 = localStorage.getItem(_0xstr(883)) === _0xstr(884);
 _0x00ee();
 const _0x0034 = window.location.href;
-const hash = window.location.hash || _0xstr(865);
+const hash = window.location.hash || _0xstr(885);
 if (_0x0034 !== _0x0091) {
 _0x0091 = _0x0034;
 _0x0076 = false;
@@ -2687,65 +2743,65 @@ _0x0025();
 _0x0016();
 }
 const now = Date.now();
-if (hash.includes(_0xstr(866))) {
+if (hash.includes(_0xstr(886))) {
 if (now - _0x0081 > 4500) {
 _0x0081 = now;
 _0x00d1();
 }
 }
-if (hash.includes(_0xstr(867))) {
+if (hash.includes(_0xstr(887))) {
 _0x00b8();
 }
-if (hash.includes(_0xstr(868))) {
+if (hash.includes(_0xstr(888))) {
 if (now - _0x0090 > 4500) {
 _0x0090 = now;
 _0x00b7();
 }
 }
-if (hash.includes(_0xstr(869))) {
+if (hash.includes(_0xstr(889))) {
 if (now - _0x0082 > 5000) {
 _0x0082 = now;
 _0x00d0();
 }
 }
 }
-window.addEventListener(_0xstr(870), (e) => {
+window.addEventListener(_0xstr(890), (e) => {
 if (e.data) {
-if (e.data.type === _0xstr(871)) {
+if (e.data.type === _0xstr(891)) {
 _0x00ec();
 if (_0x0078) {
 _0x0021();
-const hash = window.location.hash || _0xstr(872);
-if (hash.includes(_0xstr(873))) {
+const hash = window.location.hash || _0xstr(892);
+if (hash.includes(_0xstr(893))) {
 _0x00d1();
-} else if (hash.includes(_0xstr(874))) {
+} else if (hash.includes(_0xstr(894))) {
 _0x00b8();
-} else if (hash.includes(_0xstr(875))) {
+} else if (hash.includes(_0xstr(895))) {
 _0x00b7();
-} else if (hash.includes(_0xstr(876))) {
+} else if (hash.includes(_0xstr(896))) {
 _0x00d0();
 }
 }
-} else if (e.data.type === _0xstr(877)) {
-log(_0xstr(878));
-_0x0067(_0xstr(879));
+} else if (e.data.type === _0xstr(897)) {
+log(_0xstr(898));
+_0x0067(_0xstr(899));
 }
 }
 });
 _0x00ec();
 let _0x00f6 = null;
 try {
-const _0x0017 = new Blob([_0xstr(880)], { type: _0xstr(881) });
+const _0x0017 = new Blob([_0xstr(900)], { type: _0xstr(901) });
 const _0x00f7 = URL.createObjectURL(_0x0017);
 _0x00f6 = new Worker(_0x00f7);
 _0x00f6.onmessage = function(e) {
-if (e.data === _0xstr(882)) {
+if (e.data === _0xstr(902)) {
 _0x009c();
 }
 };
-log(_0xstr(883));
+log(_0xstr(903));
 } catch (err) {
-log(_0xstr(884));
+log(_0xstr(904));
 function _0x004d() {
 _0x009c();
 setTimeout(_0x004d, 400);
@@ -2753,8 +2809,8 @@ setTimeout(_0x004d, 400);
 _0x004d();
 }
 }
-if (document.readyState === _0xstr(885)) {
-document.addEventListener(_0xstr(886), init);
+if (document.readyState === _0xstr(905)) {
+document.addEventListener(_0xstr(906), init);
 } else {
 init();
 }
