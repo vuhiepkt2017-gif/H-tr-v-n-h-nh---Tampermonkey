@@ -461,7 +461,7 @@ if (typeof unsafeWindow === 'undefined') {
         'IGZhaWxlZDog',
         'LiBSZXRyeWluZyBpbiAycy4uLg==',
         '',
-        'UGjDoXQgaGnhu4duIHRhYiDEkWFuZyBjaOG6oXkg4bqpbi4gxJBhbmcga8OtY2ggaG/huqF0IHRhYiBsw6puIHRyxrDhu5tjIGtoaSB0aOG7sWMgaGnhu4duIGluLi4u',
+        'UGjDoXQgaGnhu4duIHRhYiBob+G6t2MgY+G7rWEgc+G7lSBDaHJvbWUgxJFhbmcgY2jhuqF5IOG6qW4vbeG6pXQgZm9jdXMuIMSQYW5nIGvDrWNoIGhv4bqhdCB0YWIuLi4=',
         'U0hPUEVFX0FDVElWQVRFX1RBQl9SRVFVRVNU',
         'Kg==',
         '',
@@ -1769,12 +1769,12 @@ const match = driverStr.match(/\d+/);
 return match ? match[0] : driverStr;
 }
 async function _0x0044() {
-if (document.hidden) {
+if (document.hidden || !document.hasFocus()) {
 log(_0xstr(389));
 window.postMessage({ type: _0xstr(390), tabInstanceId: _0x00d6 }, _0xstr(391));
 for (let i = 0; i < 40; i++) {
 await _0x0036(100);
-if (!document.hidden) {
+if (!document.hidden && document.hasFocus()) {
 await _0x0036(500);
 return true;
 }

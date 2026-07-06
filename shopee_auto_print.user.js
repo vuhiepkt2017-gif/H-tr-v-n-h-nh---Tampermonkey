@@ -1082,12 +1082,12 @@
 
         // Đảm bảo tab được kích hoạt lên foreground trước khi in để tránh bị Chrome chặn window.print()
         async function ensureTabActive() {
-            if (document.hidden) {
-                log("Phát hiện tab đang chạy ẩn. Đang kích hoạt tab lên trước khi thực hiện in...");
+            if (document.hidden || !document.hasFocus()) {
+                log("Phát hiện tab hoặc cửa sổ Chrome đang chạy ẩn/mất focus. Đang kích hoạt tab...");
                 window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST", tabInstanceId: tabInstanceId }, "*");
                 for (let i = 0; i < 40; i++) {
                     await delay(100);
-                    if (!document.hidden) {
+                    if (!document.hidden && document.hasFocus()) {
                         await delay(500); // Đợi 500ms cho trang ổn định
                         return true;
                     }
