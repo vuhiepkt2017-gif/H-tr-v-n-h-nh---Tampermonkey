@@ -2123,10 +2123,10 @@
         function initiateSmartReload() {
             const now = Date.now();
 
-            // Đóng tất cả các tab đang hoạt động bằng cách phát tín hiệu đóng
+            // Đóng tất cả các tab đang hoạt động bằng cách phát tín hiệu đóng có kèm dấu thời gian
             log('[Smart Reload] Phát lệnh đóng tất cả các tab để làm mới...');
             for (const type of RELOAD_ORDER) {
-                localStorage.setItem('close_tab_trigger_' + type, 'true');
+                localStorage.setItem('close_tab_trigger_time_' + type, now.toString());
             }
 
             // Đợi 2.5 giây để các tab khác kịp đóng, sau đó tab điều phối hiện tại sẽ tự kích hoạt chuỗi mở tab tuần tự
@@ -2142,20 +2142,26 @@
         function checkCloseTabTrigger() {
             const myTabType = getCurrentTabType();
             if (myTabType) {
-                const trigger = localStorage.getItem('close_tab_trigger_' + myTabType);
-                if (trigger === 'true') {
-                    // Nếu tab đang bận xử lý task, hoãn lại cho tới khi hoàn thành
-                    const isBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover;
-                    if (isBusy) {
-                        log(`[Hệ thống] Nhận lệnh làm mới tuần tự nhưng tab đang bận xử lý task. Hoãn việc đóng tab...`);
-                        return;
+                const triggerTimeStr = localStorage.getItem('close_tab_trigger_time_' + myTabType);
+                if (triggerTimeStr) {
+                    const triggerTime = parseInt(triggerTimeStr, 10);
+                    const now = Date.now();
+                    
+                    // Nếu thời gian phát lệnh đóng cách đây chưa quá 8 giây (đủ để toàn bộ các tab trùng lặp đóng, tránh bị sót)
+                    if (now - triggerTime < 8000) {
+                        // Nếu tab đang bận xử lý task, hoãn lại cho tới khi hoàn thành
+                        const isBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover;
+                        if (isBusy) {
+                            log(`[Hệ thống] Nhận lệnh làm mới tuần tự nhưng tab đang bận xử lý task. Hoãn việc đóng tab...`);
+                            return;
+                        }
+                        
+                        log(`[Hệ thống] Nhận lệnh làm mới tuần tự. Đang đóng tab này...`);
+                        // Xóa instance id và pulse
+                        localStorage.setItem("last_pulse_" + myTabType, "0");
+                        localStorage.removeItem("tab_instance_id_" + myTabType);
+                        window.close();
                     }
-                    localStorage.removeItem('close_tab_trigger_' + myTabType);
-                    log(`[Hệ thống] Nhận lệnh làm mới tuần tự. Đang đóng tab này...`);
-                    // Xóa instance id và pulse
-                    localStorage.setItem("last_pulse_" + myTabType, "0");
-                    localStorage.removeItem("tab_instance_id_" + myTabType);
-                    window.close();
                 }
             }
         }
