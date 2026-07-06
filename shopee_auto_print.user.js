@@ -174,7 +174,7 @@
         let lastHandoverStartTime = 0;
         const STUCK_TIMEOUT = 30000; // 30 giây - nếu quá thời gian này thì coi là treo và tự giải phóng
         let lastSuccessfulAction = Date.now(); // Lần cuối cùng thực hiện thành công bất kỳ hành động nào
-        const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
+        const PAGE_RELOAD_INTERVAL = 2700000; // 45 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
 
         let lastReleaseTime = 0;
         let lastAwbPollTime = 0;
@@ -2142,6 +2142,12 @@
             if (myTabType) {
                 const trigger = localStorage.getItem('close_tab_trigger_' + myTabType);
                 if (trigger === 'true') {
+                    // Nếu tab đang bận xử lý task, hoãn lại cho tới khi hoàn thành
+                    const isBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover;
+                    if (isBusy) {
+                        log(`[Hệ thống] Nhận lệnh làm mới tuần tự nhưng tab đang bận xử lý task. Hoãn việc đóng tab...`);
+                        return;
+                    }
                     localStorage.removeItem('close_tab_trigger_' + myTabType);
                     log(`[Hệ thống] Nhận lệnh làm mới tuần tự. Đang đóng tab này...`);
                     // Xóa instance id và pulse
