@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
-// @namespace    http://tampermonkey.net/
-// @version      6.1
+// @namespace    http://VTDStadio.net/
+// @version      4.8
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -629,7 +629,11 @@
                     window.location.reload();
                 } else {
                     log(`[Mở Tab] ➡ Mở tab tiếp: ${cfg.name}...`);
-                    if (typeof GM_openInTab !== 'undefined') {
+                    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
+                        chrome.runtime.sendMessage({ action: "open_tab", url: cfg.url, active: true }, () => {
+                            const err = chrome.runtime.lastError;
+                        });
+                    } else if (typeof GM_openInTab !== 'undefined') {
                         GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
                     } else {
                         window.open(cfg.url, '_blank');
