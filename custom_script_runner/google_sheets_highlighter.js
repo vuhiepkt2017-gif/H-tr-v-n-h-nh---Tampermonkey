@@ -7,8 +7,7 @@
         color: '#0e65eb',
         opacity: 0.1,
         row: true,
-        column: false,
-        auto: true
+        column: false
     };
 
     let config = { ...DEFAULT_CONFIG };
@@ -82,7 +81,6 @@
 
         // 3. Tìm phần tử ô đang chọn (Active Cell Focus Indicator) của Google Sheets
         function findSelectionIndicator() {
-            // Chiến lược A: Tìm theo class định danh của Google Sheets
             const selectors = [
                 '.docs-sheet-selection-focus-indicator',
                 '.selection-focus-indicator',
@@ -96,7 +94,6 @@
                 }
             }
 
-            // Chiến lược B: Quét vùng Grid Canvas tìm div có viền xanh dương đặc trưng
             const gridCanvas = document.querySelector('.grid-canvas-container');
             if (gridCanvas) {
                 const divs = gridCanvas.querySelectorAll('div');
@@ -110,7 +107,6 @@
                 }
             }
 
-            // Chiến lược C: Tìm div bất kỳ có viền 2px màu xanh dương
             const activeCellBorders = document.querySelectorAll('div[style*="border-top-color"][style*="2px"]');
             for (const border of activeCellBorders) {
                 if (border.offsetWidth > 0) return border;
@@ -121,12 +117,6 @@
 
         // 4. Định vị trí cho các phần tử bôi màu
         function updateHighlights() {
-            if (!config.auto) {
-                rowHighlighter.style.display = 'none';
-                colHighlighter.style.display = 'none';
-                return;
-            }
-
             const indicator = findSelectionIndicator();
             if (!indicator) {
                 rowHighlighter.style.display = 'none';
@@ -181,26 +171,53 @@
         window.addEventListener('keyup', () => setTimeout(updateHighlights, 0));
         window.addEventListener('resize', updateHighlights);
 
-        // 5. Tạo và chèn bảng điều khiển nổi (Floating Control Panel UI)
+        // 5. Tạo và chèn bảng điều khiển trượt thu gọn (Collapsible Control Panel UI)
         const panel = document.createElement('div');
         panel.id = 'vtd-highlighter-panel';
-        panel.style.position = 'fixed';
-        panel.style.bottom = '40px';
-        panel.style.right = '40px';
-        panel.style.zIndex = '99999';
-        panel.style.backgroundColor = '#ffffff';
-        panel.style.border = '1px solid #c0c0c0';
-        panel.style.boxShadow = '0 4px 15px rgba(0,0,0,0.15)';
-        panel.style.fontFamily = 'Arial, sans-serif';
-        panel.style.fontSize = '13px';
-        panel.style.color = '#333333';
-        panel.style.borderRadius = '4px';
-        panel.style.overflow = 'hidden';
-        panel.style.userSelect = 'none';
-
-        // Nhúng CSS kiểu dáng Grid giống Google Sheets
+        
+        // Nhúng CSS kiểu dáng Grid giống Google Sheets và cơ chế trượt mở rộng
         const styleSheet = document.createElement('style');
         styleSheet.textContent = `
+            #vtd-highlighter-panel {
+                position: fixed;
+                right: 0;
+                top: 150px;
+                z-index: 99999;
+                background-color: #ffffff;
+                border: 1px solid #c0c0c0;
+                border-right: none;
+                box-shadow: -2px 4px 15px rgba(0,0,0,0.15);
+                font-family: Arial, sans-serif;
+                font-size: 13px;
+                color: #333333;
+                border-radius: 4px 0 0 4px;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transform: translateX(100%);
+            }
+            #vtd-highlighter-panel.expanded {
+                transform: translateX(0);
+            }
+            #vtd-highlighter-panel .toggle-handle {
+                position: absolute;
+                left: -24px;
+                top: 0;
+                width: 24px;
+                height: 50px;
+                background-color: #ffffff;
+                border: 1px solid #c0c0c0;
+                border-right: none;
+                border-radius: 4px 0 0 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: -3px 2px 6px rgba(0,0,0,0.1);
+                font-size: 12px;
+                color: #5f6368;
+            }
+            #vtd-highlighter-panel .toggle-handle:hover {
+                background-color: #f1f3f4;
+            }
             #vtd-highlighter-panel table {
                 border-collapse: collapse;
                 margin: 0;
@@ -271,17 +288,11 @@
             #vtd-highlighter-panel .btn-reset:hover {
                 background-color: #e8eaed;
             }
-            #vtd-highlighter-panel .drag-handle {
-                background-color: #f8f9fa;
-                height: 8px;
-                cursor: move;
-                border-bottom: 1px solid #e0e0e0;
-            }
         `;
         document.head.appendChild(styleSheet);
 
         panel.innerHTML = `
-            <div class="drag-handle" title="Kéo để di chuyển"></div>
+            <div class="toggle-handle" title="Hiện cấu hình bôi màu">🎨</div>
             <table>
                 <thead>
                     <tr>
@@ -317,11 +328,6 @@
                     </tr>
                     <tr>
                         <td class="row-header">6</td>
-                        <td>Auto</td>
-                        <td style="text-align: center;"><input type="checkbox" id="vtd-val-auto" ${config.auto ? 'checked' : ''}></td>
-                    </tr>
-                    <tr>
-                        <td class="row-header">7</td>
                         <td colspan="2" style="text-align: center;">
                             <button class="btn-reset" id="vtd-btn-reset">Reset</button>
                         </td>
@@ -331,12 +337,24 @@
         `;
         document.body.appendChild(panel);
 
+        // Bắt sự kiện ẩn/hiển thị
+        const toggleHandle = panel.querySelector('.toggle-handle');
+        toggleHandle.addEventListener('click', () => {
+            panel.classList.toggle('expanded');
+            if (panel.classList.contains('expanded')) {
+                toggleHandle.innerText = '▶';
+                toggleHandle.title = 'Thu gọn';
+            } else {
+                toggleHandle.innerText = '🎨';
+                toggleHandle.title = 'Hiện cấu hình bôi màu';
+            }
+        });
+
         // Bắt sự kiện thay đổi giá trị
         const inputColor = document.getElementById('vtd-val-color');
         const inputOpacity = document.getElementById('vtd-val-opacity');
         const inputRow = document.getElementById('vtd-val-row');
         const inputCol = document.getElementById('vtd-val-col');
-        const inputAuto = document.getElementById('vtd-val-auto');
         const btnReset = document.getElementById('vtd-btn-reset');
 
         function handleConfigChange() {
@@ -344,7 +362,6 @@
             config.opacity = parseFloat(inputOpacity.value) || 0;
             config.row = inputRow.checked;
             config.column = inputCol.checked;
-            config.auto = inputAuto.checked;
             saveConfig();
             updateHighlighterStyles();
             updateHighlights();
@@ -354,7 +371,6 @@
         inputOpacity.addEventListener('input', handleConfigChange);
         inputRow.addEventListener('change', handleConfigChange);
         inputCol.addEventListener('change', handleConfigChange);
-        inputAuto.addEventListener('change', handleConfigChange);
 
         btnReset.addEventListener('click', () => {
             config = { ...DEFAULT_CONFIG };
@@ -362,44 +378,10 @@
             inputOpacity.value = config.opacity;
             inputRow.checked = config.row;
             inputCol.checked = config.column;
-            inputAuto.checked = config.auto;
             saveConfig();
             updateHighlighterStyles();
             updateHighlights();
         });
-
-        // Kéo thả bảng điều khiển
-        const dragHandle = panel.querySelector('.drag-handle');
-        let isDragging = false;
-        let startX, startY, initialLeft, initialTop;
-
-        dragHandle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            const rect = panel.getBoundingClientRect();
-            initialLeft = rect.left;
-            initialTop = rect.top;
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-            e.preventDefault();
-        });
-
-        function onMouseMove(e) {
-            if (!isDragging) return;
-            const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
-            panel.style.bottom = 'auto';
-            panel.style.right = 'auto';
-            panel.style.left = (initialLeft + dx) + 'px';
-            panel.style.top = (initialTop + dy) + 'px';
-        }
-
-        function onMouseUp() {
-            isDragging = false;
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-        }
     }
 
 })();
