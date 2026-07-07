@@ -120,7 +120,10 @@
         // 4. Định vị trí cho các phần tử bôi màu
         function updateHighlights() {
             const indicator = findSelectionIndicator();
-            const gridScrollable = document.querySelector('.grid-scrollable');
+            
+            // Tìm vùng cuộn bảng tính động và an toàn (nếu không có class .grid-scrollable thì dùng phần tử cha của canvas làm fallback)
+            const gridCanvas = document.querySelector('.grid-canvas-container');
+            const gridScrollable = gridCanvas ? (document.querySelector('.grid-scrollable') || gridCanvas.parentNode) : null;
             
             if (!indicator || !gridScrollable) {
                 rowHighlighter.style.display = 'none';
