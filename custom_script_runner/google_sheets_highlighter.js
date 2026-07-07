@@ -89,7 +89,7 @@
             for (const selector of selectors) {
                 const el = document.querySelector(selector);
                 // Đảm bảo kích thước đủ lớn để là viền ô chọn, không phải các chấm vuông phụ trợ
-                if (el && el.offsetWidth > 20 && el.offsetHeight > 15) {
+                if (el && el.offsetWidth > 10 && el.offsetHeight > 8) {
                     return el;
                 }
             }
@@ -99,7 +99,7 @@
             if (gridCanvas) {
                 const divs = gridCanvas.querySelectorAll('div');
                 for (const div of divs) {
-                    if (div.style.position === 'absolute' && div.offsetWidth > 20 && div.offsetHeight > 15) {
+                    if (div.style.position === 'absolute' && div.offsetWidth > 10 && div.offsetHeight > 8) {
                         const borderTop = window.getComputedStyle(div).borderTopColor;
                         if (borderTop.includes('rgb(26, 115, 232)') || borderTop.includes('rgb(14, 101, 235)')) {
                             return div;
@@ -111,7 +111,7 @@
             // Chiến lược C: Tìm div bất kỳ viền 2px màu xanh và có kích thước tối thiểu
             const activeCellBorders = document.querySelectorAll('div[style*="border-top-color"][style*="2px"]');
             for (const border of activeCellBorders) {
-                if (border.offsetWidth > 20 && border.offsetHeight > 15) return border;
+                if (border.offsetWidth > 10 && border.offsetHeight > 8) return border;
             }
 
             return null;
