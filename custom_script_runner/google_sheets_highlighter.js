@@ -81,37 +81,52 @@
 
         // 3. Tìm phần tử ô đang chọn (Active Cell Focus Indicator) của Google Sheets
         function findSelectionIndicator() {
-            // Chiến lược A: Chỉ tìm theo class viền chọn chính thức của Google Sheets (Tránh nhầm autofill cover)
+            // Chiến lược A: Chỉ tìm theo class viền chọn chính thức của Google Sheets
             const selectors = [
                 '.docs-sheet-selection-focus-indicator',
                 '.selection-focus-indicator'
             ];
             for (const selector of selectors) {
                 const el = document.querySelector(selector);
-                // Đảm bảo kích thước đủ lớn để là viền ô chọn, không phải các chấm vuông phụ trợ
+                // Đảm bảo kích thước đủ lớn để là viền ô chọn
                 if (el && el.offsetWidth > 10 && el.offsetHeight > 8) {
                     return el;
                 }
             }
 
-            // Chiến lược B: Quét vùng Grid Canvas tìm div viền xanh có kích thước ô hợp lệ
+            // Chiến lược B: Quét vùng cuộn bảng tính tìm div tuyệt đối có viền màu xanh
             const gridCanvas = document.querySelector('.grid-canvas-container');
-            if (gridCanvas) {
-                const divs = gridCanvas.querySelectorAll('div');
+            const gridScrollable = gridCanvas ? (document.querySelector('.grid-scrollable') || gridCanvas.parentNode) : null;
+            if (gridScrollable) {
+                const divs = gridScrollable.querySelectorAll('div');
                 for (const div of divs) {
-                    if (div.style.position === 'absolute' && div.offsetWidth > 10 && div.offsetHeight > 8) {
-                        const borderTop = window.getComputedStyle(div).borderTopColor;
-                        if (borderTop.includes('rgb(26, 115, 232)') || borderTop.includes('rgb(14, 101, 235)')) {
-                            return div;
+                    if (div.offsetWidth > 10 && div.offsetHeight > 8) {
+                        const style = window.getComputedStyle(div);
+                        if (style.position === 'absolute') {
+                            const borderTop = style.borderTopColor;
+                            const borderLeft = style.borderLeftColor;
+                            // Kiểm tra xem viền có màu xanh đặc trưng của Google Sheets không (rgb(26, 115, 232) hoặc rgb(14, 101, 235))
+                            if (borderTop.includes('rgb(26, 115, 232)') || borderTop.includes('rgb(14, 101, 235)') || 
+                                borderLeft.includes('rgb(26, 115, 232)') || borderLeft.includes('rgb(14, 101, 235)')) {
+                                return div;
+                            }
                         }
                     }
                 }
             }
 
-            // Chiến lược C: Tìm div bất kỳ viền 2px màu xanh và có kích thước tối thiểu
-            const activeCellBorders = document.querySelectorAll('div[style*="border-top-color"][style*="2px"]');
-            for (const border of activeCellBorders) {
-                if (border.offsetWidth > 10 && border.offsetHeight > 8) return border;
+            // Chiến lược C: Quét toàn bộ trang tìm div tuyệt đối viền xanh (dự phòng cuối cùng)
+            const allDivs = document.querySelectorAll('div');
+            for (const div of allDivs) {
+                if (div.offsetWidth > 10 && div.offsetHeight > 8) {
+                    const style = window.getComputedStyle(div);
+                    if (style.position === 'absolute') {
+                        const borderTop = style.borderTopColor;
+                        if (borderTop.includes('rgb(26, 115, 232)') || borderTop.includes('rgb(14, 101, 235)')) {
+                            return div;
+                        }
+                    }
+                }
             }
 
             return null;
