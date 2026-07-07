@@ -111,6 +111,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     } else {
       sendResponse({ success: false, error: "No tab found" });
     }
+  } else if (message.action === "close_tab") {
+    if (sender.tab && sender.tab.id) {
+      chrome.tabs.remove(sender.tab.id, () => {
+        sendResponse({ success: true });
+      });
+    } else {
+      sendResponse({ success: false, error: "No tab to close" });
+    }
     return true;
   }
 });

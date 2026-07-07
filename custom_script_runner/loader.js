@@ -219,6 +219,10 @@ globalThis.GM_openInTab = (url, options) => {
             try {
                 chrome.runtime.sendMessage({ action: "activate_tab" });
             } catch (err) {}
+        } else if (e.data.type === "SHOPEE_CLOSE_TAB_REQUEST") {
+            try {
+                chrome.runtime.sendMessage({ action: "close_tab" });
+            } catch (err) {}
         }
     });
     // Keep alive connection to background script to prevent tab freezing and service worker suspension

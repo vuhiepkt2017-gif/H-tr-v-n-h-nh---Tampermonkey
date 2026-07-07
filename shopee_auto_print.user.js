@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.0
+// @version      6.1
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -178,7 +178,7 @@
         let lastHandoverStartTime = 0;
         const STUCK_TIMEOUT = 30000; // 30 giây - nếu quá thời gian này thì coi là treo và tự giải phóng
         let lastSuccessfulAction = Date.now(); // Lần cuối cùng thực hiện thành công bất kỳ hành động nào
-        const PAGE_RELOAD_INTERVAL = 2700000; // 45 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
+        const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
 
         let lastReleaseTime = 0;
         let lastAwbPollTime = 0;
@@ -2133,6 +2133,16 @@
             return false;
         }
 
+        function closeCurrentTab(tabType) {
+            log(`[Smart Reload] Đang tiến hành đóng tab loại: ${tabType}`);
+            localStorage.setItem("last_pulse_" + tabType, "0");
+            localStorage.removeItem("tab_instance_id_" + tabType);
+            window.postMessage({ type: "SHOPEE_CLOSE_TAB_REQUEST" }, "*");
+            setTimeout(() => {
+                window.close();
+            }, 1000);
+        }
+
         function initiateSmartReload() {
             const now = Date.now();
             const myTabType = getCurrentTabType();
@@ -2155,7 +2165,7 @@
                 localStorage.setItem('seq_open_phase', 'opening');
                 localStorage.setItem('seq_open_tab_start', Date.now().toString());
                 localStorage.removeItem('seq_open_retry');
-
+ 
                 if (myTabType === firstType) {
                     log(`[Mở Tab] 🔄 Tab hiện tại chính là tab đầu tiên (${firstType}) - F5 để bắt đầu chuỗi...`);
                     window.location.reload();
@@ -2168,9 +2178,7 @@
                             // Tự đóng tab điều phối hiện tại sau khi đã khởi chạy tab đầu tiên thành công
                             setTimeout(() => {
                                 log(`[Smart Reload] Tab điều phối đã khởi chạy chuỗi thành công, tự đóng...`);
-                                localStorage.setItem("last_pulse_" + myTabType, "0");
-                                localStorage.removeItem("tab_instance_id_" + myTabType);
-                                window.close();
+                                closeCurrentTab(myTabType);
                             }, 500);
                         });
                     } else {
@@ -2180,9 +2188,7 @@
                             window.open(cfg.url, '_blank');
                         }
                         setTimeout(() => {
-                            localStorage.setItem("last_pulse_" + myTabType, "0");
-                            localStorage.removeItem("tab_instance_id_" + myTabType);
-                            window.close();
+                            closeCurrentTab(myTabType);
                         }, 1000);
                     }
                 }
@@ -2210,10 +2216,7 @@
                         }
                         
                         log(`[Hệ thống] Nhận lệnh làm mới tuần tự. Đang đóng tab này...`);
-                        // Xóa instance id và pulse
-                        localStorage.setItem("last_pulse_" + myTabType, "0");
-                        localStorage.removeItem("tab_instance_id_" + myTabType);
-                        window.close();
+                        closeCurrentTab(myTabType);
                     }
                 }
             }
