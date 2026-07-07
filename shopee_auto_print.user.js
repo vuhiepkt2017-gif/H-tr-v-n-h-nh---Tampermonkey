@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      5.9
+// @version      6.0
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1243,7 +1243,13 @@
                             dialogText.toLowerCase().includes("không tìm thấy") || 
                             dialogText.toLowerCase().includes("alert") || 
                             dialogText.toLowerCase().includes("system") ||
-                            dialogText.toLowerCase().includes("không tồn tại")) {
+                            dialogText.toLowerCase().includes("không tồn tại") ||
+                            dialogText.toLowerCase().includes("onhold") ||
+                            dialogText.toLowerCase().includes("status") ||
+                            dialogText.toLowerCase().includes("allow") ||
+                            dialogText.toLowerCase().includes("không cho phép") ||
+                            dialogText.toLowerCase().includes("not allowed") ||
+                            dialogText.toLowerCase().includes("không thể")) {
                             
                             hasError = true;
                             
