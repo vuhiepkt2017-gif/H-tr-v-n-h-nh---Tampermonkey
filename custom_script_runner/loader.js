@@ -169,8 +169,8 @@ globalThis.GM_openInTab = (url, options) => {
             const scripts = result.user_scripts || [];
             scripts.forEach(script => {
                 if (script.enabled && urlMatchesPattern(currentUrl, script.matchUrl)) {
-                    // Không tự nạp lại script Shopee vì đã nạp qua manifest.json
-                    if (script.name.includes("Shopee") || script.matchUrl.includes("spx.shopee.vn")) {
+                    // Không tự nạp lại script Shopee và không tự chạy kịch bản Google Sheets bằng eval
+                    if (script.name.includes("Shopee") || script.matchUrl.includes("spx.shopee.vn") || script.matchUrl.includes("spreadsheets")) {
                         return;
                     }
                     console.log("[VTDAuto] Running custom script in ISOLATED world:", script.name);
