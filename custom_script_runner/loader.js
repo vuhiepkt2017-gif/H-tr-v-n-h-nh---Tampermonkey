@@ -173,14 +173,12 @@ globalThis.GM_openInTab = (url, options) => {
                     if (script.name.includes("Shopee") || script.matchUrl.includes("spx.shopee.vn")) {
                         return;
                     }
-                    console.log("[VTDAuto] Injecting custom script:", script.name);
+                    console.log("[VTDAuto] Running custom script in ISOLATED world:", script.name);
                     try {
-                        const el = document.createElement("script");
-                        el.textContent = script.code;
-                        (document.head || document.documentElement).appendChild(el);
-                        el.remove();
+                        const runScript = new Function(script.code);
+                        runScript();
                     } catch (err) {
-                        console.error("[VTDAuto] Lỗi inject script:", script.name, err.message);
+                        console.error("[VTDAuto] Lỗi chạy script:", script.name, err.message);
                     }
                 }
             });
