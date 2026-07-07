@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.1
+// @version      6.2
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -468,6 +468,12 @@
             if (currentType) {
                 localStorage.setItem("last_pulse_" + currentType, Date.now().toString());
                 localStorage.setItem("tab_instance_id_" + currentType, tabInstanceId);
+                
+                // Tránh tình trạng cờ pending bị kẹt trong localStorage khi tab đã chạy lại hoặc không thực sự xử lý tác vụ
+                const isExecuting = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover;
+                if (!isExecuting) {
+                    localStorage.removeItem('pending_' + currentType);
+                }
             }
         }
 
