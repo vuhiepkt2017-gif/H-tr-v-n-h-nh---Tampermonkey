@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      4.9
+// @version      5.0
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -16,7 +16,11 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
+    // Chỉ chạy tập lệnh trên tên miền Shopee Express để tránh ảnh hưởng/hiển thị UI trên Google Sheets
+    const isShopee = window.location.host.includes("spx.shopee.vn") || window.location.host.includes("spxexpress.com");
+    if (!isShopee) {
+        return;
+    }
 
     // Standard background communication messaging bridge / fallback GM APIs in Main/Page world
     if (typeof GM_getValue === 'undefined') {
