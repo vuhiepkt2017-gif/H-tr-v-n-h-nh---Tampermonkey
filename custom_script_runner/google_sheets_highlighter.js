@@ -81,24 +81,25 @@
 
         // 3. Tìm phần tử ô đang chọn (Active Cell Focus Indicator) của Google Sheets
         function findSelectionIndicator() {
+            // Chiến lược A: Chỉ tìm theo class viền chọn chính thức của Google Sheets (Tránh nhầm autofill cover)
             const selectors = [
                 '.docs-sheet-selection-focus-indicator',
-                '.selection-focus-indicator',
-                '.grid-active-cell',
-                '.autofill-cover'
+                '.selection-focus-indicator'
             ];
             for (const selector of selectors) {
                 const el = document.querySelector(selector);
-                if (el && el.offsetWidth > 0 && el.offsetHeight > 0) {
+                // Đảm bảo kích thước đủ lớn để là viền ô chọn, không phải các chấm vuông phụ trợ
+                if (el && el.offsetWidth > 20 && el.offsetHeight > 15) {
                     return el;
                 }
             }
 
+            // Chiến lược B: Quét vùng Grid Canvas tìm div viền xanh có kích thước ô hợp lệ
             const gridCanvas = document.querySelector('.grid-canvas-container');
             if (gridCanvas) {
                 const divs = gridCanvas.querySelectorAll('div');
                 for (const div of divs) {
-                    if (div.style.position === 'absolute' && div.offsetWidth > 0) {
+                    if (div.style.position === 'absolute' && div.offsetWidth > 20 && div.offsetHeight > 15) {
                         const borderTop = window.getComputedStyle(div).borderTopColor;
                         if (borderTop.includes('rgb(26, 115, 232)') || borderTop.includes('rgb(14, 101, 235)')) {
                             return div;
@@ -107,9 +108,10 @@
                 }
             }
 
+            // Chiến lược C: Tìm div bất kỳ viền 2px màu xanh và có kích thước tối thiểu
             const activeCellBorders = document.querySelectorAll('div[style*="border-top-color"][style*="2px"]');
             for (const border of activeCellBorders) {
-                if (border.offsetWidth > 0) return border;
+                if (border.offsetWidth > 20 && border.offsetHeight > 15) return border;
             }
 
             return null;
@@ -118,15 +120,16 @@
         // 4. Định vị trí cho các phần tử bôi màu
         function updateHighlights() {
             const indicator = findSelectionIndicator();
-            if (!indicator) {
+            const gridScrollable = document.querySelector('.grid-scrollable');
+            
+            if (!indicator || !gridScrollable) {
                 rowHighlighter.style.display = 'none';
                 colHighlighter.style.display = 'none';
                 return;
             }
 
             const rect = indicator.getBoundingClientRect();
-            const gridContainer = document.querySelector('.grid-canvas-container');
-            const gridRect = gridContainer ? gridContainer.getBoundingClientRect() : null;
+            const gridRect = gridScrollable.getBoundingClientRect();
 
             // Định vị cho hàng (Row)
             if (config.row) {
@@ -134,13 +137,9 @@
                 rowHighlighter.style.top = rect.top + 'px';
                 rowHighlighter.style.height = rect.height + 'px';
                 
-                if (gridRect) {
-                    rowHighlighter.style.left = gridRect.left + 'px';
-                    rowHighlighter.style.width = gridRect.width + 'px';
-                } else {
-                    rowHighlighter.style.left = '0';
-                    rowHighlighter.style.width = '100vw';
-                }
+                // Giới hạn chiều ngang nằm trọn trong vùng cuộn của bảng tính (không tràn ra ngoài hay đè lên hàng tiêu đề dòng 1, 2, 3...)
+                rowHighlighter.style.left = gridRect.left + 'px';
+                rowHighlighter.style.width = gridRect.width + 'px';
             } else {
                 rowHighlighter.style.display = 'none';
             }
@@ -151,13 +150,9 @@
                 colHighlighter.style.left = rect.left + 'px';
                 colHighlighter.style.width = rect.width + 'px';
 
-                if (gridRect) {
-                    colHighlighter.style.top = gridRect.top + 'px';
-                    colHighlighter.style.height = gridRect.height + 'px';
-                } else {
-                    colHighlighter.style.top = '0';
-                    colHighlighter.style.height = '100vh';
-                }
+                // Giới hạn chiều dọc nằm trọn trong vùng cuộn (không đè lên hàng tiêu đề cột A, B, C...)
+                colHighlighter.style.top = gridRect.top + 'px';
+                colHighlighter.style.height = gridRect.height + 'px';
             } else {
                 colHighlighter.style.display = 'none';
             }
