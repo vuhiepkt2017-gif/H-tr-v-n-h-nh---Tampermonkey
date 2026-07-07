@@ -131,9 +131,22 @@ globalThis.GM_openInTab = (url, options) => {
         return true;
     });
 
-    // Tu dong dong bo URL Web App va PC Name vao localStorage
-    chrome.storage.local.get(["extension_enabled", "google_apps_script_url", "shopee_pc_name", "extension_unlocked"], (result) => {
-        // Neu chua unlock qua popup, tat luon auto print
+    function urlMatchesPattern(url, pattern) {
+        try {
+            const regexPattern = '^' + pattern
+                .replace(/[.+^${}()|[\]\\]/g, '\\$&')
+                .replace(/\*/g, '.*')
+                + '$';
+            const regex = new RegExp(regexPattern, 'i');
+            return regex.test(url);
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Tu dong dong bo URL Web App va PC Name vao localStorage, dong thoi inject cac script tuy chinh phu hop
+    chrome.storage.local.get(["extension_enabled", "google_apps_script_url", "shopee_pc_name", "extension_unlocked", "user_scripts"], (result) => {
+        // Neu chua unlock qua popup, tat luon
         if (result.extension_unlocked !== true) {
             localStorage.setItem("auto_print_enabled", "false");
             console.log("[VTDAuto] Extension dang bi khoa. Vui long unlock qua popup.");
@@ -148,6 +161,29 @@ globalThis.GM_openInTab = (url, options) => {
         }
         if (result.shopee_pc_name) {
             localStorage.setItem("shopee_pc_name", result.shopee_pc_name);
+        }
+
+        // Chạy các script tùy chỉnh phù hợp với URL hiện tại (ngoại trừ script Shopee mặc định)
+        if (isEnabled) {
+            const currentUrl = window.location.href;
+            const scripts = result.user_scripts || [];
+            scripts.forEach(script => {
+                if (script.enabled && urlMatchesPattern(currentUrl, script.matchUrl)) {
+                    // Không tự nạp lại script Shopee vì đã nạp qua manifest.json
+                    if (script.name.includes("Shopee") || script.matchUrl.includes("spx.shopee.vn")) {
+                        return;
+                    }
+                    console.log("[VTDAuto] Injecting custom script:", script.name);
+                    try {
+                        const el = document.createElement("script");
+                        el.textContent = script.code;
+                        (document.head || document.documentElement).appendChild(el);
+                        el.remove();
+                    } catch (err) {
+                        console.error("[VTDAuto] Lỗi inject script:", script.name, err.message);
+                    }
+                }
+            });
         }
     });
 
