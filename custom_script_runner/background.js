@@ -72,19 +72,31 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     return true; // Giu ket noi de phan hoi bat dong bo
   } else if (message.action === "open_tab") {
-    try {
+    const createTabWithRetry = (attempt = 1) => {
       chrome.tabs.create({
         url: message.url,
         active: message.active !== false
       }, (tab) => {
         if (chrome.runtime.lastError) {
-          console.error("[VTDAuto] Lỗi tạo tab:", chrome.runtime.lastError.message);
-          sendResponse({ success: false, error: chrome.runtime.lastError.message });
+          const errMsg = chrome.runtime.lastError.message;
+          console.warn(`[VTDAuto] Lỗi tạo tab (Lần thử ${attempt}):`, errMsg);
+          
+          // Thử lại nếu lỗi liên quan tới việc kéo thả tab hoặc trình duyệt đang bận
+          if ((errMsg.includes("dragging") || errMsg.includes("edited") || errMsg.includes("busy") || errMsg.includes("drag")) && attempt < 5) {
+            console.log(`[VTDAuto] Đang thử lại tạo tab sau 1 giây...`);
+            setTimeout(() => createTabWithRetry(attempt + 1), 1000);
+          } else {
+            sendResponse({ success: false, error: errMsg });
+          }
         } else {
           console.log("[VTDAuto] Đã tạo tab thành công:", tab.id);
           sendResponse({ success: true });
         }
       });
+    };
+
+    try {
+      createTabWithRetry();
     } catch (err) {
       console.error("[VTDAuto] Exception khi tạo tab:", err.message);
       sendResponse({ success: false, error: err.message });
@@ -114,6 +126,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === "close_tab") {
     if (sender.tab && sender.tab.id) {
       chrome.tabs.remove(sender.tab.id, () => {
+        if (chrome.runtime.lastError) {
+          console.warn("[VTDAuto] Cảnh báo lỗi đóng tab:", chrome.runtime.lastError.message);
+        }
         sendResponse({ success: true });
       });
     } else {
