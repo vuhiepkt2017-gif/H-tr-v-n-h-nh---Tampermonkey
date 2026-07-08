@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.7
+// @version      6.8
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -179,6 +179,7 @@
         const STUCK_TIMEOUT = 30000; // 30 giây - nếu quá thời gian này thì coi là treo và tự giải phóng
         let lastSuccessfulAction = Date.now(); // Lần cuối cùng thực hiện thành công bất kỳ hành động nào
         const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
+        const tabStartupTime = Date.now() + Math.floor(Math.random() * 60000); // Thêm offset ngẫu nhiên lên tới 60s để so le thời gian reload các tab
 
         let lastReleaseTime = 0;
         let lastAwbPollTime = 0;
@@ -2213,16 +2214,13 @@
         }
 
         // Thay thế checkPeriodicReload cũ: kiểm tra xem có cần khởi tạo chuỗi reload không
+        // Làm mới định kỳ từng tab độc lập bằng F5 khi rảnh rỗi để giải phóng bộ nhớ và làm mới session
         function checkPeriodicReload() {
             const now = Date.now();
-
-            // Nếu đang có chuỗi reload hoặc mở tab đang chạy → không tạo mới
-            if (localStorage.getItem('seq_open_queue') || localStorage.getItem('smart_reload_queue')) return;
-
-            // Chỉ khởi tạo reload khi KHÔNG đang xử lý tác vụ nào và đã quá 1 giờ
             const isIdle = !isPrintingNow && !isProcessingList && !isProcessingPrint && !isProcessingHandover;
-            if (isIdle && (now - lastSuccessfulAction) > PAGE_RELOAD_INTERVAL) {
-                initiateSmartReload();
+            if (isIdle && (now - tabStartupTime) > PAGE_RELOAD_INTERVAL) {
+                log('[Tự động làm mới] Tab đã hoạt động liên tục 30 phút. Tiến hành F5 làm mới trang...');
+                window.location.reload();
             }
         }
 
