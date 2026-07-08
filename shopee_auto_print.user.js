@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.9
+// @version      7.0
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2093,54 +2093,39 @@
                 }
             }
 
-            // 2. Kiểm tra phần tử tương tác thực tế của từng trang
+            // 2. Kiểm tra phần tử tương tác thực tế của từng trang (chỉ cần tồn tại trong DOM để chạy tốt dưới nền)
             if (hash.includes('awbPrint')) {
-                // Trang In Bill: Cần có ô textarea nhập mã vận đơn và có kích thước thực tế hiển thị
+                // Trang In Bill: Cần có ô textarea nhập mã vận đơn
                 const textarea = document.querySelector('textarea') || document.querySelector('.el-textarea__inner');
-                if (!textarea) return false;
-                const style = window.getComputedStyle(textarea);
-                return textarea.offsetWidth > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+                return !!textarea;
             }
 
             if (hash.includes('general-to-management')) {
-                // Trang Quét TO: Cần có nút "Tìm kiếm" / "Search" và có table headers hoặc dòng dữ liệu hiển thị
+                // Trang Quét TO: Cần có nút "Tìm kiếm" / "Search" và có table headers
                 const buttons = Array.from(document.querySelectorAll('button'));
                 const hasSearchBtn = buttons.some(btn => {
                     const text = (btn.innerText || btn.textContent || '').trim().toLowerCase();
-                    const style = window.getComputedStyle(btn);
-                    const isVisible = btn.offsetWidth > 0 && style.display !== 'none' && style.visibility !== 'hidden';
-                    return isVisible && (text.includes('tìm kiếm') || text.includes('search'));
+                    return text.includes('tìm kiếm') || text.includes('search');
                 });
                 
-                // Cần có bảng dữ liệu (thẻ table hoặc các ô th)
                 const hasTable = document.querySelectorAll('th').length > 0;
                 return hasSearchBtn && hasTable;
             }
 
             if (hash.includes('startPackNoLabel')) {
-                // Trang In TO: Cần có ô nhập (input) TO number có kích thước thực tế hiển thị
+                // Trang In TO: Cần có ít nhất một ô nhập (input) text/search
                 const inputs = Array.from(document.querySelectorAll('input'));
-                const hasVisibleInput = inputs.some(input => {
+                const hasInput = inputs.some(input => {
                     const type = (input.type || 'text').toLowerCase();
-                    const style = window.getComputedStyle(input);
-                    const isText = type === 'text' || type === 'search' || type === '';
-                    return isText && input.offsetWidth > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+                    return type === 'text' || type === 'search' || type === '';
                 });
-                return hasVisibleInput;
+                return hasInput;
             }
 
             if (hash.includes('pickupTask')) {
-                // Trang Chuyển Pick: Cần có ô lọc và nút tìm kiếm khả dụng
-                const inputs = Array.from(document.querySelectorAll('input'));
-                const hasInput = inputs.some(input => {
-                    const style = window.getComputedStyle(input);
-                    return input.offsetWidth > 0 && style.display !== 'none' && style.visibility !== 'hidden';
-                });
-                const buttons = Array.from(document.querySelectorAll('button'));
-                const hasButton = buttons.some(btn => {
-                    const style = window.getComputedStyle(btn);
-                    return btn.offsetWidth > 0 && style.display !== 'none' && style.visibility !== 'hidden';
-                });
+                // Trang Chuyển Pick: Cần có ô nhập (input) và nút bấm (button)
+                const hasInput = document.querySelector('input') !== null;
+                const hasButton = document.querySelector('button') !== null;
                 return hasInput && hasButton;
             }
 
