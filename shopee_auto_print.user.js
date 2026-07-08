@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.5
+// @version      6.6
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -639,15 +639,7 @@
                     window.location.reload();
                 } else {
                     log(`[Mở Tab] ➡ Mở tab tiếp: ${cfg.name}...`);
-                    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
-                        chrome.runtime.sendMessage({ action: "open_tab", url: cfg.url, active: true }, () => {
-                            const err = chrome.runtime.lastError;
-                        });
-                    } else if (typeof GM_openInTab !== 'undefined') {
-                        GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
-                    } else {
-                        window.open(cfg.url, '_blank');
-                    }
+                    window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url: cfg.url, active: true }, "*");
                 }
             } else {
                 clearSeqOpenState();
@@ -2178,24 +2170,13 @@
                     const cfg = TABS_CONFIG[firstType];
                     log(`[Mở Tab] ➡ Mở tab đầu tiên của chuỗi: ${cfg.name}...`);
                     
-                    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.sendMessage) {
-                        chrome.runtime.sendMessage({ action: "open_tab", url: cfg.url, active: true }, () => {
-                            // Tự đóng tab điều phối hiện tại sau khi đã khởi chạy tab đầu tiên thành công
-                            setTimeout(() => {
-                                log(`[Smart Reload] Tab điều phối đã khởi chạy chuỗi thành công, tự đóng...`);
-                                closeCurrentTab(myTabType);
-                            }, 500);
-                        });
-                    } else {
-                        if (typeof GM_openInTab !== 'undefined') {
-                            GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
-                        } else {
-                            window.open(cfg.url, '_blank');
-                        }
-                        setTimeout(() => {
-                            closeCurrentTab(myTabType);
-                        }, 1000);
-                    }
+                    window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url: cfg.url, active: true }, "*");
+                    
+                    // Tự đóng tab điều phối hiện tại sau khi phát lệnh mở tab đầu tiên
+                    setTimeout(() => {
+                        log(`[Smart Reload] Tab điều phối đã phát lệnh mở chuỗi thành công, tự đóng...`);
+                        closeCurrentTab(myTabType);
+                    }, 1000);
                 }
             }, 2500);
 
