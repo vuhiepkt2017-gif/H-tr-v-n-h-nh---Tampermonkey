@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.8
+// @version      6.9
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1113,6 +1113,10 @@
             const hash = window.location.hash || "";
             if (!hash.includes('awbPrint')) return;
 
+            if (!isPageContentFullyLoaded()) {
+                return;
+            }
+
             if (!acquireGlobalLock('awbPrint')) {
                 return;
             }
@@ -1354,6 +1358,11 @@
         // ==========================================
         async function processTOListPage() {
             if (!isRunning || isProcessingList) return;
+            
+            if (!isPageContentFullyLoaded()) {
+                return;
+            }
+            
             isProcessingList = true;
             lastListStartTime = Date.now();
             lastSuccessfulAction = Date.now();
@@ -1482,6 +1491,10 @@
 
             const hash = window.location.hash;
             if (!hash.includes("startPackNoLabel")) return;
+
+            if (!isPageContentFullyLoaded()) {
+                return;
+            }
 
             if (!acquireGlobalLock('startPackNoLabel')) {
                 return;
@@ -1646,6 +1659,10 @@
 
             const hash = window.location.hash || "";
             if (!hash.includes('pickupTask/list')) return;
+
+            if (!isPageContentFullyLoaded()) {
+                return;
+            }
 
             if (!acquireGlobalLock('pickupTask')) {
                 return;

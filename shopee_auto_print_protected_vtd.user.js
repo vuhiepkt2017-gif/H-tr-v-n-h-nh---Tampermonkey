@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.8
+// @version      6.9
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1811,6 +1811,9 @@ async function _0x00d3() {
 if (!_0x0079 || _0x0075) return;
 const hash = window.location.hash || _0xstr(394);
 if (!hash.includes(_0xstr(395))) return;
+if (!_0x0072()) {
+return;
+}
 if (!_0x000c(_0xstr(396))) {
 return;
 }
@@ -2009,6 +2012,9 @@ return { success: true, invalidCodes: invalidCodes };
 }
 async function _0x00ba() {
 if (!_0x0079 || _0x0077) return;
+if (!_0x0072()) {
+return;
+}
 _0x0077 = true;
 _0x0088 = Date.now();
 _0x0090 = Date.now();
@@ -2118,6 +2124,9 @@ async function _0x00b9() {
 if (!_0x0079 || _0x0078) return;
 const hash = window.location.hash;
 if (!hash.includes(_0xstr(541))) return;
+if (!_0x0072()) {
+return;
+}
 if (!_0x000c(_0xstr(542))) {
 return;
 }
@@ -2252,6 +2261,9 @@ async function _0x00d2() {
 if (!_0x0079 || _0x0076) return;
 const hash = window.location.hash || _0xstr(618);
 if (!hash.includes(_0xstr(619))) return;
+if (!_0x0072()) {
+return;
+}
 if (!_0x000c(_0xstr(620))) {
 return;
 }
