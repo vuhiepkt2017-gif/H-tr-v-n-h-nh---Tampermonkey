@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.6
+// @version      6.7
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -231,9 +231,9 @@
             const myIndex = priorities.indexOf(tabType);
             const holderIndex = currentLockType ? priorities.indexOf(currentLockType) : 99;
 
-            // Nếu chưa có khóa, hoặc khóa đã quá 5 giây (để các tab rảnh rỗi nhường khóa nhanh hơn), hoặc chính tab này đang giữ khóa
+            // Nếu chưa có khóa, hoặc khóa đã quá 25 giây (tránh các tab khác cướp khóa khi đang gọi GAS), hoặc chính tab này đang giữ khóa
             // HOẶC tab này có độ ưu tiên cao hơn hẳn tab đang giữ khóa (myIndex < holderIndex)
-            if (!currentLockType || (now - lockTime) > 5000 || currentLockType === tabType || (myIndex !== -1 && myIndex < holderIndex)) {
+            if (!currentLockType || (now - lockTime) > 25000 || currentLockType === tabType || (myIndex !== -1 && myIndex < holderIndex)) {
                 localStorage.setItem(lockKey, "locked");
                 localStorage.setItem(typeKey, tabType);
                 localStorage.setItem(timeKey, now.toString());

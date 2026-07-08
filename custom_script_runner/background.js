@@ -105,20 +105,30 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === "activate_tab") {
     if (sender.tab && sender.tab.id && sender.tab.windowId) {
       chrome.windows.get(sender.tab.windowId, (win) => {
-        // Lưu lại trạng thái ban đầu để khôi phục chính xác (mặc định là normal nếu trước đó bị minimized)
-        const originalState = win.state === "minimized" ? "normal" : win.state;
-        const updateInfo = { focused: true, drawAttention: true };
-        
-        // Mẹo ép Windows đưa Chrome lên Foreground: Thu nhỏ (minimize) -> Khôi phục lại trạng thái cũ (restore)
-        chrome.windows.update(sender.tab.windowId, { state: "minimized" }, () => {
-          setTimeout(() => {
-            chrome.windows.update(sender.tab.windowId, { state: originalState, focused: true }, () => {
-              chrome.tabs.update(sender.tab.id, { active: true }, () => {
-                sendResponse({ success: true });
-              });
+        if (chrome.runtime.lastError || !win) {
+          // Dự phòng nếu lỗi lấy cửa sổ
+          chrome.windows.update(sender.tab.windowId, { focused: true }, () => {
+            chrome.tabs.update(sender.tab.id, { active: true }, () => {
+              sendResponse({ success: true });
             });
-          }, 150); // Chờ 150ms để Windows thực hiện xong hiệu ứng thu nhỏ trước khi mở lại
-        });
+          });
+          return;
+        }
+        if (win.state === "minimized") {
+          // Chỉ thực hiện hiệu ứng minimize/restore nếu cửa sổ thực sự đang bị thu nhỏ
+          chrome.windows.update(sender.tab.windowId, { state: "normal", focused: true }, () => {
+            chrome.tabs.update(sender.tab.id, { active: true }, () => {
+              sendResponse({ success: true });
+            });
+          });
+        } else {
+          // Nếu cửa sổ đang mở bình thường, chỉ cần gọi tập trung trực tiếp để không bị chớp màn hình
+          chrome.windows.update(sender.tab.windowId, { focused: true }, () => {
+            chrome.tabs.update(sender.tab.id, { active: true }, () => {
+              sendResponse({ success: true });
+            });
+          });
+        }
       });
     } else {
       sendResponse({ success: false, error: "No tab found" });

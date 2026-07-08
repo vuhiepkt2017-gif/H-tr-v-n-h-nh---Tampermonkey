@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.6
+// @version      6.7
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1173,7 +1173,7 @@ const _0x0098 = parseInt(localStorage.getItem(_0x00e2) || _0xstr(69));
 const _0x00b6 = [_0xstr(70), _0xstr(71), _0xstr(72)];
 const _0x00a0 = _0x00b6.indexOf(tabType);
 const _0x0065 = _0x0031 ? _0x00b6.indexOf(_0x0031) : 99;
-if (!_0x0031 || (now - _0x0098) > 5000 || _0x0031 === tabType || (_0x00a0 !== -1 && _0x00a0 < _0x0065)) {
+if (!_0x0031 || (now - _0x0098) > 25000 || _0x0031 === tabType || (_0x00a0 !== -1 && _0x00a0 < _0x0065)) {
 localStorage.setItem(_0x0097, _0xstr(73));
 localStorage.setItem(_0x00ec, tabType);
 localStorage.setItem(_0x00e2, now.toString());
