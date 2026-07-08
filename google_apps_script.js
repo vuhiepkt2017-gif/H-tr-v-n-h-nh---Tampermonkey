@@ -486,13 +486,15 @@ function getPendingTO(pcName, priority) {
         var parsedTime = parseDateDefensive(rowTime);
         if (parsedTime) {
           var diffMs = now.getTime() - parsedTime.getTime();
-          if (diffMs > 20000) { // Quá 20 giây chưa xong -> Coi như Mã lỗi
+          if (diffMs > 120000) { // Quá 2 phút chưa xong -> Coi như Mã lỗi
             sheet.getRange(i + 2, 2).setValue("Mã lỗi");
             isTimedOut = true;
+            values[i][1] = "Mã lỗi";
           }
         } else {
           sheet.getRange(i + 2, 2).setValue("Mã lỗi");
           isTimedOut = true;
+          values[i][1] = "Mã lỗi";
         }
         
         if (!isTimedOut && activePc && isPcAlive(activePc, now)) {

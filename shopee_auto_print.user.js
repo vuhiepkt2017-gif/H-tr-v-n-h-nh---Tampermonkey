@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.4
+// @version      6.5
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -748,7 +748,7 @@
                             hasDeadTab = true;
                             break;
                         }
-                        if (lastPulse > 0 && (now - lastPulse) > REOPEN_COOLDOWN_CRASHED_NEW && lastOpenDiff > REOPEN_COOLDOWN_CRASHED_NEW) {
+                        if (lastPulse > 0 && (now - lastPulse) > REOPEN_COOLDOWN_CRASHED && lastOpenDiff > REOPEN_COOLDOWN_CRASHED) {
                             hasDeadTab = true;
                             break;
                         }

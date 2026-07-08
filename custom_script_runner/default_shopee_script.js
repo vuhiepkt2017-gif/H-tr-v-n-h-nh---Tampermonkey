@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.4
+// @version      6.5
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1531,7 +1531,7 @@ if (_0x008d === 0 && _0x008a > _0x0003) {
 _0x005b = true;
 break;
 }
-if (_0x008d > 0 && (now - _0x008d) > _0x0005 && _0x008a > _0x0005) {
+if (_0x008d > 0 && (now - _0x008d) > _0x0004 && _0x008a > _0x0004) {
 _0x005b = true;
 break;
 }
