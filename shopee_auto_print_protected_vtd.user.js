@@ -927,6 +927,7 @@ if (typeof unsafeWindow === 'undefined') {
         'dGFiX2luc3RhbmNlX2lkXw==',
         'U0hPUEVFX0NMT1NFX1RBQl9SRVFVRVNU',
         'Kg==',
+        'W1NtYXJ0IFJlbG9hZF0gd2luZG93LmNsb3NlKCkgYmxvY2tlZCBieSBicm93c2VyLCByZWx5aW5nIG9uIEV4dGVuc2lvbiB0YWJzLnJlbW92ZQ==',
         'W1NtYXJ0IFJlbG9hZF0gUGjDoXQgbOG7h25oIMSRw7NuZyB04bqldCBj4bqjIGPDoWMgdGFiIGtow6FjIMSR4buDIGzDoG0gbeG7m2kuLi4=',
         'Y2xvc2VfdGFiX3RyaWdnZXJfdGltZV8=',
         'W1NtYXJ0IFJlbG9hZF0gQuG6r3QgxJHhuqd1IG3hu58gbOG6oWkgdHXhuqduIHThu7EgY8OhYyB0YWIuLi4=',
@@ -2647,35 +2648,39 @@ localStorage.setItem(_0xstr(850) + tabType, _0xstr(851));
 localStorage.removeItem(_0xstr(852) + tabType);
 window.postMessage({ type: _0xstr(853) }, _0xstr(854));
 setTimeout(() => {
+try {
 window.close();
+} catch (e) {
+console.log(_0xstr(855));
+}
 }, 1000);
 }
 function _0x0068() {
 const now = Date.now();
 const _0x00a1 = _0x0055();
-log(_0xstr(855));
+log(_0xstr(856));
 for (const type of _0x0002) {
 if (type !== _0x00a1) {
-localStorage.setItem(_0xstr(856) + type, now.toString());
+localStorage.setItem(_0xstr(857) + type, now.toString());
 }
 }
 setTimeout(() => {
-log(_0xstr(857));
-localStorage.setItem(_0xstr(858), JSON.stringify(_0x0002));
+log(_0xstr(858));
+localStorage.setItem(_0xstr(859), JSON.stringify(_0x0002));
 const _0x004f = _0x0002[0];
-localStorage.setItem(_0xstr(859), _0x004f);
-localStorage.setItem(_0xstr(860), _0xstr(861));
-localStorage.setItem(_0xstr(862), Date.now().toString());
-localStorage.removeItem(_0xstr(863));
+localStorage.setItem(_0xstr(860), _0x004f);
+localStorage.setItem(_0xstr(861), _0xstr(862));
+localStorage.setItem(_0xstr(863), Date.now().toString());
+localStorage.removeItem(_0xstr(864));
 if (_0x00a1 === _0x004f) {
-log(_0xstr(864) + (_0x004f) + _0xstr(865));
+log(_0xstr(865) + (_0x004f) + _0xstr(866));
 window.location.reload();
 } else {
 const _0x001e = _0x000a[_0x004f];
-log(_0xstr(866) + (_0x001e.name) + _0xstr(867));
-window.postMessage({ type: _0xstr(868), url: _0x001e.url, active: true }, _0xstr(869));
+log(_0xstr(867) + (_0x001e.name) + _0xstr(868));
+window.postMessage({ type: _0xstr(869), url: _0x001e.url, active: true }, _0xstr(870));
 setTimeout(() => {
-log(_0xstr(870));
+log(_0xstr(871));
 _0x002b(_0x00a1);
 }, 1000);
 }
@@ -2685,17 +2690,17 @@ _0x0090 = now;
 function _0x0022() {
 const _0x00a1 = _0x0055();
 if (_0x00a1) {
-const _0x00ea = localStorage.getItem(_0xstr(871) + _0x00a1);
+const _0x00ea = localStorage.getItem(_0xstr(872) + _0x00a1);
 if (_0x00ea) {
 const _0x00e9 = parseInt(_0x00ea, 10);
 const now = Date.now();
 if (now - _0x00e9 < 8000) {
 const _0x006d = _0x0075 || _0x0077 || _0x0078 || _0x0076;
 if (_0x006d) {
-log(_0xstr(872));
+log(_0xstr(873));
 return;
 }
-log(_0xstr(873));
+log(_0xstr(874));
 _0x002b(_0x00a1);
 }
 }
@@ -2703,7 +2708,7 @@ _0x002b(_0x00a1);
 }
 function _0x0025() {
 const now = Date.now();
-if (localStorage.getItem(_0xstr(874)) || localStorage.getItem(_0xstr(875))) return;
+if (localStorage.getItem(_0xstr(875)) || localStorage.getItem(_0xstr(876))) return;
 const _0x0070 = !_0x0075 && !_0x0077 && !_0x0078 && !_0x0076;
 if (_0x0070 && (now - _0x0090) > _0x0001) {
 _0x0068();
@@ -2714,13 +2719,13 @@ function _0x009e() {
 _0x00ee();
 _0x00ef();
 _0x0022();
-_0x0013 = localStorage.getItem(_0xstr(876)) || GM_getValue(_0xstr(877), _0x0000);
-_0x00b1 = localStorage.getItem(_0xstr(878)) || GM_getValue(_0xstr(879), _0xstr(880));
-_0x00b2 = localStorage.getItem(_0xstr(881)) || GM_getValue(_0xstr(882), _0xstr(883));
-_0x0079 = localStorage.getItem(_0xstr(884)) === _0xstr(885);
+_0x0013 = localStorage.getItem(_0xstr(877)) || GM_getValue(_0xstr(878), _0x0000);
+_0x00b1 = localStorage.getItem(_0xstr(879)) || GM_getValue(_0xstr(880), _0xstr(881));
+_0x00b2 = localStorage.getItem(_0xstr(882)) || GM_getValue(_0xstr(883), _0xstr(884));
+_0x0079 = localStorage.getItem(_0xstr(885)) === _0xstr(886);
 _0x00f0();
 const _0x0035 = window.location.href;
-const hash = window.location.hash || _0xstr(886);
+const hash = window.location.hash || _0xstr(887);
 if (_0x0035 !== _0x0093) {
 _0x0093 = _0x0035;
 _0x0077 = false;
@@ -2739,65 +2744,65 @@ _0x0025();
 _0x0015();
 }
 const now = Date.now();
-if (hash.includes(_0xstr(887))) {
+if (hash.includes(_0xstr(888))) {
 if (now - _0x0083 > 4500) {
 _0x0083 = now;
 _0x00d3();
 }
 }
-if (hash.includes(_0xstr(888))) {
+if (hash.includes(_0xstr(889))) {
 _0x00ba();
 }
-if (hash.includes(_0xstr(889))) {
+if (hash.includes(_0xstr(890))) {
 if (now - _0x0092 > 4500) {
 _0x0092 = now;
 _0x00b9();
 }
 }
-if (hash.includes(_0xstr(890))) {
+if (hash.includes(_0xstr(891))) {
 if (now - _0x0084 > 5000) {
 _0x0084 = now;
 _0x00d2();
 }
 }
 }
-window.addEventListener(_0xstr(891), (e) => {
+window.addEventListener(_0xstr(892), (e) => {
 if (e.data) {
-if (e.data.type === _0xstr(892)) {
+if (e.data.type === _0xstr(893)) {
 _0x00ee();
 if (_0x0079) {
 _0x0021();
-const hash = window.location.hash || _0xstr(893);
-if (hash.includes(_0xstr(894))) {
+const hash = window.location.hash || _0xstr(894);
+if (hash.includes(_0xstr(895))) {
 _0x00d3();
-} else if (hash.includes(_0xstr(895))) {
-_0x00ba();
 } else if (hash.includes(_0xstr(896))) {
-_0x00b9();
+_0x00ba();
 } else if (hash.includes(_0xstr(897))) {
+_0x00b9();
+} else if (hash.includes(_0xstr(898))) {
 _0x00d2();
 }
 }
-} else if (e.data.type === _0xstr(898)) {
-log(_0xstr(899));
-_0x0067(_0xstr(900));
+} else if (e.data.type === _0xstr(899)) {
+log(_0xstr(900));
+_0x0067(_0xstr(901));
 }
 }
 });
 _0x00ee();
 let _0x00f8 = null;
 try {
-const _0x0016 = new Blob([_0xstr(901)], { type: _0xstr(902) });
+const _0x0016 = new Blob([_0xstr(902)], { type: _0xstr(903) });
 const _0x00f9 = URL.createObjectURL(_0x0016);
 _0x00f8 = new Worker(_0x00f9);
 _0x00f8.onmessage = function(e) {
-if (e.data === _0xstr(903)) {
+if (e.data === _0xstr(904)) {
 _0x009e();
 }
 };
-log(_0xstr(904));
-} catch (err) {
 log(_0xstr(905));
+} catch (err) {
+log(_0xstr(906));
 function _0x004d() {
 _0x009e();
 setTimeout(_0x004d, 400);
@@ -2805,8 +2810,8 @@ setTimeout(_0x004d, 400);
 _0x004d();
 }
 }
-if (document.readyState === _0xstr(906)) {
-document.addEventListener(_0xstr(907), init);
+if (document.readyState === _0xstr(907)) {
+document.addEventListener(_0xstr(908), init);
 } else {
 init();
 }

@@ -2136,7 +2136,11 @@
             localStorage.removeItem("tab_instance_id_" + tabType);
             window.postMessage({ type: "SHOPEE_CLOSE_TAB_REQUEST" }, "*");
             setTimeout(() => {
-                window.close();
+                try {
+                    window.close();
+                } catch (e) {
+                    console.log("[Smart Reload] window.close() blocked by browser, relying on Extension tabs.remove");
+                }
             }, 1000);
         }
 
