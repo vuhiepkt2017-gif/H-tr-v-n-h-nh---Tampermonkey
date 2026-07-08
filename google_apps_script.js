@@ -679,6 +679,40 @@ function getPendingChuyenPick(pcName, priority) {
     var sheetCP = getOrCreateSheetChuyenPick();
     var lastRowCP = sheetCP.getLastRow();
 
+    // Tự động khôi phục các tác vụ bị kẹt ở trạng thái "Đang chuyển" quá 3 phút (180,000 ms)
+    if (lastRowHT >= 2) {
+      var rangeHTAll = sheetHT.getRange(2, 1, lastRowHT - 1, 6);
+      var valuesHTAll = rangeHTAll.getValues();
+      for (var i = 0; i < valuesHTAll.length; i++) {
+        var status = valuesHTAll[i][4].toString().trim().toLowerCase();
+        if (status === "đang chuyển") {
+          var timestamp = valuesHTAll[i][1];
+          var parsedTime = parseDateDefensive(timestamp);
+          if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
+            sheetHT.getRange(i + 2, 5).setValue("Chờ chuyển");
+            sheetHT.getRange(i + 2, 6).setValue("");
+            valuesHTAll[i][4] = "Chờ chuyển";
+          }
+        }
+      }
+    }
+    if (lastRowCP >= 2) {
+      var rangeCPAll = sheetCP.getRange(2, 1, lastRowCP - 1, 6);
+      var valuesCPAll = rangeCPAll.getValues();
+      for (var i = 0; i < valuesCPAll.length; i++) {
+        var status = valuesCPAll[i][4].toString().trim().toLowerCase();
+        if (status === "đang chuyển") {
+          var timestamp = valuesCPAll[i][1];
+          var parsedTime = parseDateDefensive(timestamp);
+          if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
+            sheetCP.getRange(i + 2, 5).setValue("Chờ chuyển");
+            sheetCP.getRange(i + 2, 6).setValue("");
+            valuesCPAll[i][4] = "Chờ chuyển";
+          }
+        }
+      }
+    }
+
     // TIẾN HÀNH PHÁT TASK NEW NẾU CÓ TASK CHỜ CHUYỂN
     // 1. Kiểm tra ưu tiên sheet "Hỗ Trợ" trước
     if (lastRowHT >= 2) {

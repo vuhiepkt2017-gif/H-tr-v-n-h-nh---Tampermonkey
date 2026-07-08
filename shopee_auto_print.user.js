@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      6.3
+// @version      6.4
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -1903,7 +1903,6 @@
                                 activeInput.value = recipientDriver;
                             }
                             
-                            // Element UI can chuoi event nay de kich hoat loc tu dong tren he thong
                             activeInput.dispatchEvent(new Event('input', { bubbles: true }));
                             activeInput.dispatchEvent(new Event('change', { bubbles: true }));
                             activeInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
@@ -1958,13 +1957,9 @@
                                     let hasDriverError = false;
                                     for (let check = 0; check < 30; check++) {
                                         await delay(100);
-                                        const allMessages = Array.from(document.querySelectorAll('.el-message, .el-notification, .el-dialog, .modal-content, div, p, span'));
-                                        const errorMsg = allMessages.find(el => {
-                                            const txt = (el.innerText || el.textContent || "");
-                                            return txt.includes("110901002") || txt.includes("already belongs to this driver");
-                                        });
-                                        if (errorMsg && (errorMsg.offsetWidth > 0 || errorMsg.offsetHeight > 0)) {
-                                            log(`[Chuyển Pick] Lỗi: ${errorMsg.textContent.trim()}`);
+                                        const bodyText = document.body.innerText || "";
+                                        if (bodyText.includes("110901002") || bodyText.toLowerCase().includes("already belongs to this driver")) {
+                                            log(`[Chuyển Pick] Phát hiện lỗi tài xế đã thuộc nhiệm vụ.`);
                                             hasDriverError = true;
                                             break;
                                         }
@@ -1984,11 +1979,15 @@
                                                        (btn.offsetWidth > 0 || btn.offsetHeight > 0);
                                             });
                                         }
+                                        if (!cancelBtn) {
+                                            // Thử nút Close góc trên bên phải el-dialog
+                                            cancelBtn = targetDialog.querySelector('.el-dialog__headerbtn, [class*="close"], [class*="headerbtn"]');
+                                        }
                                         if (cancelBtn) {
                                             cancelBtn.click();
-                                            log("[Chuyển Pick] Đã click nút Hủy/Cancel để đóng hộp thoại Reassign.");
+                                            log("[Chuyển Pick] Đã click nút Hủy/Close để đóng hộp thoại Reassign.");
                                         } else {
-                                            log("[Chuyển Pick] Cảnh báo: Không tìm thấy nút Cancel/Hủy trên giao diện để đóng hộp thoại!");
+                                            log("[Chuyển Pick] Cảnh báo: Không tìm thấy nút Close/Hủy trên giao diện để đóng hộp thoại!");
                                         }
                                         await delay(500);
                                         return "already_belongs"; // Trả về mã thành công đặc biệt
