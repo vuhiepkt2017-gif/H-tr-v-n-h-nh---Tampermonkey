@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.4
+// @version      8.5
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2477,8 +2477,14 @@
             }
 
             if (hash.includes('pickupOrder/createNew')) {
-                // Không kiểm tra lúc load lại tab để tránh lag/treo, trả về true luôn
-                return true;
+                // Chờ cho đến khi thấy nút tìm kiếm (Search) hoặc ô nhập liệu thì mới coi là load xong để mở tab tiếp theo
+                const buttons = Array.from(document.querySelectorAll('button'));
+                const hasSearchBtn = buttons.some(btn => {
+                    const text = (btn.innerText || btn.textContent || '').trim().toLowerCase();
+                    return text.includes('search') || text.includes('tìm kiếm');
+                });
+                const hasInput = document.querySelectorAll('input').length > 0;
+                return hasSearchBtn || hasInput;
             }
 
             // Mặc định: Nếu không khớp bất kỳ hash của trang nghiệp vụ nào, coi như chưa load xong nội dung chính
