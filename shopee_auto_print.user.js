@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.3
+// @version      8.4
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2271,20 +2271,28 @@
                                     
                                     driverInput.focus();
                                     driverInput.click();
-                                    await delay(800); // Chờ 0.8s load như yêu cầu
+                                    await delay(500);
 
-                                    driverInput.value = task.riderId;
-                                    driverInput.dispatchEvent(new Event('input', { bubbles: true }));
+                                    // Giả lập gõ từng ký tự của ID Rider để kích hoạt reactivity của Vue
+                                    driverInput.value = "";
+                                    for (let char of task.riderId) {
+                                        driverInput.value += char;
+                                        driverInput.dispatchEvent(new Event('input', { bubbles: true }));
+                                        driverInput.dispatchEvent(new KeyboardEvent('keydown', { key: char, bubbles: true }));
+                                        driverInput.dispatchEvent(new KeyboardEvent('keypress', { key: char, bubbles: true }));
+                                        driverInput.dispatchEvent(new KeyboardEvent('keyup', { key: char, bubbles: true }));
+                                        await delay(80);
+                                    }
                                     driverInput.dispatchEvent(new Event('change', { bubbles: true }));
-                                    await delay(800); // Chờ 0.8s load tên rider
+                                    await delay(1200); // Chờ 1.2s để Shopee lọc và hiển thị danh sách
 
                                     const allElements = Array.from(document.querySelectorAll('li, span, div, p, option, .el-select-dropdown__item'));
                                     const matchItem = allElements.find(item => {
                                         const txt = (item.innerText || item.textContent || "").trim();
-                                        const isDropdownItem = (item.className && typeof item.className === 'string') && 
-                                                               (item.className.includes("select-dropdown__item") || 
-                                                                item.className.includes("select-item") || 
-                                                                item.className.includes("el-select-dropdown__item"));
+                                        const className = (item.getAttribute && item.getAttribute('class')) || "";
+                                        const isDropdownItem = className.includes("select-dropdown__item") || 
+                                                               className.includes("select-item") || 
+                                                               className.includes("el-select-dropdown__item");
                                         return isDropdownItem && txt.includes(task.riderId) && (item.offsetWidth > 0 || item.offsetHeight > 0);
                                     });
 
