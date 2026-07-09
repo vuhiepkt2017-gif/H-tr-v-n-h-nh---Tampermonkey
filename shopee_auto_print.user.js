@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.2
+// @version      8.3
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2257,8 +2257,15 @@
 
                                 if (driverInput) {
                                     // Click vào wrapper của Select trước để mở dropdown (giải quyết lỗi chữ mờ "Please Select")
-                                    if (selectWrapper) {
-                                        selectWrapper.click();
+                                    const clickTarget = selectWrapper || 
+                                                        driverInput.closest('.el-select') || 
+                                                        driverInput.closest('.el-select__wrapper') || 
+                                                        driverInput.closest('.el-input') || 
+                                                        driverInput.closest('.el-input__wrapper') || 
+                                                        driverInput.parentElement;
+                                    
+                                    if (clickTarget) {
+                                        clickTarget.click();
                                         await delay(400);
                                     }
                                     
