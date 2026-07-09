@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.0
+// @version      8.1
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2265,10 +2265,14 @@
                                     driverInput.dispatchEvent(new Event('change', { bubbles: true }));
                                     await delay(800); // Chờ 0.8s load tên rider
 
-                                    const dropdownItems = Array.from(document.querySelectorAll('.el-select-dropdown__item'));
-                                    const matchItem = dropdownItems.find(item => {
+                                    const allElements = Array.from(document.querySelectorAll('li, span, div, p, option, .el-select-dropdown__item'));
+                                    const matchItem = allElements.find(item => {
                                         const txt = (item.innerText || item.textContent || "").trim();
-                                        return txt.includes(task.riderId);
+                                        const isDropdownItem = (item.className && typeof item.className === 'string') && 
+                                                               (item.className.includes("select-dropdown__item") || 
+                                                                item.className.includes("select-item") || 
+                                                                item.className.includes("el-select-dropdown__item"));
+                                        return isDropdownItem && txt.includes(task.riderId) && (item.offsetWidth > 0 || item.offsetHeight > 0);
                                     });
 
                                     if (matchItem) {
