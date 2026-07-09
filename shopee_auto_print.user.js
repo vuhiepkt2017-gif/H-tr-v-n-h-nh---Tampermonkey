@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.1
+// @version      7.2
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -596,11 +596,7 @@
                 window.location.reload();
             } else {
                 log(`[Mở Tab] 🔄 Đang mở tab: ${cfg.name}...`);
-                if (typeof GM_openInTab !== 'undefined') {
-                    GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
-                } else {
-                    window.open(cfg.url, '_blank');
-                }
+                window.postMessage({ type: "SHOPEE_OPEN_TAB_REQUEST", url: cfg.url, active: true }, "*");
             }
         }
 

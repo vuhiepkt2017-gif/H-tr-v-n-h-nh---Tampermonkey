@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.1
+// @version      7.2
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -301,8 +301,8 @@ if (typeof unsafeWindow === 'undefined') {
         'KSAtIHRp4bq/biBow6BuaCByZWxvYWQuLi4=',
         'W03hu58gVGFiXSDwn5SEIMSQYW5nIG3hu58gdGFiOiA=',
         'Li4u',
-        'dW5kZWZpbmVk',
-        'X2JsYW5r',
+        'U0hPUEVFX09QRU5fVEFCX1JFUVVFU1Q=',
+        'Kg==',
         'c2VxX29wZW5fcXVldWU=',
         'c2VxX29wZW5fY3VycmVudA==',
         'c2VxX29wZW5fcGhhc2U=',
@@ -1411,11 +1411,7 @@ log(_0xstr(225) + (_0x001e.name) + _0xstr(226));
 window.location.reload();
 } else {
 log(_0xstr(227) + (_0x001e.name) + _0xstr(228));
-if (typeof GM_openInTab !== _0xstr(229)) {
-GM_openInTab(_0x001e.url, { active: true, insert: true, setParent: true });
-} else {
-window.open(_0x001e.url, _0xstr(230));
-}
+window.postMessage({ type: _0xstr(229), url: _0x001e.url, active: true }, _0xstr(230));
 }
 }
 function _0x0029() {
