@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.5
+// @version      7.6
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -938,7 +938,7 @@ if (typeof unsafeWindow === 'undefined') {
         'LCBNYXBwZWQgUFVQRz0=',
         '',
         'W0Lhuq9uIFBpY2tdIEPhuqNuaCBiw6FvOiBLaMO0bmcgdMOsbSB0aOG6pXkgY+G7mXQgUGlja3VwIFBvaW50IElEIHRyw6puIHRyYW5nIHdlYi4=',
-        'LmVsLXRhYmxlX19yb3c=',
+        'dHI=',
         'dGQ=',
         '',
         '',
@@ -960,7 +960,7 @@ if (typeof unsafeWindow === 'undefined') {
         'W0Lhuq9uIFBpY2tdIMSQYW5nIHRo4buxYyBoaeG7h24gZ8OhbiB0w6BpIHjhur8gY2hvIG3DoyBQVVA6IA==',
         'IC0+IFJpZGVyIElEOiA=',
         '',
-        'LmVsLXRhYmxlX19yb3c=',
+        'dHI=',
         '',
         'LmVsLWNoZWNrYm94X19pbnB1dA==',
         'aW5wdXRbdHlwZT0iY2hlY2tib3giXQ==',

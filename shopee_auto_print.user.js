@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.5
+// @version      7.6
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2139,7 +2139,7 @@
                     }
 
                     const scraped = [];
-                    const rows = document.querySelectorAll('.el-table__row');
+                    const rows = document.querySelectorAll('tr');
                     rows.forEach(row => {
                         const cells = row.querySelectorAll('td');
                         if (cells.length > Math.max(colIndices.pupId, colIndices.shopName, colIndices.shopAddress, colIndices.mappedPupg)) {
@@ -2183,7 +2183,7 @@
                 if (task) {
                     log(`[Bắn Pick] Đang thực hiện gán tài xế cho mã PUP: ${task.pupId} -> Rider ID: ${task.riderId}`);
                     
-                    const rows = Array.from(document.querySelectorAll('.el-table__row'));
+                    const rows = Array.from(document.querySelectorAll('tr'));
                     const matchRow = rows.find(row => (row.innerText || row.textContent || "").includes(task.pupId));
                     
                     if (matchRow) {
