@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.0
+// @version      7.1
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -157,6 +157,10 @@
         
         let apiUrl = localStorage.getItem("google_apps_script_url") || GM_getValue("google_apps_script_url", DEFAULT_WEB_APP_URL);
         let pcName = localStorage.getItem("shopee_pc_name") || GM_getValue("shopee_pc_name", "PC_01");
+        if (!pcName || pcName === "undefined" || pcName === "null" || pcName.trim() === "") {
+            pcName = "PC_01";
+            localStorage.setItem("shopee_pc_name", "PC_01");
+        }
         let pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
         let isRunning = localStorage.getItem("auto_print_enabled") === "true";
         
@@ -2236,6 +2240,9 @@
             // Đồng bộ lại trạng thái chạy và cấu hình từ localStorage theo thời gian thực
             apiUrl = localStorage.getItem("google_apps_script_url") || GM_getValue("google_apps_script_url", DEFAULT_WEB_APP_URL);
             pcName = localStorage.getItem("shopee_pc_name") || GM_getValue("shopee_pc_name", "PC_01");
+            if (!pcName || pcName === "undefined" || pcName === "null" || pcName.trim() === "") {
+                pcName = "PC_01";
+            }
             pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
             isRunning = localStorage.getItem("auto_print_enabled") === "true";
             updateUIState();

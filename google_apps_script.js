@@ -687,7 +687,7 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesHTAll = rangeHTAll.getValues();
       for (var i = 0; i < valuesHTAll.length; i++) {
         var status = valuesHTAll[i][4].toString().trim().toLowerCase();
-        if (status === "đang chuyển") {
+        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen" || status.includes("chuyển")) {
           var timestamp = valuesHTAll[i][1];
           var parsedTime = parseDateDefensive(timestamp);
           if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
@@ -703,7 +703,7 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesCPAll = rangeCPAll.getValues();
       for (var i = 0; i < valuesCPAll.length; i++) {
         var status = valuesCPAll[i][4].toString().trim().toLowerCase();
-        if (status === "đang chuyển") {
+        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen" || status.includes("chuyển")) {
           var timestamp = valuesCPAll[i][1];
           var parsedTime = parseDateDefensive(timestamp);
           if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
