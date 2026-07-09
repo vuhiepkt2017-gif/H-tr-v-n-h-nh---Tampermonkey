@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.9
+// @version      8.0
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2193,10 +2193,15 @@
                     
                     if (matchRow) {
                         // Tích chọn ô vuông tương ứng với PUP
-                        const checkbox = matchRow.querySelector('.el-checkbox__input') || matchRow.querySelector('input[type="checkbox"]');
-                        if (checkbox && !checkbox.classList.contains('is-checked')) {
-                            checkbox.click();
-                            await delay(300);
+                        const checkbox = matchRow.querySelector('.el-checkbox') || matchRow.querySelector('.el-checkbox__inner') || matchRow.querySelector('.el-checkbox__input') || matchRow.querySelector('input[type="checkbox"]');
+                        if (checkbox) {
+                            const isChecked = checkbox.classList.contains('is-checked') || 
+                                              (checkbox.querySelector && checkbox.querySelector('.is-checked')) || 
+                                              (checkbox.parentElement && checkbox.parentElement.classList.contains('is-checked'));
+                            if (!isChecked) {
+                                checkbox.click();
+                                await delay(500);
+                            }
                         }
 
                         // Bấm vào nút Assign màu cam
@@ -2211,7 +2216,8 @@
                             // Đợi dynamic cho dialog xuất hiện (tối đa 5 giây)
                             let dialog = null;
                             for (let attempts = 0; attempts < 10; attempts++) {
-                                dialog = document.querySelector('.el-dialog') || document.querySelector('.el-overlay') || document.querySelector('[role="dialog"]');
+                                const candidates = Array.from(document.querySelectorAll('.el-dialog, .modal-content, .el-overlay, [class*="dialog"], [class*="modal"], [role="dialog"]'));
+                                dialog = candidates.find(d => d.offsetWidth > 0 || d.offsetHeight > 0);
                                 if (dialog) break;
                                 await delay(500);
                             }
