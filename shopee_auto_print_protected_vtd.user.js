@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.3
+// @version      7.4
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -192,10 +192,7 @@ if (typeof unsafeWindow === 'undefined') {
         'Mw==',
         'c2VsZWN0ZWQ=',
         '',
-        'PjMgKENhbyBuaOG6pXQgLSDGr3UgdGnDqm4pPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgPC9zZWxlY3Q+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9Im1hcmdpbi1ib3R0b206IDEwcHg7IGRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjsiPgogICAgICAgICAgICAgICAgICAgIDxsYWJlbCBzdHlsZT0iY29sb3I6ICNhYWE7IGZvbnQtc2l6ZTogMTFweDsiPlThu7EgxJHhu5luZyBC4bqvbiBQaWNrOjwvbGFiZWw+CiAgICAgICAgICAgICAgICAgICAgPGlucHV0IHR5cGU9ImNoZWNrYm94IiBpZD0iYXAtYXNzaWduLXBpY2stY2hlY2tib3giIHN0eWxlPSJjdXJzb3I6IHBvaW50ZXI7IHdpZHRoOiAxNnB4OyBoZWlnaHQ6IDE2cHg7IiA=',
-        'Y2hlY2tlZA==',
-        '',
-        'PgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPSJkaXNwbGF5OiBmbGV4OyBnYXA6IDhweDsgbWFyZ2luLWJvdHRvbTogMTBweDsiPgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gaWQ9ImFwLXNhdmUtdXJsIiBzdHlsZT0iZmxleDogMTsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogbm9uZTsgYmFja2dyb3VuZC1jb2xvcjogIzRjYWY1MDsgY29sb3I6IHdoaXRlOyBjdXJzb3I6IHBvaW50ZXI7IGZvbnQtd2VpZ2h0OiBib2xkOyI+TMawdTwvYnV0dG9uPgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gaWQ9ImFwLXRvZ2dsZS1idG4iIHN0eWxlPSJmbGV4OiAxLjU7IHBhZGRpbmc6IDZweDsgYm9yZGVyLXJhZGl1czogNnB4OyBib3JkZXI6IG5vbmU7IGJhY2tncm91bmQtY29sb3I6ICMyMTk2ZjM7IGNvbG9yOiB3aGl0ZTsgY3Vyc29yOiBwb2ludGVyOyBmb250LXdlaWdodDogYm9sZDsiPkLhuq90IMSR4bqndSBjaOG6oXk8L2J1dHRvbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBzdHlsZT0ibWFyZ2luLWJvdHRvbTogMTBweDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM0NDQ7IHBhZGRpbmctdG9wOiA4cHg7Ij4KICAgICAgICAgICAgICAgICAgICA8bGFiZWwgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyBtYXJnaW4tYm90dG9tOiA2cHg7IGNvbG9yOiAjZmY5ODAwOyBmb250LXdlaWdodDogYm9sZDsiPlRy4bqhbmcgdGjDoWkgY8OhYyBUYWIgKEF1dG8tT3Blbik6PC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPSJkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCgyLCAxZnIpOyBnYXA6IDZweDsiIGlkPSJhcC10YWJzLXN0YXR1cy1jb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8IS0tIFRhYiBzdGF0dXMgaXRlbXMgd2lsbCBiZSByZW5kZXJlZCBoZXJlIGR5bmFtaWNhbGx5IC0tPgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gaWQ9ImFwLW9wZW4tYWxsLXRhYnMtYnRuIiBzdHlsZT0id2lkdGg6IDEwMCU7IG1hcmdpbi10b3A6IDhweDsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogMXB4IGRhc2hlZCAjZmY5ODAwOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMTUyLCAwLCAwLjEpOyBjb2xvcjogI2ZmOTgwMDsgY3Vyc29yOiBwb2ludGVyOyBmb250LXdlaWdodDogYm9sZDsgZm9udC1zaXplOiAxMXB4OyI+CiAgICAgICAgICAgICAgICAgICAgICAgIPCfmoAgTeG7nyB04bqldCBj4bqjIGPDoWMgVGFiIGhv4bqhdCDEkeG7mW5nCiAgICAgICAgICAgICAgICAgICAgPC9idXR0b24+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6ICMxMjEyMTY7IHBhZGRpbmc6IDhweDsgYm9yZGVyLXJhZGl1czogNnB4OyBmb250LWZhbWlseTogbW9ub3NwYWNlOyBmb250LXNpemU6IDExcHg7IG1heC1oZWlnaHQ6IDgwcHg7IG92ZXJmbG93LXk6IGF1dG87IGJvcmRlcjogMXB4IHNvbGlkICMyMjI7IiBpZD0iYXAtbG9nLWJveCI+CiAgICAgICAgICAgICAgICAgICAgW0jhu4cgdGjhu5FuZ10gxJBhbmcgdOG6o2kuLi4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICA=',
+        'PjMgKENhbyBuaOG6pXQgLSDGr3UgdGnDqm4pPC9vcHRpb24+CiAgICAgICAgICAgICAgICAgICAgPC9zZWxlY3Q+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGdhcDogOHB4OyBtYXJnaW4tYm90dG9tOiAxMHB4OyI+CiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBpZD0iYXAtc2F2ZS11cmwiIHN0eWxlPSJmbGV4OiAxOyBwYWRkaW5nOiA2cHg7IGJvcmRlci1yYWRpdXM6IDZweDsgYm9yZGVyOiBub25lOyBiYWNrZ3JvdW5kLWNvbG9yOiAjNGNhZjUwOyBjb2xvcjogd2hpdGU7IGN1cnNvcjogcG9pbnRlcjsgZm9udC13ZWlnaHQ6IGJvbGQ7Ij5MxrB1PC9idXR0b24+CiAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBpZD0iYXAtdG9nZ2xlLWJ0biIgc3R5bGU9ImZsZXg6IDEuNTsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogbm9uZTsgYmFja2dyb3VuZC1jb2xvcjogIzIxOTZmMzsgY29sb3I6IHdoaXRlOyBjdXJzb3I6IHBvaW50ZXI7IGZvbnQtd2VpZ2h0OiBib2xkOyI+QuG6r3QgxJHhuqd1IGNo4bqheTwvYnV0dG9uPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPSJtYXJnaW4tYm90dG9tOiAxMHB4OyBib3JkZXItdG9wOiAxcHggc29saWQgIzQ0NDsgcGFkZGluZy10b3A6IDhweDsiPgogICAgICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9ImRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjsgbWFyZ2luLWJvdHRvbTogNnB4OyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDE4OCwgMjEyLCAwLjA4KTsgcGFkZGluZzogNXB4IDhweDsgYm9yZGVyLXJhZGl1czogNXB4OyBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDAsIDE4OCwgMjEyLCAwLjI1KTsiPgogICAgICAgICAgICAgICAgICAgICAgICA8c3Ryb25nIHN0eWxlPSJjb2xvcjogIzAwYmNkNDsgZm9udC1zaXplOiAxMXB4OyI+VMOtbmggbsSDbmcgQuG6r24gUGljazo8L3N0cm9uZz4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBzdHlsZT0iZGlzcGxheTogZmxleDsgZ2FwOiA2cHg7IGFsaWduLWl0ZW1zOiBjZW50ZXI7Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGlkPSJhcC1hc3NpZ24tcGljay10YWItc3RhdHVzIiBzdHlsZT0iZm9udC1zaXplOiA5cHg7IHBhZGRpbmc6IDJweCA1cHg7IGJvcmRlci1yYWRpdXM6IDNweDsgYmFja2dyb3VuZC1jb2xvcjogI2Y0NDMzNjsgY29sb3I6IHdoaXRlOyBjdXJzb3I6IHBvaW50ZXI7IGZvbnQtd2VpZ2h0OiBib2xkOyIgdGl0bGU9IkLhuqVtIMSR4buDIG3hu58gdGFiIELhuq9uIFBpY2siPlRhYjogVOG6r3Q8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YnV0dG9uIGlkPSJhcC10b2dnbGUtYXNzaWduLXBpY2stYnRuIiBzdHlsZT0icGFkZGluZzogM3B4IDhweDsgYm9yZGVyLXJhZGl1czogNHB4OyBib3JkZXI6IG5vbmU7IGJhY2tncm91bmQtY29sb3I6ICM3Nzc3Nzc7IGNvbG9yOiB3aGl0ZTsgY3Vyc29yOiBwb2ludGVyOyBmb250LXdlaWdodDogYm9sZDsgZm9udC1zaXplOiAxMHB4OyBvdXRsaW5lOiBub25lOyB0cmFuc2l0aW9uOiBiYWNrZ3JvdW5kLWNvbG9yIDAuMnM7Ij5O4bqhcC4uLjwvYnV0dG9uPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBzdHlsZT0ibWFyZ2luLWJvdHRvbTogMTBweDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM0NDQ7IHBhZGRpbmctdG9wOiA4cHg7Ij4KICAgICAgICAgICAgICAgICAgICA8bGFiZWwgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyBtYXJnaW4tYm90dG9tOiA2cHg7IGNvbG9yOiAjZmY5ODAwOyBmb250LXdlaWdodDogYm9sZDsiPlRy4bqhbmcgdGjDoWkgY8OhYyBUYWIgKEF1dG8tT3Blbik6PC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPSJkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCgyLCAxZnIpOyBnYXA6IDZweDsiIGlkPSJhcC10YWJzLXN0YXR1cy1jb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8IS0tIFRhYiBzdGF0dXMgaXRlbXMgd2lsbCBiZSByZW5kZXJlZCBoZXJlIGR5bmFtaWNhbGx5IC0tPgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDxidXR0b24gaWQ9ImFwLW9wZW4tYWxsLXRhYnMtYnRuIiBzdHlsZT0id2lkdGg6IDEwMCU7IG1hcmdpbi10b3A6IDhweDsgcGFkZGluZzogNnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogMXB4IGRhc2hlZCAjZmY5ODAwOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMTUyLCAwLCAwLjEpOyBjb2xvcjogI2ZmOTgwMDsgY3Vyc29yOiBwb2ludGVyOyBmb250LXdlaWdodDogYm9sZDsgZm9udC1zaXplOiAxMXB4OyI+CiAgICAgICAgICAgICAgICAgICAgICAgIPCfmoAgTeG7nyB04bqldCBj4bqjIGPDoWMgVGFiIGhv4bqhdCDEkeG7mW5nCiAgICAgICAgICAgICAgICAgICAgPC9idXR0b24+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9ImJhY2tncm91bmQtY29sb3I6ICMxMjEyMTY7IHBhZGRpbmc6IDhweDsgYm9yZGVyLXJhZGl1czogNnB4OyBmb250LWZhbWlseTogbW9ub3NwYWNlOyBmb250LXNpemU6IDExcHg7IG1heC1oZWlnaHQ6IDgwcHg7IG92ZXJmbG93LXk6IGF1dG87IGJvcmRlcjogMXB4IHNvbGlkICMyMjI7IiBpZD0iYXAtbG9nLWJveCI+CiAgICAgICAgICAgICAgICAgICAgW0jhu4cgdGjhu5FuZ10gxJBhbmcgdOG6o2kuLi4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICA=',
         'c3R5bGU=',
         'CiAgICAgICAgICAgICNzaG9wZWUtYXV0by1wcmludC1wYW5lbCwgI3Nob3BlZS1hdXRvLXByaW50LWxhdW5jaGVyIHsKICAgICAgICAgICAgICAgIHRyYW5zaXRpb246IG9wYWNpdHkgMC4yNXMgZWFzZS1pbi1vdXQ7CiAgICAgICAgICAgIH0KICAgICAgICA=',
         'LnByZXZpZXctY29udGFpbmVyLCAucHJpbnQtcHJldmlldywgaWZyYW1lW3NyYyo9InByaW50Il0=',
@@ -250,6 +247,12 @@ if (typeof unsafeWindow === 'undefined') {
         '',
         'bGFzdF9wdWxzZV8=',
         'MA==',
+        'YXNzaWduUGljaw==',
+        'YXAtYXNzaWduLXBpY2stdGFiLXN0YXR1cw==',
+        'VGFiOiBN4buf',
+        'VGFiOiBU4bqvdA==',
+        'IzRjYWY1MA==',
+        'I2Y0NDMzNg==',
         'ZGl2',
         'ZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBwYWRkaW5nOiA0cHggNnB4OyBib3JkZXItcmFkaXVzOiA0cHg7IGJhY2tncm91bmQtY29sb3I6IA==',
         'cmdiYSg3NiwgMTc1LCA4MCwgMC4xNSk=',
@@ -388,7 +391,6 @@ if (typeof unsafeWindow === 'undefined') {
         'UENfMDE=',
         'YXAtcHJpb3JpdHktc2VsZWN0',
         'MQ==',
-        'YXAtYXNzaWduLXBpY2stY2hlY2tib3g=',
         'Z29vZ2xlX2FwcHNfc2NyaXB0X3VybA==',
         '',
         'SEFZX0RJRU5fVVJM',
@@ -399,9 +401,6 @@ if (typeof unsafeWindow === 'undefined') {
         'Z29vZ2xlX2FwcHNfc2NyaXB0X3VybA==',
         'c2hvcGVlX3BjX25hbWU=',
         'c2hvcGVlX3BjX3ByaW9yaXR5',
-        'YXNzaWduX3BpY2tfZW5hYmxlZA==',
-        'dHJ1ZQ==',
-        'ZmFsc2U=',
         'Z29vZ2xlX2FwcHNfc2NyaXB0X3VybA==',
         'c2hvcGVlX3BjX25hbWU=',
         'c2hvcGVlX3BjX3ByaW9yaXR5',
@@ -426,6 +425,23 @@ if (typeof unsafeWindow === 'undefined') {
         'xJDDoyB04bqhbSBk4burbmcgaOG7hyB0aOG7kW5nLg==',
         'Y2xpY2s=',
         'Y2xpY2s=',
+        'YXAtdG9nZ2xlLWFzc2lnbi1waWNrLWJ0bg==',
+        'YXAtYXNzaWduLXBpY2stdGFiLXN0YXR1cw==',
+        'QuG6rFQ=',
+        'VOG6rlQ=',
+        'IzRjYWY1MA==',
+        'Izc3Nzc3Nw==',
+        'Y2xpY2s=',
+        'YXNzaWduX3BpY2tfZW5hYmxlZA==',
+        'dHJ1ZQ==',
+        'ZmFsc2U=',
+        'W0Lhuq9uIFBpY2tdIMSQw6Mg',
+        'QuG6rFQ=',
+        'VOG6rlQ=',
+        'IHTDrW5oIG7Eg25nIELhuq9uIFBpY2su',
+        'Y2xpY2s=',
+        'dW5kZWZpbmVk',
+        'X2JsYW5r',
         'Y2xpY2s=',
         'Y2xpY2s=',
         'bW91c2VlbnRlcg==',
@@ -1118,19 +1134,19 @@ if (typeof unsafeWindow === 'undefined') {
 
 try {
     (function() {
-const _0x0083 = window.location.host.includes(_0xstr(0)) || window.location.host.includes(_0xstr(1));
-if (!_0x0083) {
+const _0x0082 = window.location.host.includes(_0xstr(0)) || window.location.host.includes(_0xstr(1));
+if (!_0x0082) {
 return;
 }
 if (typeof GM_getValue === _0xstr(2)) {
 globalThis.GM_getValue = (key, def) => {
-const _0x0107 = localStorage.getItem(key);
-return _0x0107 !== null ? _0x0107 : def;
+const _0x0109 = localStorage.getItem(key);
+return _0x0109 !== null ? _0x0109 : def;
 };
 }
 if (typeof GM_setValue === _0xstr(3)) {
-globalThis.GM_setValue = (key, _0x0107) => {
-localStorage.setItem(key, _0x0107);
+globalThis.GM_setValue = (key, _0x0109) => {
+localStorage.setItem(key, _0x0109);
 };
 }
 if (typeof GM_registerMenuCommand === _0xstr(4)) {
@@ -1147,9 +1163,9 @@ window.postMessage({ type: _0xstr(7), url, active }, _0xstr(8));
 if (typeof GM_xmlhttpRequest === _0xstr(9)) {
 globalThis.GM_xmlhttpRequest = (options) => {
 const reqId = _0xstr(10) + Math.random().toString(36).substring(2, 9);
-window.addEventListener(_0xstr(11), function _0x0061(e) {
+window.addEventListener(_0xstr(11), function _0x0060(e) {
 if (e.data && e.data.type === _0xstr(12) && e.data.reqId === reqId) {
-window.removeEventListener(_0xstr(13), _0x0061);
+window.removeEventListener(_0xstr(13), _0x0060);
 if (e.data.success) {
 if (options.onload) {
 options.onload({
@@ -1202,11 +1218,11 @@ url: _0xstr(31),
 hashKey: _0xstr(32)
 }
 };
-function _0x005d() {
+function _0x005c() {
 const hash = window.location.hash || _0xstr(33);
-const _0x00bb = hash.split(_0xstr(34))[0];
-for (const [type, _0x0021] of Object.entries(_0x000a)) {
-if (_0x00bb.includes(_0x0021.hashKey)) {
+const _0x00ba = hash.split(_0xstr(34))[0];
+for (const [type, _0x0020] of Object.entries(_0x000a)) {
+if (_0x00ba.includes(_0x0020.hashKey)) {
 return type;
 }
 }
@@ -1217,75 +1233,75 @@ if (!_0x00e9) {
 _0x00e9 = _0xstr(36) + Math.random().toString(36).substring(2, 10) + _0xstr(37) + Date.now();
 sessionStorage.setItem(_0xstr(38), _0x00e9);
 }
-const _0x006d = _0x005d();
-if (_0x006d) {
-localStorage.setItem(_0xstr(39) + _0x006d, Date.now().toString());
-localStorage.setItem(_0xstr(40) + _0x006d, _0x00e9);
+const _0x006c = _0x005c();
+if (_0x006c) {
+localStorage.setItem(_0xstr(39) + _0x006c, Date.now().toString());
+localStorage.setItem(_0xstr(40) + _0x006c, _0x00e9);
 }
-function _0x0060() {
-const _0x0039 = _0x005d();
-if (_0x0039) {
-const _0x00d2 = localStorage.getItem(_0xstr(41) + _0x0039);
-if (_0x00d2 === _0x00e9) {
-localStorage.setItem(_0xstr(42) + _0x0039, _0xstr(43));
-localStorage.removeItem(_0xstr(44) + _0x0039);
+function _0x005f() {
+const _0x0038 = _0x005c();
+if (_0x0038) {
+const _0x00d1 = localStorage.getItem(_0xstr(41) + _0x0038);
+if (_0x00d1 === _0x00e9) {
+localStorage.setItem(_0xstr(42) + _0x0038, _0xstr(43));
+localStorage.removeItem(_0xstr(44) + _0x0038);
 }
 }
 }
-window.addEventListener(_0xstr(45), _0x0060);
-window.addEventListener(_0xstr(46), _0x0060);
+window.addEventListener(_0xstr(45), _0x005f);
+window.addEventListener(_0xstr(46), _0x005f);
 function init() {
-const _0x007c = window.self !== window.top || window.location.href.includes(_0xstr(47)) || window.location.href.includes(_0xstr(48));
-if (_0x007c) {
+const _0x007b = window.self !== window.top || window.location.href.includes(_0xstr(47)) || window.location.href.includes(_0xstr(48));
+if (_0x007b) {
 return;
 }
 const _0x0000 = _0xstr(49);
 let _0x0013 = localStorage.getItem(_0xstr(50)) || GM_getValue(_0xstr(51), _0x0000);
-let _0x00be = localStorage.getItem(_0xstr(52)) || GM_getValue(_0xstr(53), _0xstr(54));
-if (!_0x00be || _0x00be === _0xstr(55) || _0x00be === _0xstr(56) || _0x00be.trim() === _0xstr(57)) {
-_0x00be = _0xstr(58);
+let _0x00bd = localStorage.getItem(_0xstr(52)) || GM_getValue(_0xstr(53), _0xstr(54));
+if (!_0x00bd || _0x00bd === _0xstr(55) || _0x00bd === _0xstr(56) || _0x00bd.trim() === _0xstr(57)) {
+_0x00bd = _0xstr(58);
 localStorage.setItem(_0xstr(59), _0xstr(60));
 }
-let _0x00bf = localStorage.getItem(_0xstr(61)) || GM_getValue(_0xstr(62), _0xstr(63));
-let _0x0082 = localStorage.getItem(_0xstr(64)) === _0xstr(65);
-let _0x0074 = localStorage.getItem(_0xstr(66)) === _0xstr(67);
-let _0x007d = false;
-let _0x0080 = false;
-let _0x0081 = false;
+let _0x00be = localStorage.getItem(_0xstr(61)) || GM_getValue(_0xstr(62), _0xstr(63));
+let _0x0081 = localStorage.getItem(_0xstr(64)) === _0xstr(65);
+let _0x0073 = localStorage.getItem(_0xstr(66)) === _0xstr(67);
+let _0x007c = false;
 let _0x007f = false;
+let _0x0080 = false;
 let _0x007e = false;
-let _0x0090 = _0xstr(68);
-let _0x0092 = 0;
-let _0x009e = _0xstr(69);
-let _0x009a = 0;
-let _0x00a1 = new Set();
-let _0x009c = 0;
-let _0x0097 = 0;
-let _0x0093 = 0;
-let _0x0096 = 0;
+let _0x007d = false;
+let _0x008f = _0xstr(68);
 let _0x0091 = 0;
-let _0x008d = 0;
+let _0x009d = _0xstr(69);
+let _0x0099 = 0;
+let _0x00a0 = new Set();
+let _0x009b = 0;
+let _0x0096 = 0;
+let _0x0092 = 0;
+let _0x0095 = 0;
+let _0x0090 = 0;
+let _0x008c = 0;
 const _0x0009 = 30000;
-let _0x009b = Date.now();
+let _0x009a = Date.now();
 const _0x0001 = 1800000;
 const _0x00eb = Date.now() + Math.floor(Math.random() * 60000);
-let _0x0099 = 0;
+let _0x0098 = 0;
+let _0x008d = 0;
+let _0x009c = 0;
 let _0x008e = 0;
-let _0x009d = 0;
-let _0x008f = 0;
-let _0x008c = 0;
-function _0x0077(myType) {
+let _0x008b = 0;
+function _0x0076(myType) {
 const now = Date.now();
-const _0x00c3 = [_0xstr(70), _0xstr(71), _0xstr(72)];
-const _0x00ad = _0x00c3.indexOf(myType);
-if (_0x00ad === -1) return false;
+const _0x00c2 = [_0xstr(70), _0xstr(71), _0xstr(72)];
+const _0x00ac = _0x00c2.indexOf(myType);
+if (_0x00ac === -1) return false;
 const _0x000b = 12000;
-for (let i = 0; i < _0x00ad; i++) {
-const type = _0x00c3[i];
-const _0x0098 = parseInt(localStorage.getItem(_0xstr(73) + type) || _0xstr(74));
-const _0x0085 = _0x0098 > 0 && (now - _0x0098) < _0x000b;
-const _0x007b = localStorage.getItem(_0xstr(75) + type) === _0xstr(76);
-if (_0x0085 && _0x007b) {
+for (let i = 0; i < _0x00ac; i++) {
+const type = _0x00c2[i];
+const _0x0097 = parseInt(localStorage.getItem(_0xstr(73) + type) || _0xstr(74));
+const _0x0084 = _0x0097 > 0 && (now - _0x0097) < _0x000b;
+const _0x007a = localStorage.getItem(_0xstr(75) + type) === _0xstr(76);
+if (_0x0084 && _0x007a) {
 return true;
 }
 }
@@ -1293,52 +1309,52 @@ return false;
 }
 function _0x000c(tabType) {
 const now = Date.now();
-if (now - _0x0099 < 2000) {
+if (now - _0x0098 < 2000) {
 return false;
 }
-if (_0x0077(tabType)) {
+if (_0x0076(tabType)) {
 return false;
 }
-const _0x00a2 = _0xstr(77);
-const _0x00fd = _0xstr(78);
+const _0x00a1 = _0xstr(77);
+const _0x00fe = _0xstr(78);
 const _0x00f3 = _0xstr(79);
-const _0x0036 = localStorage.getItem(_0x00fd);
-const _0x00a3 = parseInt(localStorage.getItem(_0x00f3) || _0xstr(80));
-const _0x00c3 = [_0xstr(81), _0xstr(82), _0xstr(83)];
-const _0x00ad = _0x00c3.indexOf(tabType);
-const _0x006c = _0x0036 ? _0x00c3.indexOf(_0x0036) : 99;
-if (!_0x0036 || (now - _0x00a3) > 25000 || _0x0036 === tabType || (_0x00ad !== -1 && _0x00ad < _0x006c)) {
-localStorage.setItem(_0x00a2, _0xstr(84));
-localStorage.setItem(_0x00fd, tabType);
+const _0x0035 = localStorage.getItem(_0x00fe);
+const _0x00a2 = parseInt(localStorage.getItem(_0x00f3) || _0xstr(80));
+const _0x00c2 = [_0xstr(81), _0xstr(82), _0xstr(83)];
+const _0x00ac = _0x00c2.indexOf(tabType);
+const _0x006b = _0x0035 ? _0x00c2.indexOf(_0x0035) : 99;
+if (!_0x0035 || (now - _0x00a2) > 25000 || _0x0035 === tabType || (_0x00ac !== -1 && _0x00ac < _0x006b)) {
+localStorage.setItem(_0x00a1, _0xstr(84));
+localStorage.setItem(_0x00fe, tabType);
 localStorage.setItem(_0x00f3, now.toString());
 return true;
 }
 return false;
 }
-function _0x00d4(tabType) {
-const _0x00a2 = _0xstr(85);
-const _0x00fd = _0xstr(86);
+function _0x00d3(tabType) {
+const _0x00a1 = _0xstr(85);
+const _0x00fe = _0xstr(86);
 const _0x00f3 = _0xstr(87);
-const _0x0036 = localStorage.getItem(_0x00fd);
-if (_0x0036 === tabType) {
-localStorage.removeItem(_0x00a2);
-localStorage.removeItem(_0x00fd);
+const _0x0035 = localStorage.getItem(_0x00fe);
+if (_0x0035 === tabType) {
+localStorage.removeItem(_0x00a1);
+localStorage.removeItem(_0x00fe);
 localStorage.removeItem(_0x00f3);
-_0x0099 = Date.now();
+_0x0098 = Date.now();
 }
 }
-function _0x00fe(tabType) {
-const _0x00fd = _0xstr(88);
+function _0x0100(tabType) {
+const _0x00fe = _0xstr(88);
 const _0x00f3 = _0xstr(89);
-const _0x0036 = localStorage.getItem(_0x00fd);
-if (_0x0036 === tabType) {
+const _0x0035 = localStorage.getItem(_0x00fe);
+if (_0x0035 === tabType) {
 localStorage.setItem(_0x00f3, Date.now().toString());
 }
 }
 GM_registerMenuCommand(_0xstr(90), function() {
-let _0x00b0 = prompt(_0xstr(91), _0x0013);
-if (_0x00b0) {
-_0x0013 = _0x00b0.trim();
+let _0x00af = prompt(_0xstr(91), _0x0013);
+if (_0x00af) {
+_0x0013 = _0x00af.trim();
 localStorage.setItem(_0xstr(92), _0x0013);
 GM_setValue(_0xstr(93), _0x0013);
 alert(_0xstr(94));
@@ -1353,506 +1369,537 @@ document.body.appendChild(launcher);
 const panel = document.createElement(_0xstr(99));
 panel.id = _0xstr(100);
 panel.style = _0xstr(101);
-let _0x0017 = null;
-function _0x00e0() {
+let _0x0016 = null;
+function _0x00df() {
 _0x00e6();
-_0x0017 = setTimeout(() => {
-_0x0032();
+_0x0016 = setTimeout(() => {
+_0x0031();
 }, 20000);
 }
 function _0x00e6() {
-if (_0x0017) {
-clearTimeout(_0x0017);
-_0x0017 = null;
+if (_0x0016) {
+clearTimeout(_0x0016);
+_0x0016 = null;
 }
 }
-function _0x0032() {
+function _0x0031() {
 panel.style.display = _0xstr(102);
 launcher.style.display = _0xstr(103);
 _0x00e6();
 }
-function _0x0051() {
+function _0x0050() {
 panel.style.display = _0xstr(104);
 launcher.style.display = _0xstr(105);
-_0x00e0();
+_0x00df();
 }
-panel.innerHTML = _0xstr(106) + (_0x0013) + _0xstr(107) + (_0x00be) + _0xstr(108) + (_0x00bf === _0xstr(109) ? _0xstr(110) : _0xstr(111)) + _0xstr(112) + (_0x00bf === _0xstr(113) ? _0xstr(114) : _0xstr(115)) + _0xstr(116) + (_0x00bf === _0xstr(117) ? _0xstr(118) : _0xstr(119)) + _0xstr(120) + (_0x0074 ? _0xstr(121) : _0xstr(122)) + _0xstr(123);
+panel.innerHTML = _0xstr(106) + (_0x0013) + _0xstr(107) + (_0x00bd) + _0xstr(108) + (_0x00be === _0xstr(109) ? _0xstr(110) : _0xstr(111)) + _0xstr(112) + (_0x00be === _0xstr(113) ? _0xstr(114) : _0xstr(115)) + _0xstr(116) + (_0x00be === _0xstr(117) ? _0xstr(118) : _0xstr(119)) + _0xstr(120);
 document.body.appendChild(panel);
-const _0x00f8 = document.createElement(_0xstr(124));
-_0x00f8.innerHTML = _0xstr(125);
-document.head.appendChild(_0x00f8);
-function _0x0027() {
-let _0x006b = false;
-const _0x0044 = document.querySelectorAll(_0xstr(126));
-for (let i = 0; i < _0x0044.length; i++) {
-const el = _0x0044[i];
-if (el.id === _0xstr(127) || el.id === _0xstr(128)) continue;
+const _0x00f9 = document.createElement(_0xstr(121));
+_0x00f9.innerHTML = _0xstr(122);
+document.head.appendChild(_0x00f9);
+function _0x0026() {
+let _0x006a = false;
+const _0x0043 = document.querySelectorAll(_0xstr(123));
+for (let i = 0; i < _0x0043.length; i++) {
+const el = _0x0043[i];
+if (el.id === _0xstr(124) || el.id === _0xstr(125)) continue;
 const style = window.getComputedStyle(el);
-if (style.display !== _0xstr(129) && style.visibility !== _0xstr(130) && style.opacity !== _0xstr(131) && el.offsetHeight > 0) {
-_0x006b = true;
+if (style.display !== _0xstr(126) && style.visibility !== _0xstr(127) && style.opacity !== _0xstr(128) && el.offsetHeight > 0) {
+_0x006a = true;
 break;
 }
 }
-if (_0x006b) {
+if (_0x006a) {
+panel.style.opacity = _0xstr(129);
+panel.style.pointerEvents = _0xstr(130);
+} else {
+if (panel.style.display !== _0xstr(131)) {
 panel.style.opacity = _0xstr(132);
 panel.style.pointerEvents = _0xstr(133);
-} else {
-if (panel.style.display !== _0xstr(134)) {
-panel.style.opacity = _0xstr(135);
-panel.style.pointerEvents = _0xstr(136);
 }
 }
-if (launcher.style.display !== _0xstr(137)) {
-launcher.style.opacity = _0xstr(138);
-launcher.style.pointerEvents = _0xstr(139);
+if (launcher.style.display !== _0xstr(134)) {
+launcher.style.opacity = _0xstr(135);
+launcher.style.pointerEvents = _0xstr(136);
 }
 }
-setInterval(_0x0027, 300);
-const _0x00a4 = document.getElementById(_0xstr(140));
-const badge = document.getElementById(_0xstr(141));
-const _0x00f6 = document.getElementById(_0xstr(142));
-const _0x0104 = document.getElementById(_0xstr(143));
-const _0x00bc = document.getElementById(_0xstr(144));
-const _0x00db = document.getElementById(_0xstr(145));
-const _0x002e = document.getElementById(_0xstr(146));
-const _0x0035 = document.getElementById(_0xstr(147));
-const _0x0105 = document.getElementById(_0xstr(148));
-const _0x0103 = document.getElementById(_0xstr(149));
-const _0x0049 = document.getElementById(_0xstr(150));
-const _0x0106 = document.getElementById(_0xstr(151));
-const _0x00ec = document.getElementById(_0xstr(152));
-const _0x00b7 = document.getElementById(_0xstr(153));
+setInterval(_0x0026, 300);
+const _0x00a3 = document.getElementById(_0xstr(137));
+const badge = document.getElementById(_0xstr(138));
+const _0x00f7 = document.getElementById(_0xstr(139));
+const _0x0106 = document.getElementById(_0xstr(140));
+const _0x00bb = document.getElementById(_0xstr(141));
+const _0x00da = document.getElementById(_0xstr(142));
+const _0x002d = document.getElementById(_0xstr(143));
+const _0x0034 = document.getElementById(_0xstr(144));
+const _0x0107 = document.getElementById(_0xstr(145));
+const _0x0105 = document.getElementById(_0xstr(146));
+const _0x0048 = document.getElementById(_0xstr(147));
+const _0x0108 = document.getElementById(_0xstr(148));
+const _0x00ec = document.getElementById(_0xstr(149));
+const _0x00b6 = document.getElementById(_0xstr(150));
 function log(message) {
 const _0x00f2 = new Date().toLocaleTimeString();
-_0x00a4.innerHTML = _0xstr(154) + (_0x00f2) + _0xstr(155) + (message) + _0xstr(156) + _0x00a4.innerHTML;
-const _0x00a0 = _0x00a4.innerHTML.split(_0xstr(157));
-if (_0x00a0.length > 20) _0x00a4.innerHTML = _0x00a0.slice(0, 20).join(_0xstr(158));
+_0x00a3.innerHTML = _0xstr(151) + (_0x00f2) + _0xstr(152) + (message) + _0xstr(153) + _0x00a3.innerHTML;
+const _0x009f = _0x00a3.innerHTML.split(_0xstr(154));
+if (_0x009f.length > 20) _0x00a3.innerHTML = _0x009f.slice(0, 20).join(_0xstr(155));
+}
+function _0x0103() {
+if (_0x0081) {
+badge.innerText = _0xstr(156);
+badge.style.backgroundColor = _0xstr(157);
+_0x00f7.innerText = _0xstr(158);
+_0x00f7.style.backgroundColor = _0xstr(159);
+} else {
+badge.innerText = _0xstr(160);
+badge.style.backgroundColor = _0xstr(161);
+_0x00f7.innerText = _0xstr(162);
+_0x00f7.style.backgroundColor = _0xstr(163);
+}
+}
+function _0x0104() {
+if (_0x0013 && _0x0013 !== _0x0000) {
+_0x0105.style.display = _0xstr(164);
+_0x0107.style.display = _0xstr(165);
+_0x0108.innerText = _0xstr(166);
+} else {
+_0x0105.style.display = _0xstr(167);
+_0x0107.style.display = _0xstr(168);
+}
 }
 function _0x0101() {
-if (_0x0082) {
-badge.innerText = _0xstr(159);
-badge.style.backgroundColor = _0xstr(160);
-_0x00f6.innerText = _0xstr(161);
-_0x00f6.style.backgroundColor = _0xstr(162);
-} else {
-badge.innerText = _0xstr(163);
-badge.style.backgroundColor = _0xstr(164);
-_0x00f6.innerText = _0xstr(165);
-_0x00f6.style.backgroundColor = _0xstr(166);
-}
-}
-function _0x0102() {
-if (_0x0013 && _0x0013 !== _0x0000) {
-_0x0103.style.display = _0xstr(167);
-_0x0105.style.display = _0xstr(168);
-_0x0106.innerText = _0xstr(169);
-} else {
-_0x0103.style.display = _0xstr(170);
-_0x0105.style.display = _0xstr(171);
-}
-}
-function _0x00ff() {
-const _0x0039 = _0x005d();
-if (_0x0039) {
-localStorage.setItem(_0xstr(172) + _0x0039, Date.now().toString());
-localStorage.setItem(_0xstr(173) + _0x0039, _0x00e9);
-const _0x0076 = _0x007d || _0x0080 || _0x0081 || _0x007f;
-if (!_0x0076) {
-localStorage.removeItem(_0xstr(174) + _0x0039);
+const _0x0038 = _0x005c();
+if (_0x0038) {
+localStorage.setItem(_0xstr(169) + _0x0038, Date.now().toString());
+localStorage.setItem(_0xstr(170) + _0x0038, _0x00e9);
+const _0x0075 = _0x007c || _0x007f || _0x0080 || _0x007e;
+if (!_0x0075) {
+localStorage.removeItem(_0xstr(171) + _0x0038);
 }
 }
 }
 const _0x000b = 15000;
 const _0x0003 = 10000;
 const _0x0004 = 20000;
-function _0x0100() {
-_0x00ec.innerHTML = _0xstr(175);
+function _0x0102() {
+_0x00ec.innerHTML = _0xstr(172);
 const now = Date.now();
-for (const [type, _0x0021] of Object.entries(_0x000a)) {
-const _0x0098 = parseInt(localStorage.getItem(_0xstr(176) + type) || _0xstr(177));
-const _0x0085 = _0x0098 > 0 && (now - _0x0098) < _0x000b;
-const _0x0088 = document.createElement(_0xstr(178));
-_0x0088.style = _0xstr(179) + (_0x0085 ? _0xstr(180) : _0xstr(181)) + _0xstr(182) + (_0x0085 ? _0xstr(183) : _0xstr(184)) + _0xstr(185);
-_0x0088.innerHTML = _0xstr(186) + (_0x0085 ? _0xstr(187) : _0xstr(188)) + _0xstr(189) + (_0x0021.name) + _0xstr(190) + (_0x0085 ? _0xstr(191) : _0xstr(192)) + _0xstr(193) + (_0x0085 ? _0xstr(194) : _0xstr(195)) + _0xstr(196);
-_0x0088.style.cursor = _0xstr(197);
-_0x0088.title = _0xstr(198) + (_0x0021.name) + _0xstr(199);
-_0x0088.addEventListener(_0xstr(200), () => {
-if (typeof GM_openInTab !== _0xstr(201)) {
-GM_openInTab(_0x0021.url, { active: true, insert: true, setParent: true });
+for (const [type, _0x0020] of Object.entries(_0x000a)) {
+const _0x0097 = parseInt(localStorage.getItem(_0xstr(173) + type) || _0xstr(174));
+const _0x0084 = _0x0097 > 0 && (now - _0x0097) < _0x000b;
+if (type === _0xstr(175)) {
+const _0x00e5 = document.getElementById(_0xstr(176));
+if (_0x00e5) {
+_0x00e5.innerText = _0x0084 ? _0xstr(177) : _0xstr(178);
+_0x00e5.style.backgroundColor = _0x0084 ? _0xstr(179) : _0xstr(180);
+}
+continue;
+}
+const _0x0087 = document.createElement(_0xstr(181));
+_0x0087.style = _0xstr(182) + (_0x0084 ? _0xstr(183) : _0xstr(184)) + _0xstr(185) + (_0x0084 ? _0xstr(186) : _0xstr(187)) + _0xstr(188);
+_0x0087.innerHTML = _0xstr(189) + (_0x0084 ? _0xstr(190) : _0xstr(191)) + _0xstr(192) + (_0x0020.name) + _0xstr(193) + (_0x0084 ? _0xstr(194) : _0xstr(195)) + _0xstr(196) + (_0x0084 ? _0xstr(197) : _0xstr(198)) + _0xstr(199);
+_0x0087.style.cursor = _0xstr(200);
+_0x0087.title = _0xstr(201) + (_0x0020.name) + _0xstr(202);
+_0x0087.addEventListener(_0xstr(203), () => {
+if (typeof GM_openInTab !== _0xstr(204)) {
+GM_openInTab(_0x0020.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(_0x0021.url, _0xstr(202));
+window.open(_0x0020.url, _0xstr(205));
 }
 });
-_0x00ec.appendChild(_0x0088);
+_0x00ec.appendChild(_0x0087);
 }
 }
-const _0x0002 = [_0xstr(203), _0xstr(204), _0xstr(205), _0xstr(206), _0xstr(207)];
+const _0x0002 = [_0xstr(206), _0xstr(207), _0xstr(208), _0xstr(209), _0xstr(210)];
 const _0x0006 = 45000;
-function _0x00b8() {
-_0x006e(_0xstr(208));
+function _0x00b7() {
+_0x006d(_0xstr(211));
 }
-function _0x006e(trigger) {
+function _0x006d(trigger) {
 const now = Date.now();
-const _0x0050 = localStorage.getItem(_0xstr(209));
-if (_0x0050) {
-if (trigger === _0xstr(210)) {
-log(_0xstr(211));
-_0x002d();
+const _0x004f = localStorage.getItem(_0xstr(212));
+if (_0x004f) {
+if (trigger === _0xstr(213)) {
+log(_0xstr(214));
+_0x002c();
 } else {
-const _0x00e4 = parseInt(localStorage.getItem(_0xstr(212)) || _0xstr(213));
-if ((now - _0x00e4) < 300000) {
+const _0x00e3 = parseInt(localStorage.getItem(_0xstr(215)) || _0xstr(216));
+if ((now - _0x00e3) < 300000) {
 return;
 }
-log(_0xstr(214));
-_0x002d();
+log(_0xstr(217));
+_0x002c();
 }
 }
 const _0x00ed = [];
 for (const type of _0x0002) {
-if (trigger === _0xstr(215)) {
-localStorage.setItem(_0xstr(216) + type, _0xstr(217));
+if (trigger === _0xstr(218)) {
+localStorage.setItem(_0xstr(219) + type, _0xstr(220));
 _0x00ed.push(type);
 } else {
-const _0x0098 = parseInt(localStorage.getItem(_0xstr(218) + type) || _0xstr(219));
-const _0x0073 = _0x0098 > 0 && (now - _0x0098) < _0x000b;
-if (!_0x0073) {
+const _0x0097 = parseInt(localStorage.getItem(_0xstr(221) + type) || _0xstr(222));
+const _0x0072 = _0x0097 > 0 && (now - _0x0097) < _0x000b;
+if (!_0x0072) {
 _0x00ed.push(type);
 }
 }
 }
 if (_0x00ed.length === 0) {
-if (trigger === _0xstr(220)) log(_0xstr(221));
+if (trigger === _0xstr(223)) log(_0xstr(224));
 return;
 }
-localStorage.removeItem(_0xstr(222));
-log(_0xstr(223) + (_0x00ed.length) + _0xstr(224) + (_0x00ed.map(t => _0x000a[t]?.name || t).join(_0xstr(225))) + _0xstr(226));
-localStorage.setItem(_0xstr(227), JSON.stringify(_0x00ed));
-localStorage.setItem(_0xstr(228), _0x00ed[0]);
-localStorage.setItem(_0xstr(229), _0xstr(230));
-localStorage.setItem(_0xstr(231), now.toString());
-localStorage.setItem(_0xstr(232), now.toString());
-const _0x0057 = _0x00ed[0];
-const _0x0021 = _0x000a[_0x0057];
-localStorage.setItem(_0xstr(233) + _0x0057, now.toString());
-const _0x00ae = _0x005d();
-if (_0x00ae === _0x0057) {
-log(_0xstr(234) + (_0x0021.name) + _0xstr(235));
+localStorage.removeItem(_0xstr(225));
+log(_0xstr(226) + (_0x00ed.length) + _0xstr(227) + (_0x00ed.map(t => _0x000a[t]?.name || t).join(_0xstr(228))) + _0xstr(229));
+localStorage.setItem(_0xstr(230), JSON.stringify(_0x00ed));
+localStorage.setItem(_0xstr(231), _0x00ed[0]);
+localStorage.setItem(_0xstr(232), _0xstr(233));
+localStorage.setItem(_0xstr(234), now.toString());
+localStorage.setItem(_0xstr(235), now.toString());
+const _0x0056 = _0x00ed[0];
+const _0x0020 = _0x000a[_0x0056];
+localStorage.setItem(_0xstr(236) + _0x0056, now.toString());
+const _0x00ad = _0x005c();
+if (_0x00ad === _0x0056) {
+log(_0xstr(237) + (_0x0020.name) + _0xstr(238));
 window.location.reload();
 } else {
-log(_0xstr(236) + (_0x0021.name) + _0xstr(237));
-window.postMessage({ type: _0xstr(238), url: _0x0021.url, active: true }, _0xstr(239));
+log(_0xstr(239) + (_0x0020.name) + _0xstr(240));
+window.postMessage({ type: _0xstr(241), url: _0x0020.url, active: true }, _0xstr(242));
 }
 }
-function _0x002d() {
-localStorage.removeItem(_0xstr(240));
-localStorage.removeItem(_0xstr(241));
-localStorage.removeItem(_0xstr(242));
+function _0x002c() {
 localStorage.removeItem(_0xstr(243));
 localStorage.removeItem(_0xstr(244));
 localStorage.removeItem(_0xstr(245));
+localStorage.removeItem(_0xstr(246));
+localStorage.removeItem(_0xstr(247));
+localStorage.removeItem(_0xstr(248));
 }
-function _0x00b9() {
-let _0x00cc;
+function _0x00b8() {
+let _0x00cb;
 try {
-_0x00cc = JSON.parse(localStorage.getItem(_0xstr(246)) || _0xstr(247));
+_0x00cb = JSON.parse(localStorage.getItem(_0xstr(249)) || _0xstr(250));
 } catch(e) {
-_0x002d();
+_0x002c();
 return;
 }
-_0x00cc.shift();
-if (_0x00cc.length > 0) {
-const _0x00b1 = _0x00cc[0];
-const _0x0021 = _0x000a[_0x00b1];
+_0x00cb.shift();
+if (_0x00cb.length > 0) {
+const _0x00b0 = _0x00cb[0];
+const _0x0020 = _0x000a[_0x00b0];
 const now = Date.now();
-localStorage.setItem(_0xstr(248), JSON.stringify(_0x00cc));
-localStorage.setItem(_0xstr(249), _0x00b1);
-localStorage.setItem(_0xstr(250), _0xstr(251));
-localStorage.setItem(_0xstr(252), now.toString());
-localStorage.setItem(_0xstr(253) + _0x00b1, now.toString());
-localStorage.removeItem(_0xstr(254));
-const _0x00ae = _0x005d();
-if (_0x00ae === _0x00b1) {
-log(_0xstr(255) + (_0x0021.name) + _0xstr(256));
+localStorage.setItem(_0xstr(251), JSON.stringify(_0x00cb));
+localStorage.setItem(_0xstr(252), _0x00b0);
+localStorage.setItem(_0xstr(253), _0xstr(254));
+localStorage.setItem(_0xstr(255), now.toString());
+localStorage.setItem(_0xstr(256) + _0x00b0, now.toString());
+localStorage.removeItem(_0xstr(257));
+const _0x00ad = _0x005c();
+if (_0x00ad === _0x00b0) {
+log(_0xstr(258) + (_0x0020.name) + _0xstr(259));
 window.location.reload();
 } else {
-log(_0xstr(257) + (_0x0021.name) + _0xstr(258));
-window.postMessage({ type: _0xstr(259), url: _0x0021.url, active: true }, _0xstr(260));
+log(_0xstr(260) + (_0x0020.name) + _0xstr(261));
+window.postMessage({ type: _0xstr(262), url: _0x0020.url, active: true }, _0xstr(263));
 }
 } else {
-_0x002d();
-log(_0xstr(261));
+_0x002c();
+log(_0xstr(264));
 }
 }
-function _0x005f() {
-const _0x00cd = localStorage.getItem(_0xstr(262));
-if (!_0x00cd) return;
-let _0x00cc;
+function _0x005e() {
+const _0x00cc = localStorage.getItem(_0xstr(265));
+if (!_0x00cc) return;
+let _0x00cb;
 try {
-_0x00cc = JSON.parse(_0x00cd);
+_0x00cb = JSON.parse(_0x00cc);
 } catch(e) {
-_0x002d();
+_0x002c();
 return;
 }
-if (!Array.isArray(_0x00cc) || _0x00cc.length === 0) {
-_0x002d();
+if (!Array.isArray(_0x00cb) || _0x00cb.length === 0) {
+_0x002c();
 return;
 }
-const _0x0038 = localStorage.getItem(_0xstr(263));
-const _0x00ae = _0x005d();
-if (!_0x00ae || _0x00ae !== _0x0038) return;
-const _0x00c0 = localStorage.getItem(_0xstr(264));
-if (_0x00c0 !== _0xstr(265)) return;
-const _0x00ea = parseInt(localStorage.getItem(_0xstr(266)) || _0xstr(267));
+const _0x0037 = localStorage.getItem(_0xstr(266));
+const _0x00ad = _0x005c();
+if (!_0x00ad || _0x00ad !== _0x0037) return;
+const _0x00bf = localStorage.getItem(_0xstr(267));
+if (_0x00bf !== _0xstr(268)) return;
+const _0x00ea = parseInt(localStorage.getItem(_0xstr(269)) || _0xstr(270));
 const now = Date.now();
-if (_0x007a()) {
-log(_0xstr(268) + (_0x000a[_0x00ae]?.name || _0x00ae) + _0xstr(269));
-_0x009b = Date.now();
-_0x00b9();
+if (_0x0079()) {
+log(_0xstr(271) + (_0x000a[_0x00ad]?.name || _0x00ad) + _0xstr(272));
+_0x009a = Date.now();
+_0x00b8();
 return;
 }
 if ((now - _0x00ea) > _0x0006) {
-const _0x00d8 = parseInt(localStorage.getItem(_0xstr(270)) || _0xstr(271));
-if (_0x00d8 < 1) {
-log(_0xstr(272) + (_0x000a[_0x00ae]?.name || _0x00ae) + _0xstr(273));
-localStorage.setItem(_0xstr(274), _0xstr(275));
-localStorage.setItem(_0xstr(276), now.toString());
+const _0x00d7 = parseInt(localStorage.getItem(_0xstr(273)) || _0xstr(274));
+if (_0x00d7 < 1) {
+log(_0xstr(275) + (_0x000a[_0x00ad]?.name || _0x00ad) + _0xstr(276));
+localStorage.setItem(_0xstr(277), _0xstr(278));
+localStorage.setItem(_0xstr(279), now.toString());
 window.location.reload();
 } else {
-log(_0xstr(277) + (_0x000a[_0x00ae]?.name || _0x00ae) + _0xstr(278));
-localStorage.removeItem(_0xstr(279));
-_0x00b9();
+log(_0xstr(280) + (_0x000a[_0x00ad]?.name || _0x00ad) + _0xstr(281));
+localStorage.removeItem(_0xstr(282));
+_0x00b8();
 }
 }
 }
 const _0x0005 = 20000;
-function _0x0018() {
-if (!_0x0082) return;
-if (localStorage.getItem(_0xstr(280)) || localStorage.getItem(_0xstr(281))) return;
+function _0x0017() {
+if (!_0x0081) return;
+if (localStorage.getItem(_0xstr(283)) || localStorage.getItem(_0xstr(284))) return;
 const now = Date.now();
-let _0x0063 = false;
-let _0x0066 = false;
-let _0x005b = _0xstr(282);
-for (const [type, _0x0021] of Object.entries(_0x000a)) {
-const _0x0098 = parseInt(localStorage.getItem(_0xstr(283) + type) || _0xstr(284));
-const _0x00d3 = localStorage.getItem(_0xstr(285) + type);
-const _0x0085 = _0x0098 > 0 && (now - _0x0098) < _0x000b;
-if (!_0x0085) {
-const _0x0094 = parseInt(localStorage.getItem(_0xstr(286) + type) || _0xstr(287));
-const _0x0095 = now - _0x0094;
-if (_0x00d3 && _0x0095 > 60000) {
-_0x0066 = true;
-_0x005b = type;
+let _0x0062 = false;
+let _0x0065 = false;
+let _0x005a = _0xstr(285);
+for (const [type, _0x0020] of Object.entries(_0x000a)) {
+const _0x0097 = parseInt(localStorage.getItem(_0xstr(286) + type) || _0xstr(287));
+const _0x00d2 = localStorage.getItem(_0xstr(288) + type);
+const _0x0084 = _0x0097 > 0 && (now - _0x0097) < _0x000b;
+if (!_0x0084) {
+const _0x0093 = parseInt(localStorage.getItem(_0xstr(289) + type) || _0xstr(290));
+const _0x0094 = now - _0x0093;
+if (_0x00d2 && _0x0094 > 60000) {
+_0x0065 = true;
+_0x005a = type;
 break;
 }
-if (!_0x00d3) {
-if (_0x0098 === 0 && _0x0095 > _0x0003) {
-_0x0063 = true;
+if (!_0x00d2) {
+if (_0x0097 === 0 && _0x0094 > _0x0003) {
+_0x0062 = true;
 break;
 }
-if (_0x0098 > 0 && (now - _0x0098) > _0x0004 && _0x0095 > _0x0004) {
-_0x0063 = true;
+if (_0x0097 > 0 && (now - _0x0097) > _0x0004 && _0x0094 > _0x0004) {
+_0x0062 = true;
 break;
 }
 }
 }
 }
-if (_0x0066 && _0x005b) {
-const _0x0021 = _0x000a[_0x005b];
-log(_0xstr(288) + (_0x0021.name) + _0xstr(289));
-localStorage.setItem(_0xstr(290) + _0x005b, now.toString());
-if (typeof GM_openInTab !== _0xstr(291)) {
-GM_openInTab(_0x0021.url, { active: true, insert: true, setParent: true });
+if (_0x0065 && _0x005a) {
+const _0x0020 = _0x000a[_0x005a];
+log(_0xstr(291) + (_0x0020.name) + _0xstr(292));
+localStorage.setItem(_0xstr(293) + _0x005a, now.toString());
+if (typeof GM_openInTab !== _0xstr(294)) {
+GM_openInTab(_0x0020.url, { active: true, insert: true, setParent: true });
 } else {
-window.open(_0x0021.url, _0xstr(292));
+window.open(_0x0020.url, _0xstr(295));
 }
 return;
 }
-if (_0x0063) {
-log(_0xstr(293));
-_0x006e(_0xstr(294));
+if (_0x0062) {
+log(_0xstr(296));
+_0x006d(_0xstr(297));
 }
 }
 let wakeLock = null;
 let audioCtx = null;
-async function _0x00d6() {
-if (!(_0xstr(295) in navigator)) {
-log(_0xstr(296));
+async function _0x00d5() {
+if (!(_0xstr(298) in navigator)) {
+log(_0xstr(299));
 return;
 }
 try {
-wakeLock = await navigator.wakeLock.request(_0xstr(297));
-log(_0xstr(298));
+wakeLock = await navigator.wakeLock.request(_0xstr(300));
+log(_0xstr(301));
 } catch (err) {
-console.log(_0xstr(299), err.message);
+console.log(_0xstr(302), err.message);
 }
 }
-function _0x00d5() {
+function _0x00d4() {
 if (wakeLock) {
 wakeLock.release().then(() => {
 wakeLock = null;
-log(_0xstr(300));
+log(_0xstr(303));
 });
 }
 }
-let _0x006a = false;
-function _0x00e3() {
+let _0x0069 = false;
+function _0x00e2() {
 }
-const _0x005c = [_0xstr(301), _0xstr(302), _0xstr(303), _0xstr(304), _0xstr(305)];
-const _0x005e = () => {
-_0x006a = true;
-_0x005c.forEach(e => window.removeEventListener(e, _0x005e, true));
-if (_0x0082) {
-_0x00e3();
-_0x0024();
+const _0x005b = [_0xstr(304), _0xstr(305), _0xstr(306), _0xstr(307), _0xstr(308)];
+const _0x005d = () => {
+_0x0069 = true;
+_0x005b.forEach(e => window.removeEventListener(e, _0x005d, true));
+if (_0x0081) {
+_0x00e2();
+_0x0023();
 }
 };
-_0x005c.forEach(e => window.addEventListener(e, _0x005e, { once: true, capture: true, passive: true }));
-function _0x0024() {
+_0x005b.forEach(e => window.addEventListener(e, _0x005d, { once: true, capture: true, passive: true }));
+function _0x0023() {
 }
 function _0x00e7() {
 }
-function _0x004c() {
-_0x00d6();
-_0x00e3();
-}
-function _0x0045() {
+function _0x004b() {
 _0x00d5();
+_0x00e2();
+}
+function _0x0044() {
+_0x00d4();
 _0x00e7();
 }
-document.addEventListener(_0xstr(306), () => {
-if (document.visibilityState === _0xstr(307) && _0x0082) {
-_0x00d6();
+document.addEventListener(_0xstr(309), () => {
+if (document.visibilityState === _0xstr(310) && _0x0081) {
+_0x00d5();
 }
 });
-_0x00b7.addEventListener(_0xstr(308), _0x00b8);
-_0x0101();
-_0x0102();
-if (_0x0082) {
-_0x004c();
+_0x00b6.addEventListener(_0xstr(311), _0x00b7);
+_0x0103();
+_0x0104();
+if (_0x0081) {
+_0x004b();
 }
-_0x0049.addEventListener(_0xstr(309), () => {
-_0x0103.style.display = _0xstr(310);
-_0x0105.style.display = _0xstr(311);
-_0x0104.focus();
+_0x0048.addEventListener(_0xstr(312), () => {
+_0x0105.style.display = _0xstr(313);
+_0x0107.style.display = _0xstr(314);
+_0x0106.focus();
 });
-_0x00db.addEventListener(_0xstr(312), async () => {
-const _0x0071 = _0x0104.value.trim();
-const _0x00bd = _0x00bc.value.trim() || _0xstr(313);
-const _0x00c4 = document.getElementById(_0xstr(314));
-const _0x00c5 = _0x00c4 ? _0x00c4.value : _0xstr(315);
-const _0x0015 = document.getElementById(_0xstr(316));
-const _0x0016 = _0x0015 ? _0x0015.checked : false;
-const _0x00b5 = localStorage.getItem(_0xstr(317)) || _0xstr(318);
-if (_0x0071 && !_0x0071.includes(_0xstr(319))) {
-if (_0x0071 !== _0x00b5 && _0x00b5 !== _0xstr(320)) {
-const pass = prompt(_0xstr(321));
-if (pass !== _0xstr(322)) {
-alert(_0xstr(323));
+_0x00da.addEventListener(_0xstr(315), async () => {
+const _0x0070 = _0x0106.value.trim();
+const _0x00bc = _0x00bb.value.trim() || _0xstr(316);
+const _0x00c3 = document.getElementById(_0xstr(317));
+const _0x00c4 = _0x00c3 ? _0x00c3.value : _0xstr(318);
+const _0x00b4 = localStorage.getItem(_0xstr(319)) || _0xstr(320);
+if (_0x0070 && !_0x0070.includes(_0xstr(321))) {
+if (_0x0070 !== _0x00b4 && _0x00b4 !== _0xstr(322)) {
+const pass = prompt(_0xstr(323));
+if (pass !== _0xstr(324)) {
+alert(_0xstr(325));
 return;
 }
 }
-_0x0013 = _0x0071;
-_0x00be = _0x00bd;
-_0x00bf = _0x00c5;
-_0x0074 = _0x0016;
-localStorage.setItem(_0xstr(324), _0x0013);
-localStorage.setItem(_0xstr(325), _0x00be);
-localStorage.setItem(_0xstr(326), _0x00bf);
-localStorage.setItem(_0xstr(327), _0x0074 ? _0xstr(328) : _0xstr(329));
-GM_setValue(_0xstr(330), _0x0013);
+_0x0013 = _0x0070;
+_0x00bd = _0x00bc;
+_0x00be = _0x00c4;
+localStorage.setItem(_0xstr(326), _0x0013);
+localStorage.setItem(_0xstr(327), _0x00bd);
+localStorage.setItem(_0xstr(328), _0x00be);
+GM_setValue(_0xstr(329), _0x0013);
+GM_setValue(_0xstr(330), _0x00bd);
 GM_setValue(_0xstr(331), _0x00be);
-GM_setValue(_0xstr(332), _0x00bf);
-log(_0xstr(333) + (_0x00be) + _0xstr(334) + (_0x00bf) + _0xstr(335));
-_0x0102();
-if (_0x0071 !== _0x00b5 && _0x00b5 !== _0xstr(336)) {
-log(_0xstr(337));
+log(_0xstr(332) + (_0x00bd) + _0xstr(333) + (_0x00be) + _0xstr(334));
+_0x0104();
+if (_0x0070 !== _0x00b4 && _0x00b4 !== _0xstr(335)) {
+log(_0xstr(336));
 try {
-await _0x001e(_0xstr(338), _0xstr(339), { newUrl: _0x0013 });
-log(_0xstr(340));
+await _0x001d(_0xstr(337), _0xstr(338), { newUrl: _0x0013 });
+log(_0xstr(339));
 } catch (e) {
-log(_0xstr(341) + (e.message) + _0xstr(342));
+log(_0xstr(340) + (e.message) + _0xstr(341));
 }
 }
-alert(_0xstr(343));
+alert(_0xstr(342));
 } else {
-alert(_0xstr(344));
+alert(_0xstr(343));
 }
 });
-function _0x00f7() {
-if (!_0x0013 || _0x0013.includes(_0xstr(345))) {
-alert(_0xstr(346));
+function _0x00f8() {
+if (!_0x0013 || _0x0013.includes(_0xstr(344))) {
+alert(_0xstr(345));
 return;
 }
-_0x0082 = !_0x0082;
-localStorage.setItem(_0xstr(347), _0x0082 ? _0xstr(348) : _0xstr(349));
-_0x0101();
-log(_0x0082 ? _0xstr(350) : _0xstr(351));
-if (_0x0082) {
-_0x004c();
-_0x00b8();
+_0x0081 = !_0x0081;
+localStorage.setItem(_0xstr(346), _0x0081 ? _0xstr(347) : _0xstr(348));
+_0x0103();
+log(_0x0081 ? _0xstr(349) : _0xstr(350));
+if (_0x0081) {
+_0x004b();
+_0x00b7();
 } else {
-_0x0045();
+_0x0044();
 }
 }
-_0x00f6.addEventListener(_0xstr(352), _0x00f7);
-badge.addEventListener(_0xstr(353), _0x00f7);
-_0x002e.addEventListener(_0xstr(354), _0x0032);
-launcher.addEventListener(_0xstr(355), _0x0051);
-panel.addEventListener(_0xstr(356), _0x00e6);
-panel.addEventListener(_0xstr(357), _0x00e6);
-panel.addEventListener(_0xstr(358), _0x00e6);
-panel.addEventListener(_0xstr(359), _0x00e6);
-panel.addEventListener(_0xstr(360), _0x00e0);
-function _0x003c(ms) {
+_0x00f7.addEventListener(_0xstr(351), _0x00f8);
+badge.addEventListener(_0xstr(352), _0x00f8);
+const _0x00f6 = document.getElementById(_0xstr(353));
+const _0x0015 = document.getElementById(_0xstr(354));
+function _0x00ff() {
+if (_0x00f6) {
+_0x00f6.innerText = _0x0073 ? _0xstr(355) : _0xstr(356);
+_0x00f6.style.backgroundColor = _0x0073 ? _0xstr(357) : _0xstr(358);
+}
+}
+_0x00ff();
+if (_0x00f6) {
+_0x00f6.addEventListener(_0xstr(359), () => {
+_0x0073 = !_0x0073;
+localStorage.setItem(_0xstr(360), _0x0073 ? _0xstr(361) : _0xstr(362));
+log(_0xstr(363) + (_0x0073 ? _0xstr(364) : _0xstr(365)) + _0xstr(366));
+_0x00ff();
+});
+}
+if (_0x0015) {
+_0x0015.addEventListener(_0xstr(367), () => {
+const _0x0020 = _0x000a.assignPick;
+if (typeof GM_openInTab !== _0xstr(368)) {
+GM_openInTab(_0x0020.url, { active: true, insert: true, setParent: true });
+} else {
+window.open(_0x0020.url, _0xstr(369));
+}
+});
+}
+_0x002d.addEventListener(_0xstr(370), _0x0031);
+launcher.addEventListener(_0xstr(371), _0x0050);
+panel.addEventListener(_0xstr(372), _0x00e6);
+panel.addEventListener(_0xstr(373), _0x00e6);
+panel.addEventListener(_0xstr(374), _0x00e6);
+panel.addEventListener(_0xstr(375), _0x00e6);
+panel.addEventListener(_0xstr(376), _0x00df);
+function _0x003b(ms) {
 return new Promise(resolve => setTimeout(resolve, ms));
 }
-function _0x003d(min, max) {
+function _0x003c(min, max) {
 return new Promise(resolve => setTimeout(resolve, min + Math.random() * (max - min)));
 }
-async function _0x00df(inputEl, value) {
+async function _0x00de(inputEl, value) {
 try {
 inputEl.focus();
 } catch (e) {}
-const _0x00af = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(361))?.set;
-if (_0x00af) {
-_0x00af.call(inputEl, value);
+const _0x00ae = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, _0xstr(377))?.set;
+if (_0x00ae) {
+_0x00ae.call(inputEl, value);
 } else {
 inputEl.value = value;
 }
-inputEl.dispatchEvent(new Event(_0xstr(362), { bubbles: true }));
-inputEl.dispatchEvent(new Event(_0xstr(363), { bubbles: true }));
-await _0x003c(300);
-[_0xstr(364), _0xstr(365), _0xstr(366)].forEach(name => {
+inputEl.dispatchEvent(new Event(_0xstr(378), { bubbles: true }));
+inputEl.dispatchEvent(new Event(_0xstr(379), { bubbles: true }));
+await _0x003b(300);
+[_0xstr(380), _0xstr(381), _0xstr(382)].forEach(name => {
 const ev = new KeyboardEvent(name, {
-bubbles: true, cancelable: true, key: _0xstr(367), code: _0xstr(368), keyCode: 13, which: 13
+bubbles: true, cancelable: true, key: _0xstr(383), code: _0xstr(384), keyCode: 13, which: 13
 });
-Object.defineProperty(ev, _0xstr(369), { value: 13 });
-Object.defineProperty(ev, _0xstr(370), { value: 13 });
+Object.defineProperty(ev, _0xstr(385), { value: 13 });
+Object.defineProperty(ev, _0xstr(386), { value: 13 });
 inputEl.dispatchEvent(ev);
 });
 }
-function _0x001e(method, urlOrAction, data = null, timeoutMs = 60000) {
+function _0x001d(method, urlOrAction, data = null, timeoutMs = 60000) {
 let attempts = 0;
 const maxAttempts = 2;
 function makeRequest() {
 attempts++;
 return new Promise((resolve, reject) => {
-let _0x002c = (_0x0013 || _0xstr(371)).trim();
-if (!_0x002c || _0x002c.includes(_0xstr(372))) {
-reject(new Error(_0xstr(373)));
+let _0x002b = (_0x0013 || _0xstr(387)).trim();
+if (!_0x002b || _0x002b.includes(_0xstr(388))) {
+reject(new Error(_0xstr(389)));
 return;
 }
-let _0x00f0 = _0xstr(374);
-if (method === _0xstr(375)) {
-_0x00f0 = _0xstr(376) + (_0x002c) + _0xstr(377) + (urlOrAction) + _0xstr(378) + (encodeURIComponent((_0x00be || _0xstr(379)).trim())) + _0xstr(380) + (encodeURIComponent((_0x00bf || _0xstr(381)).trim())) + _0xstr(382);
+let _0x00f0 = _0xstr(390);
+if (method === _0xstr(391)) {
+_0x00f0 = _0xstr(392) + (_0x002b) + _0xstr(393) + (urlOrAction) + _0xstr(394) + (encodeURIComponent((_0x00bd || _0xstr(395)).trim())) + _0xstr(396) + (encodeURIComponent((_0x00be || _0xstr(397)).trim())) + _0xstr(398);
 } else {
-_0x00f0 = _0x002c;
+_0x00f0 = _0x002b;
 }
 let isSettled = false;
 const timer = setTimeout(() => {
 if (!isSettled) {
 isSettled = true;
-reject(new Error(_0xstr(383) + (timeoutMs/1000) + _0xstr(384) + (urlOrAction) + _0xstr(385) + (attempts) + _0xstr(386)));
+reject(new Error(_0xstr(399) + (timeoutMs/1000) + _0xstr(400) + (urlOrAction) + _0xstr(401) + (attempts) + _0xstr(402)));
 }
 }, timeoutMs);
 let options = {
@@ -1865,14 +1912,14 @@ isSettled = true;
 clearTimeout(timer);
 try {
 const res = JSON.parse(response.responseText);
-if (res.activeWebappUrl && res.activeWebappUrl.trim() !== _0xstr(387) && res.activeWebappUrl !== _0x0013) {
+if (res.activeWebappUrl && res.activeWebappUrl.trim() !== _0xstr(403) && res.activeWebappUrl !== _0x0013) {
 _0x0013 = res.activeWebappUrl;
-localStorage.setItem(_0xstr(388), _0x0013);
-GM_setValue(_0xstr(389), _0x0013);
-log(_0xstr(390) + (_0x0013) + _0xstr(391));
-if (typeof chrome !== _0xstr(392) && chrome.runtime && chrome.runtime.sendMessage) {
+localStorage.setItem(_0xstr(404), _0x0013);
+GM_setValue(_0xstr(405), _0x0013);
+log(_0xstr(406) + (_0x0013) + _0xstr(407));
+if (typeof chrome !== _0xstr(408) && chrome.runtime && chrome.runtime.sendMessage) {
 chrome.runtime.sendMessage({
-action: _0xstr(393),
+action: _0xstr(409),
 apiUrl: _0x0013
 }, () => {
 const err = chrome.runtime.lastError;
@@ -1881,25 +1928,25 @@ const err = chrome.runtime.lastError;
 }
 resolve(res);
 } catch (e) {
-reject(new Error(_0xstr(394) + (e.message) + _0xstr(395) + (response.responseText.substring(0, 120)) + _0xstr(396)));
+reject(new Error(_0xstr(410) + (e.message) + _0xstr(411) + (response.responseText.substring(0, 120)) + _0xstr(412)));
 }
 },
 onerror: function(err) {
 if (isSettled) return;
 isSettled = true;
 clearTimeout(timer);
-reject(new Error(_0xstr(397) + (_0x00f0) + _0xstr(398)));
+reject(new Error(_0xstr(413) + (_0x00f0) + _0xstr(414)));
 },
 ontimeout: function() {
 if (isSettled) return;
 isSettled = true;
 clearTimeout(timer);
-reject(new Error(_0xstr(399) + (urlOrAction) + _0xstr(400)));
+reject(new Error(_0xstr(415) + (urlOrAction) + _0xstr(416)));
 }
 };
-if (method !== _0xstr(401)) {
-options.headers = { [_0xstr(402)]: _0xstr(403) };
-options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (_0x00be || _0xstr(404)).trim(), priority: (_0x00bf || _0xstr(405)).trim() }, data));
+if (method !== _0xstr(417)) {
+options.headers = { [_0xstr(418)]: _0xstr(419) };
+options.data = JSON.stringify(Object.assign({ action: urlOrAction, pc: (_0x00bd || _0xstr(420)).trim(), priority: (_0x00be || _0xstr(421)).trim() }, data));
 }
 GM_xmlhttpRequest(options);
 });
@@ -1910,7 +1957,7 @@ makeRequest()
 .then(resolve)
 .catch(err => {
 if (attempts < maxAttempts) {
-console.log(_0xstr(406) + (urlOrAction) + _0xstr(407) + (err.message) + _0xstr(408));
+console.log(_0xstr(422) + (urlOrAction) + _0xstr(423) + (err.message) + _0xstr(424));
 setTimeout(tryCall, 2000);
 } else {
 reject(err);
@@ -1920,19 +1967,19 @@ reject(err);
 tryCall();
 });
 }
-function _0x0052(driverStr) {
-if (!driverStr) return _0xstr(409);
+function _0x0051(driverStr) {
+if (!driverStr) return _0xstr(425);
 const match = driverStr.match(/\d+/);
 return match ? match[0] : driverStr;
 }
-async function _0x004d() {
+async function _0x004c() {
 if (document.hidden || !document.hasFocus()) {
-log(_0xstr(410));
-window.postMessage({ type: _0xstr(411), tabInstanceId: _0x00e9 }, _0xstr(412));
+log(_0xstr(426));
+window.postMessage({ type: _0xstr(427), tabInstanceId: _0x00e9 }, _0xstr(428));
 for (let i = 0; i < 40; i++) {
-await _0x003c(100);
+await _0x003b(100);
 if (!document.hidden && document.hasFocus()) {
-await _0x003c(500);
+await _0x003b(500);
 return true;
 }
 }
@@ -1940,146 +1987,146 @@ return false;
 }
 return true;
 }
-async function _0x00e2() {
-if (!_0x0082 || _0x007d) return;
-const hash = window.location.hash || _0xstr(413);
-if (!hash.includes(_0xstr(414))) return;
-if (!_0x007a()) {
+async function _0x00e1() {
+if (!_0x0081 || _0x007c) return;
+const hash = window.location.hash || _0xstr(429);
+if (!hash.includes(_0xstr(430))) return;
+if (!_0x0079()) {
 return;
 }
-if (!_0x000c(_0xstr(415))) {
+if (!_0x000c(_0xstr(431))) {
 return;
 }
 try {
-_0x007d = true;
-_0x0097 = Date.now();
-localStorage.setItem(_0xstr(416), _0xstr(417));
-_0x00fe(_0xstr(418));
-const data = await _0x001e(_0xstr(419), _0xstr(420));
-_0x009b = Date.now();
-let _0x0030 = [];
-if (data.status === _0xstr(421)) {
+_0x007c = true;
+_0x0096 = Date.now();
+localStorage.setItem(_0xstr(432), _0xstr(433));
+_0x0100(_0xstr(434));
+const data = await _0x001d(_0xstr(435), _0xstr(436));
+_0x009a = Date.now();
+let _0x002f = [];
+if (data.status === _0xstr(437)) {
 if (data.code) {
-const _0x00cf = data.code.toUpperCase();
-const _0x00aa = _0x00cf.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
-_0x0030 = _0x00aa ? _0x00aa.filter(c => c.trim().length > 0) : [];
+const _0x00ce = data.code.toUpperCase();
+const _0x00a9 = _0x00ce.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
+_0x002f = _0x00a9 ? _0x00a9.filter(c => c.trim().length > 0) : [];
 } else if (data.codes && Array.isArray(data.codes)) {
-_0x0030 = data.codes.map(c => c.trim().toUpperCase());
+_0x002f = data.codes.map(c => c.trim().toUpperCase());
 }
 }
-if (_0x0030.length > 0) {
-log(_0xstr(422) + (_0x0030.length) + _0xstr(423));
-const _0x00d7 = await _0x004f(_0x0030);
-if (_0x00d7 && _0x00d7.success) {
-_0x009b = Date.now();
-const _0x0053 = _0x00d7.invalidCodes || [];
-const _0x00e8 = _0x0030.filter(c => !_0x0053.some(f => c === f || c.includes(f)));
-log(_0xstr(424) + (_0x00e8.length) + _0xstr(425) + (_0x0053.length) + _0xstr(426));
+if (_0x002f.length > 0) {
+log(_0xstr(438) + (_0x002f.length) + _0xstr(439));
+const _0x00d6 = await _0x004e(_0x002f);
+if (_0x00d6 && _0x00d6.success) {
+_0x009a = Date.now();
+const _0x0052 = _0x00d6.invalidCodes || [];
+const _0x00e8 = _0x002f.filter(c => !_0x0052.some(f => c === f || c.includes(f)));
+log(_0xstr(440) + (_0x00e8.length) + _0xstr(441) + (_0x0052.length) + _0xstr(442));
 for (const code of _0x00e8) {
-_0x001e(_0xstr(427), _0xstr(428), { code: code, status: _0xstr(429) })
-.then(() => log(_0xstr(430) + (code) + _0xstr(431)))
-.catch(e => log(_0xstr(432) + (code) + _0xstr(433) + (e.message) + _0xstr(434)));
+_0x001d(_0xstr(443), _0xstr(444), { code: code, status: _0xstr(445) })
+.then(() => log(_0xstr(446) + (code) + _0xstr(447)))
+.catch(e => log(_0xstr(448) + (code) + _0xstr(449) + (e.message) + _0xstr(450)));
 }
-for (const code of _0x0053) {
-_0x001e(_0xstr(435), _0xstr(436), { code: code, status: _0xstr(437) })
-.then(() => log(_0xstr(438) + (code) + _0xstr(439)))
-.catch(e => log(_0xstr(440) + (code) + _0xstr(441) + (e.message) + _0xstr(442)));
+for (const code of _0x0052) {
+_0x001d(_0xstr(451), _0xstr(452), { code: code, status: _0xstr(453) })
+.then(() => log(_0xstr(454) + (code) + _0xstr(455)))
+.catch(e => log(_0xstr(456) + (code) + _0xstr(457) + (e.message) + _0xstr(458)));
 }
 } else {
-log(_0xstr(443));
-const _0x0054 = (_0x00d7 && _0x00d7.invalidCodes) ? _0x00d7.invalidCodes : _0x0030;
-for (const code of _0x0054) {
-_0x001e(_0xstr(444), _0xstr(445), { code: code, status: _0xstr(446) })
-.then(() => log(_0xstr(447) + (code) + _0xstr(448)))
-.catch(e => log(_0xstr(449) + (code) + _0xstr(450) + (e.message) + _0xstr(451)));
+log(_0xstr(459));
+const _0x0053 = (_0x00d6 && _0x00d6.invalidCodes) ? _0x00d6.invalidCodes : _0x002f;
+for (const code of _0x0053) {
+_0x001d(_0xstr(460), _0xstr(461), { code: code, status: _0xstr(462) })
+.then(() => log(_0xstr(463) + (code) + _0xstr(464)))
+.catch(e => log(_0xstr(465) + (code) + _0xstr(466) + (e.message) + _0xstr(467)));
 }
 }
 }
 } catch (error) {
-log(_0xstr(452) + (error.message) + _0xstr(453));
+log(_0xstr(468) + (error.message) + _0xstr(469));
 } finally {
-_0x007d = false;
-localStorage.removeItem(_0xstr(454));
-_0x00d4(_0xstr(455));
+_0x007c = false;
+localStorage.removeItem(_0xstr(470));
+_0x00d3(_0xstr(471));
 }
 }
-async function _0x004f(codes) {
-await _0x004d();
+async function _0x004e(codes) {
+await _0x004c();
 let textarea = null;
 for (let i = 0; i < 20; i++) {
-textarea = document.querySelector(_0xstr(456)) || document.querySelector(_0xstr(457));
+textarea = document.querySelector(_0xstr(472)) || document.querySelector(_0xstr(473));
 if (textarea) break;
-await _0x003c(100);
+await _0x003b(100);
 }
 if (!textarea) {
-log(_0xstr(458));
+log(_0xstr(474));
 return { success: false, invalidCodes: codes };
 }
-const _0x0033 = codes.join(_0xstr(459));
-textarea.value = _0x0033;
-textarea.dispatchEvent(new Event(_0xstr(460), { bubbles: true }));
-textarea.dispatchEvent(new Event(_0xstr(461), { bubbles: true }));
+const _0x0032 = codes.join(_0xstr(475));
+textarea.value = _0x0032;
+textarea.dispatchEvent(new Event(_0xstr(476), { bubbles: true }));
+textarea.dispatchEvent(new Event(_0xstr(477), { bubbles: true }));
 try {
 textarea.focus();
 textarea.select();
-document.execCommand(_0xstr(462), false, _0x0033);
-textarea.dispatchEvent(new Event(_0xstr(463), { bubbles: true }));
+document.execCommand(_0xstr(478), false, _0x0032);
+textarea.dispatchEvent(new Event(_0xstr(479), { bubbles: true }));
 } catch (e) {}
-await _0x003d(300, 500);
-const _0x0034 = Array.from(document.querySelectorAll(_0xstr(464))).find(btn => {
-const _0x00fc = btn.innerText || btn.textContent || _0xstr(465);
-return _0x00fc.trim().toLowerCase() === _0xstr(466);
+await _0x003c(300, 500);
+const _0x0033 = Array.from(document.querySelectorAll(_0xstr(480))).find(btn => {
+const _0x00fd = btn.innerText || btn.textContent || _0xstr(481);
+return _0x00fd.trim().toLowerCase() === _0xstr(482);
 });
-if (!_0x0034) return { success: false, invalidCodes: codes };
-_0x0034.click();
-let _0x0079 = false;
-let _0x0065 = false;
+if (!_0x0033) return { success: false, invalidCodes: codes };
+_0x0033.click();
+let _0x0078 = false;
+let _0x0064 = false;
 const invalidCodes = [];
-const _0x0108 = codes.filter(c => c.startsWith(_0xstr(467)) || c.startsWith(_0xstr(468)) || c.startsWith(_0xstr(469)) || /^[A-Z0-9]{8,25}$/.test(c));
+const _0x010a = codes.filter(c => c.startsWith(_0xstr(483)) || c.startsWith(_0xstr(484)) || c.startsWith(_0xstr(485)) || /^[A-Z0-9]{8,25}$/.test(c));
 for (let i = 0; i < 40; i++) {
-await _0x003c(50);
-const _0x0010 = Array.from(document.querySelectorAll(_0xstr(470)));
-const _0x005a = _0x0010.find(el => {
-const _0x00fc = el.textContent.trim().toUpperCase();
-return _0x0108.some(vc => _0x00fc === vc || _0x00fc.includes(vc));
+await _0x003b(50);
+const _0x0010 = Array.from(document.querySelectorAll(_0xstr(486)));
+const _0x0059 = _0x0010.find(el => {
+const _0x00fd = el.textContent.trim().toUpperCase();
+return _0x010a.some(vc => _0x00fd === vc || _0x00fd.includes(vc));
 });
-if (_0x005a) {
-_0x0079 = true;
+if (_0x0059) {
+_0x0078 = true;
 }
-const _0x0044 = document.querySelectorAll(_0xstr(471));
-for (const _0x003f of _0x0044) {
-if (_0x003f.offsetWidth > 0 || _0x003f.offsetHeight > 0) {
-const _0x0043 = (_0x003f.innerText || _0x003f.textContent || _0xstr(472));
-if (_0x0043.toLowerCase().includes(_0xstr(473)) ||
-_0x0043.toLowerCase().includes(_0xstr(474)) ||
-_0x0043.toLowerCase().includes(_0xstr(475)) ||
-_0x0043.toLowerCase().includes(_0xstr(476)) ||
-_0x0043.toLowerCase().includes(_0xstr(477)) ||
-_0x0043.toLowerCase().includes(_0xstr(478)) ||
-_0x0043.toLowerCase().includes(_0xstr(479)) ||
-_0x0043.toLowerCase().includes(_0xstr(480)) ||
-_0x0043.toLowerCase().includes(_0xstr(481)) ||
-_0x0043.toLowerCase().includes(_0xstr(482)) ||
-_0x0043.toLowerCase().includes(_0xstr(483))) {
-_0x0065 = true;
-const _0x00b3 = Array.from(_0x003f.querySelectorAll(_0xstr(484))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(485)).trim().toLowerCase();
-return _0x00fc === _0xstr(486) || _0x00fc === _0xstr(487) || _0x00fc === _0xstr(488) || _0x00fc === _0xstr(489) || _0x00fc === _0xstr(490) || _0x00fc.includes(_0xstr(491));
+const _0x0043 = document.querySelectorAll(_0xstr(487));
+for (const _0x003e of _0x0043) {
+if (_0x003e.offsetWidth > 0 || _0x003e.offsetHeight > 0) {
+const _0x0042 = (_0x003e.innerText || _0x003e.textContent || _0xstr(488));
+if (_0x0042.toLowerCase().includes(_0xstr(489)) ||
+_0x0042.toLowerCase().includes(_0xstr(490)) ||
+_0x0042.toLowerCase().includes(_0xstr(491)) ||
+_0x0042.toLowerCase().includes(_0xstr(492)) ||
+_0x0042.toLowerCase().includes(_0xstr(493)) ||
+_0x0042.toLowerCase().includes(_0xstr(494)) ||
+_0x0042.toLowerCase().includes(_0xstr(495)) ||
+_0x0042.toLowerCase().includes(_0xstr(496)) ||
+_0x0042.toLowerCase().includes(_0xstr(497)) ||
+_0x0042.toLowerCase().includes(_0xstr(498)) ||
+_0x0042.toLowerCase().includes(_0xstr(499))) {
+_0x0064 = true;
+const _0x00b2 = Array.from(_0x003e.querySelectorAll(_0xstr(500))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(501)).trim().toLowerCase();
+return _0x00fd === _0xstr(502) || _0x00fd === _0xstr(503) || _0x00fd === _0xstr(504) || _0x00fd === _0xstr(505) || _0x00fd === _0xstr(506) || _0x00fd.includes(_0xstr(507));
 });
-if (_0x00b3) {
-const _0x00b4 = 800 + Math.random() * 200;
-log(_0xstr(492) + ((_0x00b4/1000).toFixed(2)) + _0xstr(493));
-await _0x003c(_0x00b4);
-_0x00b3.click();
-log(_0xstr(494));
-await _0x003c(500);
+if (_0x00b2) {
+const _0x00b3 = 800 + Math.random() * 200;
+log(_0xstr(508) + ((_0x00b3/1000).toFixed(2)) + _0xstr(509));
+await _0x003b(_0x00b3);
+_0x00b2.click();
+log(_0xstr(510));
+await _0x003b(500);
 }
-const _0x00a0 = _0x0043.split(_0xstr(495)).map(l => l.trim().toUpperCase());
-for (const _0x009f of _0x00a0) {
-const _0x00aa = _0x009f.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
-if (_0x00aa) {
-for (const match of _0x00aa) {
-if (!match.includes(_0xstr(496)) && !match.includes(_0xstr(497)) && !match.includes(_0xstr(498))) {
+const _0x009f = _0x0042.split(_0xstr(511)).map(l => l.trim().toUpperCase());
+for (const _0x009e of _0x009f) {
+const _0x00a9 = _0x009e.match(/(SPXVN\d+|TETS\d+|VN\d+|[A-Z0-9]{8,25})/g);
+if (_0x00a9) {
+for (const match of _0x00a9) {
+if (!match.includes(_0xstr(512)) && !match.includes(_0xstr(513)) && !match.includes(_0xstr(514))) {
 if (!invalidCodes.includes(match)) {
 invalidCodes.push(match);
 }
@@ -2091,194 +2138,194 @@ break;
 }
 }
 }
-if (_0x0079 && !_0x0065) {
+if (_0x0078 && !_0x0064) {
 break;
 }
-if (_0x0065) break;
+if (_0x0064) break;
 }
-if (_0x0065 && !_0x0079) {
+if (_0x0064 && !_0x0078) {
 return { success: false, invalidCodes: codes };
 }
-if (!_0x0079) {
-log(_0xstr(499));
+if (!_0x0078) {
+log(_0xstr(515));
 return { success: false, invalidCodes: codes };
 }
-const _0x00c1 = Array.from(document.querySelectorAll(_0xstr(500))).find(el => {
-const _0x00fc = el.innerText || el.textContent || _0xstr(501);
-return _0x00fc.trim().toLowerCase() === _0xstr(502);
+const _0x00c0 = Array.from(document.querySelectorAll(_0xstr(516))).find(el => {
+const _0x00fd = el.innerText || el.textContent || _0xstr(517);
+return _0x00fd.trim().toLowerCase() === _0xstr(518);
 });
-if (!_0x00c1) return { success: false, invalidCodes: codes };
-await _0x003d(400, 500);
-_0x00c1.click();
-let _0x0042 = null;
+if (!_0x00c0) return { success: false, invalidCodes: codes };
+await _0x003c(400, 500);
+_0x00c0.click();
+let _0x0041 = null;
 for (let i = 0; i < 40; i++) {
-await _0x003c(50);
-const _0x000f = Array.from(document.querySelectorAll(_0xstr(503))).filter(btn => {
-const _0x00fc = btn.innerText || btn.textContent || _0xstr(504);
-return _0x00fc.trim().toLowerCase() === _0xstr(505);
+await _0x003b(50);
+const _0x000f = Array.from(document.querySelectorAll(_0xstr(519))).filter(btn => {
+const _0x00fd = btn.innerText || btn.textContent || _0xstr(520);
+return _0x00fd.trim().toLowerCase() === _0xstr(521);
 });
-_0x0042 = _0x000f.find(btn => {
+_0x0041 = _0x000f.find(btn => {
 let parent = btn.parentElement;
-let _0x003e = 0;
-while (parent && _0x003e < 4) {
-const textContent = (parent.innerText || parent.textContent || _0xstr(506)).toLowerCase();
-if (textContent.includes(_0xstr(507)) || textContent.includes(_0xstr(508)) || textContent.includes(_0xstr(509))) {
+let _0x003d = 0;
+while (parent && _0x003d < 4) {
+const textContent = (parent.innerText || parent.textContent || _0xstr(522)).toLowerCase();
+if (textContent.includes(_0xstr(523)) || textContent.includes(_0xstr(524)) || textContent.includes(_0xstr(525))) {
 return true;
 }
 parent = parent.parentElement;
-_0x003e++;
+_0x003d++;
 }
 return false;
 });
-if (_0x0042) break;
+if (_0x0041) break;
 }
-if (_0x0042) {
-await _0x003c(300);
-_0x0042.click();
-log(_0xstr(510));
-await _0x003c(1000);
+if (_0x0041) {
+await _0x003b(300);
+_0x0041.click();
+log(_0xstr(526));
+await _0x003b(1000);
 } else {
-log(_0xstr(511));
-await _0x003c(500);
+log(_0xstr(527));
+await _0x003b(500);
 }
 return { success: true, invalidCodes: invalidCodes };
 }
-async function _0x00c8() {
-if (!_0x0082 || _0x0080) return;
-if (!_0x007a()) {
+async function _0x00c7() {
+if (!_0x0081 || _0x007f) return;
+if (!_0x0079()) {
 return;
 }
-_0x0080 = true;
-_0x0093 = Date.now();
-_0x009b = Date.now();
-log(_0xstr(512));
+_0x007f = true;
+_0x0092 = Date.now();
+_0x009a = Date.now();
+log(_0xstr(528));
 try {
 const now = Date.now();
-if (now - _0x009a > 2000) {
-let _0x00dd = Array.from(document.querySelectorAll(_0xstr(513))).find(btn => {
+if (now - _0x0099 > 2000) {
+let _0x00dc = Array.from(document.querySelectorAll(_0xstr(529))).find(btn => {
 const text = btn.innerText.trim();
-return text === _0xstr(514) || text === _0xstr(515);
+return text === _0xstr(530) || text === _0xstr(531);
 });
-if (_0x00dd) {
-_0x00dd.click();
-_0x009a = now;
-await _0x003c(300);
+if (_0x00dc) {
+_0x00dc.click();
+_0x0099 = now;
+await _0x003b(300);
 }
 }
-if (_0x00a1.size === 0 || (now - _0x009c) > 60000) {
+if (_0x00a0.size === 0 || (now - _0x009b) > 60000) {
 try {
-const res = await _0x001e(_0xstr(516), _0xstr(517));
-if (res.status === _0xstr(518) && Array.isArray(res.data)) {
-_0x00a1 = new Set(res.data.map(to => to.toLowerCase()));
-_0x009c = now;
-log(_0xstr(519) + (_0x00a1.size) + _0xstr(520));
+const res = await _0x001d(_0xstr(532), _0xstr(533));
+if (res.status === _0xstr(534) && Array.isArray(res.data)) {
+_0x00a0 = new Set(res.data.map(to => to.toLowerCase()));
+_0x009b = now;
+log(_0xstr(535) + (_0x00a0.size) + _0xstr(536));
 }
 } catch (e) {
-log(_0xstr(521) + (e.message) + _0xstr(522));
+log(_0xstr(537) + (e.message) + _0xstr(538));
 }
 }
-const headers = Array.from(document.querySelectorAll(_0xstr(523)));
+const headers = Array.from(document.querySelectorAll(_0xstr(539)));
 let _0x00f4 = -1;
-let _0x00b6 = -1;
-let _0x00ca = -1;
+let _0x00b5 = -1;
+let _0x00c9 = -1;
 headers.forEach((th, index) => {
 const text = th.innerText.trim().toLowerCase();
-if (text.includes(_0xstr(524)) || text.includes(_0xstr(525)) || text.includes(_0xstr(526)) || text.includes(_0xstr(527))) {
+if (text.includes(_0xstr(540)) || text.includes(_0xstr(541)) || text.includes(_0xstr(542)) || text.includes(_0xstr(543))) {
 _0x00f4 = index;
-} else if (text.includes(_0xstr(528)) || text.includes(_0xstr(529)) || text.includes(_0xstr(530)) || text.includes(_0xstr(531))) {
-_0x00b6 = index;
-} else if (text.includes(_0xstr(532)) || text.includes(_0xstr(533)) || text.includes(_0xstr(534)) || text.includes(_0xstr(535))) {
-_0x00ca = index;
+} else if (text.includes(_0xstr(544)) || text.includes(_0xstr(545)) || text.includes(_0xstr(546)) || text.includes(_0xstr(547))) {
+_0x00b5 = index;
+} else if (text.includes(_0xstr(548)) || text.includes(_0xstr(549)) || text.includes(_0xstr(550)) || text.includes(_0xstr(551))) {
+_0x00c9 = index;
 }
 });
-const _0x00da = document.querySelectorAll(_0xstr(536));
-for (let _0x00d9 of _0x00da) {
-const _0x0020 = _0x00d9.querySelectorAll(_0xstr(537));
-if (_0x0020.length > 0) {
-let toNum = _0xstr(538);
-let _0x00ba = _0xstr(539);
-let _0x00cb = -1;
-if (_0x00f4 !== -1 && _0x0020[_0x00f4]) toNum = _0x0020[_0x00f4].innerText.trim();
-if (_0x00b6 !== -1 && _0x0020[_0x00b6]) _0x00ba = _0x0020[_0x00b6].innerText.trim();
-if (_0x00ca !== -1 && _0x0020[_0x00ca]) {
-const _0x00c9 = parseInt(_0x0020[_0x00ca].innerText.trim(), 10);
-if (!isNaN(_0x00c9)) _0x00cb = _0x00c9;
+const _0x00d9 = document.querySelectorAll(_0xstr(552));
+for (let _0x00d8 of _0x00d9) {
+const _0x001f = _0x00d8.querySelectorAll(_0xstr(553));
+if (_0x001f.length > 0) {
+let toNum = _0xstr(554);
+let _0x00b9 = _0xstr(555);
+let _0x00ca = -1;
+if (_0x00f4 !== -1 && _0x001f[_0x00f4]) toNum = _0x001f[_0x00f4].innerText.trim();
+if (_0x00b5 !== -1 && _0x001f[_0x00b5]) _0x00b9 = _0x001f[_0x00b5].innerText.trim();
+if (_0x00c9 !== -1 && _0x001f[_0x00c9]) {
+const _0x00c8 = parseInt(_0x001f[_0x00c9].innerText.trim(), 10);
+if (!isNaN(_0x00c8)) _0x00ca = _0x00c8;
 }
 if (!toNum) {
-_0x0020.forEach(c => {
-const _0x00fc = c.innerText.trim();
-if (/^TO\d+[A-Z0-9]+$/i.test(_0x00fc)) toNum = _0x00fc;
+_0x001f.forEach(c => {
+const _0x00fd = c.innerText.trim();
+if (/^TO\d+[A-Z0-9]+$/i.test(_0x00fd)) toNum = _0x00fd;
 });
 }
-if (!_0x00ba) {
-_0x0020.forEach(c => {
-const _0x00fc = c.innerText.trim();
-if (_0x00fc.includes(_0xstr(540))) _0x00ba = _0x00fc;
+if (!_0x00b9) {
+_0x001f.forEach(c => {
+const _0x00fd = c.innerText.trim();
+if (_0x00fd.includes(_0xstr(556))) _0x00b9 = _0x00fd;
 });
 }
-if (_0x00cb === -1) {
-_0x0020.forEach((c, idx) => {
-const _0x00fc = c.innerText.trim();
-if (/^\d+$/.test(_0x00fc) && idx > 0 && idx !== _0x00f4) {
-const _0x00c9 = parseInt(_0x00fc, 10);
-if (_0x00c9 > 0) _0x00cb = _0x00c9;
+if (_0x00ca === -1) {
+_0x001f.forEach((c, idx) => {
+const _0x00fd = c.innerText.trim();
+if (/^\d+$/.test(_0x00fd) && idx > 0 && idx !== _0x00f4) {
+const _0x00c8 = parseInt(_0x00fd, 10);
+if (_0x00c8 > 0) _0x00ca = _0x00c8;
 }
 });
 }
-if (toNum && _0x00ba && _0x00cb > 0) {
-const _0x0084 = _0x00ba.toLowerCase() === _0xstr(541);
-if (!_0x0084 && !_0x00a1.has(toNum.toLowerCase())) {
-_0x00a1.add(toNum.toLowerCase());
+if (toNum && _0x00b9 && _0x00ca > 0) {
+const _0x0083 = _0x00b9.toLowerCase() === _0xstr(557);
+if (!_0x0083 && !_0x00a0.has(toNum.toLowerCase())) {
+_0x00a0.add(toNum.toLowerCase());
 try {
-const _0x000e = await _0x001e(_0xstr(542), _0xstr(543), { toNum: toNum });
-if (_0x000e.status === _0xstr(544)) {
-log(_0xstr(545) + (toNum) + _0xstr(546) + (_0x00ba) + _0xstr(547) + (_0x00cb) + _0xstr(548));
-_0x009b = Date.now();
-} else if (_0x000e.status === _0xstr(549)) {
-log(_0xstr(550) + (toNum) + _0xstr(551));
+const _0x000e = await _0x001d(_0xstr(558), _0xstr(559), { toNum: toNum });
+if (_0x000e.status === _0xstr(560)) {
+log(_0xstr(561) + (toNum) + _0xstr(562) + (_0x00b9) + _0xstr(563) + (_0x00ca) + _0xstr(564));
+_0x009a = Date.now();
+} else if (_0x000e.status === _0xstr(565)) {
+log(_0xstr(566) + (toNum) + _0xstr(567));
 } else {
-log(_0xstr(552) + (toNum) + _0xstr(553) + (JSON.stringify(_0x000e)) + _0xstr(554));
+log(_0xstr(568) + (toNum) + _0xstr(569) + (JSON.stringify(_0x000e)) + _0xstr(570));
 }
 } catch (err) {
-_0x00a1.delete(toNum.toLowerCase());
-log(_0xstr(555) + (toNum) + _0xstr(556) + (err.message) + _0xstr(557));
+_0x00a0.delete(toNum.toLowerCase());
+log(_0xstr(571) + (toNum) + _0xstr(572) + (err.message) + _0xstr(573));
 }
 }
 }
 }
 }
 } catch (error) {
-log(_0xstr(558) + (error.message) + _0xstr(559));
+log(_0xstr(574) + (error.message) + _0xstr(575));
 } finally {
-_0x0080 = false;
+_0x007f = false;
 }
 }
-async function _0x00c7() {
-if (!_0x0082 || _0x0081) return;
+async function _0x00c6() {
+if (!_0x0081 || _0x0080) return;
 const hash = window.location.hash;
-if (!hash.includes(_0xstr(560))) return;
-if (!_0x007a()) {
+if (!hash.includes(_0xstr(576))) return;
+if (!_0x0079()) {
 return;
 }
-if (!_0x000c(_0xstr(561))) {
+if (!_0x000c(_0xstr(577))) {
 return;
 }
 try {
-_0x0081 = true;
-_0x0096 = Date.now();
-localStorage.setItem(_0xstr(562), _0xstr(563));
-_0x00fe(_0xstr(564));
-const res = await _0x001e(_0xstr(565), _0xstr(566));
-if (res.status === _0xstr(567) && res.toNum) {
-const _0x0037 = res.toNum;
-log(_0xstr(568) + (_0x0037) + _0xstr(569));
-await _0x004d();
+_0x0080 = true;
+_0x0095 = Date.now();
+localStorage.setItem(_0xstr(578), _0xstr(579));
+_0x0100(_0xstr(580));
+const res = await _0x001d(_0xstr(581), _0xstr(582));
+if (res.status === _0xstr(583) && res.toNum) {
+const _0x0036 = res.toNum;
+log(_0xstr(584) + (_0x0036) + _0xstr(585));
+await _0x004c();
 let _0x00f5 = null;
-const _0x008a = document.querySelectorAll(_0xstr(570));
+const _0x0089 = document.querySelectorAll(_0xstr(586));
 let _0x00ef = null;
-for (let el of _0x008a) {
+for (let el of _0x0089) {
 const text = el.innerText.trim().toLowerCase();
-if (text === _0xstr(571) || text === _0xstr(572) || text === _0xstr(573) || text === _0xstr(574)) {
+if (text === _0xstr(587) || text === _0xstr(588) || text === _0xstr(589) || text === _0xstr(590)) {
 _0x00ef = el;
 break;
 }
@@ -2286,612 +2333,612 @@ break;
 if (_0x00ef) {
 let parent = _0x00ef.parentElement;
 for (let i = 0; i < 3 && parent; i++) {
-_0x00f5 = parent.querySelector(_0xstr(575));
+_0x00f5 = parent.querySelector(_0xstr(591));
 if (_0x00f5) break;
 parent = parent.parentElement;
 }
 }
 if (!_0x00f5) {
-const _0x0012 = document.querySelectorAll(_0xstr(576));
+const _0x0012 = document.querySelectorAll(_0xstr(592));
 for (let input of _0x0012) {
-const placeholder = (input.placeholder || _0xstr(577)).toLowerCase();
-if (placeholder.includes(_0xstr(578)) || placeholder.includes(_0xstr(579)) || placeholder.includes(_0xstr(580)) || placeholder.includes(_0xstr(581))) {
+const placeholder = (input.placeholder || _0xstr(593)).toLowerCase();
+if (placeholder.includes(_0xstr(594)) || placeholder.includes(_0xstr(595)) || placeholder.includes(_0xstr(596)) || placeholder.includes(_0xstr(597))) {
 _0x00f5 = input;
 break;
 }
 }
 }
 if (!_0x00f5) {
-const _0x0012 = Array.from(document.querySelectorAll(_0xstr(582)));
+const _0x0012 = Array.from(document.querySelectorAll(_0xstr(598)));
 _0x00f5 = _0x0012.find(input => {
-const type = (input.type || _0xstr(583)).toLowerCase();
-const _0x0086 = type === _0xstr(584) || type === _0xstr(585) || type === _0xstr(586);
-const _0x0087 = input.style.display !== _0xstr(587) && input.style.visibility !== _0xstr(588);
-return _0x0086 && _0x0087;
+const type = (input.type || _0xstr(599)).toLowerCase();
+const _0x0085 = type === _0xstr(600) || type === _0xstr(601) || type === _0xstr(602);
+const _0x0086 = input.style.display !== _0xstr(603) && input.style.visibility !== _0xstr(604);
+return _0x0085 && _0x0086;
 });
 }
 if (_0x00f5) {
-log(_0xstr(589) + (_0x0037) + _0xstr(590));
-await _0x00df(_0x00f5, _0x0037);
-await _0x003c(100);
-_0x00fe(_0xstr(591));
-const _0x00c2 = await _0x00f9(_0x0037);
-if (_0x00c2) {
-log(_0xstr(592) + (_0x0037) + _0xstr(593));
-_0x009b = Date.now();
+log(_0xstr(605) + (_0x0036) + _0xstr(606));
+await _0x00de(_0x00f5, _0x0036);
+await _0x003b(100);
+_0x0100(_0xstr(607));
+const _0x00c1 = await _0x00fa(_0x0036);
+if (_0x00c1) {
+log(_0xstr(608) + (_0x0036) + _0xstr(609));
+_0x009a = Date.now();
 try {
-await _0x001e(_0xstr(594), _0xstr(595), { toNum: _0x0037 });
-log(_0xstr(596) + (_0x0037) + _0xstr(597));
+await _0x001d(_0xstr(610), _0xstr(611), { toNum: _0x0036 });
+log(_0xstr(612) + (_0x0036) + _0xstr(613));
 } catch (markErr) {
-log(_0xstr(598) + (_0x0037) + _0xstr(599) + (markErr.message) + _0xstr(600));
+log(_0xstr(614) + (_0x0036) + _0xstr(615) + (markErr.message) + _0xstr(616));
 }
 } else {
-log(_0xstr(601) + (_0x0037) + _0xstr(602));
+log(_0xstr(617) + (_0x0036) + _0xstr(618));
 try {
-await _0x001e(_0xstr(603), _0xstr(604), { toNum: _0x0037, status: _0xstr(605) });
+await _0x001d(_0xstr(619), _0xstr(620), { toNum: _0x0036, status: _0xstr(621) });
 } catch (e) {
-log(_0xstr(606) + (_0x0037) + _0xstr(607) + (e.message) + _0xstr(608));
+log(_0xstr(622) + (_0x0036) + _0xstr(623) + (e.message) + _0xstr(624));
 }
 }
 } else {
-log(_0xstr(609));
+log(_0xstr(625));
 try {
-await _0x001e(_0xstr(610), _0xstr(611), { toNum: _0x0037, status: _0xstr(612) });
-log(_0xstr(613) + (_0x0037) + _0xstr(614));
+await _0x001d(_0xstr(626), _0xstr(627), { toNum: _0x0036, status: _0xstr(628) });
+log(_0xstr(629) + (_0x0036) + _0xstr(630));
 } catch (e) {
-log(_0xstr(615) + (_0x0037) + _0xstr(616) + (e.message) + _0xstr(617));
+log(_0xstr(631) + (_0x0036) + _0xstr(632) + (e.message) + _0xstr(633));
 }
 }
 }
 } catch (error) {
-log(_0xstr(618) + (error.message) + _0xstr(619));
+log(_0xstr(634) + (error.message) + _0xstr(635));
 } finally {
-_0x0081 = false;
-localStorage.removeItem(_0xstr(620));
-_0x00d4(_0xstr(621));
+_0x0080 = false;
+localStorage.removeItem(_0xstr(636));
+_0x00d3(_0xstr(637));
 }
 }
-function _0x00f9(_0x0037) {
+function _0x00fa(_0x0036) {
 return new Promise((resolve) => {
-let _0x0026 = 0;
-let _0x0029 = setInterval(() => {
-_0x0026++;
-let _0x00c1 = null;
-const _0x001b = document.querySelectorAll(_0xstr(622));
-for (let btn of _0x001b) {
+let _0x0025 = 0;
+let _0x0028 = setInterval(() => {
+_0x0025++;
+let _0x00c0 = null;
+const _0x001a = document.querySelectorAll(_0xstr(638));
+for (let btn of _0x001a) {
 const text = btn.innerText.trim();
-if (text === _0xstr(623) || text === _0xstr(624) || text === _0xstr(625) || text.includes(_0xstr(626))) {
-_0x00c1 = btn;
+if (text === _0xstr(639) || text === _0xstr(640) || text === _0xstr(641) || text.includes(_0xstr(642))) {
+_0x00c0 = btn;
 break;
 }
 }
-if (!_0x00c1) {
-const _0x004a = document.querySelectorAll(_0xstr(627));
-for (let el of _0x004a) {
+if (!_0x00c0) {
+const _0x0049 = document.querySelectorAll(_0xstr(643));
+for (let el of _0x0049) {
 const text = el.innerText.trim();
-if (text === _0xstr(628) || text === _0xstr(629) || text === _0xstr(630) || text.includes(_0xstr(631))) {
-_0x00c1 = el.closest(_0xstr(632)) || el;
+if (text === _0xstr(644) || text === _0xstr(645) || text === _0xstr(646) || text.includes(_0xstr(647))) {
+_0x00c0 = el.closest(_0xstr(648)) || el;
 break;
 }
 }
 }
-if (_0x00c1 && !_0x00c1.disabled && !_0x00c1.classList.contains(_0xstr(633))) {
-clearInterval(_0x0029);
-log(_0xstr(634));
-_0x00c1.click();
+if (_0x00c0 && !_0x00c0.disabled && !_0x00c0.classList.contains(_0xstr(649))) {
+clearInterval(_0x0028);
+log(_0xstr(650));
+_0x00c0.click();
 setTimeout(() => {
-log(_0xstr(635) + (_0x0037) + _0xstr(636));
+log(_0xstr(651) + (_0x0036) + _0xstr(652));
 resolve(true);
 }, 800);
-} else if (_0x0026 > 20) {
-clearInterval(_0x0029);
+} else if (_0x0025 > 20) {
+clearInterval(_0x0028);
 resolve(false);
 }
 }, 150);
 });
 }
-async function _0x00e1() {
-if (!_0x0082 || _0x007f) return;
-const hash = window.location.hash || _0xstr(637);
-if (!hash.includes(_0xstr(638))) return;
-if (!_0x007a()) {
+async function _0x00e0() {
+if (!_0x0081 || _0x007e) return;
+const hash = window.location.hash || _0xstr(653);
+if (!hash.includes(_0xstr(654))) return;
+if (!_0x0079()) {
 return;
 }
-if (!_0x000c(_0xstr(639))) {
+if (!_0x000c(_0xstr(655))) {
 return;
 }
 try {
-_0x007f = true;
-_0x0091 = Date.now();
-localStorage.setItem(_0xstr(640), _0xstr(641));
-_0x00fe(_0xstr(642));
-const data = await _0x001e(_0xstr(643), _0xstr(644));
-if (data.status === _0xstr(645) && data.pupCode) {
+_0x007e = true;
+_0x0090 = Date.now();
+localStorage.setItem(_0xstr(656), _0xstr(657));
+_0x0100(_0xstr(658));
+const data = await _0x001d(_0xstr(659), _0xstr(660));
+if (data.status === _0xstr(661) && data.pupCode) {
 const pupCode = data.pupCode;
-const _0x00ce = data.recipientDriver;
-const recipientDriver = _0x0052(_0x00ce);
+const _0x00cd = data.recipientDriver;
+const recipientDriver = _0x0051(_0x00cd);
 const now = Date.now();
-if (pupCode === _0x0090 && (now - _0x0092) < 30000) {
-log(_0xstr(646) + (pupCode) + _0xstr(647));
+if (pupCode === _0x008f && (now - _0x0091) < 30000) {
+log(_0xstr(662) + (pupCode) + _0xstr(663));
 return;
 }
-log(_0xstr(648) + (pupCode) + _0xstr(649) + (recipientDriver) + _0xstr(650) + (_0x00ce) + _0xstr(651));
-const _0x001c = localStorage.getItem(_0xstr(652) + pupCode);
-const _0x001d = parseInt(localStorage.getItem(_0xstr(653) + pupCode) || _0xstr(654));
-if (_0x001c && _0x001c === recipientDriver && (Date.now() - _0x001d) < 1200000) {
-log(_0xstr(655) + (pupCode) + _0xstr(656) + (recipientDriver) + _0xstr(657));
+log(_0xstr(664) + (pupCode) + _0xstr(665) + (recipientDriver) + _0xstr(666) + (_0x00cd) + _0xstr(667));
+const _0x001b = localStorage.getItem(_0xstr(668) + pupCode);
+const _0x001c = parseInt(localStorage.getItem(_0xstr(669) + pupCode) || _0xstr(670));
+if (_0x001b && _0x001b === recipientDriver && (Date.now() - _0x001c) < 1200000) {
+log(_0xstr(671) + (pupCode) + _0xstr(672) + (recipientDriver) + _0xstr(673));
 try {
-await _0x001e(_0xstr(658), _0xstr(659), { pupCode: pupCode, status: _0xstr(660) });
-log(_0xstr(661) + (pupCode) + _0xstr(662));
+await _0x001d(_0xstr(674), _0xstr(675), { pupCode: pupCode, status: _0xstr(676) });
+log(_0xstr(677) + (pupCode) + _0xstr(678));
 } catch (err) {
-log(_0xstr(663) + (pupCode) + _0xstr(664) + (err.message) + _0xstr(665));
+log(_0xstr(679) + (pupCode) + _0xstr(680) + (err.message) + _0xstr(681));
 }
 return;
 }
-const success = await _0x004e(pupCode, recipientDriver);
-_0x0090 = pupCode;
-_0x0092 = Date.now();
-if (success === true || success === _0xstr(666)) {
-localStorage.setItem(_0xstr(667) + pupCode, recipientDriver);
-localStorage.setItem(_0xstr(668) + pupCode, Date.now().toString());
-const _0x00e5 = success === _0xstr(669) ? _0xstr(670) : _0xstr(671) + (recipientDriver) + _0xstr(672);
-log(_0xstr(673) + (pupCode) + _0xstr(674) + (_0x00e5) + _0xstr(675));
+const success = await _0x004d(pupCode, recipientDriver);
+_0x008f = pupCode;
+_0x0091 = Date.now();
+if (success === true || success === _0xstr(682)) {
+localStorage.setItem(_0xstr(683) + pupCode, recipientDriver);
+localStorage.setItem(_0xstr(684) + pupCode, Date.now().toString());
+const _0x00e4 = success === _0xstr(685) ? _0xstr(686) : _0xstr(687) + (recipientDriver) + _0xstr(688);
+log(_0xstr(689) + (pupCode) + _0xstr(690) + (_0x00e4) + _0xstr(691));
 try {
-await _0x001e(_0xstr(676), _0xstr(677), { pupCode: pupCode, status: _0xstr(678) });
-log(_0xstr(679) + (pupCode) + _0xstr(680));
+await _0x001d(_0xstr(692), _0xstr(693), { pupCode: pupCode, status: _0xstr(694) });
+log(_0xstr(695) + (pupCode) + _0xstr(696));
 } catch (err) {
-log(_0xstr(681) + (pupCode) + _0xstr(682) + (err.message) + _0xstr(683));
+log(_0xstr(697) + (pupCode) + _0xstr(698) + (err.message) + _0xstr(699));
 }
 } else {
-log(_0xstr(684));
+log(_0xstr(700));
 try {
-await _0x001e(_0xstr(685), _0xstr(686), { pupCode: pupCode, status: _0xstr(687) });
-log(_0xstr(688) + (pupCode) + _0xstr(689));
+await _0x001d(_0xstr(701), _0xstr(702), { pupCode: pupCode, status: _0xstr(703) });
+log(_0xstr(704) + (pupCode) + _0xstr(705));
 } catch (err) {
-log(_0xstr(690) + (pupCode) + _0xstr(691) + (err.message) + _0xstr(692));
+log(_0xstr(706) + (pupCode) + _0xstr(707) + (err.message) + _0xstr(708));
 }
 }
 } else {
-localStorage.removeItem(_0xstr(693));
+localStorage.removeItem(_0xstr(709));
 }
 } catch (error) {
-log(_0xstr(694) + (error.message) + _0xstr(695));
+log(_0xstr(710) + (error.message) + _0xstr(711));
 } finally {
-_0x007f = false;
-_0x00d4(_0xstr(696));
+_0x007e = false;
+_0x00d3(_0xstr(712));
 }
 }
-async function _0x004e(pupCode, recipientDriver) {
-await _0x004d();
-let _0x0056 = null;
-const _0x0058 = document.querySelectorAll(_0xstr(697));
-for (let _0x0088 of _0x0058) {
-const _0x0089 = _0x0088.querySelector(_0xstr(698));
-if (_0x0089) {
-const _0x008b = (_0x0089.innerText || _0x0089.textContent || _0xstr(699)).trim().toLowerCase();
-if (_0x008b.includes(_0xstr(700)) || _0x008b.includes(_0xstr(701)) || _0x008b === _0xstr(702)) {
-_0x0056 = _0x0088.querySelector(_0xstr(703));
-if (_0x0056) break;
+async function _0x004d(pupCode, recipientDriver) {
+await _0x004c();
+let _0x0055 = null;
+const _0x0057 = document.querySelectorAll(_0xstr(713));
+for (let _0x0087 of _0x0057) {
+const _0x0088 = _0x0087.querySelector(_0xstr(714));
+if (_0x0088) {
+const _0x008a = (_0x0088.innerText || _0x0088.textContent || _0xstr(715)).trim().toLowerCase();
+if (_0x008a.includes(_0xstr(716)) || _0x008a.includes(_0xstr(717)) || _0x008a === _0xstr(718)) {
+_0x0055 = _0x0087.querySelector(_0xstr(719));
+if (_0x0055) break;
 }
 }
 }
-if (!_0x0056) {
-const _0x0012 = document.querySelectorAll(_0xstr(704));
+if (!_0x0055) {
+const _0x0012 = document.querySelectorAll(_0xstr(720));
 for (let input of _0x0012) {
-const placeholder = input.placeholder || _0xstr(705);
-if (placeholder.toLowerCase().includes(_0xstr(706)) || placeholder.toLowerCase().includes(_0xstr(707))) {
-_0x0056 = input;
+const placeholder = input.placeholder || _0xstr(721);
+if (placeholder.toLowerCase().includes(_0xstr(722)) || placeholder.toLowerCase().includes(_0xstr(723))) {
+_0x0055 = input;
 break;
 }
 }
 }
-if (!_0x0056) {
-log(_0xstr(708));
+if (!_0x0055) {
+log(_0xstr(724));
 return false;
 }
-await _0x00df(_0x0056, pupCode);
-await _0x003c(300);
-let _0x00dd = Array.from(document.querySelectorAll(_0xstr(709))).find(btn => {
-const _0x00fc = btn.innerText || btn.textContent || _0xstr(710);
-return _0x00fc.trim() === _0xstr(711) || _0x00fc.trim() === _0xstr(712);
+await _0x00de(_0x0055, pupCode);
+await _0x003b(300);
+let _0x00dc = Array.from(document.querySelectorAll(_0xstr(725))).find(btn => {
+const _0x00fd = btn.innerText || btn.textContent || _0xstr(726);
+return _0x00fd.trim() === _0xstr(727) || _0x00fd.trim() === _0xstr(728);
 });
-if (_0x00dd) {
-_0x00dd.click();
-log(_0xstr(713) + pupCode);
+if (_0x00dc) {
+_0x00dc.click();
+log(_0xstr(729) + pupCode);
 } else {
-_0x0056.dispatchEvent(new KeyboardEvent(_0xstr(714), { key: _0xstr(715), code: _0xstr(716), keyCode: 13, which: 13, bubbles: true }));
+_0x0055.dispatchEvent(new KeyboardEvent(_0xstr(730), { key: _0xstr(731), code: _0xstr(732), keyCode: 13, which: 13, bubbles: true }));
 }
-await _0x003c(2000);
-_0x00fe(_0xstr(717));
-const _0x00b2 = Array.from(document.querySelectorAll(_0xstr(718))).find(el => {
-const _0x00fc = (el.innerText || el.textContent || _0xstr(719)).trim().toLowerCase();
-return _0x00fc === _0xstr(720) || _0x00fc === _0xstr(721);
+await _0x003b(2000);
+_0x0100(_0xstr(733));
+const _0x00b1 = Array.from(document.querySelectorAll(_0xstr(734))).find(el => {
+const _0x00fd = (el.innerText || el.textContent || _0xstr(735)).trim().toLowerCase();
+return _0x00fd === _0xstr(736) || _0x00fd === _0xstr(737);
 });
-if (_0x00b2 && (_0x00b2.offsetWidth > 0 || _0x00b2.offsetHeight > 0)) {
-log(_0xstr(722) + (pupCode) + _0xstr(723));
+if (_0x00b1 && (_0x00b1.offsetWidth > 0 || _0x00b1.offsetHeight > 0)) {
+log(_0xstr(738) + (pupCode) + _0xstr(739));
 return false;
 }
-const _0x00da = Array.from(document.querySelectorAll(_0xstr(724)));
-const _0x003b = _0x00da.filter(_0x00d9 => _0x00d9.querySelector(_0xstr(725)));
-if (_0x003b.length > 0) {
-let _0x0059 = false;
-for (let _0x00d9 of _0x003b) {
-const _0x00d0 = Array.from(_0x00d9.querySelectorAll(_0xstr(726))).find(el => {
-const _0x00fc = el.innerText || el.textContent || _0xstr(727);
-return _0x00fc.trim() === _0xstr(728) || _0x00fc.trim() === _0xstr(729) || _0x00fc.trim() === _0xstr(730);
+const _0x00d9 = Array.from(document.querySelectorAll(_0xstr(740)));
+const _0x003a = _0x00d9.filter(_0x00d8 => _0x00d8.querySelector(_0xstr(741)));
+if (_0x003a.length > 0) {
+let _0x0058 = false;
+for (let _0x00d8 of _0x003a) {
+const _0x00cf = Array.from(_0x00d8.querySelectorAll(_0xstr(742))).find(el => {
+const _0x00fd = el.innerText || el.textContent || _0xstr(743);
+return _0x00fd.trim() === _0xstr(744) || _0x00fd.trim() === _0xstr(745) || _0x00fd.trim() === _0xstr(746);
 });
-if (_0x00d0) {
-_0x0059 = true;
+if (_0x00cf) {
+_0x0058 = true;
 break;
 }
 }
-if (!_0x0059) {
-log(_0xstr(731) + (pupCode) + _0xstr(732));
+if (!_0x0058) {
+log(_0xstr(747) + (pupCode) + _0xstr(748));
 return false;
 }
 }
-let _0x00d1 = false;
-for (let _0x00d9 of _0x00da) {
-const _0x00d0 = Array.from(_0x00d9.querySelectorAll(_0xstr(733))).find(el => {
-const _0x00fc = el.innerText || el.textContent || _0xstr(734);
-return _0x00fc.trim() === _0xstr(735) || _0x00fc.trim() === _0xstr(736) || _0x00fc.trim() === _0xstr(737);
+let _0x00d0 = false;
+for (let _0x00d8 of _0x00d9) {
+const _0x00cf = Array.from(_0x00d8.querySelectorAll(_0xstr(749))).find(el => {
+const _0x00fd = el.innerText || el.textContent || _0xstr(750);
+return _0x00fd.trim() === _0xstr(751) || _0x00fd.trim() === _0xstr(752) || _0x00fd.trim() === _0xstr(753);
 });
-if (_0x00d0) {
-log(_0xstr(738));
-_0x00d0.click();
-await _0x003c(2500);
-_0x00fe(_0xstr(739));
-const _0x0044 = document.querySelectorAll(_0xstr(740));
+if (_0x00cf) {
+log(_0xstr(754));
+_0x00cf.click();
+await _0x003b(2500);
+_0x0100(_0xstr(755));
+const _0x0043 = document.querySelectorAll(_0xstr(756));
 let _0x00ee = null;
-for (const _0x003f of _0x0044) {
-if (_0x003f.offsetWidth > 0 || _0x003f.offsetHeight > 0) {
-const text = (_0x003f.innerText || _0x003f.textContent || _0xstr(741));
-if (text.includes(_0xstr(742)) || text.includes(_0xstr(743)) || text.includes(_0xstr(744)) || text.includes(_0xstr(745))) {
-_0x00ee = _0x003f;
+for (const _0x003e of _0x0043) {
+if (_0x003e.offsetWidth > 0 || _0x003e.offsetHeight > 0) {
+const text = (_0x003e.innerText || _0x003e.textContent || _0xstr(757));
+if (text.includes(_0xstr(758)) || text.includes(_0xstr(759)) || text.includes(_0xstr(760)) || text.includes(_0xstr(761))) {
+_0x00ee = _0x003e;
 break;
 }
 }
 }
 if (_0x00ee) {
-let _0x0047 = null;
-const _0x0058 = _0x00ee.querySelectorAll(_0xstr(746));
-for (let _0x0088 of _0x0058) {
-const _0x0089 = _0x0088.querySelector(_0xstr(747));
-if (_0x0089) {
-const _0x008b = (_0x0089.innerText || _0x0089.textContent || _0xstr(748)).trim().toLowerCase();
-if (_0x008b.includes(_0xstr(749)) || _0x008b.includes(_0xstr(750))) {
-_0x0047 = _0x0088.querySelector(_0xstr(751));
-if (_0x0047) break;
+let _0x0046 = null;
+const _0x0057 = _0x00ee.querySelectorAll(_0xstr(762));
+for (let _0x0087 of _0x0057) {
+const _0x0088 = _0x0087.querySelector(_0xstr(763));
+if (_0x0088) {
+const _0x008a = (_0x0088.innerText || _0x0088.textContent || _0xstr(764)).trim().toLowerCase();
+if (_0x008a.includes(_0xstr(765)) || _0x008a.includes(_0xstr(766))) {
+_0x0046 = _0x0087.querySelector(_0xstr(767));
+if (_0x0046) break;
 }
 }
 }
-if (!_0x0047) {
-const _0x0041 = _0x00ee.querySelectorAll(_0xstr(752));
-for (let _0x0070 of _0x0041) {
-const ph = _0x0070.placeholder || _0xstr(753);
-if (ph.toLowerCase().includes(_0xstr(754)) || ph.toLowerCase().includes(_0xstr(755)) || ph.toLowerCase().includes(_0xstr(756))) {
-_0x0047 = _0x0070;
+if (!_0x0046) {
+const _0x0040 = _0x00ee.querySelectorAll(_0xstr(768));
+for (let _0x006f of _0x0040) {
+const ph = _0x006f.placeholder || _0xstr(769);
+if (ph.toLowerCase().includes(_0xstr(770)) || ph.toLowerCase().includes(_0xstr(771)) || ph.toLowerCase().includes(_0xstr(772))) {
+_0x0046 = _0x006f;
 break;
 }
 }
 }
-if (_0x0047) {
-const _0x00de = _0x0047.closest(_0xstr(757)) || _0x0047.parentElement;
-if (_0x00de) {
-_0x00de.click();
+if (_0x0046) {
+const _0x00dd = _0x0046.closest(_0xstr(773)) || _0x0046.parentElement;
+if (_0x00dd) {
+_0x00dd.click();
 } else {
-_0x0047.removeAttribute(_0xstr(758));
-_0x0047.click();
+_0x0046.removeAttribute(_0xstr(774));
+_0x0046.click();
 }
-log(_0xstr(759));
-await _0x003c(2200);
-_0x00fe(_0xstr(760));
+log(_0xstr(775));
+await _0x003b(2200);
+_0x0100(_0xstr(776));
 let _0x000d = document.activeElement;
-if (!_0x000d || _0x000d.tagName !== _0xstr(761) || !_0x00ee.contains(_0x000d)) {
-_0x000d = _0x0047;
+if (!_0x000d || _0x000d.tagName !== _0xstr(777) || !_0x00ee.contains(_0x000d)) {
+_0x000d = _0x0046;
 }
-_0x000d.removeAttribute(_0xstr(762));
+_0x000d.removeAttribute(_0xstr(778));
 _0x000d.focus();
-if (typeof _0x000d.select === _0xstr(763)) _0x000d.select();
-_0x000d.value = _0xstr(764);
-_0x000d.dispatchEvent(new Event(_0xstr(765), { bubbles: true }));
+if (typeof _0x000d.select === _0xstr(779)) _0x000d.select();
+_0x000d.value = _0xstr(780);
+_0x000d.dispatchEvent(new Event(_0xstr(781), { bubbles: true }));
 try {
-document.execCommand(_0xstr(766), false, recipientDriver);
+document.execCommand(_0xstr(782), false, recipientDriver);
 } catch (e) {}
 if (_0x000d.value !== recipientDriver) {
 _0x000d.value = recipientDriver;
 }
-_0x000d.dispatchEvent(new Event(_0xstr(767), { bubbles: true }));
-_0x000d.dispatchEvent(new Event(_0xstr(768), { bubbles: true }));
-_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(769), { key: _0xstr(770), bubbles: true }));
-_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(771), { key: _0xstr(772), bubbles: true }));
-log(_0xstr(773) + recipientDriver + _0xstr(774));
-await _0x003c(2500);
-const _0x0011 = Array.from(document.querySelectorAll(_0xstr(775)));
-let _0x00a9 = _0x0011.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(776)).trim();
+_0x000d.dispatchEvent(new Event(_0xstr(783), { bubbles: true }));
+_0x000d.dispatchEvent(new Event(_0xstr(784), { bubbles: true }));
+_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(785), { key: _0xstr(786), bubbles: true }));
+_0x000d.dispatchEvent(new KeyboardEvent(_0xstr(787), { key: _0xstr(788), bubbles: true }));
+log(_0xstr(789) + recipientDriver + _0xstr(790));
+await _0x003b(2500);
+const _0x0011 = Array.from(document.querySelectorAll(_0xstr(791)));
+let _0x00a8 = _0x0011.find(el => {
+const text = (el.innerText || el.textContent || _0xstr(792)).trim();
 return text.includes(recipientDriver) &&
 (el.offsetWidth > 0 || el.offsetHeight > 0) &&
-(el.classList.contains(_0xstr(777)) ||
-el.closest(_0xstr(778)) ||
-el.closest(_0xstr(779)) ||
-el.tagName === _0xstr(780));
+(el.classList.contains(_0xstr(793)) ||
+el.closest(_0xstr(794)) ||
+el.closest(_0xstr(795)) ||
+el.tagName === _0xstr(796));
 });
-if (!_0x00a9) {
-_0x00a9 = _0x0011.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(781)).trim();
+if (!_0x00a8) {
+_0x00a8 = _0x0011.find(el => {
+const text = (el.innerText || el.textContent || _0xstr(797)).trim();
 return text.includes(recipientDriver) &&
-(el.closest(_0xstr(782)) || el.closest(_0xstr(783)) || el.tagName === _0xstr(784));
+(el.closest(_0xstr(798)) || el.closest(_0xstr(799)) || el.tagName === _0xstr(800));
 });
 }
-if (!_0x00a9) {
-_0x00a9 = _0x0011.find(el => {
-const text = (el.innerText || el.textContent || _0xstr(785)).trim();
+if (!_0x00a8) {
+_0x00a8 = _0x0011.find(el => {
+const text = (el.innerText || el.textContent || _0xstr(801)).trim();
 return text.includes(recipientDriver);
 });
 }
-if (_0x00a9) {
-_0x00a9.click();
-log(_0xstr(786) + (_0x00a9.innerText || _0x00a9.textContent).trim());
-await _0x003c(1200);
-const _0x0040 = Array.from(_0x00ee.querySelectorAll(_0xstr(787))).find(btn => {
-const _0x00fc = btn.innerText || btn.textContent || _0xstr(788);
-return _0x00fc.trim() === _0xstr(789) || _0x00fc.trim() === _0xstr(790) || _0x00fc.trim() === _0xstr(791);
+if (_0x00a8) {
+_0x00a8.click();
+log(_0xstr(802) + (_0x00a8.innerText || _0x00a8.textContent).trim());
+await _0x003b(1200);
+const _0x003f = Array.from(_0x00ee.querySelectorAll(_0xstr(803))).find(btn => {
+const _0x00fd = btn.innerText || btn.textContent || _0xstr(804);
+return _0x00fd.trim() === _0xstr(805) || _0x00fd.trim() === _0xstr(806) || _0x00fd.trim() === _0xstr(807);
 });
-if (_0x0040) {
-_0x0040.click();
-log(_0xstr(792));
-let _0x0064 = false;
-for (let _0x0022 = 0; _0x0022 < 30; _0x0022++) {
-await _0x003c(100);
-const _0x001a = document.body.innerText || _0xstr(793);
-if (_0x001a.includes(_0xstr(794)) || _0x001a.toLowerCase().includes(_0xstr(795))) {
-log(_0xstr(796));
-_0x0064 = true;
+if (_0x003f) {
+_0x003f.click();
+log(_0xstr(808));
+let _0x0063 = false;
+for (let _0x0021 = 0; _0x0021 < 30; _0x0021++) {
+await _0x003b(100);
+const _0x0019 = document.body.innerText || _0xstr(809);
+if (_0x0019.includes(_0xstr(810)) || _0x0019.toLowerCase().includes(_0xstr(811))) {
+log(_0xstr(812));
+_0x0063 = true;
 break;
 }
 }
-if (_0x0064) {
-let _0x001f = Array.from(_0x00ee.querySelectorAll(_0xstr(797))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(798)).trim().toLowerCase();
-return _0x00fc === _0xstr(799) || _0x00fc === _0xstr(800) || _0x00fc === _0xstr(801) || _0x00fc === _0xstr(802) || _0x00fc.includes(_0xstr(803)) || _0x00fc.includes(_0xstr(804));
+if (_0x0063) {
+let _0x001e = Array.from(_0x00ee.querySelectorAll(_0xstr(813))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(814)).trim().toLowerCase();
+return _0x00fd === _0xstr(815) || _0x00fd === _0xstr(816) || _0x00fd === _0xstr(817) || _0x00fd === _0xstr(818) || _0x00fd.includes(_0xstr(819)) || _0x00fd.includes(_0xstr(820));
 });
-if (!_0x001f) {
-_0x001f = Array.from(document.querySelectorAll(_0xstr(805))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(806)).trim().toLowerCase();
-return (_0x00fc === _0xstr(807) || _0x00fc === _0xstr(808) || _0x00fc === _0xstr(809) || _0x00fc === _0xstr(810) || _0x00fc.includes(_0xstr(811)) || _0x00fc.includes(_0xstr(812))) &&
+if (!_0x001e) {
+_0x001e = Array.from(document.querySelectorAll(_0xstr(821))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(822)).trim().toLowerCase();
+return (_0x00fd === _0xstr(823) || _0x00fd === _0xstr(824) || _0x00fd === _0xstr(825) || _0x00fd === _0xstr(826) || _0x00fd.includes(_0xstr(827)) || _0x00fd.includes(_0xstr(828))) &&
 (btn.offsetWidth > 0 || btn.offsetHeight > 0);
 });
 }
-if (!_0x001f) {
-_0x001f = _0x00ee.querySelector(_0xstr(813));
+if (!_0x001e) {
+_0x001e = _0x00ee.querySelector(_0xstr(829));
 }
-if (_0x001f) {
-_0x001f.click();
-log(_0xstr(814));
+if (_0x001e) {
+_0x001e.click();
+log(_0xstr(830));
 } else {
-log(_0xstr(815));
+log(_0xstr(831));
 }
-await _0x003c(500);
-return _0xstr(816);
+await _0x003b(500);
+return _0xstr(832);
 }
-_0x00d1 = true;
-await _0x003c(1500);
+_0x00d0 = true;
+await _0x003b(1500);
 break;
 } else {
-log(_0xstr(817));
+log(_0xstr(833));
 }
 } else {
-log(_0xstr(818) + recipientDriver);
+log(_0xstr(834) + recipientDriver);
 }
 } else {
-log(_0xstr(819));
+log(_0xstr(835));
 }
 } else {
-log(_0xstr(820));
+log(_0xstr(836));
 }
 }
 }
-return _0x00d1;
+return _0x00d0;
 }
-async function _0x00c6() {
-if (!_0x0082 || !_0x0074 || _0x007e) return;
-const hash = window.location.hash || _0xstr(821);
-if (!hash.includes(_0xstr(822))) return;
-if (!_0x007a()) {
+async function _0x00c5() {
+if (!_0x0081 || !_0x0073 || _0x007d) return;
+const hash = window.location.hash || _0xstr(837);
+if (!hash.includes(_0xstr(838))) return;
+if (!_0x0079()) {
 return;
 }
-if (!_0x000c(_0xstr(823))) {
+if (!_0x000c(_0xstr(839))) {
 return;
 }
 try {
-_0x007e = true;
-_0x008d = Date.now();
-localStorage.setItem(_0xstr(824), _0xstr(825));
-_0x00fe(_0xstr(826));
-const data = await _0x001e(_0xstr(827), _0xstr(828));
-if (data.status !== _0xstr(829)) {
-throw new Error(_0xstr(830));
+_0x007d = true;
+_0x008c = Date.now();
+localStorage.setItem(_0xstr(840), _0xstr(841));
+_0x0100(_0xstr(842));
+const data = await _0x001d(_0xstr(843), _0xstr(844));
+if (data.status !== _0xstr(845)) {
+throw new Error(_0xstr(846));
 }
 if (data.tasks.length === 0) {
-log(_0xstr(831));
-const headers = Array.from(document.querySelectorAll(_0xstr(832)));
-let _0x0031 = { pupId: -1, shopName: -1, shopAddress: -1, mappedPupg: -1 };
+log(_0xstr(847));
+const headers = Array.from(document.querySelectorAll(_0xstr(848)));
+let _0x0030 = { pupId: -1, shopName: -1, shopAddress: -1, mappedPupg: -1 };
 headers.forEach((th, idx) => {
-const _0x00fc = (th.innerText || th.textContent || _0xstr(833)).trim().toLowerCase();
-if (_0x00fc.includes(_0xstr(834))) _0x0031.pupId = idx;
-else if (_0x00fc.includes(_0xstr(835))) _0x0031.shopName = idx;
-else if (_0x00fc.includes(_0xstr(836))) _0x0031.shopAddress = idx;
-else if (_0x00fc.includes(_0xstr(837))) _0x0031.mappedPupg = idx;
+const _0x00fd = (th.innerText || th.textContent || _0xstr(849)).trim().toLowerCase();
+if (_0x00fd.includes(_0xstr(850))) _0x0030.pupId = idx;
+else if (_0x00fd.includes(_0xstr(851))) _0x0030.shopName = idx;
+else if (_0x00fd.includes(_0xstr(852))) _0x0030.shopAddress = idx;
+else if (_0x00fd.includes(_0xstr(853))) _0x0030.mappedPupg = idx;
 });
-if (_0x0031.pupId === -1) {
-log(_0xstr(838));
+if (_0x0030.pupId === -1) {
+log(_0xstr(854));
 return;
 }
-const _0x00dc = [];
-const _0x00da = document.querySelectorAll(_0xstr(839));
-_0x00da.forEach(_0x00d9 => {
-const _0x0020 = _0x00d9.querySelectorAll(_0xstr(840));
-if (_0x0020.length > Math.max(_0x0031.pupId, _0x0031.shopName, _0x0031.shopAddress, _0x0031.mappedPupg)) {
-const pupId = _0x0020[_0x0031.pupId].innerText.trim();
-const shopName = _0x0031.shopName !== -1 ? _0x0020[_0x0031.shopName].innerText.trim() : _0xstr(841);
-const shopAddress = _0x0031.shopAddress !== -1 ? _0x0020[_0x0031.shopAddress].innerText.trim() : _0xstr(842);
-const mappedPupg = _0x0031.mappedPupg !== -1 ? _0x0020[_0x0031.mappedPupg].innerText.trim() : _0xstr(843);
+const _0x00db = [];
+const _0x00d9 = document.querySelectorAll(_0xstr(855));
+_0x00d9.forEach(_0x00d8 => {
+const _0x001f = _0x00d8.querySelectorAll(_0xstr(856));
+if (_0x001f.length > Math.max(_0x0030.pupId, _0x0030.shopName, _0x0030.shopAddress, _0x0030.mappedPupg)) {
+const pupId = _0x001f[_0x0030.pupId].innerText.trim();
+const shopName = _0x0030.shopName !== -1 ? _0x001f[_0x0030.shopName].innerText.trim() : _0xstr(857);
+const shopAddress = _0x0030.shopAddress !== -1 ? _0x001f[_0x0030.shopAddress].innerText.trim() : _0xstr(858);
+const mappedPupg = _0x0030.mappedPupg !== -1 ? _0x001f[_0x0030.mappedPupg].innerText.trim() : _0xstr(859);
 if (pupId) {
-_0x00dc.push({ pupId, shopName, shopAddress, mappedPupg });
+_0x00db.push({ pupId, shopName, shopAddress, mappedPupg });
 }
 }
 });
-if (_0x00dc.length > 0) {
-log(_0xstr(844) + (_0x00dc.length) + _0xstr(845));
-await _0x001e(_0xstr(846), _0xstr(847), { scraped: _0x00dc });
-log(_0xstr(848));
+if (_0x00db.length > 0) {
+log(_0xstr(860) + (_0x00db.length) + _0xstr(861));
+await _0x001d(_0xstr(862), _0xstr(863), { scraped: _0x00db });
+log(_0xstr(864));
 } else {
-log(_0xstr(849));
+log(_0xstr(865));
 }
 return;
 }
 if (!data.hasRiderValue) {
-log(_0xstr(850));
+log(_0xstr(866));
 return;
 }
-const _0x004b = data.tasks.find(t => !t.riderId || t.riderId.trim() === _0xstr(851));
-if (_0x004b) {
-log(_0xstr(852) + (_0x004b.pupId) + _0xstr(853));
-await _0x001e(_0xstr(854), _0xstr(855), { pupId: _0x004b.pupId, actionType: _0xstr(856) });
+const _0x004a = data.tasks.find(t => !t.riderId || t.riderId.trim() === _0xstr(867));
+if (_0x004a) {
+log(_0xstr(868) + (_0x004a.pupId) + _0xstr(869));
+await _0x001d(_0xstr(870), _0xstr(871), { pupId: _0x004a.pupId, actionType: _0xstr(872) });
 return;
 }
-const _0x00f1 = data.tasks.find(t => t.riderId && t.riderId.trim() !== _0xstr(857));
+const _0x00f1 = data.tasks.find(t => t.riderId && t.riderId.trim() !== _0xstr(873));
 if (_0x00f1) {
-log(_0xstr(858) + (_0x00f1.pupId) + _0xstr(859) + (_0x00f1.riderId) + _0xstr(860));
-const _0x00da = Array.from(document.querySelectorAll(_0xstr(861)));
-const _0x00a8 = _0x00da.find(_0x00d9 => (_0x00d9.innerText || _0x00d9.textContent || _0xstr(862)).includes(_0x00f1.pupId));
-if (_0x00a8) {
-const _0x002b = _0x00a8.querySelector(_0xstr(863)) || _0x00a8.querySelector(_0xstr(864));
-if (_0x002b && !_0x002b.classList.contains(_0xstr(865))) {
-_0x002b.click();
-await _0x003c(300);
+log(_0xstr(874) + (_0x00f1.pupId) + _0xstr(875) + (_0x00f1.riderId) + _0xstr(876));
+const _0x00d9 = Array.from(document.querySelectorAll(_0xstr(877)));
+const _0x00a7 = _0x00d9.find(_0x00d8 => (_0x00d8.innerText || _0x00d8.textContent || _0xstr(878)).includes(_0x00f1.pupId));
+if (_0x00a7) {
+const _0x002a = _0x00a7.querySelector(_0xstr(879)) || _0x00a7.querySelector(_0xstr(880));
+if (_0x002a && !_0x002a.classList.contains(_0xstr(881))) {
+_0x002a.click();
+await _0x003b(300);
 }
-const _0x0014 = Array.from(document.querySelectorAll(_0xstr(866))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(867)).trim().toLowerCase();
-return _0x00fc === _0xstr(868) || _0x00fc.includes(_0xstr(869));
+const _0x0014 = Array.from(document.querySelectorAll(_0xstr(882))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(883)).trim().toLowerCase();
+return _0x00fd === _0xstr(884) || _0x00fd.includes(_0xstr(885));
 });
 if (_0x0014) {
 _0x0014.click();
-await _0x003c(1200);
-const _0x003f = document.querySelector(_0xstr(870)) || document.querySelector(_0xstr(871)) || document.querySelector(_0xstr(872));
-if (_0x003f) {
-const _0x0046 = _0x003f.querySelector(_0xstr(873)) || _0x003f.querySelector(_0xstr(874)) || _0x003f.querySelector(_0xstr(875)) || _0x003f.querySelector(_0xstr(876));
-if (_0x0046) {
-_0x0046.focus();
-_0x0046.click();
-await _0x003c(800);
-_0x0046.value = _0x00f1.riderId;
-_0x0046.dispatchEvent(new Event(_0xstr(877), { bubbles: true }));
-_0x0046.dispatchEvent(new Event(_0xstr(878), { bubbles: true }));
-await _0x003c(800);
-const _0x0048 = Array.from(document.querySelectorAll(_0xstr(879)));
-const _0x00a7 = _0x0048.find(_0x0088 => {
-const _0x00fc = (_0x0088.innerText || _0x0088.textContent || _0xstr(880)).trim();
-return _0x00fc.includes(_0x00f1.riderId);
+await _0x003b(1200);
+const _0x003e = document.querySelector(_0xstr(886)) || document.querySelector(_0xstr(887)) || document.querySelector(_0xstr(888));
+if (_0x003e) {
+const _0x0045 = _0x003e.querySelector(_0xstr(889)) || _0x003e.querySelector(_0xstr(890)) || _0x003e.querySelector(_0xstr(891)) || _0x003e.querySelector(_0xstr(892));
+if (_0x0045) {
+_0x0045.focus();
+_0x0045.click();
+await _0x003b(800);
+_0x0045.value = _0x00f1.riderId;
+_0x0045.dispatchEvent(new Event(_0xstr(893), { bubbles: true }));
+_0x0045.dispatchEvent(new Event(_0xstr(894), { bubbles: true }));
+await _0x003b(800);
+const _0x0047 = Array.from(document.querySelectorAll(_0xstr(895)));
+const _0x00a6 = _0x0047.find(_0x0087 => {
+const _0x00fd = (_0x0087.innerText || _0x0087.textContent || _0xstr(896)).trim();
+return _0x00fd.includes(_0x00f1.riderId);
 });
-if (_0x00a7) {
-_0x00a7.click();
-log(_0xstr(881) + (_0x00a7.innerText) + _0xstr(882));
-await _0x003c(500);
-const _0x0034 = Array.from(_0x003f.querySelectorAll(_0xstr(883))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(884)).trim().toLowerCase();
-return _0x00fc.includes(_0xstr(885)) || _0x00fc.includes(_0xstr(886));
+if (_0x00a6) {
+_0x00a6.click();
+log(_0xstr(897) + (_0x00a6.innerText) + _0xstr(898));
+await _0x003b(500);
+const _0x0033 = Array.from(_0x003e.querySelectorAll(_0xstr(899))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(900)).trim().toLowerCase();
+return _0x00fd.includes(_0xstr(901)) || _0x00fd.includes(_0xstr(902));
 });
-if (_0x0034) {
-_0x0034.click();
-log(_0xstr(887));
-await _0x003c(1500);
-await _0x001e(_0xstr(888), _0xstr(889), { pupId: _0x00f1.pupId, actionType: _0xstr(890) });
+if (_0x0033) {
+_0x0033.click();
+log(_0xstr(903));
+await _0x003b(1500);
+await _0x001d(_0xstr(904), _0xstr(905), { pupId: _0x00f1.pupId, actionType: _0xstr(906) });
 } else {
-throw new Error(_0xstr(891));
+throw new Error(_0xstr(907));
 }
 } else {
-log(_0xstr(892) + (_0x00f1.riderId) + _0xstr(893));
-const _0x001f = Array.from(_0x003f.querySelectorAll(_0xstr(894))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(895)).trim().toLowerCase();
-return _0x00fc.includes(_0xstr(896)) || _0x00fc.includes(_0xstr(897));
+log(_0xstr(908) + (_0x00f1.riderId) + _0xstr(909));
+const _0x001e = Array.from(_0x003e.querySelectorAll(_0xstr(910))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(911)).trim().toLowerCase();
+return _0x00fd.includes(_0xstr(912)) || _0x00fd.includes(_0xstr(913));
 });
-if (_0x001f) _0x001f.click();
-await _0x003c(800);
-await _0x001e(_0xstr(898), _0xstr(899), { pupId: _0x00f1.pupId, actionType: _0xstr(900) });
+if (_0x001e) _0x001e.click();
+await _0x003b(800);
+await _0x001d(_0xstr(914), _0xstr(915), { pupId: _0x00f1.pupId, actionType: _0xstr(916) });
 }
 } else {
-throw new Error(_0xstr(901));
+throw new Error(_0xstr(917));
 }
 } else {
-throw new Error(_0xstr(902));
+throw new Error(_0xstr(918));
 }
 } else {
-throw new Error(_0xstr(903));
+throw new Error(_0xstr(919));
 }
 } else {
-log(_0xstr(904) + (_0x00f1.pupId) + _0xstr(905));
-await _0x001e(_0xstr(906), _0xstr(907), { pupId: _0x00f1.pupId, actionType: _0xstr(908) });
+log(_0xstr(920) + (_0x00f1.pupId) + _0xstr(921));
+await _0x001d(_0xstr(922), _0xstr(923), { pupId: _0x00f1.pupId, actionType: _0xstr(924) });
 }
 return;
 }
 if (data.tasks.length === 0) {
-log(_0xstr(909));
-const _0x00dd = Array.from(document.querySelectorAll(_0xstr(910))).find(btn => {
-const _0x00fc = (btn.innerText || btn.textContent || _0xstr(911)).trim().toLowerCase();
-return _0x00fc === _0xstr(912) || _0x00fc === _0xstr(913);
+log(_0xstr(925));
+const _0x00dc = Array.from(document.querySelectorAll(_0xstr(926))).find(btn => {
+const _0x00fd = (btn.innerText || btn.textContent || _0xstr(927)).trim().toLowerCase();
+return _0x00fd === _0xstr(928) || _0x00fd === _0xstr(929);
 });
-if (_0x00dd) {
-_0x00dd.click();
-await _0x003c(1500);
+if (_0x00dc) {
+_0x00dc.click();
+await _0x003b(1500);
 }
 }
 } catch (error) {
-log(_0xstr(914) + (error.message) + _0xstr(915));
+log(_0xstr(930) + (error.message) + _0xstr(931));
 } finally {
-_0x007e = false;
-localStorage.removeItem(_0xstr(916));
-_0x00d4(_0xstr(917));
-}
-}
-function _0x0023() {
-const now = Date.now();
-if (_0x007d && _0x0097 > 0 && (now - _0x0097) > _0x0009) {
-log(_0xstr(918));
 _0x007d = false;
-_0x00d4(_0xstr(919));
-_0x0097 = 0;
+localStorage.removeItem(_0xstr(932));
+_0x00d3(_0xstr(933));
 }
-if (_0x0080 && _0x0093 > 0 && (now - _0x0093) > _0x0009) {
-log(_0xstr(920));
-_0x0080 = false;
-_0x00d4(_0xstr(921));
-_0x0093 = 0;
 }
-if (_0x0081 && _0x0096 > 0 && (now - _0x0096) > _0x0009) {
-log(_0xstr(922));
-_0x0081 = false;
-_0x00d4(_0xstr(923));
+function _0x0022() {
+const now = Date.now();
+if (_0x007c && _0x0096 > 0 && (now - _0x0096) > _0x0009) {
+log(_0xstr(934));
+_0x007c = false;
+_0x00d3(_0xstr(935));
 _0x0096 = 0;
 }
-if (_0x007f && _0x0091 > 0 && (now - _0x0091) > _0x0009) {
-log(_0xstr(924));
+if (_0x007f && _0x0092 > 0 && (now - _0x0092) > _0x0009) {
+log(_0xstr(936));
 _0x007f = false;
-_0x00d4(_0xstr(925));
-_0x0091 = 0;
+_0x00d3(_0xstr(937));
+_0x0092 = 0;
 }
-if (_0x007e && _0x008d > 0 && (now - _0x008d) > _0x0009) {
-log(_0xstr(926));
+if (_0x0080 && _0x0095 > 0 && (now - _0x0095) > _0x0009) {
+log(_0xstr(938));
+_0x0080 = false;
+_0x00d3(_0xstr(939));
+_0x0095 = 0;
+}
+if (_0x007e && _0x0090 > 0 && (now - _0x0090) > _0x0009) {
+log(_0xstr(940));
 _0x007e = false;
-_0x00d4(_0xstr(927));
-_0x008d = 0;
+_0x00d3(_0xstr(941));
+_0x0090 = 0;
+}
+if (_0x007d && _0x008c > 0 && (now - _0x008c) > _0x0009) {
+log(_0xstr(942));
+_0x007d = false;
+_0x00d3(_0xstr(943));
+_0x008c = 0;
 }
 }
-function _0x002a() {
+function _0x0029() {
 const href = window.location.href;
-if (href.includes(_0xstr(928)) || href.includes(_0xstr(929))) {
-log(_0xstr(930));
+if (href.includes(_0xstr(944)) || href.includes(_0xstr(945))) {
+log(_0xstr(946));
 window.location.reload();
 return false;
 }
@@ -2899,236 +2946,236 @@ return true;
 }
 const _0x0008 = 60000;
 const _0x0007 = 300000;
-function _0x007a() {
-const hash = window.location.hash || _0xstr(931);
+function _0x0079() {
+const hash = window.location.hash || _0xstr(947);
 const href = window.location.href;
-if (href.includes(_0xstr(932)) || href.includes(_0xstr(933))) return false;
-const _0x00a6 = document.querySelectorAll(_0xstr(934));
-for (const _0x00a5 of _0x00a6) {
-if (_0x00a5.offsetWidth > 100 && _0x00a5.offsetHeight > 100) {
-const style = window.getComputedStyle(_0x00a5);
-if (style.display !== _0xstr(935) && style.visibility !== _0xstr(936) && style.opacity !== _0xstr(937)) {
+if (href.includes(_0xstr(948)) || href.includes(_0xstr(949))) return false;
+const _0x00a5 = document.querySelectorAll(_0xstr(950));
+for (const _0x00a4 of _0x00a5) {
+if (_0x00a4.offsetWidth > 100 && _0x00a4.offsetHeight > 100) {
+const style = window.getComputedStyle(_0x00a4);
+if (style.display !== _0xstr(951) && style.visibility !== _0xstr(952) && style.opacity !== _0xstr(953)) {
 return false;
 }
 }
 }
-if (hash.includes(_0xstr(938))) {
-const textarea = document.querySelector(_0xstr(939)) || document.querySelector(_0xstr(940));
+if (hash.includes(_0xstr(954))) {
+const textarea = document.querySelector(_0xstr(955)) || document.querySelector(_0xstr(956));
 return !!textarea;
 }
-if (hash.includes(_0xstr(941))) {
-const _0x001b = Array.from(document.querySelectorAll(_0xstr(942)));
-const _0x0068 = _0x001b.some(btn => {
-const text = (btn.innerText || btn.textContent || _0xstr(943)).trim().toLowerCase();
-return text.includes(_0xstr(944)) || text.includes(_0xstr(945));
+if (hash.includes(_0xstr(957))) {
+const _0x001a = Array.from(document.querySelectorAll(_0xstr(958)));
+const _0x0067 = _0x001a.some(btn => {
+const text = (btn.innerText || btn.textContent || _0xstr(959)).trim().toLowerCase();
+return text.includes(_0xstr(960)) || text.includes(_0xstr(961));
 });
-const _0x0069 = document.querySelectorAll(_0xstr(946)).length > 0;
-return _0x0068 && _0x0069;
+const _0x0068 = document.querySelectorAll(_0xstr(962)).length > 0;
+return _0x0067 && _0x0068;
 }
-if (hash.includes(_0xstr(947))) {
-const _0x0072 = Array.from(document.querySelectorAll(_0xstr(948)));
-const _0x0067 = _0x0072.some(input => {
-const type = (input.type || _0xstr(949)).toLowerCase();
-return type === _0xstr(950) || type === _0xstr(951) || type === _0xstr(952);
+if (hash.includes(_0xstr(963))) {
+const _0x0071 = Array.from(document.querySelectorAll(_0xstr(964)));
+const _0x0066 = _0x0071.some(input => {
+const type = (input.type || _0xstr(965)).toLowerCase();
+return type === _0xstr(966) || type === _0xstr(967) || type === _0xstr(968);
+});
+return _0x0066;
+}
+if (hash.includes(_0xstr(969))) {
+const _0x0066 = document.querySelector(_0xstr(970)) !== null;
+const _0x0061 = document.querySelector(_0xstr(971)) !== null;
+return _0x0066 && _0x0061;
+}
+if (hash.includes(_0xstr(972))) {
+const _0x001a = Array.from(document.querySelectorAll(_0xstr(973)));
+const _0x0067 = _0x001a.some(btn => {
+const text = (btn.innerText || btn.textContent || _0xstr(974)).trim().toLowerCase();
+return text.includes(_0xstr(975)) || text.includes(_0xstr(976));
 });
 return _0x0067;
 }
-if (hash.includes(_0xstr(953))) {
-const _0x0067 = document.querySelector(_0xstr(954)) !== null;
-const _0x0062 = document.querySelector(_0xstr(955)) !== null;
-return _0x0067 && _0x0062;
-}
-if (hash.includes(_0xstr(956))) {
-const _0x001b = Array.from(document.querySelectorAll(_0xstr(957)));
-const _0x0068 = _0x001b.some(btn => {
-const text = (btn.innerText || btn.textContent || _0xstr(958)).trim().toLowerCase();
-return text.includes(_0xstr(959)) || text.includes(_0xstr(960));
-});
-return _0x0068;
-}
 return false;
 }
-function _0x002f(tabType) {
-log(_0xstr(961) + (tabType) + _0xstr(962));
-localStorage.setItem(_0xstr(963) + tabType, _0xstr(964));
-localStorage.removeItem(_0xstr(965) + tabType);
-window.postMessage({ type: _0xstr(966) }, _0xstr(967));
+function _0x002e(tabType) {
+log(_0xstr(977) + (tabType) + _0xstr(978));
+localStorage.setItem(_0xstr(979) + tabType, _0xstr(980));
+localStorage.removeItem(_0xstr(981) + tabType);
+window.postMessage({ type: _0xstr(982) }, _0xstr(983));
 setTimeout(() => {
 try {
 window.close();
 } catch (e) {
-console.log(_0xstr(968));
+console.log(_0xstr(984));
 }
 }, 1000);
 }
-function _0x006f() {
+function _0x006e() {
 const now = Date.now();
-const _0x00ae = _0x005d();
-log(_0xstr(969));
+const _0x00ad = _0x005c();
+log(_0xstr(985));
 for (const type of _0x0002) {
-if (type !== _0x00ae) {
-localStorage.setItem(_0xstr(970) + type, now.toString());
+if (type !== _0x00ad) {
+localStorage.setItem(_0xstr(986) + type, now.toString());
 }
 }
 setTimeout(() => {
-log(_0xstr(971));
-localStorage.setItem(_0xstr(972), JSON.stringify(_0x0002));
-const _0x0057 = _0x0002[0];
-localStorage.setItem(_0xstr(973), _0x0057);
-localStorage.setItem(_0xstr(974), _0xstr(975));
-localStorage.setItem(_0xstr(976), Date.now().toString());
-localStorage.removeItem(_0xstr(977));
-if (_0x00ae === _0x0057) {
-log(_0xstr(978) + (_0x0057) + _0xstr(979));
+log(_0xstr(987));
+localStorage.setItem(_0xstr(988), JSON.stringify(_0x0002));
+const _0x0056 = _0x0002[0];
+localStorage.setItem(_0xstr(989), _0x0056);
+localStorage.setItem(_0xstr(990), _0xstr(991));
+localStorage.setItem(_0xstr(992), Date.now().toString());
+localStorage.removeItem(_0xstr(993));
+if (_0x00ad === _0x0056) {
+log(_0xstr(994) + (_0x0056) + _0xstr(995));
 window.location.reload();
 } else {
-const _0x0021 = _0x000a[_0x0057];
-log(_0xstr(980) + (_0x0021.name) + _0xstr(981));
-window.postMessage({ type: _0xstr(982), url: _0x0021.url, active: true }, _0xstr(983));
+const _0x0020 = _0x000a[_0x0056];
+log(_0xstr(996) + (_0x0020.name) + _0xstr(997));
+window.postMessage({ type: _0xstr(998), url: _0x0020.url, active: true }, _0xstr(999));
 setTimeout(() => {
-log(_0xstr(984));
-_0x002f(_0x00ae);
+log(_0xstr(1000));
+_0x002e(_0x00ad);
 }, 1000);
 }
 }, 2500);
-_0x009b = now;
+_0x009a = now;
 }
-function _0x0025() {
-const _0x00ae = _0x005d();
-if (_0x00ae) {
-const _0x00fb = localStorage.getItem(_0xstr(985) + _0x00ae);
-if (_0x00fb) {
-const _0x00fa = parseInt(_0x00fb, 10);
+function _0x0024() {
+const _0x00ad = _0x005c();
+if (_0x00ad) {
+const _0x00fc = localStorage.getItem(_0xstr(1001) + _0x00ad);
+if (_0x00fc) {
+const _0x00fb = parseInt(_0x00fc, 10);
 const now = Date.now();
-if (now - _0x00fa < 8000) {
-const _0x0075 = _0x007d || _0x0080 || _0x0081 || _0x007f || _0x007e;
-if (_0x0075) {
-log(_0xstr(986));
+if (now - _0x00fb < 8000) {
+const _0x0074 = _0x007c || _0x007f || _0x0080 || _0x007e || _0x007d;
+if (_0x0074) {
+log(_0xstr(1002));
 return;
 }
-log(_0xstr(987));
-_0x002f(_0x00ae);
+log(_0xstr(1003));
+_0x002e(_0x00ad);
 }
 }
 }
 }
-function _0x0028() {
+function _0x0027() {
 const now = Date.now();
-const _0x0078 = !_0x007d && !_0x0080 && !_0x0081 && !_0x007f && !_0x007e;
-if (_0x0078 && (now - _0x00eb) > _0x0001) {
-log(_0xstr(988));
+const _0x0077 = !_0x007c && !_0x007f && !_0x0080 && !_0x007e && !_0x007d;
+if (_0x0077 && (now - _0x00eb) > _0x0001) {
+log(_0xstr(1004));
 window.location.reload();
 }
 }
-let _0x00ac = 0;
-function _0x00ab() {
-_0x00ff();
-_0x0100();
-_0x0025();
-_0x0013 = localStorage.getItem(_0xstr(989)) || GM_getValue(_0xstr(990), _0x0000);
-_0x00be = localStorage.getItem(_0xstr(991)) || GM_getValue(_0xstr(992), _0xstr(993));
-if (!_0x00be || _0x00be === _0xstr(994) || _0x00be === _0xstr(995) || _0x00be.trim() === _0xstr(996)) {
-_0x00be = _0xstr(997);
-}
-_0x00bf = localStorage.getItem(_0xstr(998)) || GM_getValue(_0xstr(999), _0xstr(1000));
-_0x0082 = localStorage.getItem(_0xstr(1001)) === _0xstr(1002);
-_0x0074 = localStorage.getItem(_0xstr(1003)) === _0xstr(1004);
+let _0x00ab = 0;
+function _0x00aa() {
 _0x0101();
-const _0x003a = window.location.href;
-const hash = window.location.hash || _0xstr(1005);
-if (_0x003a !== _0x009e) {
-_0x009e = _0x003a;
-_0x0080 = false;
-_0x0081 = false;
-_0x007d = false;
-_0x007f = false;
-_0x007e = false;
-}
-_0x005f();
-if (!_0x0082) return;
-_0x00ac++;
-if (_0x00ac % 75 === 0) {
-_0x0023();
+_0x0102();
 _0x0024();
-_0x002a();
-_0x0028();
-_0x0018();
+_0x0013 = localStorage.getItem(_0xstr(1005)) || GM_getValue(_0xstr(1006), _0x0000);
+_0x00bd = localStorage.getItem(_0xstr(1007)) || GM_getValue(_0xstr(1008), _0xstr(1009));
+if (!_0x00bd || _0x00bd === _0xstr(1010) || _0x00bd === _0xstr(1011) || _0x00bd.trim() === _0xstr(1012)) {
+_0x00bd = _0xstr(1013);
+}
+_0x00be = localStorage.getItem(_0xstr(1014)) || GM_getValue(_0xstr(1015), _0xstr(1016));
+_0x0081 = localStorage.getItem(_0xstr(1017)) === _0xstr(1018);
+_0x0073 = localStorage.getItem(_0xstr(1019)) === _0xstr(1020);
+_0x0103();
+const _0x0039 = window.location.href;
+const hash = window.location.hash || _0xstr(1021);
+if (_0x0039 !== _0x009d) {
+_0x009d = _0x0039;
+_0x007f = false;
+_0x0080 = false;
+_0x007c = false;
+_0x007e = false;
+_0x007d = false;
+}
+_0x005e();
+if (!_0x0081) return;
+_0x00ab++;
+if (_0x00ab % 75 === 0) {
+_0x0022();
+_0x0023();
+_0x0029();
+_0x0027();
+_0x0017();
 }
 const now = Date.now();
-if (hash.includes(_0xstr(1006))) {
-if (now - _0x008e > 4500) {
-_0x008e = now;
-_0x00e2();
-}
-}
-if (hash.includes(_0xstr(1007))) {
-_0x00c8();
-}
-if (hash.includes(_0xstr(1008))) {
-if (now - _0x009d > 4500) {
-_0x009d = now;
-_0x00c7();
-}
-}
-if (hash.includes(_0xstr(1009))) {
-if (now - _0x008f > 5000) {
-_0x008f = now;
+if (hash.includes(_0xstr(1022))) {
+if (now - _0x008d > 4500) {
+_0x008d = now;
 _0x00e1();
 }
 }
-if (hash.includes(_0xstr(1010))) {
-if (now - _0x008c > 5000) {
-_0x008c = now;
+if (hash.includes(_0xstr(1023))) {
+_0x00c7();
+}
+if (hash.includes(_0xstr(1024))) {
+if (now - _0x009c > 4500) {
+_0x009c = now;
 _0x00c6();
 }
 }
+if (hash.includes(_0xstr(1025))) {
+if (now - _0x008e > 5000) {
+_0x008e = now;
+_0x00e0();
 }
-window.addEventListener(_0xstr(1011), (e) => {
+}
+if (hash.includes(_0xstr(1026))) {
+if (now - _0x008b > 5000) {
+_0x008b = now;
+_0x00c5();
+}
+}
+}
+window.addEventListener(_0xstr(1027), (e) => {
 if (e.data) {
-if (e.data.type === _0xstr(1012)) {
-_0x00ff();
-if (_0x0082) {
-_0x0024();
-const hash = window.location.hash || _0xstr(1013);
-if (hash.includes(_0xstr(1014))) {
-_0x00e2();
-} else if (hash.includes(_0xstr(1015))) {
-_0x00c8();
-} else if (hash.includes(_0xstr(1016))) {
-_0x00c7();
-} else if (hash.includes(_0xstr(1017))) {
+if (e.data.type === _0xstr(1028)) {
+_0x0101();
+if (_0x0081) {
+_0x0023();
+const hash = window.location.hash || _0xstr(1029);
+if (hash.includes(_0xstr(1030))) {
 _0x00e1();
+} else if (hash.includes(_0xstr(1031))) {
+_0x00c7();
+} else if (hash.includes(_0xstr(1032))) {
+_0x00c6();
+} else if (hash.includes(_0xstr(1033))) {
+_0x00e0();
 }
 }
-} else if (e.data.type === _0xstr(1018)) {
-log(_0xstr(1019));
-_0x006e(_0xstr(1020));
+} else if (e.data.type === _0xstr(1034)) {
+log(_0xstr(1035));
+_0x006d(_0xstr(1036));
 }
 }
 });
-_0x00ff();
-let _0x0109 = null;
+_0x0101();
+let _0x010b = null;
 try {
-const _0x0019 = new Blob([_0xstr(1021)], { type: _0xstr(1022) });
-const _0x010a = URL.createObjectURL(_0x0019);
-_0x0109 = new Worker(_0x010a);
-_0x0109.onmessage = function(e) {
-if (e.data === _0xstr(1023)) {
-_0x00ab();
+const _0x0018 = new Blob([_0xstr(1037)], { type: _0xstr(1038) });
+const _0x010c = URL.createObjectURL(_0x0018);
+_0x010b = new Worker(_0x010c);
+_0x010b.onmessage = function(e) {
+if (e.data === _0xstr(1039)) {
+_0x00aa();
 }
 };
-log(_0xstr(1024));
+log(_0xstr(1040));
 } catch (err) {
-log(_0xstr(1025));
-function _0x0055() {
-_0x00ab();
-setTimeout(_0x0055, 400);
+log(_0xstr(1041));
+function _0x0054() {
+_0x00aa();
+setTimeout(_0x0054, 400);
 }
-_0x0055();
+_0x0054();
 }
 }
-if (document.readyState === _0xstr(1026)) {
-document.addEventListener(_0xstr(1027), init);
+if (document.readyState === _0xstr(1042)) {
+document.addEventListener(_0xstr(1043), init);
 } else {
 init();
 }

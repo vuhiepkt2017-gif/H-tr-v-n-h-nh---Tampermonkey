@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.3
+// @version      7.4
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -362,13 +362,18 @@
                         <option value="3" ${pcPriority === "3" ? "selected" : ""}>3 (Cao nhất - Ưu tiên)</option>
                     </select>
                 </div>
-                <div style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
-                    <label style="color: #aaa; font-size: 11px;">Tự động Bắn Pick:</label>
-                    <input type="checkbox" id="ap-assign-pick-checkbox" style="cursor: pointer; width: 16px; height: 16px;" ${isAssignPickEnabled ? "checked" : ""}>
-                </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                     <button id="ap-save-url" style="flex: 1; padding: 6px; border-radius: 6px; border: none; background-color: #4caf50; color: white; cursor: pointer; font-weight: bold;">Lưu</button>
                     <button id="ap-toggle-btn" style="flex: 1.5; padding: 6px; border-radius: 6px; border: none; background-color: #2196f3; color: white; cursor: pointer; font-weight: bold;">Bắt đầu chạy</button>
+                </div>
+                <div style="margin-bottom: 10px; border-top: 1px solid #444; padding-top: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; background-color: rgba(0, 188, 212, 0.08); padding: 5px 8px; border-radius: 5px; border: 1px solid rgba(0, 188, 212, 0.25);">
+                        <strong style="color: #00bcd4; font-size: 11px;">Tính năng Bắn Pick:</strong>
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <span id="ap-assign-pick-tab-status" style="font-size: 9px; padding: 2px 5px; border-radius: 3px; background-color: #f44336; color: white; cursor: pointer; font-weight: bold;" title="Bấm để mở tab Bắn Pick">Tab: Tắt</span>
+                            <button id="ap-toggle-assign-pick-btn" style="padding: 3px 8px; border-radius: 4px; border: none; background-color: #777777; color: white; cursor: pointer; font-weight: bold; font-size: 10px; outline: none; transition: background-color 0.2s;">Nạp...</button>
+                        </div>
+                    </div>
                 </div>
                 <div style="margin-bottom: 10px; border-top: 1px solid #444; padding-top: 8px;">
                     <label style="display: block; margin-bottom: 6px; color: #ff9800; font-weight: bold;">Trạng thái các Tab (Auto-Open):</label>
@@ -509,6 +514,15 @@
                 const lastPulse = parseInt(localStorage.getItem("last_pulse_" + type) || "0");
                 const isTabActive = lastPulse > 0 && (now - lastPulse) < TAB_ACTIVE_TIMEOUT;
                 
+                if (type === 'assignPick') {
+                    const statusSpan = document.getElementById("ap-assign-pick-tab-status");
+                    if (statusSpan) {
+                        statusSpan.innerText = isTabActive ? "Tab: Mở" : "Tab: Tắt";
+                        statusSpan.style.backgroundColor = isTabActive ? "#4caf50" : "#f44336";
+                    }
+                    continue; // Bỏ qua không hiển thị trong grid chung
+                }
+
                 const item = document.createElement('div');
                 item.style = `display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 4px; background-color: ${isTabActive ? 'rgba(76, 175, 80, 0.15)' : 'rgba(244, 67, 54, 0.15)'}; border: 1px solid ${isTabActive ? '#4caf50' : '#f44336'}; font-size: 11px;`;
                 
@@ -871,8 +885,6 @@
             const pcInputVal = pcInput.value.trim() || "PC_01";
             const prioritySelect = document.getElementById('ap-priority-select');
             const priorityVal = prioritySelect ? prioritySelect.value : "1";
-            const assignPickCheckbox = document.getElementById('ap-assign-pick-checkbox');
-            const assignPickVal = assignPickCheckbox ? assignPickCheckbox.checked : false;
             
             const oldUrl = localStorage.getItem("google_apps_script_url") || "";
 
@@ -889,12 +901,10 @@
                 apiUrl = inputVal;
                 pcName = pcInputVal;
                 pcPriority = priorityVal;
-                isAssignPickEnabled = assignPickVal;
                 
                 localStorage.setItem("google_apps_script_url", apiUrl);
                 localStorage.setItem("shopee_pc_name", pcName);
                 localStorage.setItem("shopee_pc_priority", pcPriority);
-                localStorage.setItem("assign_pick_enabled", isAssignPickEnabled ? "true" : "false");
                 
                 GM_setValue("google_apps_script_url", apiUrl);
                 GM_setValue("shopee_pc_name", pcName);
@@ -940,6 +950,37 @@
 
         toggleBtn.addEventListener('click', toggleRunningState);
         badge.addEventListener('click', toggleRunningState);
+
+        const toggleAssignPickBtn = document.getElementById('ap-toggle-assign-pick-btn');
+        const assignPickTabStatus = document.getElementById('ap-assign-pick-tab-status');
+
+        function updateAssignPickBtnUI() {
+            if (toggleAssignPickBtn) {
+                toggleAssignPickBtn.innerText = isAssignPickEnabled ? "BẬT" : "TẮT";
+                toggleAssignPickBtn.style.backgroundColor = isAssignPickEnabled ? "#4caf50" : "#777777";
+            }
+        }
+        updateAssignPickBtnUI();
+
+        if (toggleAssignPickBtn) {
+            toggleAssignPickBtn.addEventListener('click', () => {
+                isAssignPickEnabled = !isAssignPickEnabled;
+                localStorage.setItem("assign_pick_enabled", isAssignPickEnabled ? "true" : "false");
+                log(`[Bắn Pick] Đã ${isAssignPickEnabled ? 'BẬT' : 'TẮT'} tính năng Bắn Pick.`);
+                updateAssignPickBtnUI();
+            });
+        }
+
+        if (assignPickTabStatus) {
+            assignPickTabStatus.addEventListener('click', () => {
+                const cfg = TABS_CONFIG.assignPick;
+                if (typeof GM_openInTab !== 'undefined') {
+                    GM_openInTab(cfg.url, { active: true, insert: true, setParent: true });
+                } else {
+                    window.open(cfg.url, '_blank');
+                }
+            });
+        }
 
 
 
