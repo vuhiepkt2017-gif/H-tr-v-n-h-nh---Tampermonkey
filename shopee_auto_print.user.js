@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.6
+// @version      7.7
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2179,7 +2179,12 @@
                 }
 
                 // 2.2 Lấy tác vụ đầu tiên hợp lệ để thực hiện gán
-                const task = data.tasks.find(t => t.riderId && t.riderId.trim() !== "");
+                const task = data.tasks.find(t => {
+                    if (!t.riderId) return false;
+                    const rId = t.riderId.trim();
+                    const rIdUpper = rId.toUpperCase();
+                    return rId !== "" && rIdUpper !== "#N/A" && rIdUpper !== "N/A";
+                });
                 if (task) {
                     log(`[Bắn Pick] Đang thực hiện gán tài xế cho mã PUP: ${task.pupId} -> Rider ID: ${task.riderId}`);
                     

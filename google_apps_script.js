@@ -1129,7 +1129,8 @@ function getAssignPickState() {
           mappedPupg: mappedPupg,
           riderId: riderId
         });
-        if (riderId !== "") {
+        var riderIdUpper = riderId.toUpperCase();
+        if (riderId !== "" && riderIdUpper !== "#N/A" && riderIdUpper !== "N/A") {
           hasRiderValue = true;
         }
       }
