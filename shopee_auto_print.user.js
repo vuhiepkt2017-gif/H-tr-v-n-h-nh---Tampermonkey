@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.5
+// @version      8.6
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -638,6 +638,9 @@
             localStorage.removeItem('seq_open_tab_start');
             localStorage.removeItem('seq_open_chain_start');
             localStorage.removeItem('seq_open_retry');
+            for (const type of RELOAD_ORDER) {
+                localStorage.removeItem('seq_open_load_done_time_' + type);
+            }
         }
 
         // Mở tab tiếp theo trong chuỗi
@@ -710,7 +713,25 @@
 
             // Kiểm tra nội dung trang đã load đầy đủ chưa
             if (isPageContentFullyLoaded()) {
-                log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã load đầy đủ và sẵn sàng!`);
+                const loadDoneTimeKey = 'seq_open_load_done_time_' + myTabType;
+                const loadDoneTime = localStorage.getItem(loadDoneTimeKey);
+                
+                if (!loadDoneTime) {
+                    // Lần đầu tiên phát hiện load xong, ghi nhận mốc thời gian và chờ thêm 300ms
+                    localStorage.setItem(loadDoneTimeKey, now.toString());
+                    log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã phát hiện nút/ô nhập liệu. Chờ thêm 0.3s để trang ổn định...`);
+                    return;
+                }
+                
+                const timePassed = now - parseInt(loadDoneTime);
+                if (timePassed < 300) {
+                    // Chưa đủ 300ms, tiếp tục chờ
+                    return;
+                }
+                
+                // Đã đủ 300ms, dọn dẹp trạng thái và mở tab tiếp theo
+                localStorage.removeItem(loadDoneTimeKey);
+                log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã ổn định. Tiến hành mở tab kế tiếp!`);
                 lastSuccessfulAction = Date.now();
                 openNextTabInQueue();
                 return;
