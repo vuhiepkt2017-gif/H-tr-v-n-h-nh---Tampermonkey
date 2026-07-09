@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.2
+// @version      7.3
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -98,6 +98,11 @@
             name: "Chuyển Pick",
             url: "https://spx.shopee.vn/#/pickupTask/list",
             hashKey: "pickupTask/list"
+        },
+        assignPick: {
+            name: "Bắn Pick",
+            url: "https://spx.shopee.vn/#/pickupOrder/createNew",
+            hashKey: "pickupOrder/createNew"
         }
     };
 
@@ -163,11 +168,13 @@
         }
         let pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
         let isRunning = localStorage.getItem("auto_print_enabled") === "true";
+        let isAssignPickEnabled = localStorage.getItem("assign_pick_enabled") === "true";
         
         let isPrintingNow = false;
         let isProcessingList = false;
         let isProcessingPrint = false;
         let isProcessingHandover = false;
+        let isProcessingAssignPick = false;
         let lastHandoverPup = "";
         let lastHandoverTime = 0;
         let lastUrl = "";
@@ -180,6 +187,7 @@
         let lastListStartTime = 0;
         let lastPrintPageStartTime = 0;
         let lastHandoverStartTime = 0;
+        let lastAssignPickStartTime = 0;
         const STUCK_TIMEOUT = 30000; // 30 giây - nếu quá thời gian này thì coi là treo và tự giải phóng
         let lastSuccessfulAction = Date.now(); // Lần cuối cùng thực hiện thành công bất kỳ hành động nào
         const PAGE_RELOAD_INTERVAL = 1800000; // 30 phút - tự động đóng và mở lại các tab để refresh session tránh ngủ đông
@@ -189,6 +197,7 @@
         let lastAwbPollTime = 0;
         let lastToPollTime = 0;
         let lastCpPollTime = 0;
+        let lastApPollTime = 0;
 
         // Cơ chế khóa dùng chung duy nhất (Single Global Lock) cho toàn bộ hệ thống
         // Đảm bảo tại một thời điểm chỉ có DUY NHẤT một tab thực hiện nhiệm vụ, tránh chạy chồng lấn các sheet khác nhau.
@@ -352,6 +361,10 @@
                         <option value="2" ${pcPriority === "2" ? "selected" : ""}>2 (Trung bình)</option>
                         <option value="3" ${pcPriority === "3" ? "selected" : ""}>3 (Cao nhất - Ưu tiên)</option>
                     </select>
+                </div>
+                <div style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                    <label style="color: #aaa; font-size: 11px;">Tự động Bắn Pick:</label>
+                    <input type="checkbox" id="ap-assign-pick-checkbox" style="cursor: pointer; width: 16px; height: 16px;" ${isAssignPickEnabled ? "checked" : ""}>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                     <button id="ap-save-url" style="flex: 1; padding: 6px; border-radius: 6px; border: none; background-color: #4caf50; color: white; cursor: pointer; font-weight: bold;">Lưu</button>
@@ -520,7 +533,7 @@
         }
 
         // Thứ tự ưu tiên mở/reload tab: Chuyển Pick, In bill, Quét TO, In TO
-        const RELOAD_ORDER = ['pickupTask', 'awbPrint', 'generalPackTOList', 'startPackNoLabel'];
+        const RELOAD_ORDER = ['pickupTask', 'awbPrint', 'generalPackTOList', 'startPackNoLabel', 'assignPick'];
 
         // ==========================================
         // MỞ TAB TUẦN TỰ (SEQUENTIAL TAB OPEN)
@@ -858,6 +871,8 @@
             const pcInputVal = pcInput.value.trim() || "PC_01";
             const prioritySelect = document.getElementById('ap-priority-select');
             const priorityVal = prioritySelect ? prioritySelect.value : "1";
+            const assignPickCheckbox = document.getElementById('ap-assign-pick-checkbox');
+            const assignPickVal = assignPickCheckbox ? assignPickCheckbox.checked : false;
             
             const oldUrl = localStorage.getItem("google_apps_script_url") || "";
 
@@ -874,10 +889,12 @@
                 apiUrl = inputVal;
                 pcName = pcInputVal;
                 pcPriority = priorityVal;
+                isAssignPickEnabled = assignPickVal;
                 
                 localStorage.setItem("google_apps_script_url", apiUrl);
                 localStorage.setItem("shopee_pc_name", pcName);
                 localStorage.setItem("shopee_pc_priority", pcPriority);
+                localStorage.setItem("assign_pick_enabled", isAssignPickEnabled ? "true" : "false");
                 
                 GM_setValue("google_apps_script_url", apiUrl);
                 GM_setValue("shopee_pc_name", pcName);
@@ -2025,6 +2042,207 @@
         }
 
         // ==========================================
+        // 5. TÍNH NĂNG 5: TỰ ĐỘNG GÁN PICK (assignPick)
+        // ==========================================
+        async function processAssignPickPage() {
+            if (!isRunning || !isAssignPickEnabled || isProcessingAssignPick) return;
+
+            const hash = window.location.hash || "";
+            if (!hash.includes('pickupOrder/createNew')) return;
+
+            if (!isPageContentFullyLoaded()) {
+                return;
+            }
+
+            if (!acquireGlobalLock('assignPick')) {
+                return;
+            }
+
+            try {
+                isProcessingAssignPick = true;
+                lastAssignPickStartTime = Date.now();
+                localStorage.setItem('pending_assignPick', 'true');
+                updateGlobalLockHeartbeat('assignPick');
+
+                const data = await callGASPromise("POST", "get_assign_pick_state");
+                if (data.status !== "success") {
+                    throw new Error("Không thể tải trạng thái Assign Pick từ GAS");
+                }
+
+                // CASE 1: Chưa có danh sách PUP hoặc danh sách A2:A trống -> Tiến hành cào dữ liệu từ trang Shopee
+                if (data.tasks.length === 0) {
+                    log("[Bắn Pick] Danh sách trên trang tính trống. Tiến hành cào dữ liệu...");
+                    
+                    const headers = Array.from(document.querySelectorAll('th'));
+                    let colIndices = { pupId: -1, shopName: -1, shopAddress: -1, mappedPupg: -1 };
+                    headers.forEach((th, idx) => {
+                        const txt = (th.innerText || th.textContent || "").trim().toLowerCase();
+                        if (txt.includes("pickup point id")) colIndices.pupId = idx;
+                        else if (txt.includes("shop/sp names")) colIndices.shopName = idx;
+                        else if (txt.includes("shop/sp address")) colIndices.shopAddress = idx;
+                        else if (txt.includes("mapped pupg")) colIndices.mappedPupg = idx;
+                    });
+
+                    if (colIndices.pupId === -1) {
+                        log("[Bắn Pick] Cảnh báo: Không tìm thấy cột Pickup Point ID trên trang web.");
+                        return;
+                    }
+
+                    const scraped = [];
+                    const rows = document.querySelectorAll('.el-table__row');
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        if (cells.length > Math.max(colIndices.pupId, colIndices.shopName, colIndices.shopAddress, colIndices.mappedPupg)) {
+                            const pupId = cells[colIndices.pupId].innerText.trim();
+                            const shopName = colIndices.shopName !== -1 ? cells[colIndices.shopName].innerText.trim() : "";
+                            const shopAddress = colIndices.shopAddress !== -1 ? cells[colIndices.shopAddress].innerText.trim() : "";
+                            const mappedPupg = colIndices.mappedPupg !== -1 ? cells[colIndices.mappedPupg].innerText.trim() : "";
+                            if (pupId) {
+                                scraped.push({ pupId, shopName, shopAddress, mappedPupg });
+                            }
+                        }
+                    });
+
+                    if (scraped.length > 0) {
+                        log(`[Bắn Pick] Cào thành công ${scraped.length} mã PUP. Gửi lên Google Sheets...`);
+                        await callGASPromise("POST", "save_assign_pick_scraped", { scraped: scraped });
+                        log("[Bắn Pick] Đã cập nhật dữ liệu cào lên Sheets. Vui lòng bổ sung ID Rider.");
+                    } else {
+                        log("[Bắn Pick] Không tìm thấy dòng dữ liệu nào khả dụng trên bảng Shopee.");
+                    }
+                    return;
+                }
+
+                // CASE 2: Có danh sách PUP trên trang tính
+                // Kiểm tra điều kiện E2:E có rỗng hết không
+                if (!data.hasRiderValue) {
+                    log("[Bắn Pick] Cột ID Rider trống hoàn toàn. Tạm dừng để chờ nhập Rider ID.");
+                    return;
+                }
+
+                // 2.1 Tìm tác vụ đầu tiên không có Rider ID trong vùng E2:E để chuyển sang I2:L (vùng MAP lỗi) và xóa
+                const emptyRiderTask = data.tasks.find(t => !t.riderId || t.riderId.trim() === "");
+                if (emptyRiderTask) {
+                    log(`[Bắn Pick] Phát hiện mã PUP ${emptyRiderTask.pupId} không có Rider ID. Tiến hành chuyển sang vùng MAP lỗi...`);
+                    await callGASPromise("POST", "update_assign_pick_task", { pupId: emptyRiderTask.pupId, actionType: "copy_to_map" });
+                    return;
+                }
+
+                // 2.2 Lấy tác vụ đầu tiên hợp lệ để thực hiện gán
+                const task = data.tasks.find(t => t.riderId && t.riderId.trim() !== "");
+                if (task) {
+                    log(`[Bắn Pick] Đang thực hiện gán tài xế cho mã PUP: ${task.pupId} -> Rider ID: ${task.riderId}`);
+                    
+                    const rows = Array.from(document.querySelectorAll('.el-table__row'));
+                    const matchRow = rows.find(row => (row.innerText || row.textContent || "").includes(task.pupId));
+                    
+                    if (matchRow) {
+                        // Tích chọn ô vuông tương ứng với PUP
+                        const checkbox = matchRow.querySelector('.el-checkbox__input') || matchRow.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.classList.contains('is-checked')) {
+                            checkbox.click();
+                            await delay(300);
+                        }
+
+                        // Bấm vào nút Assign màu cam
+                        const assignBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                            return txt === "assign" || txt.includes("phân bổ");
+                        });
+
+                        if (assignBtn) {
+                            assignBtn.click();
+                            await delay(1200); // Đợi popup hiện lên
+                            
+                            const dialog = document.querySelector('.el-dialog') || document.querySelector('.el-overlay') || document.querySelector('[role="dialog"]');
+                            if (dialog) {
+                                const driverInput = dialog.querySelector('input[placeholder*="Driver"]') || dialog.querySelector('input[placeholder*="tài xế"]') || dialog.querySelector('.el-select__input') || dialog.querySelector('input');
+                                if (driverInput) {
+                                    driverInput.focus();
+                                    driverInput.click();
+                                    await delay(800); // Chờ 0.8s load như yêu cầu
+
+                                    driverInput.value = task.riderId;
+                                    driverInput.dispatchEvent(new Event('input', { bubbles: true }));
+                                    driverInput.dispatchEvent(new Event('change', { bubbles: true }));
+                                    await delay(800); // Chờ 0.8s load tên rider
+
+                                    const dropdownItems = Array.from(document.querySelectorAll('.el-select-dropdown__item'));
+                                    const matchItem = dropdownItems.find(item => {
+                                        const txt = (item.innerText || item.textContent || "").trim();
+                                        return txt.includes(task.riderId);
+                                    });
+
+                                    if (matchItem) {
+                                        matchItem.click();
+                                        log(`[Bắn Pick] Đã chọn tài xế: ${matchItem.innerText}`);
+                                        await delay(500);
+
+                                        const confirmBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
+                                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                            return txt.includes("confirm") || txt.includes("xác nhận");
+                                        });
+
+                                        if (confirmBtn) {
+                                            confirmBtn.click();
+                                            log(`[Bắn Pick] Đã Confirm gán thành công.`);
+                                            await delay(1500);
+
+                                            // Cập nhật trạng thái thành công lên GAS (xóa dòng khỏi A:E)
+                                            await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "success" });
+                                        } else {
+                                            throw new Error("Không tìm thấy nút Confirm trên popup");
+                                        }
+                                    } else {
+                                        log(`[Bắn Pick] Không tìm thấy mã Rider ${task.riderId} trên Shopee. Chuyển sang MAP...`);
+                                        const cancelBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
+                                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                            return txt.includes("cancel") || txt.includes("hủy");
+                                        });
+                                        if (cancelBtn) cancelBtn.click();
+                                        await delay(800);
+
+                                        await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "copy_to_map" });
+                                    }
+                                } else {
+                                    throw new Error("Không tìm thấy ô nhập Driver trên popup");
+                                }
+                            } else {
+                                throw new Error("Không hiển thị dialog gán tài xế");
+                            }
+                        } else {
+                            throw new Error("Không tìm thấy nút Assign");
+                        }
+                    } else {
+                        log(`[Bắn Pick] Không tìm thấy mã PUP ${task.pupId} trên trang web hiện tại. Chuyển sang MAP...`);
+                        await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "copy_to_map" });
+                    }
+                    return;
+                }
+
+                // Khi đã hoàn thành toàn bộ tác vụ (không còn mã nào ở A2:A nữa)
+                if (data.tasks.length === 0) {
+                    log("[Bắn Pick] Hoàn thành toàn bộ danh sách. Tiến hành bấm Search quét danh sách mới...");
+                    const searchBtn = Array.from(document.querySelectorAll('button')).find(btn => {
+                        const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                        return txt === "search" || txt === "tìm kiếm";
+                    });
+                    if (searchBtn) {
+                        searchBtn.click();
+                        await delay(1500);
+                    }
+                }
+
+            } catch (error) {
+                log(`[Bắn Pick] Lỗi: ${error.message}`);
+            } finally {
+                isProcessingAssignPick = false;
+                localStorage.removeItem('pending_assignPick');
+                releaseGlobalLock('assignPick');
+            }
+        }
+
+        // ==========================================
         // 6. GIÁM SÁT HỆ THỐNG & ĐIỀU PHỐI ĐA TAB
         // ==========================================
 
@@ -2054,6 +2272,12 @@
                 isProcessingHandover = false;
                 releaseGlobalLock('pickupTask');
                 lastHandoverStartTime = 0;
+            }
+            if (isProcessingAssignPick && lastAssignPickStartTime > 0 && (now - lastAssignPickStartTime) > STUCK_TIMEOUT) {
+                log("[Khôi phục] Phát hiện Bắn Pick bị treo quá 30 giây. Tự động giải phóng...");
+                isProcessingAssignPick = false;
+                releaseGlobalLock('assignPick');
+                lastAssignPickStartTime = 0;
             }
         }
 
@@ -2129,6 +2353,16 @@
                 return hasInput && hasButton;
             }
 
+            if (hash.includes('pickupOrder/createNew')) {
+                // Trang Bắn Pick: Cần có nút "Search" và bảng/dòng dữ liệu
+                const buttons = Array.from(document.querySelectorAll('button'));
+                const hasSearchBtn = buttons.some(btn => {
+                    const text = (btn.innerText || btn.textContent || '').trim().toLowerCase();
+                    return text.includes('search') || text.includes('tìm kiếm');
+                });
+                return hasSearchBtn;
+            }
+
             // Mặc định: Nếu không khớp bất kỳ hash của trang nghiệp vụ nào, coi như chưa load xong nội dung chính
             return false;
         }
@@ -2202,7 +2436,7 @@
                     // Nếu thời gian phát lệnh đóng cách đây chưa quá 8 giây (đủ để toàn bộ các tab trùng lặp đóng, tránh bị sót)
                     if (now - triggerTime < 8000) {
                         // Nếu tab đang bận xử lý task, hoãn lại cho tới khi hoàn thành
-                        const isBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover;
+                        const isBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover || isProcessingAssignPick;
                         if (isBusy) {
                             log(`[Hệ thống] Nhận lệnh làm mới tuần tự nhưng tab đang bận xử lý task. Hoãn việc đóng tab...`);
                             return;
@@ -2219,7 +2453,7 @@
         // Làm mới định kỳ từng tab độc lập bằng F5 khi rảnh rỗi để giải phóng bộ nhớ và làm mới session
         function checkPeriodicReload() {
             const now = Date.now();
-            const isIdle = !isPrintingNow && !isProcessingList && !isProcessingPrint && !isProcessingHandover;
+            const isIdle = !isPrintingNow && !isProcessingList && !isProcessingPrint && !isProcessingHandover && !isProcessingAssignPick;
             if (isIdle && (now - tabStartupTime) > PAGE_RELOAD_INTERVAL) {
                 log('[Tự động làm mới] Tab đã hoạt động liên tục 30 phút. Tiến hành F5 làm mới trang...');
                 window.location.reload();
@@ -2241,6 +2475,7 @@
             }
             pcPriority = localStorage.getItem("shopee_pc_priority") || GM_getValue("shopee_pc_priority", "1");
             isRunning = localStorage.getItem("auto_print_enabled") === "true";
+            isAssignPickEnabled = localStorage.getItem("assign_pick_enabled") === "true";
             updateUIState();
 
             const currentUrl = window.location.href;
@@ -2252,6 +2487,7 @@
                 isProcessingPrint = false;
                 isPrintingNow = false;
                 isProcessingHandover = false;
+                isProcessingAssignPick = false;
             }
 
             // Sequential Tab Open: kiểm tra mỗi cycle (~1.5s) xem tab mới mở đã load xong chưa
@@ -2295,6 +2531,14 @@
                 if (now - lastCpPollTime > 5000) {
                     lastCpPollTime = now;
                     startHandoverLoop();
+                }
+            }
+
+            if (hash.includes("pickupOrder/createNew")) {
+                // Tăng giãn cách gọi API lên 5 giây đối với luồng Bắn Pick
+                if (now - lastApPollTime > 5000) {
+                    lastApPollTime = now;
+                    processAssignPickPage();
                 }
             }
         }

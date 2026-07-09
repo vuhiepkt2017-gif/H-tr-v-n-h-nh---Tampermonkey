@@ -109,6 +109,7 @@ globalThis.GM_openInTab = (url, options) => {
                     generalPackTOList: localStorage.getItem("last_pulse_generalPackTOList") || "0",
                     startPackNoLabel: localStorage.getItem("last_pulse_startPackNoLabel") || "0",
                     pickupTask: localStorage.getItem("last_pulse_pickupTask") || "0",
+                    assignPick: localStorage.getItem("last_pulse_assignPick") || "0",
                 },
                 logs: localStorage.getItem("shopee_automation_logs") || ""
             };

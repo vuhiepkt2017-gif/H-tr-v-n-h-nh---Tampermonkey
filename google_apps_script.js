@@ -121,6 +121,15 @@ function doPostInternal(e) {
     if (action === "admin_chuyen_ho_tro") {
       return handleAdminChuyenHoTro(data);
     }
+    if (action === "get_assign_pick_state") {
+      return getAssignPickState();
+    }
+    if (action === "save_assign_pick_scraped") {
+      return saveAssignPickScrapedData(data.scraped);
+    }
+    if (action === "update_assign_pick_task") {
+      return updateAssignPickTask(data);
+    }
 
     var username = data.username || "";
     var email = data.email || "";
@@ -1081,4 +1090,133 @@ function parseDateDefensive(dateVal) {
   
   var d = new Date(str);
   return isNaN(d.getTime()) ? null : d;
+}
+
+// =====================================================================
+// TÍNH NĂNG 5: BẮN PICK (Assign Pick) - SHEET "Assign Pick"
+// =====================================================================
+
+function getOrCreateSheetAssignPick() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Assign Pick");
+  if (!sheet) {
+    sheet = ss.insertSheet("Assign Pick");
+    sheet.appendRow(["Pickup Point ID", "Shop/SP Names", "Shop/SP Address", "Mapped PUPG", "ID Rider"]);
+  }
+  return sheet;
+}
+
+function getAssignPickState() {
+  var sheet = getOrCreateSheetAssignPick();
+  var lastRow = sheet.getLastRow();
+  var pendingTasks = [];
+  var hasRiderValue = false;
+
+  if (lastRow >= 2) {
+    var values = sheet.getRange(2, 1, lastRow - 1, 5).getValues();
+    for (var i = 0; i < values.length; i++) {
+      var pupId = values[i][0].toString().trim();
+      var shopName = values[i][1].toString().trim();
+      var shopAddress = values[i][2].toString().trim();
+      var mappedPupg = values[i][3].toString().trim();
+      var riderId = values[i][4].toString().trim();
+
+      if (pupId) {
+        pendingTasks.push({
+          pupId: pupId,
+          shopName: shopName,
+          shopAddress: shopAddress,
+          mappedPupg: mappedPupg,
+          riderId: riderId
+        });
+        if (riderId !== "") {
+          hasRiderValue = true;
+        }
+      }
+    }
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({
+    status: "success",
+    tasks: pendingTasks,
+    hasRiderValue: hasRiderValue
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function saveAssignPickScrapedData(scrapedList) {
+  var sheet = getOrCreateSheetAssignPick();
+  
+  // Xóa sạch vùng dữ liệu A2:D cũ nếu có (giữ lại ID Rider cột E)
+  var lastRow = sheet.getLastRow();
+  if (lastRow >= 2) {
+    sheet.getRange(2, 1, lastRow - 1, 4).clearContent();
+  }
+
+  if (scrapedList && scrapedList.length > 0) {
+    var dataToRows = [];
+    for (var i = 0; i < scrapedList.length; i++) {
+      dataToRows.push([
+        scrapedList[i].pupId || "",
+        scrapedList[i].shopName || "",
+        scrapedList[i].shopAddress || "",
+        scrapedList[i].mappedPupg || ""
+      ]);
+    }
+    sheet.getRange(2, 1, scrapedList.length, 4).setValues(dataToRows);
+  }
+
+  SpreadsheetApp.flush();
+  return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function updateAssignPickTask(data) {
+  var sheet = getOrCreateSheetAssignPick();
+  var lastRow = sheet.getLastRow();
+  var pupIdClean = (data.pupId || "").toString().trim().toUpperCase();
+  var actionType = data.actionType; // "success" hoặc "copy_to_map"
+
+  if (lastRow >= 2 && pupIdClean !== "") {
+    var range = sheet.getRange(2, 1, lastRow - 1, 5);
+    var values = range.getValues();
+    var foundIndex = -1;
+
+    for (var i = 0; i < values.length; i++) {
+      if (values[i][0].toString().trim().toUpperCase() === pupIdClean) {
+        foundIndex = i;
+        break;
+      }
+    }
+
+    if (foundIndex !== -1) {
+      var rowNum = foundIndex + 2;
+      
+      // Nếu copy sang vùng MAP (cột I đến L)
+      if (actionType === "copy_to_map") {
+        // Tìm dòng cuối cùng của vùng dữ liệu cột I
+        var lastRowI = 1;
+        var colIVals = sheet.getRange(1, 9, sheet.getMaxRows(), 1).getValues();
+        for (var k = colIVals.length - 1; k >= 0; k--) {
+          if (colIVals[k][0].toString().trim() !== "") {
+            lastRowI = k + 1;
+            break;
+          }
+        }
+        var nextRowI = lastRowI + 1;
+        var rowData = values[foundIndex]; // [pupId, shopName, shopAddress, mappedPupg, riderId]
+        
+        sheet.getRange(nextRowI, 9, 1, 4).setValues([[
+          rowData[0],
+          rowData[1],
+          rowData[2],
+          rowData[3]
+        ]]);
+      }
+
+      // Xóa dòng đã thực hiện khỏi vùng A:E
+      sheet.deleteRow(rowNum);
+    }
+  }
+
+  SpreadsheetApp.flush();
+  return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON);
 }
