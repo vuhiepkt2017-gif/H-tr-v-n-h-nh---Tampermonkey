@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.4
+// @version      7.5
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -203,7 +203,7 @@
         // Đảm bảo tại một thời điểm chỉ có DUY NHẤT một tab thực hiện nhiệm vụ, tránh chạy chồng lấn các sheet khác nhau.
         function isHigherPriorityTaskPending(myType) {
             const now = Date.now();
-            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask'];
+            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask', 'assignPick'];
             const myIndex = priorities.indexOf(myType);
             if (myIndex === -1) return false;
             
@@ -230,7 +230,7 @@
                 return false;
             }
 
-            // KIỂM TRA ĐỘ ƯU TIÊN (Priority Lock Policy): In Bill > In TO > Chuyển Pick
+            // KIỂM TRA ĐỘ ƯU TIÊN (Priority Lock Policy): In Bill > In TO > Chuyển Pick > Bắn Pick
             if (isHigherPriorityTaskPending(tabType)) {
                 return false; // Nhường khóa cho tab có độ ưu tiên cao hơn đang hoạt động và có task
             }
@@ -241,7 +241,7 @@
             const currentLockType = localStorage.getItem(typeKey);
             const lockTime = parseInt(localStorage.getItem(timeKey) || "0");
             
-            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask'];
+            const priorities = ['awbPrint', 'startPackNoLabel', 'pickupTask', 'assignPick'];
             const myIndex = priorities.indexOf(tabType);
             const holderIndex = currentLockType ? priorities.indexOf(currentLockType) : 99;
 
@@ -583,6 +583,9 @@
             // Thu thập danh sách tab cần mở
             const tabsToOpen = [];
             for (const type of RELOAD_ORDER) {
+                if (type === 'assignPick' && !isAssignPickEnabled) {
+                    continue; // Skip if disabled
+                }
                 if (trigger === 'manual') {
                     // Khi người dùng bấm thủ công: xóa pulse cũ và mở TẤT CẢ các tab
                     localStorage.setItem('last_pulse_' + type, '0');
@@ -745,6 +748,9 @@
             let frozenTabType = "";
 
             for (const [type, cfg] of Object.entries(TABS_CONFIG)) {
+                if (type === 'assignPick' && !isAssignPickEnabled) {
+                    continue; // Skip if disabled
+                }
                 const lastPulse = parseInt(localStorage.getItem('last_pulse_' + type) || '0');
                 const registeredInstanceId = localStorage.getItem("tab_instance_id_" + type);
                 
@@ -2118,11 +2124,14 @@
                     let colIndices = { pupId: -1, shopName: -1, shopAddress: -1, mappedPupg: -1 };
                     headers.forEach((th, idx) => {
                         const txt = (th.innerText || th.textContent || "").trim().toLowerCase();
-                        if (txt.includes("pickup point id")) colIndices.pupId = idx;
-                        else if (txt.includes("shop/sp names")) colIndices.shopName = idx;
-                        else if (txt.includes("shop/sp address")) colIndices.shopAddress = idx;
-                        else if (txt.includes("mapped pupg")) colIndices.mappedPupg = idx;
+                        const cleanTxt = txt.replace(/\s+/g, '');
+                        if (cleanTxt.includes("pickuppointid")) colIndices.pupId = idx;
+                        else if (cleanTxt.includes("shop/spnames") || cleanTxt.includes("shop/spname")) colIndices.shopName = idx;
+                        else if (cleanTxt.includes("shop/spaddress")) colIndices.shopAddress = idx;
+                        else if (cleanTxt.includes("mappedpupg")) colIndices.mappedPupg = idx;
                     });
+
+                    log(`[Bắn Pick] Kết quả phân tích cột: Pickup Point ID=${colIndices.pupId}, Shop Name=${colIndices.shopName}, Shop Address=${colIndices.shopAddress}, Mapped PUPG=${colIndices.mappedPupg}`);
 
                     if (colIndices.pupId === -1) {
                         log("[Bắn Pick] Cảnh báo: Không tìm thấy cột Pickup Point ID trên trang web.");
@@ -2518,6 +2527,9 @@
             isRunning = localStorage.getItem("auto_print_enabled") === "true";
             isAssignPickEnabled = localStorage.getItem("assign_pick_enabled") === "true";
             updateUIState();
+            if (typeof updateAssignPickBtnUI === 'function') {
+                updateAssignPickBtnUI();
+            }
 
             const currentUrl = window.location.href;
             const hash = window.location.hash || "";
