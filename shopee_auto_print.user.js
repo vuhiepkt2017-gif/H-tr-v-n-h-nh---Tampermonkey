@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.1
+// @version      8.2
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2097,7 +2097,13 @@
             const hash = window.location.hash || "";
             if (!hash.includes('pickupOrder/createNew')) return;
 
-            if (!isPageContentFullyLoaded()) {
+            // Kiểm tra nút Tìm kiếm (Search) trực tiếp để đảm bảo trang đã load xong nội dung
+            const buttons = Array.from(document.querySelectorAll('button'));
+            const hasSearchBtn = buttons.some(btn => {
+                const text = (btn.innerText || btn.textContent || '').trim().toLowerCase();
+                return text.includes('search') || text.includes('tìm kiếm');
+            });
+            if (!hasSearchBtn) {
                 return;
             }
 
@@ -2456,13 +2462,8 @@
             }
 
             if (hash.includes('pickupOrder/createNew')) {
-                // Trang Bắn Pick: Cần có nút "Search" và bảng/dòng dữ liệu
-                const buttons = Array.from(document.querySelectorAll('button'));
-                const hasSearchBtn = buttons.some(btn => {
-                    const text = (btn.innerText || btn.textContent || '').trim().toLowerCase();
-                    return text.includes('search') || text.includes('tìm kiếm');
-                });
-                return hasSearchBtn;
+                // Không kiểm tra lúc load lại tab để tránh lag/treo, trả về true luôn
+                return true;
             }
 
             // Mặc định: Nếu không khớp bất kỳ hash của trang nghiệp vụ nào, coi như chưa load xong nội dung chính
