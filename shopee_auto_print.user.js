@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.8
+// @version      7.9
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2207,17 +2207,25 @@
 
                         if (assignBtn) {
                             assignBtn.click();
-                            await delay(1200); // Đợi popup hiện lên
                             
-                            const dialog = document.querySelector('.el-dialog') || document.querySelector('.el-overlay') || document.querySelector('[role="dialog"]');
+                            // Đợi dynamic cho dialog xuất hiện (tối đa 5 giây)
+                            let dialog = null;
+                            for (let attempts = 0; attempts < 10; attempts++) {
+                                dialog = document.querySelector('.el-dialog') || document.querySelector('.el-overlay') || document.querySelector('[role="dialog"]');
+                                if (dialog) break;
+                                await delay(500);
+                            }
+
                             if (dialog) {
                                 const dialogInputs = Array.from(dialog.querySelectorAll('input'));
                                 const selects = Array.from(dialog.querySelectorAll('.el-select'));
                                 let driverInput = null;
+                                let selectWrapper = null;
                                 
                                 // Ưu tiên chọn input của el-select thứ hai (cột Driver)
                                 if (selects.length >= 2) {
                                     driverInput = selects[1].querySelector('input');
+                                    selectWrapper = selects[1].querySelector('.el-select__wrapper') || selects[1].querySelector('.el-input__wrapper') || selects[1].querySelector('.el-input__inner') || selects[1];
                                 }
                                 
                                 // Fallback 1: Tìm input có placeholder Driver/tài xế
@@ -2236,6 +2244,12 @@
                                 }
 
                                 if (driverInput) {
+                                    // Click vào wrapper của Select trước để mở dropdown (giải quyết lỗi chữ mờ "Please Select")
+                                    if (selectWrapper) {
+                                        selectWrapper.click();
+                                        await delay(400);
+                                    }
+                                    
                                     driverInput.focus();
                                     driverInput.click();
                                     await delay(800); // Chờ 0.8s load như yêu cầu
