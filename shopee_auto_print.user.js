@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      7.7
+// @version      7.8
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -2211,7 +2211,30 @@
                             
                             const dialog = document.querySelector('.el-dialog') || document.querySelector('.el-overlay') || document.querySelector('[role="dialog"]');
                             if (dialog) {
-                                const driverInput = dialog.querySelector('input[placeholder*="Driver"]') || dialog.querySelector('input[placeholder*="tài xế"]') || dialog.querySelector('.el-select__input') || dialog.querySelector('input');
+                                const dialogInputs = Array.from(dialog.querySelectorAll('input'));
+                                const selects = Array.from(dialog.querySelectorAll('.el-select'));
+                                let driverInput = null;
+                                
+                                // Ưu tiên chọn input của el-select thứ hai (cột Driver)
+                                if (selects.length >= 2) {
+                                    driverInput = selects[1].querySelector('input');
+                                }
+                                
+                                // Fallback 1: Tìm input có placeholder Driver/tài xế
+                                if (!driverInput) {
+                                    driverInput = dialog.querySelector('input[placeholder*="Driver"]') || dialog.querySelector('input[placeholder*="tài xế"]');
+                                }
+                                
+                                // Fallback 2: chọn input thứ hai trong dialog
+                                if (!driverInput && dialogInputs.length >= 2) {
+                                    driverInput = dialogInputs[1];
+                                }
+                                
+                                // Ultimate fallback: input đầu tiên
+                                if (!driverInput) {
+                                    driverInput = dialog.querySelector('input');
+                                }
+
                                 if (driverInput) {
                                     driverInput.focus();
                                     driverInput.click();
