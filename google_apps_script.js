@@ -696,7 +696,7 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesHTAll = rangeHTAll.getValues();
       for (var i = 0; i < valuesHTAll.length; i++) {
         var status = valuesHTAll[i][4].toString().trim().toLowerCase();
-        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen" || status.includes("chuyển")) {
+        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen") {
           var timestamp = valuesHTAll[i][1];
           var parsedTime = parseDateDefensive(timestamp);
           if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
@@ -712,7 +712,7 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesCPAll = rangeCPAll.getValues();
       for (var i = 0; i < valuesCPAll.length; i++) {
         var status = valuesCPAll[i][4].toString().trim().toLowerCase();
-        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen" || status.includes("chuyển")) {
+        if (status === "đang chuyển" || status === "dang chuyển" || status === "dang chuyen") {
           var timestamp = valuesCPAll[i][1];
           var parsedTime = parseDateDefensive(timestamp);
           if (parsedTime && (now.getTime() - parsedTime.getTime()) > 180000) {
@@ -731,14 +731,15 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesHTAll = rangeHTAll.getValues();
       for (var i = 0; i < valuesHTAll.length; i++) {
         var status = valuesHTAll[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
-        if (status === "chờ chuyển") {
+        var pupCodeVal = valuesHTAll[i][0].toString().trim();
+        if (pupCodeVal !== "" && status === "chờ chuyển") {
           var rowNum = i + 2;
           sheetHT.getRange(rowNum, 5).setValue("Đang chuyển"); // Cột E: Đặt trạng thái trung gian
           sheetHT.getRange(rowNum, 6).setValue(pcName); // Cột F: Máy
           SpreadsheetApp.flush();
           return ContentService.createTextOutput(JSON.stringify({
             status: "success",
-            pupCode: valuesHTAll[i][0].toString().trim(), // Cột A: Mã PUP
+            pupCode: pupCodeVal, // Cột A: Mã PUP
             recipientDriver: valuesHTAll[i][3].toString().trim(), // Cột D: Tên Rider nhận (chứa mã số)
             timestamp: valuesHTAll[i][1], // Cột B: Thời gian chuyển
             sourceSheet: "Hỗ Trợ"
@@ -753,14 +754,15 @@ function getPendingChuyenPick(pcName, priority) {
       var valuesCPAll = rangeCPAll.getValues();
       for (var i = 0; i < valuesCPAll.length; i++) {
         var status = valuesCPAll[i][4].toString().trim().toLowerCase(); // Cột E: Trạng thái
-        if (status === "chờ chuyển" || status === "") {
+        var pupCodeVal = valuesCPAll[i][0].toString().trim();
+        if (pupCodeVal !== "" && (status === "chờ chuyển" || status === "")) {
           var rowNum = i + 2;
           sheetCP.getRange(rowNum, 5).setValue("Đang chuyển"); // Cột E: Đặt trạng thái trung gian
           sheetCP.getRange(rowNum, 6).setValue(pcName); // Cột F: Thiết bị PC
           SpreadsheetApp.flush();
           return ContentService.createTextOutput(JSON.stringify({
             status: "success",
-            pupCode: valuesCPAll[i][0].toString().trim(),
+            pupCode: pupCodeVal,
             recipientDriver: valuesCPAll[i][3].toString().trim(),
             timestamp: valuesCPAll[i][1],
             sourceSheet: "Chuyển Pick"
@@ -1191,30 +1193,43 @@ function updateAssignPickTask(data) {
     if (foundIndex !== -1) {
       var rowNum = foundIndex + 2;
       
-      // Nếu copy sang vùng MAP (cột I đến L)
       if (actionType === "copy_to_map") {
-        // Tìm dòng cuối cùng của vùng dữ liệu cột I
         var lastRowI = 1;
         var colIVals = sheet.getRange(1, 9, sheet.getMaxRows(), 1).getValues();
+        var exists = false;
         for (var k = colIVals.length - 1; k >= 0; k--) {
-          if (colIVals[k][0].toString().trim() !== "") {
-            lastRowI = k + 1;
-            break;
+          var val = colIVals[k][0].toString().trim();
+          if (val !== "") {
+            if (lastRowI === 1) lastRowI = k + 1;
+            if (val.toUpperCase() === pupIdClean) {
+              exists = true;
+              break;
+            }
           }
         }
-        var nextRowI = lastRowI + 1;
-        var rowData = values[foundIndex]; // [pupId, shopName, shopAddress, mappedPupg, riderId]
         
-        sheet.getRange(nextRowI, 9, 1, 4).setValues([[
-          rowData[0],
-          rowData[1],
-          rowData[2],
-          rowData[3]
-        ]]);
+        if (!exists) {
+          var nextRowI = lastRowI + 1;
+          var rowData = values[foundIndex]; 
+          sheet.getRange(nextRowI, 9, 1, 5).setValues([[
+            rowData[0],
+            rowData[1],
+            rowData[2],
+            rowData[3],
+            rowData[4]
+          ]]);
+        }
+        
+        // Cố tình xóa luôn row bên Assign Pick để không bị treo vòng lặp, 
+        // hoặc xóa dòng chữ tùy ý. Ở đây ta xóa luôn dồn lên giống success.
+        try {
+          sheet.getRange(rowNum, 1, 1, 5).deleteCells(SpreadsheetApp.Dimension.ROWS);
+        } catch(e) {}
+      } else if (actionType === "success") {
+        try {
+          sheet.getRange(rowNum, 1, 1, 5).deleteCells(SpreadsheetApp.Dimension.ROWS);
+        } catch(e) {}
       }
-
-      // Xóa dòng đã thực hiện khỏi vùng A:E
-      sheet.deleteRow(rowNum);
     }
   }
 

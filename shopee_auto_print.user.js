@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hỗ trợ VTDStadio
 // @namespace    http://VTDStadio.net/
-// @version      8.6
+// @version      10.12
 // @description  Hỗ Trợ Công Việc
 // @author       VTDStadio
 // @match        https://spx.shopee.vn/*
@@ -708,6 +708,9 @@
             const phase = localStorage.getItem('seq_open_phase');
             if (phase !== 'opening') return;
 
+            // Ép buộc chuyển tiêu điểm Chrome về tab này để tránh bị trình duyệt đóng băng (throttle) JS khi chạy nền
+            window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST" }, "*");
+
             const tabStart = parseInt(localStorage.getItem('seq_open_tab_start') || '0');
             const now = Date.now();
 
@@ -717,19 +720,19 @@
                 const loadDoneTime = localStorage.getItem(loadDoneTimeKey);
                 
                 if (!loadDoneTime) {
-                    // Lần đầu tiên phát hiện load xong, ghi nhận mốc thời gian và chờ thêm 300ms
+                    // Lần đầu tiên phát hiện load xong, ghi nhận mốc thời gian và chờ thêm 600ms
                     localStorage.setItem(loadDoneTimeKey, now.toString());
-                    log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã phát hiện nút/ô nhập liệu. Chờ thêm 0.3s để trang ổn định...`);
+                    log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã phát hiện nút/ô nhập liệu. Chờ thêm 0.6s để trang ổn định...`);
                     return;
                 }
                 
                 const timePassed = now - parseInt(loadDoneTime);
-                if (timePassed < 300) {
-                    // Chưa đủ 300ms, tiếp tục chờ
+                if (timePassed < 600) {
+                    // Chưa đủ 600ms, tiếp tục chờ
                     return;
                 }
                 
-                // Đã đủ 300ms, dọn dẹp trạng thái và mở tab tiếp theo
+                // Đã đủ 600ms, dọn dẹp trạng thái và mở tab tiếp theo
                 localStorage.removeItem(loadDoneTimeKey);
                 log(`[Mở Tab] ✓ Tab ${TABS_CONFIG[myTabType]?.name || myTabType} đã ổn định. Tiến hành mở tab kế tiếp!`);
                 lastSuccessfulAction = Date.now();
@@ -2115,8 +2118,45 @@
         async function processAssignPickPage() {
             if (!isRunning || !isAssignPickEnabled || isProcessingAssignPick) return;
 
+            const myTabType = getCurrentTabType();
+            if (myTabType !== 'assignPick') return; // Chỉ chạy trên tab Bắn Pick
+
+            // Kiểm tra xem các tab chính có đang bận xử lý task hay không
+            const isMainTabsBusy = localStorage.getItem('tab_busy_awbPrint') === 'true' || 
+                                   localStorage.getItem('tab_busy_pickupTask') === 'true' || 
+                                   localStorage.getItem('tab_busy_startPackNoLabel') === 'true';
+
             const hash = window.location.hash || "";
-            if (!hash.includes('pickupOrder/createNew')) return;
+            const isCurrentlyOnBắnPickPage = hash.includes('pickupOrder/createNew');
+
+            // Nếu đang ở trang khác nhưng các tab chính không bận: ta vẫn gọi GAS kiểm tra xem có task Bắn Pick không để tự nhảy về
+            if (!isCurrentlyOnBắnPickPage) {
+                if (isMainTabsBusy) return; // Nếu tab chính đang bận thì không nhảy tab Bắn Pick
+                
+                try {
+                    isProcessingAssignPick = true;
+                    const data = await callGASPromise("POST", "get_assign_pick_state");
+                    if (data.status === "success" && data.tasks && data.tasks.length > 0) {
+                        const hasValidTask = data.tasks.some(t => {
+                            if (!t.riderId) return false;
+                            const rId = t.riderId.trim();
+                            const rIdUpper = rId.toUpperCase();
+                            return rId !== "" && rIdUpper !== "#N/A" && rIdUpper !== "N/A";
+                        });
+                        if (hasValidTask) {
+                            log(`[Bắn Pick] Phát hiện có nhiệm vụ gán tài xế. Tự động chuyển về trang Bắn Pick...`);
+                            // Kích hoạt tab và chuyển hướng hash
+                            window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST" }, "*");
+                            window.location.hash = "#/pickupOrder/createNew";
+                        }
+                    }
+                } catch (e) {
+                    console.error(e);
+                } finally {
+                    isProcessingAssignPick = false;
+                }
+                return;
+            }
 
             // Kiểm tra nút Tìm kiếm (Search) trực tiếp để đảm bảo trang đã load xong nội dung
             const buttons = Array.from(document.querySelectorAll('button'));
@@ -2191,13 +2231,11 @@
                 }
 
                 // CASE 2: Có danh sách PUP trên trang tính
-                // Kiểm tra điều kiện E2:E có rỗng hết không
                 if (!data.hasRiderValue) {
                     log("[Bắn Pick] Cột ID Rider trống hoàn toàn. Tạm dừng để chờ nhập Rider ID.");
                     return;
                 }
 
-                // 2.1 Tìm tác vụ đầu tiên không có Rider ID trong vùng E2:E để chuyển sang I2:L (vùng MAP lỗi) và xóa
                 const emptyRiderTask = data.tasks.find(t => !t.riderId || t.riderId.trim() === "");
                 if (emptyRiderTask) {
                     log(`[Bắn Pick] Phát hiện mã PUP ${emptyRiderTask.pupId} không có Rider ID. Tiến hành chuyển sang vùng MAP lỗi...`);
@@ -2205,7 +2243,6 @@
                     return;
                 }
 
-                // 2.2 Lấy tác vụ đầu tiên hợp lệ để thực hiện gán
                 const task = data.tasks.find(t => {
                     if (!t.riderId) return false;
                     const rId = t.riderId.trim();
@@ -2213,13 +2250,15 @@
                     return rId !== "" && rIdUpper !== "#N/A" && rIdUpper !== "N/A";
                 });
                 if (task) {
+                    window.postMessage({ type: "SHOPEE_ACTIVATE_TAB_REQUEST" }, "*");
+                    await delay(600);
+
                     log(`[Bắn Pick] Đang thực hiện gán tài xế cho mã PUP: ${task.pupId} -> Rider ID: ${task.riderId}`);
                     
-                    const rows = Array.from(document.querySelectorAll('tr'));
-                    const matchRow = rows.find(row => (row.innerText || row.textContent || "").includes(task.pupId));
-                    
+                    const rows2 = Array.from(document.querySelectorAll('tr'));
+                    const matchRow = rows2.find(row => (row.innerText || row.textContent || "").includes(task.pupId));
+
                     if (matchRow) {
-                        // Tích chọn ô vuông tương ứng với PUP
                         const checkbox = matchRow.querySelector('.el-checkbox') || matchRow.querySelector('.el-checkbox__inner') || matchRow.querySelector('.el-checkbox__input') || matchRow.querySelector('input[type="checkbox"]');
                         if (checkbox) {
                             const isChecked = checkbox.classList.contains('is-checked') || 
@@ -2231,7 +2270,6 @@
                             }
                         }
 
-                        // Bấm vào nút Assign màu cam
                         const assignBtn = Array.from(document.querySelectorAll('button')).find(btn => {
                             const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
                             return txt === "assign" || txt.includes("phân bổ");
@@ -2240,64 +2278,156 @@
                         if (assignBtn) {
                             assignBtn.click();
                             
-                            // Đợi dynamic cho dialog xuất hiện (tối đa 5 giây)
+                            // === v10.10: Bulletproof Dialog Finder ===
                             let dialog = null;
                             for (let attempts = 0; attempts < 10; attempts++) {
-                                const candidates = Array.from(document.querySelectorAll('.el-dialog, .modal-content, .el-overlay, [class*="dialog"], [class*="modal"], [role="dialog"]'));
-                                dialog = candidates.find(d => d.offsetWidth > 0 || d.offsetHeight > 0);
-                                if (dialog) break;
-                                await delay(500);
+                                await delay(500); // Đợi popup render
+                                const candidates = Array.from(document.querySelectorAll('.ssc-dialog, .el-dialog, .modal-content, [role="dialog"], [class*="dialog"]'));
+                                const visibleCandidates = candidates.filter(d => {
+                                    const r = d.getBoundingClientRect();
+                                    const isVis = (r.width > 0 && r.height > 0) || d.offsetWidth > 0 || d.offsetHeight > 0;
+                                    if (!isVis) return false;
+                                    // Bắt buộc popup này phải chứa chữ Driver hoặc Vehicle
+                                    const txt = (d.innerText || d.textContent || "").toLowerCase();
+                                    return txt.includes('driver') || txt.includes('tài xế') || txt.includes('vehicle');
+                                });
+                                // Lấy popup xuất hiện sau cùng trong DOM (thường là popup mới mở đè lên trên)
+                                if (visibleCandidates.length > 0) {
+                                    dialog = visibleCandidates[visibleCandidates.length - 1];
+                                    break;
+                                }
                             }
 
                             if (dialog) {
-                                const dialogInputs = Array.from(dialog.querySelectorAll('input'));
-                                const selects = Array.from(dialog.querySelectorAll('.el-select'));
+                                await delay(1000);
+
+                                let clickTarget = null;
                                 let driverInput = null;
-                                let selectWrapper = null;
-                                
-                                // Ưu tiên chọn input của el-select thứ hai (cột Driver)
+
+                                // Nếu dialog là wrapper, tìm nội dung thực sự bên trong
+                                let dialogContent = dialog;
+
+                                // Cách 1: Tìm qua Native Select
+                                const selects = Array.from(dialogContent.querySelectorAll('select'));
                                 if (selects.length >= 2) {
-                                    driverInput = selects[1].querySelector('input');
-                                    selectWrapper = selects[1].querySelector('.el-select__wrapper') || selects[1].querySelector('.el-input__wrapper') || selects[1].querySelector('.el-input__inner') || selects[1];
-                                }
-                                
-                                // Fallback 1: Tìm input có placeholder Driver/tài xế
-                                if (!driverInput) {
-                                    driverInput = dialog.querySelector('input[placeholder*="Driver"]') || dialog.querySelector('input[placeholder*="tài xế"]');
-                                }
-                                
-                                // Fallback 2: chọn input thứ hai trong dialog
-                                if (!driverInput && dialogInputs.length >= 2) {
-                                    driverInput = dialogInputs[1];
-                                }
-                                
-                                // Ultimate fallback: input đầu tiên
-                                if (!driverInput) {
-                                    driverInput = dialog.querySelector('input');
+                                    selects.sort((a,b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+                                    clickTarget = selects[selects.length - 1]; // Select bên phải
+                                } else if (selects.length === 1) {
+                                    clickTarget = selects[0];
                                 }
 
-                                if (driverInput) {
-                                    // Click vào wrapper của Select trước để mở dropdown (giải quyết lỗi chữ mờ "Please Select")
-                                    const clickTarget = selectWrapper || 
-                                                        driverInput.closest('.el-select') || 
-                                                        driverInput.closest('.el-select__wrapper') || 
-                                                        driverInput.closest('.el-input') || 
-                                                        driverInput.closest('.el-input__wrapper') || 
-                                                        driverInput.parentElement;
+                                // Cách 2: Tìm thẻ chứa text/placeholder
+                                if (!clickTarget) {
+                                    let selectCandidates = Array.from(dialogContent.querySelectorAll('*')).filter(el => {
+                                        if (['SCRIPT','STYLE','SVG','PATH','TABLE','TBODY','TR','THEAD'].includes(el.tagName)) return false;
+                                        const rect = el.getBoundingClientRect();
+                                        if (rect.width === 0 || rect.height === 0) return false;
+                                        const txt = (el.innerText || el.textContent || "").toLowerCase().trim();
+                                        const plc = (el.placeholder || "").toLowerCase().trim();
+                                        return txt.includes("please select") || txt.includes("vui lòng chọn") || plc.includes("please select") || plc.includes("vui lòng chọn");
+                                    });
+                                    selectCandidates = selectCandidates.filter(el => !Array.from(el.querySelectorAll('*')).some(child => selectCandidates.includes(child)));
+                                    if (selectCandidates.length >= 2) {
+                                        selectCandidates.sort((a,b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+                                        clickTarget = selectCandidates[selectCandidates.length - 1];
+                                    } else if (selectCandidates.length === 1) {
+                                        clickTarget = selectCandidates[0];
+                                    }
+                                }
+
+                                // Cách 3: Lọc tất cả thẻ input hiển thị trên popup
+                                if (!clickTarget) {
+                                    const inputs = Array.from(dialogContent.querySelectorAll('input')).filter(el => {
+                                        const r = el.getBoundingClientRect();
+                                        return r.width > 0 && r.height > 0 && el.type !== 'hidden';
+                                    });
+
+                                    let dropdownInputs = inputs.filter(el => {
+                                        return el.value === '' || el.readOnly || el.getAttribute('readonly') !== null || el.className.includes('select');
+                                    });
+
+                                    if (dropdownInputs.length === 0 && inputs.length > 0) {
+                                        dropdownInputs = inputs; 
+                                    }
+
+                                    if (dropdownInputs.length >= 2) {
+                                        dropdownInputs.sort((a,b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+                                        clickTarget = dropdownInputs[dropdownInputs.length - 1];
+                                    } else if (dropdownInputs.length === 1) {
+                                        clickTarget = dropdownInputs[0];
+                                    }
+                                }
+
+                                // Bước Click chính xác tọa độ
+                                if (clickTarget) {
+                                    driverInput = (clickTarget.tagName === 'INPUT') ? clickTarget : clickTarget.querySelector('input');
+                                    if (!driverInput) driverInput = clickTarget; // fallback
                                     
-                                    if (clickTarget) {
-                                        clickTarget.click();
-                                        await delay(400);
+                                    const rect = clickTarget.getBoundingClientRect();
+                                    const x = rect.left + rect.width / 2;
+                                    const y = rect.top + rect.height / 2;
+                                    
+                                    log(`[Bắn Pick] Tìm thấy mục tiêu tại (${x.toFixed(0)}, ${y.toFixed(0)}), Class: ${clickTarget.className}`);
+
+                                    const topEl = document.elementFromPoint(x, y);
+                                    
+                                    const dispatchClick = (el) => {
+                                        if (!el) return;
+                                        try {
+                                            el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, clientX: x, clientY: y, view: window }));
+                                            el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, clientX: x, clientY: y, view: window }));
+                                            el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, clientX: x, clientY: y, view: window }));
+                                            el.click();
+                                        } catch(e) {}
+                                    };
+
+                                    if (topEl && topEl !== clickTarget) {
+                                        dispatchClick(topEl);
+                                        await delay(100);
                                     }
                                     
-                                    driverInput.focus();
-                                    driverInput.click();
-                                    await delay(500);
+                                    dispatchClick(clickTarget);
+                                    await delay(100);
+                                    
+                                    let p = clickTarget;
+                                    for(let i=0; i<3 && p && p !== dialog; i++){
+                                        dispatchClick(p);
+                                        p = p.parentElement;
+                                        await delay(100);
+                                    }
+                                } else {
+                                    log(`[Bắn Pick] LỖI NGHIÊM TRỌNG: KHÔNG TÌM THẤY BẤT KỲ VÙNG NÀO ĐỂ CLICK TRONG DIALOG!`);
+                                }
+                                
+                                await delay(800); 
 
-                                    // Giả lập gõ từng ký tự của ID Rider để kích hoạt reactivity của Vue
-                                    driverInput.value = "";
+                                if (driverInput) {
+                                    try { driverInput.focus(); } catch(e) {}
+                                    await delay(200);
+                                    driverInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', code: 'ArrowDown', keyCode: 40, which: 40, bubbles: true }));
+                                    await delay(600);
+                                }
+
+                                const setNativeValue = (el, val) => {
+                                    const valueSetter = Object.getOwnPropertyDescriptor(el, 'value')?.set;
+                                    const prototype = Object.getPrototypeOf(el);
+                                    const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value')?.set;
+                                    if (prototypeValueSetter && valueSetter !== prototypeValueSetter) {
+                                        prototypeValueSetter.call(el, val);
+                                    } else if (valueSetter) {
+                                        valueSetter.call(el, val);
+                                    } else {
+                                        el.value = val;
+                                    }
+                                };
+
+                                if (driverInput) {
+                                    setNativeValue(driverInput, "");
+                                    driverInput.dispatchEvent(new Event('input', { bubbles: true }));
+
                                     for (let char of task.riderId) {
-                                        driverInput.value += char;
+                                        let currentVal = driverInput.value + char;
+                                        setNativeValue(driverInput, currentVal);
                                         driverInput.dispatchEvent(new Event('input', { bubbles: true }));
                                         driverInput.dispatchEvent(new KeyboardEvent('keydown', { key: char, bubbles: true }));
                                         driverInput.dispatchEvent(new KeyboardEvent('keypress', { key: char, bubbles: true }));
@@ -2305,51 +2435,77 @@
                                         await delay(80);
                                     }
                                     driverInput.dispatchEvent(new Event('change', { bubbles: true }));
-                                    await delay(1200); // Chờ 1.2s để Shopee lọc và hiển thị danh sách
+                                    await delay(1200); 
+                                }
 
-                                    const allElements = Array.from(document.querySelectorAll('li, span, div, p, option, .el-select-dropdown__item'));
-                                    const matchItem = allElements.find(item => {
-                                        const txt = (item.innerText || item.textContent || "").trim();
-                                        const className = (item.getAttribute && item.getAttribute('class')) || "";
-                                        const isDropdownItem = className.includes("select-dropdown__item") || 
-                                                               className.includes("select-item") || 
-                                                               className.includes("el-select-dropdown__item");
-                                        return isDropdownItem && txt.includes(task.riderId) && (item.offsetWidth > 0 || item.offsetHeight > 0);
+                                const allElements = Array.from(document.querySelectorAll('li, span, div, p, option, .ssc-select-option, .el-select-dropdown__item'));
+                                const matchingItems = allElements.filter(item => {
+                                    const txt = (item.innerText || item.textContent || "").trim();
+                                    const isMatch = txt.includes("[" + task.riderId + "]") || 
+                                                    (txt.includes(task.riderId) && !txt.includes("25HYN"));
+                                    const isInput = item.tagName.toLowerCase() === 'input';
+                                    const isCustomUI = item.closest('#shopee-auto-print-panel') || item.closest('#ap-panel') || item.closest('#ap-log-box') || item.closest('[id^="ap-"]');
+                                    return isMatch && !isInput && !isCustomUI && (item.offsetWidth > 0 || item.offsetHeight > 0);
+                                });
+
+                                let matchItem = null;
+                                if (matchingItems.length > 0) {
+                                    matchingItems.sort((a, b) => {
+                                        const textA = (a.innerText || a.textContent || "").trim();
+                                        const textB = (b.innerText || b.textContent || "").trim();
+                                        return textA.length - textB.length;
                                     });
+                                    matchItem = matchingItems[0];
+                                }
 
-                                    if (matchItem) {
+                                if (matchItem) {
+                                    const rect = matchItem.getBoundingClientRect();
+                                    const cx = rect.left + rect.width / 2;
+                                    const cy = rect.top + rect.height / 2;
+                                    try {
+                                        const topEl = document.elementFromPoint(cx, cy) || matchItem;
+                                        topEl.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: window }));
+                                        topEl.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: window }));
+                                        topEl.click();
+                                        matchItem.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: window }));
+                                        matchItem.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: window }));
                                         matchItem.click();
-                                        log(`[Bắn Pick] Đã chọn tài xế: ${matchItem.innerText}`);
-                                        await delay(500);
+                                    } catch(e) {}
+                                    log(`[Bắn Pick] Đã chọn tài xế: ${matchItem.innerText}`);
+                                    await delay(500);
 
-                                        const confirmBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
-                                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
-                                            return txt.includes("confirm") || txt.includes("xác nhận");
-                                        });
+                                    const confirmCandidates = Array.from(document.querySelectorAll('*')).filter(btn => {
+                                        if (['SCRIPT','STYLE','SVG','PATH','TABLE','TBODY','TR','THEAD'].includes(btn.tagName)) return false;
+                                        const r = btn.getBoundingClientRect();
+                                        if (r.width === 0 || r.height === 0) return false;
+                                        const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                        if (txt.length > 20) return false;
+                                        return txt === "confirm" || txt === "xác nhận";
+                                    });
+                                    const confirmBtn = confirmCandidates[confirmCandidates.length - 1];
 
-                                        if (confirmBtn) {
-                                            confirmBtn.click();
-                                            log(`[Bắn Pick] Đã Confirm gán thành công.`);
-                                            await delay(1500);
-
-                                            // Cập nhật trạng thái thành công lên GAS (xóa dòng khỏi A:E)
-                                            await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "success" });
-                                        } else {
-                                            throw new Error("Không tìm thấy nút Confirm trên popup");
-                                        }
+                                    if (confirmBtn) {
+                                        confirmBtn.click();
+                                        log(`[Bắn Pick] Đã Confirm gán thành công.`);
+                                        await delay(1500);
+                                        await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "success" });
                                     } else {
-                                        log(`[Bắn Pick] Không tìm thấy mã Rider ${task.riderId} trên Shopee. Chuyển sang MAP...`);
-                                        const cancelBtn = Array.from(dialog.querySelectorAll('button')).find(btn => {
-                                            const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
-                                            return txt.includes("cancel") || txt.includes("hủy");
-                                        });
-                                        if (cancelBtn) cancelBtn.click();
-                                        await delay(800);
-
-                                        await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "copy_to_map" });
+                                        throw new Error("Không tìm thấy nút Confirm trên popup");
                                     }
                                 } else {
-                                    throw new Error("Không tìm thấy ô nhập Driver trên popup");
+                                    log(`[Bắn Pick] Không tìm thấy mã Rider ${task.riderId} trên Shopee. Chuyển sang MAP...`);
+                                    const cancelCandidates = Array.from(document.querySelectorAll('*')).filter(btn => {
+                                        if (['SCRIPT','STYLE','SVG','PATH','TABLE','TBODY','TR','THEAD'].includes(btn.tagName)) return false;
+                                        const r = btn.getBoundingClientRect();
+                                        if (r.width === 0 || r.height === 0) return false;
+                                        const txt = (btn.innerText || btn.textContent || "").trim().toLowerCase();
+                                        if (txt.length > 20) return false;
+                                        return txt === "cancel" || txt === "hủy" || txt === "huỷ";
+                                    });
+                                    const cancelBtn = cancelCandidates[cancelCandidates.length - 1];
+                                    if (cancelBtn) cancelBtn.click();
+                                    await delay(800);
+                                    await callGASPromise("POST", "update_assign_pick_task", { pupId: task.pupId, actionType: "copy_to_map" });
                                 }
                             } else {
                                 throw new Error("Không hiển thị dialog gán tài xế");
@@ -2364,7 +2520,6 @@
                     return;
                 }
 
-                // Khi đã hoàn thành toàn bộ tác vụ (không còn mã nào ở A2:A nữa)
                 if (data.tasks.length === 0) {
                     log("[Bắn Pick] Hoàn thành toàn bộ danh sách. Tiến hành bấm Search quét danh sách mới...");
                     const searchBtn = Array.from(document.querySelectorAll('button')).find(btn => {
@@ -2375,9 +2530,7 @@
                         searchBtn.click();
                         await delay(1500);
                     }
-                }
-
-            } catch (error) {
+                }            } catch (error) {
                 log(`[Bắn Pick] Lỗi: ${error.message}`);
             } finally {
                 isProcessingAssignPick = false;
@@ -2608,6 +2761,13 @@
         let monitorCounter = 0;
 
         function monitorApp() {
+            // Cập nhật trạng thái bận của tab hiện tại lên localStorage để chia sẻ chéo tab
+            const myType = getCurrentTabType();
+            if (myType) {
+                const isCurrentTabBusy = isPrintingNow || isProcessingList || isProcessingPrint || isProcessingHandover || isProcessingAssignPick;
+                localStorage.setItem('tab_busy_' + myType, isCurrentTabBusy ? 'true' : 'false');
+            }
+
             updateSelfPulse();
             updateTabsStatusUI();
             checkCloseTabTrigger(); // Liên tục kiểm tra xem có lệnh đóng tab để reload không
@@ -2655,7 +2815,6 @@
 
             const now = Date.now();
             if (hash.includes("awbPrint")) {
-                // Tăng giãn cách gọi API lên 4.5 giây để chống quá tải/nghẽn mạng cho GAS và điện thoại
                 if (now - lastAwbPollTime > 4500) {
                     lastAwbPollTime = now;
                     startPollingLoop();
@@ -2667,7 +2826,6 @@
             }
 
             if (hash.includes("startPackNoLabel")) {
-                // Tăng giãn cách gọi API lên 4.5 giây đối với luồng in nhãn TO
                 if (now - lastToPollTime > 4500) {
                     lastToPollTime = now;
                     processPrintPage();
@@ -2675,7 +2833,6 @@
             }
 
             if (hash.includes("pickupTask/list")) {
-                // Tăng giãn cách gọi API lên 5 giây đối với luồng chuyển Pick
                 if (now - lastCpPollTime > 5000) {
                     lastCpPollTime = now;
                     startHandoverLoop();
@@ -2683,10 +2840,18 @@
             }
 
             if (hash.includes("pickupOrder/createNew")) {
-                // Tăng giãn cách gọi API lên 5 giây đối với luồng Bắn Pick
-                if (now - lastApPollTime > 5000) {
-                    lastApPollTime = now;
-                    processAssignPickPage();
+                const isHighPriorityBusy = 
+                    localStorage.getItem('tab_busy_awbPrint') === 'true' || 
+                    localStorage.getItem('tab_busy_startPackNoLabel') === 'true' || 
+                    localStorage.getItem('tab_busy_pickupTask') === 'true';
+
+                if (isHighPriorityBusy) {
+                    // Do nothing, pause Ban Pick to yield bandwidth
+                } else {
+                    if (now - lastApPollTime > 5000) {
+                        lastApPollTime = now;
+                        processAssignPickPage();
+                    }
                 }
             }
         }
@@ -2706,6 +2871,8 @@
                             processPrintPage();
                         } else if (hash.includes("pickupTask/list")) {
                             startHandoverLoop();
+                        } else if (hash.includes("pickupOrder/createNew")) {
+                            processAssignPickPage();
                         }
                     }
                 } else if (e.data.type === "SHOPEE_TRIGGER_OPEN_ALL_TABS") {
